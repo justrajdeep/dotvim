@@ -37,6 +37,11 @@ GIT:
 If you get certificate error add 
 git config --global http.sslVerify false
 
+if you get login
+git config --global push.default simple
+to go with the login
+git config --global push.default matching
+
 Other git configuration
 git config --global user.name "Rajdeep"
 git config --global user.email rmondal@nvidia.com
