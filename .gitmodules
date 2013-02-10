@@ -55,3 +55,6 @@
 [submodule "bundle/vim-support"]
 	path = bundle/vim-support
 	url = https://github.com/tupton/vim-support.git
+[submodule "bundle/bufexplorer"]
+	path = bundle/bufexplorer
+	url = https://github.com/thisivan/vim-bufexplorer.git
