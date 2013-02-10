@@ -518,7 +518,9 @@ endfunction
 set guioptions+=b
 set cursorline
 "hi Cursorline ctermbg=Red guibg=#771c1c
-hi Cursorline cterm=None ctermbg=Black ctermfg=None guibg=Black
+hi Cursorline cterm=None ctermbg=Black ctermfg=None guibg=#555555
+autocmd InsertEnter * hi Cursorline cterm=None ctermbg=Black ctermfg=None guibg=black
+autocmd InsertLeave * hi Cursorline cterm=None ctermbg=Black ctermfg=None guibg=#555555
 hi LineNr ctermfg=grey guifg=grey
 
 "*** Highlighting ***
@@ -526,6 +528,7 @@ highlight Search ctermbg=DarkCyan
 highlight clear Folded
 highlight Folded term=bold gui=bold
 set foldopen-=search
+set scrolloff=2 "skip 2 lines when scrolling
 "call AutoHighlightToggle()
 "function AutoHighlightToggle()
 "        augroup auto_highlight

@@ -9,7 +9,7 @@ OR (FOR READ-ONLY ACCESS)
 git clone git://github.com/justrajdeep/dotvim.git ~/.vim
 
 Symbolic Links
-ln -fs ~/.vim/vimrcNV ~/.vim
+ln -fs ~/.vim/vimrcNV ~/.vimrc
 make sure you have cloned pathogen first
 ln -fs ~/.vim/bundle/pathogen/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim
 
