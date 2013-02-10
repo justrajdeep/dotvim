@@ -19,3 +19,6 @@
 [submodule "bundle/table"]
 	path = bundle/table
 	url = https://github.com/nvie/vim-rst-tables.git
+[submodule "bundle/VisIncr"]
+	path = bundle/VisIncr
+	url = https://github.com/vim-scripts/VisIncr.git
