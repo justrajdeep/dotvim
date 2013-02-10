@@ -1,0 +1,580 @@
+" ************************ My own vimrc ******************************
+
+     set t_Co=8                  
+     set t_Sf=[3%dm        
+     set t_Sb=[4%dm
+     set t_mr=[00;33;44m
+
+"settings handy ..
+set autoindent backspace=2  showmode  showmatch  showcmd
+set laststatus=2 ruler ignorecase wrapmargin=8
+set expandtab
+"set shiftwidth=8 tabstop=8 nowrap joinspaces magic report=0 dict=/usr/dict/words
+set bs=2 shell=csh wildchar=<TAB> incsearch
+"set guifont=-b&h-lucidatypewriter-medium-r-normal-*-*-140-*-*-m-*-iso8859-15
+set tw=79
+" Make shift-insert work like in Xterm
+map <S-Insert> <MiddleMouse>
+map! <S-Insert> <MiddleMouse>
+
+"I want mouse settings also ..
+"set mouse=a
+	set viminfo='20,\"50	" read/write a .viminfo file, don't store more
+				" than 50 lines of registers
+	set history=50000       " keep 50 lines of command line history
+
+"sets color of cursor according to the color of its text ..... looks fundu
+set t_vs=[5%dm
+
+" I work  in javascript also ...
+set textwidth=2000
+
+"Change buffer - without saving
+set hid
+
+" I don't like bells .
+set noerrorbells
+set visualbell
+set t_vb=
+
+" echo something on leaving .......
+"au VimLeave * echo "Another file ..... gosh I am tired !!"
+
+"syntax highlighting..
+syntax on
+
+ " correct these frequent typographical errors
+ ab alos also
+ ab aslo also
+ ab charcter character
+ ab charcters characters
+ ab exmaple example
+ ab shoudl should
+ ab seperate separate
+ ab teh the
+ ab hte the 
+ ab abotu about 
+ ab togglig toggling
+ ab conneted connected
+
+"source $VIM/macros/file_select.vim
+map - :se wrapmargin=0<CR>
+map + :se wrapmargin=8<CR>
+map K j.
+map <C-^> <C-]>
+
+"menu
+:source $VIMRUNTIME/menu.vim
+:set wildmenu
+:set cpo-=<
+:set wcm=<C-Z>
+:map <F4> :emenu <C-Z>
+
+" kick off emax
+"map <F10> :!emacs -nw %<CR>:e!<CR><CR>
+
+" exeute current line
+" map <F10> "hyy@h
+
+cnoremap <C-A> <Home>
+cnoremap <C-F> <Right>
+cnoremap <C-B> <Left>
+cnoremap <ESC>b <S-Left>
+cnoremap <ESC>f <S-Right>
+cnoremap <ESC><C-H> <C-W>
+
+"-------------> Edit compressed files <-------------
+":autocmd! BufReadPre,FileReadPre  	*.gz set bin
+":autocmd  BufReadPost,FileReadPost	*.gz '[,']!gunzip
+":autocmd  BufReadPost,FileReadPost	*.gz set nobin
+":autocmd! BufWritePost,FileWritePost	*.gz !mv <afile> <afile>:r
+":autocmd  BufWritePost,FileWritePost	*.gz !gzip <afile>:r
+":autocmd! FileAppendPre			*.gz !gunzip <afile>
+":autocmd  FileAppendPre			*.gz !mv <afile>:r <afile>
+":autocmd! FileAppendPost		*.gz !mv <afile> <afile>:r
+":autocmd  FileAppendPost		*.gz !gzip <afile>:r
+
+"-------------> Perl programs <-------------
+augroup filetype_perl
+:autocmd!
+:autocmd BufEnter  *.pl		set ai si cin formatoptions=croql
+:autocmd BufLeave  *.pl		set nosi nocin formatoptions=tcq
+:autocmd BufEnter  *.pl		set comments=b:#
+:autocmd BufLeave  *.pl		set comments=sr:/*,mb:*,el:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+augroup END
+
+"-------------> Create tags   <-------------
+set tags=/home/rmondal/ctags/vrtl/tags
+
+"-------------> C programs and header files <-------------
+augroup filetype_java
+:autocmd!
+:autocmd BufEnter *.java,*.l,*.y,*.c,*.cc,*.h,*.r set ai si cin formatoptions=crql
+:autocmd BufLeave *.java,*.l,*.y,*.c,*.cc,*.h,*.r set nosi nocin formatoptions=tcq
+:autocmd BufEnter *.java,*.l,*.y,*.c,*.cc,*.h,*.r set comments=sr:/*,mb:*,el:*/,://
+:autocmd BufLeave *.java,*.l,*.y,*.c,*.cc,*.h,*.r set comments=sr:/*,mb:*,el:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+:autocmd BufEnter *.java,*.l,*.y,*.c,*.cc,*.h,*.r map <F1> :!man -a <cword><CR><CR>
+:autocmd BufEnter *.l,*.y,*.c,*.cc,*.h,*.r map <F2> mpI/* <ESC>A */<ESC>`pj
+:autocmd BufEnter *.l,*.y,*.c,*.cc,*.h,*.r map <F3> mp^3x$xxx`pj
+:autocmd BufEnter *.java                   map <F2> mpI//<ESC>`pj
+:autocmd BufEnter *.java                   map <F3> mp^2x`pj
+:autocmd BufEnter *.java,*.l,*.y,?akefile*,*.c,*.cc,*.h,*.r map <F4> :!ctags -t *.{c,cc,h}<CR>
+:autocmd BufLeave *.java,*.l,*.y,*.c,*.cc,*.h,*.r unmap <F1>
+:autocmd BufLeave *.java,*.l,*.y,*.c,*.cc,*.h,*.r unmap <F2>
+:autocmd BufLeave *.java,*.l,*.y,*.c,*.cc,*.h,*.r unmap <F3>
+:autocmd BufLeave *.java,*.l,*.y,?akefile*,*.c,*.cc,*.h,*.r unmap <F4>
+augroup END
+
+"-------------> Lisp source files <-------------
+augroup filetype_lisp
+:autocmd!
+:autocmd BufEnter  *.l		set lisp sm
+:autocmd BufEnter  *.l		source $VIM/syntax/lisp.vim
+:autocmd BufEnter  *.l		map <F5> :w<CR>:!akcl < %<CR>
+:autocmd BufEnter  *.l		map! <F5> <ESC>:w<CR>:!akcl < %<CR>
+:autocmd BufLeave  *.l		set nolisp nosm
+:autocmd BufLeave  *.l		unmap <F5>
+:autocmd BufLeave  *.l		unmap! <F5>
+:autocmd BufLeave  *.l		syntax clear
+augroup END
+
+"-------------> TeX & LaTeX source files <-------------
+augroup filetype_tex
+:autocmd!
+:autocmd BufEnter *.tex		map! <F1> }
+:autocmd BufEnter *.tex		map! <F2> {\bf 
+:autocmd BufEnter *.tex		map! <F3> {\em 
+:autocmd BufEnter *.tex		map! <F4> {\
+
+:autocmd BufEnter *.tex		ab hp hyperplane
+:autocmd BufEnter *.tex		ab hps hyperplanes
+:autocmd BufEnter *.tex		ab hc hypercube
+:autocmd BufEnter *.tex		ab hcs hypercubes
+:autocmd BufEnter *.tex		ab nd n-dimensional
+:autocmd BufEnter *.tex		ab kd k-dimensional
+:autocmd BufEnter *.tex		ab gc graycode
+augroup END
+
+"-------------> Haskell source files <-------------
+augroup filetype_haskell
+:autocmd!
+:autocmd BufEnter *.gs		map <F1> :w<CR>:!gofer %<CR>
+:autocmd BufLeave *.gs		unmap <F1>
+augroup END
+
+"-------------> VIVA Files <-------------------------
+":source ~/.vim/syntax/viva.vim
+":au BufNewFile,BufRead *.vx,*.v set ft=bsv
+":au BufNewFile,BufRead *.vhx,*.v set ft=bsv
+":au BufNewFile,BufRead *.vtx,*.v set ft=bsv
+":au BufNewFile,BufRead *.svx,*.svix set ft=bsv
+":au BufNewFile,BufRead *.svcp,*.svi set ft=bsv
+
+filetype off
+call pathogen#infect()
+call pathogen#helptags()
+syntax on
+
+augroup filetype_verilog
+:autocmd!
+:au BufNewFile,BufRead *.sv set filetype=verilog
+:au BufNewFile,BufRead *.vx setf verilog
+:au BufNewFile,BufRead *.v setf verilog
+:au BufNewFile,BufRead *.vcp setf verilog
+:au BufNewFile,BufRead *.vcp.err setf verilog
+:au BufNewFile,BufRead *.vhx setf verilog
+:au BufNewFile,BufRead *.vhxcp.err setf verilog
+:au BufNewFile,BufRead *.vtx setf verilog
+:au BufNewFile,BufRead *.svx setf verilog
+:au BufNewFile,BufRead *.svix setf verilog
+:au BufNewFile,BufRead *.svcp setf verilog
+:au BufNewFile,BufRead *.svi setf verilog
+:au BufNewFile,BufRead *.svixcp setf verilog
+:au BufNewFile,BufRead Makeppfile setf make
+:au BufNewFile,BufRead *.gv setf verilog
+:au BufNewFile,BufRead *.make setf make
+:au BufNewFile,BufRead *.spec setf verilog
+:au BufNewFile,BufRead *.vhxcp setf verilog
+:au BufNewFile,BufRead *.pl setf perl
+:au BufNewFile,BufRead *.pm setf perl
+:au BufNewFile,BufRead rtlmakefile.inc setf make
+:au BufNewFile,BufRead vplmakefile.inc setf make
+:au BufNewFile,BufRead vcsmakefile.inc setf make
+:au BufNewFile,BufRead *.svh setf verilog
+:au BufNewFile,BufRead *.svhx setf verilog
+:au BufNewFile,BufRead *.log setlocal wrap
+:au BufNewFile,BufRead *.log setf log
+
+:au BufReadPost * if exists("b:current_syntax")
+:au BufReadPost *   if b:current_syntax == "verilog"
+:au BufReadPost *     let b:verilog_indent_modules = 1
+:au BufReadPost *   endif
+:au BufReadPost * endif
+  " When editing a file, always jump to the last cursor position
+:autocmd BufReadPost *
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \   exe "normal g'\"" |
+  \ endif
+:au BufReadPost,BufNewFile *
+  \ runtime macros/matchit.vim |
+  \ let b:match_words = '\<begin\>:\<end\>,\<fork\>:\<join\>,\<module\>:\<endmodule\>,\<task\>:\<endtask\>,\<function\>:\<endfunction\>,\<class\>:\<endclass\>,\<program\>:\<endprogram\>,\<case\>:^[ |<C-I>]*[^"]\+ *\::\<endcase\>,`ifdef:`else:`elsif:`endif,'
+
+augroup END
+
+
+"-------------> Html Files <-------------------------
+  nmap  ,e :e ~/.P/
+  map   ,rn :0r ~/.P/txt/New.page.form.html
+  nmap  ,p :!chmod 644 %<CR>
+  ab Ybr <br>
+  ab Yhr <hr>
+  ab Yp  <p>
+  map ,me yiwi<<ESC>ea></<C-R>"><ESC>
+  ab  Ycom  <!--X--><ESC>FXs
+  vmap ,com v`<i<!--<ESC>`>i--><ESC>
+  ab  Ybl  <blockquote></blockquote><ESC>T>i
+  ab  Yb   <b>i</b><ESC>T>
+  vmap ,b   "zdi<b><C-R>z</b><ESC>2F>
+  ab  Ycen <center></center><ESC>T>i
+  vmap ,cen "zdi<center><C-M><C-R>z<C-M></center><ESC>T>i
+  ab  Ycod <code></code><ESC>T>i
+  vmap ,cod "zdi<code><C-M><C-R>z<C-M></code><C-M><ESC>T>i
+  ab  Yi   <i></i><ESC>T>i
+  vmap ,i   "zdi<i><C-R>z</i><ESC>T>
+  ab  Ytt   <tt></tt><ESC>T>i
+  vmap ,tt   "zdi<tt><C-R>z</tt><ESC>T>
+  ab  Ypre <pre></pre><ESC>T>i
+  vmap ,pre mz:<ESC>'<O<pre><ESC>'>o</pre><ESC>`z
+  ab  Yxmp <xmp></xmp><ESC>T>i
+  vmap ,xmp mz:<ESC>'<O<xmp><ESC>'>o</xmp><ESC>`z
+  ab  Ytd  <td></td><ESC>T>i
+  vmap ,td  "zdi<td><C-R>z</td><ESC>T>i
+  ab  Ytr  <tr></tr><ESC>T>i
+  vmap ,tr  "zdi<tr><C-R>z</tr><ESC>T>i
+  ab  Yh1 <h1></h1><ESC>T>i
+  vmap ,h1 "zdi<h1><C-R>z</h1><ESC>2F>
+  ab  Yh2 <h2></h2><ESC>T>i
+  vmap ,h2 "zdi<h2><C-R>z</h2><ESC>2F>
+  ab  Yh3 <h3></h3><ESC>T>i
+  vmap ,h3 "zdi<h3><C-R>z</h3><ESC>2F>
+  ab  Yh4 <h4></h4><ESC>T>i
+  vmap ,h4 "zdi<h4><C-R>z</h4><ESC>2F>
+  ab  Yh5 <h5></h5><ESC>T>i
+  vmap ,h5 "zdi<h5><C-R>z</h5><ESC>2F>
+  ab  Yh6 <h6></h6><ESC>T>i
+  vmap ,h6 "zdi<h6><C-R>z</h6><ESC>2F>
+  ab Yol <ol><CR><li><CR></ol><ESC>k
+  ab Yul <ul><CR><li><CR></ul><ESC>k
+  ab Ydl <dl><CR><CR><dt><CR><dd><CR><p><CR><CR></dl><CR><ESC>5kA
+  ab Yli <li>
+  ab Ydt <dt><CR><dd><CR><p><CR><ESC>kA
+  ab Ydp <dt><CR><dd><C-M><p><C-M><ESC>kkkA
+  ab  Yhref <a href=""></a><ESC>?""<CR>a
+  vmap ,href "zdi<a href=""><C-R>z</a><ESC>F"i
+  ab  Ylink <a href=""></a><ESC>?""<CR>a
+  vmap ,link "zdi<a href="<C-R>z"<C-M><C-I>><C-R>z</a><ESC>F"i
+  ab  Yname <a name=""></a><ESC>?""<CR>a
+  vmap ,name "zdi<a name="<C-R>z"<C-M><C-I>><C-R>z</a><ESC>2F>
+  ab  Yimg  <img alt="[]"<C-M>   align=<C-M>     src=""></a><ESC>?""<CR>a
+  ab  Ymail <a href="mailto:"></a><ESC>?:<CR>a
+  vmap ,mail "zdi<a href="mailto:<C-R>z"<C-M><C-I><C-I>><C-R>z</a><ESC>2F>
+  vmap ,Mail "zdi<a href="mailto:<C-R>z"><C-R>z</a><ESC>2F>
+  ab  Ynews <a href="news:"></a><ESC>?:<CR>a
+  vmap ,news "zdi<a href="news:<C-R>z"><C-R>z</a><ESC>2F>
+  ab  Ypage   <C-M>page:<C-I><C-M>link:<C-I><C-M>text:<C-I><ESC>kkA
+  vmap ,Cblu "zdi<FONT COLOR="#0000FF"><C-R>z</FONT>
+  vmap ,Cgre "zdi<FONT COLOR="#00FF00"><C-R>z</FONT>
+  vmap ,Cred "zdi<FONT COLOR="#FF0000"><C-R>z</FONT>
+  imap ;& &amp;
+  imap ;K &copy;
+  imap ;" &quot;
+  imap ;< &lt;
+  imap ;> &gt;
+  imap \Ae &Auml;
+  imap \Oe &Ouml;
+  imap \Ue &Uuml;
+  imap \ae &auml;
+  imap \oe &ouml;
+  imap \ue &uuml;
+  imap \ss &szlig;
+  nmap  ,= :%s/^===\(.*\)$/<h1>\1<\/h1>/c<CR>
+  ab  Ycut  \| <a href="#"<C-I>></a><ESC>F#a
+  vmap ,cut  "zdi<a href="#<C-R>z"<C-I>><C-R>z</a><ESC>2F>
+
+se nu
+se nowrapscan
+se diffopt+=iwhite
+se autoindent
+set smartindent
+" For smartindent, don't handle # specially
+"inoremap # X#
+set smarttab
+"se ignorecase
+se smartcase
+"se bg=light
+if  has("gui_running")
+    set background=dark
+"--------------preferred--------------------------------------------------------
+    "colorscheme darkblue
+    "colorscheme wombat "Good
+    "colorscheme anotherdark
+    "colorscheme blacksea "Good
+    "colorscheme camo
+    "colorscheme candy
+    "colorscheme colorer
+    "colorscheme darkZ "Good
+    colorscheme darkspectrum
+    "colorscheme rdark
+    "colorscheme solarized
+    "colorscheme two2tango "Good
+    "colorscheme evening
+    "colorscheme darkblue
+    "colorscheme desertEx
+    "colorscheme desertedocean
+    "colorscheme koehler
+"--------------------------------------------------------------------------------
+"
+"--------------------------------------------------------------------------------
+    se mouse=a
+else
+    set bg=light
+    "colorscheme desert
+    "colorscheme slate
+    "colorscheme aiseered
+    "colorscheme manxome
+    colorscheme murphy
+    set guifont=-b&h-lucidatypewriter-medium-r-normal-*-*-140-*-*-m-*-iso8859-15    
+    se mouse=a
+    "se t_Co=256
+    se t_Co=128
+endif
+se nowrap
+" Turn backup off, since most stuff is in SVN, git anyway...
+set nobackup
+set nowb
+set noswapfile
+
+"filetype off
+"call pathogen#infect()
+"call pathogen#helptags()
+"syntax on
+filetype plugin indent on
+"Show matching bracets when text indicator is over them
+set showmatch
+se hlsearch
+se undolevels=10000
+ " Uncomment the following to have Vim jump to the last position when 
+ " reopening a file 
+  if has("autocmd") 
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif 
+  endif  
+
+ map <F2> :NERDTreeToggle<CR>
+ command CPWD cd %:p:h
+ command LPWD lcd %:p:h
+ "for replacing a test
+ vmap <C-r> "_dP
+""""""""""""""""""""""""""""""
+" => Visual mode related
+""""""""""""""""""""""""""""""
+" Really useful!
+"  In visual mode when you press * or # to search for the current selection
+vnoremap  <F8> :call VisualSearch('f')<CR>
+vnoremap  <F7> :call VisualSearch('b')<CR>
+
+" When you press gv you vimgrep after the selected text
+"vnoremap <silent> gv :call VisualSearch('gv')<CR>
+"noremap <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
+
+
+function! CmdLine(str)
+    exe "menu Foo.Bar :" . a:str
+    emenu Foo.Bar
+    unmenu Foo
+endfunction 
+
+" From an idea by Michael Naumann
+function! VisualSearch(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern . "^M"
+    elseif a:direction == 'gv'
+        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+    elseif a:direction == 'f'
+        execute "normal /" . l:pattern . "^M"
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+ 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Command mode related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Smart mappings on the command line
+cno $c <C-U>sp <C-\>eCurrentFile("sp")<cr>
+cno $C <C-U>tabe <C-\>eCurrentFile("tabe")<cr>
+cno $p <C-U>sp <C-\>eCurrentFileDir("sp")<cr>
+cno $P <C-U>tabe <C-\>eCurrentFileDir("tabe")<cr>
+cno $0 <C-U>vs <C-\>eCurrentFileDirP4("vs")<cr>
+cno $E <C-U>!p4 edit %
+cno $R <C-U>!p4 revert %
+cno $A <C-U>!p4 add %
+cno $L <C-U>!p4 filelog %
+cno $D <C-U>!p4 diff % &
+cno $N <C-U>!nedit %
+cno $G <C-U>!gnome-terminal &
+cno $M <C-U>!mutt -s "" -a % rmondal@nvidia.com < /dev/null
+cno $H <C-U>!p4 have %
+cno $S <C-U>!p4 sync %
+cno $t <C-U>sp `depth`/
+cno $T <C-U>tabe `depth`/
+cno $V <C-U>vs `depth`/
+cno $F <C-U>setf verilog
+cno $x <C-U>.s/\d\+/\=printf("0x%04x", submatch(0))
+
+" $q is super useful when browsing on the command line
+"cno $q <C-\>eDeleteTillSlash()<cr>
+
+" Bash like keys for the command line
+func! Cwd()
+  let cwd = getcwd()
+  return "e " . cwd 
+endfunc
+
+func! DeleteTillSlash()
+  let g:cmd = getcmdline()
+  if MySys() == "linux" || MySys() == "mac"
+    let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
+  else
+    let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\]\\).*", "\\1", "")
+  endif
+  if g:cmd == g:cmd_edited
+    if MySys() == "linux" || MySys() == "mac"
+      let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
+    else
+      let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
+    endif
+  endif   
+  return g:cmd_edited
+endfunc
+
+func! CurrentFile(cmd)
+  return a:cmd . " ./" . expand("%:p:t:r") . "."
+endfunc
+func! CurrentFileDir(cmd)
+  return a:cmd . " " . expand("%:p:r") . ""
+endfunc
+func! CurrentFileDirP4(cmd)
+  return a:cmd . " | enew | r !p4 print " . expand("%:p") . ""
+endfunc
+""""""""""""""""""""""""""""""
+" => Statusline
+""""""""""""""""""""""""""""""
+" Always hide the statusline
+let g:Powerline_symbols = 'compatible'
+let g:Powerline_cache_enabled = 0
+let g:Powerline_mode_V = 'V-L'
+let g:Powerline_mode_cv = 'V-B'
+let g:Powerline_mode_n = 'N'
+let g:Powerline_mode_i = 'I'
+let g:Powerline_mode_R = 'R'
+let g:Powerline_mode_v = 'V'
+let g:Powerline_colorscheme = 'skwp'
+call Pl#Theme#RemoveSegment('fileencoding')
+call Pl#Theme#RemoveSegment('fileformat')
+call Pl#Theme#InsertSegment('filesize', 'before', 'filetype')
+call Pl#Theme#InsertSegment('pwd', 'before', 'filesize')
+set laststatus=2
+
+" Format the statusline
+" %= is to right align
+"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
+ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ 
+ set statusline+=%=Line:\ %l/%L(%p%%):%c
+ set statusline+=\ 
+ set statusline+=Ftype:
+ set statusline+=%y
+
+function! CurDir()
+    let curdir = substitute(getcwd(), '/users/rmondal/', "~/", "g")
+    return curdir
+endfunction
+
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    else
+        return ''
+    endif
+endfunction
+
+set guioptions+=b
+set cursorline
+"hi Cursorline ctermbg=Red guibg=#771c1c
+hi Cursorline cterm=None ctermbg=Black ctermfg=None guibg=Black
+hi LineNr ctermfg=grey guifg=grey
+
+"*** Highlighting ***
+highlight Search ctermbg=DarkCyan
+highlight clear Folded
+highlight Folded term=bold gui=bold
+set foldopen-=search
+"call AutoHighlightToggle()
+"function AutoHighlightToggle()
+"        augroup auto_highlight
+"        au!
+"        au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+"        augroup end
+"        setl updatetime=200
+"endfunction
+
+"Filter out the greppings
+command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | new | setlocal bt=nofile | put! a
+
+
+command -nargs=0 Blame :call P4blame()
+function! P4blame()
+       exec "!`depth`/bin/p4blame %:" . line(".")
+endfunction
+"MRU CONFIG
+let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*'  " For Unix
+let MRU_Max_Entries = 100
+"FuzzyFinder
+map <F3> :FufFile<CR>
+map <F4> :FufDir<CR>
+map <F5> :FufBuffer<CR>
+map <F6> :MRU<CR>
+map * *''zz
+map g* g*''zz
+map # #''zz
+map g# g#''zz
+inoremap <c-s> <esc>ddi
+"cnoremap W w
+"cnoremap Q q
+"this is only for me
+"nnoremap <left> <nop>
+"nnoremap <right> <nop>
+"nnoremap <up> <nop>
+"nnoremap <down> <nop>
+set iskeyword+=_
+set confirm
+set nostartofline
+set autochdir
+if has('win32')
+        "Avoid mswin.vim making Ctrl-v as paste
+        noremap <C-V> <C-V>
+        "make arrow keys extend visual
+        set keymodel-=stopsel
+		behave xterm
+		"colorscheme lettuce
+                set guifont=Lucida\ Console:h11
+else
+                set guifont=Monospace\ 11 
+endif
+
