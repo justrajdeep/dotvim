@@ -73,3 +73,15 @@
 [submodule "bundle/showmarks"]
 	path = bundle/showmarks
 	url = https://github.com/vim-scripts/ShowMarks.git
+[submodule "bundle/colorSchemeEx"]
+	path = bundle/colorSchemeEx
+	url = https://github.com/vim-scripts/Color-Scheme-Explorer.git
+[submodule "bundle/colorSchemeDegrade"]
+	path = bundle/colorSchemeDegrade
+	url = https://github.com/carlobaldassi/vim-colorschemedegrade.git
+[submodule "bundle/compview"]
+	path = bundle/compview
+	url = https://github.com/vim-scripts/compview.git
+[submodule "bundle/narrow"]
+	path = bundle/narrow
+	url = https://github.com/chrisbra/NrrwRgn.git
