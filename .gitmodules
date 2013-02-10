@@ -28,3 +28,6 @@
 [submodule "bundle/perldoc"]
 	path = bundle/perldoc
 	url = https://github.com/vim-scripts/Perldoc.vim.git
+[submodule "bundle/tabular"]
+	path = bundle/tabular
+	url = https://github.com/godlygeek/tabular.git
