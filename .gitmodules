@@ -40,3 +40,6 @@
 [submodule "bundle/verilog"]
 	path = bundle/verilog
 	url = https://github.com/vim-scripts/verilog.vim.git
+[submodule "bundle/linediff"]
+	path = bundle/linediff
+	url = https://github.com/AndrewRadev/linediff.vim.git
