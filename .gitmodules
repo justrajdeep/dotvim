@@ -85,3 +85,9 @@
 [submodule "bundle/narrow"]
 	path = bundle/narrow
 	url = https://github.com/chrisbra/NrrwRgn.git
+[submodule "bundle/snipMate"]
+	path = bundle/snipMate
+	url = https://github.com/garbas/vim-snipmate.git
+[submodule "bundle/solarized"]
+	path = bundle/solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
