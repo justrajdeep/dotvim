@@ -49,3 +49,6 @@
 [submodule "bundle/verilog_systemverilog"]
 	path = bundle/verilog_systemverilog
 	url = https://github.com/vim-scripts/verilog_systemverilog.vim.git
+[submodule "bundle/matchit"]
+	path = bundle/matchit
+	url = https://github.com/tmhedberg/matchit.git
