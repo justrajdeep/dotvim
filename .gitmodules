@@ -13,3 +13,6 @@
 [submodule "bundle/NERD_tree"]
 	path = bundle/NERD_tree
 	url = https://github.com/scrooloose/nerdtree.git
+[submodule "bundle/perl-support"]
+	path = bundle/perl-support
+	url = https://github.com/vim-scripts/perl-support.vim.git
