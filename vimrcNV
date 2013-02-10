@@ -485,11 +485,12 @@ let g:Powerline_mode_n = 'N'
 let g:Powerline_mode_i = 'I'
 let g:Powerline_mode_R = 'R'
 let g:Powerline_mode_v = 'V'
-let g:Powerline_colorscheme = 'skwp'
+let g:Powerline_colorscheme = 'solarized256'
 call Pl#Theme#RemoveSegment('fileencoding')
 call Pl#Theme#RemoveSegment('fileformat')
 call Pl#Theme#InsertSegment('filesize', 'before', 'filetype')
 call Pl#Theme#InsertSegment('pwd', 'before', 'filesize')
+set rtp+=~/.vim/bundle/powerline/bindings/vim
 set laststatus=2
 
 " Format the statusline
