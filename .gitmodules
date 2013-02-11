@@ -94,3 +94,6 @@
 [submodule "bundle/mw_utils"]
 	path = bundle/mw_utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils
+[submodule "bundle/tagbar"]
+	path = bundle/tagbar
+	url = https://github.com/majutsushi/tagbar.git
