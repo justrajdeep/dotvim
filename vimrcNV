@@ -565,7 +565,7 @@ noremap <F4> :FufDir<CR>
 noremap <F5> :BufExplorerVerticalSplit<CR>
 noremap <F6> :MRU<CR>
 noremap <F3> :TagbarToggle<CR>
-noremap <F7> :YRShow<CR>
+"noremap <F7> :YRShow<CR>
 map * *''zz
 map g* g*''zz
 map # #''zz
