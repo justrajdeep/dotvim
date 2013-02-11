@@ -550,11 +550,11 @@ endfunction
 let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*'  " For Unix
 let MRU_Max_Entries = 100
 "FuzzyFinder
-map <F3> :FufFile<CR>
-map <F4> :FufDir<CR>
-map <F5> :FufBuffer<CR>
-map <F6> :MRU<CR>
-map <F7> :TagbarToggle<CR>
+noremap <F3> :FufFile<CR>
+noremap <F4> :FufDir<CR>
+noremap <F5> :FufBuffer<CR>
+noremap <F6> :MRU<CR>
+noremap <F7> :TagbarToggle<CR>
 map * *''zz
 map g* g*''zz
 map # #''zz

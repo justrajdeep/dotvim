@@ -70,9 +70,9 @@
 [submodule "bundle/multipleHilight"]
 	path = bundle/multipleHilight
 	url = https://github.com/vim-scripts/Mark--Karkat.git
-[submodule "bundle/showmarks"]
-	path = bundle/showmarks
-	url = https://github.com/vim-scripts/ShowMarks.git
+#[submodule "bundle/showmarks"]
+#	path = bundle/showmarks
+#	url = https://github.com/vim-scripts/ShowMarks.git
 [submodule "bundle/colorSchemeEx"]
 	path = bundle/colorSchemeEx
 	url = https://github.com/vim-scripts/Color-Scheme-Explorer.git
