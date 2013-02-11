@@ -162,18 +162,14 @@ augroup filetype_haskell
 :autocmd BufLeave *.gs		unmap <F1>
 augroup END
 
-"-------------> VIVA Files <-------------------------
-":source ~/.vim/syntax/viva.vim
-":au BufNewFile,BufRead *.vx,*.v set ft=bsv
-":au BufNewFile,BufRead *.vhx,*.v set ft=bsv
-":au BufNewFile,BufRead *.vtx,*.v set ft=bsv
-":au BufNewFile,BufRead *.svx,*.svix set ft=bsv
-":au BufNewFile,BufRead *.svcp,*.svi set ft=bsv
-
-filetype off
-call pathogen#infect()
-call pathogen#helptags()
-syntax on
+augroup filetype_make
+:autocmd!
+:au BufNewFile,BufRead Makeppfile setf make
+:au BufNewFile,BufRead *.make setf make
+:au BufNewFile,BufRead rtlmakefile.inc setf make
+:au BufNewFile,BufRead vplmakefile.inc setf make
+:au BufNewFile,BufRead vcsmakefile.inc setf make
+augroup END
 
 augroup filetype_verilog
 :autocmd!
@@ -190,16 +186,11 @@ augroup filetype_verilog
 :au BufNewFile,BufRead *.svcp setf verilog
 :au BufNewFile,BufRead *.svi setf verilog
 :au BufNewFile,BufRead *.svixcp setf verilog
-:au BufNewFile,BufRead Makeppfile setf make
 :au BufNewFile,BufRead *.gv setf verilog
-:au BufNewFile,BufRead *.make setf make
 :au BufNewFile,BufRead *.spec setf verilog
 :au BufNewFile,BufRead *.vhxcp setf verilog
 :au BufNewFile,BufRead *.pl setf perl
 :au BufNewFile,BufRead *.pm setf perl
-:au BufNewFile,BufRead rtlmakefile.inc setf make
-:au BufNewFile,BufRead vplmakefile.inc setf make
-:au BufNewFile,BufRead vcsmakefile.inc setf make
 :au BufNewFile,BufRead *.svh setf verilog
 :au BufNewFile,BufRead *.svhx setf verilog
 :au BufNewFile,BufRead *.log setlocal wrap
@@ -220,6 +211,20 @@ augroup filetype_verilog
   \ let b:match_words = '\<begin\>:\<end\>,\<fork\>:\<join\>,\<module\>:\<endmodule\>,\<task\>:\<endtask\>,\<function\>:\<endfunction\>,\<class\>:\<endclass\>,\<program\>:\<endprogram\>,\<case\>:^[ |<C-I>]*[^"]\+ *\::\<endcase\>,`ifdef:`else:`elsif:`endif,'
 
 augroup END
+
+"-------------> VIVA Files <-------------------------
+":source ~/.vim/syntax/viva.vim
+":au BufNewFile,BufRead *.vx,*.v set ft=bsv
+":au BufNewFile,BufRead *.vhx,*.v set ft=bsv
+":au BufNewFile,BufRead *.vtx,*.v set ft=bsv
+":au BufNewFile,BufRead *.svx,*.svix set ft=bsv
+":au BufNewFile,BufRead *.svcp,*.svi set ft=bsv
+
+filetype off
+call pathogen#infect()
+call pathogen#helptags()
+syntax on
+
 
 
 "-------------> Html Files <-------------------------
@@ -379,8 +384,8 @@ se undolevels=10000
 """"""""""""""""""""""""""""""
 " Really useful!
 "  In visual mode when you press * or # to search for the current selection
-vnoremap  <F8> :call VisualSearch('f')<CR>
-vnoremap  <F7> :call VisualSearch('b')<CR>
+vnoremap  <F9> :call VisualSearch('f')<CR>
+vnoremap  <F10> :call VisualSearch('b')<CR>
 
 " When you press gv you vimgrep after the selected text
 "vnoremap <silent> gv :call VisualSearch('gv')<CR>
@@ -550,11 +555,12 @@ endfunction
 let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*'  " For Unix
 let MRU_Max_Entries = 100
 "FuzzyFinder
-noremap <F3> :FufFile<CR>
+"noremap <F3> :FufFile<CR>
 noremap <F4> :FufDir<CR>
-noremap <F5> :FufBuffer<CR>
+noremap <F5> :BufExplorerVerticalSplit<CR>
 noremap <F6> :MRU<CR>
-noremap <F7> :TagbarToggle<CR>
+noremap <F3> :TagbarToggle<CR>
+noremap <F7> :YRShow<CR>
 map * *''zz
 map g* g*''zz
 map # #''zz
@@ -581,5 +587,6 @@ if has('win32')
                 set guifont=Lucida\ Console:h11
 else
                 set guifont=Monospace\ 11 
+                let g:ConqueTerm_ReadUnfocused = 1
 endif
 
