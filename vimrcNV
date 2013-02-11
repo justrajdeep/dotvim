@@ -554,6 +554,7 @@ map <F3> :FufFile<CR>
 map <F4> :FufDir<CR>
 map <F5> :FufBuffer<CR>
 map <F6> :MRU<CR>
+map <F7> :TagbarToggle<CR>
 map * *''zz
 map g* g*''zz
 map # #''zz
