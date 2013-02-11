@@ -46,3 +46,10 @@ Other git configuration
 git config --global user.name "Rajdeep"
 git config --global user.email rmondal@nvidia.com
 git config --global color.ui auto
+
+Removing Submodule
+Remove the submodule's entry in the .gitmodules file.
+Remove the submodule's entry in the .git/config
+Remove the path created for the submodule
+git rm --cached <path>
+path should not have the trailing slash

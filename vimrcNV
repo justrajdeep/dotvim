@@ -375,6 +375,10 @@ se undolevels=10000
   endif  
 
  map <F2> :NERDTreeToggle<CR>
+ "If there is an issue in Nerdtree
+ "Cannot browse subdirs
+let g:NERDTreeDirArrows=0
+ "
  command CPWD cd %:p:h
  command LPWD lcd %:p:h
  "for replacing a test
@@ -490,7 +494,7 @@ let g:Powerline_mode_n = 'N'
 let g:Powerline_mode_i = 'I'
 let g:Powerline_mode_R = 'R'
 let g:Powerline_mode_v = 'V'
-let g:Powerline_colorscheme = 'solarized256'
+let g:Powerline_colorscheme = 'solarized'
 call Pl#Theme#RemoveSegment('fileencoding')
 call Pl#Theme#RemoveSegment('fileformat')
 call Pl#Theme#InsertSegment('filesize', 'before', 'filetype')
@@ -526,6 +530,7 @@ set cursorline
 hi Cursorline cterm=None ctermbg=Black ctermfg=None guibg=#555555
 autocmd InsertEnter * hi Cursorline cterm=None ctermbg=Black ctermfg=None guibg=black
 autocmd InsertLeave * hi Cursorline cterm=None ctermbg=Black ctermfg=None guibg=#555555
+highlight cCursor guifg=white guibg=steelblue ctermfg=white ctermbg=black
 hi LineNr ctermfg=grey guifg=grey
 
 "*** Highlighting ***
