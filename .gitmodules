@@ -103,3 +103,6 @@
 [submodule "bundle/checkSyntax"]
 	path = bundle/checkSyntax
 	url = https://github.com/tomtom/checksyntax_vim.git
+[submodule "bundle/perforce"]
+	path = bundle/perforce
+	url = https://github.com/vim-scripts/perforce.vim.git
