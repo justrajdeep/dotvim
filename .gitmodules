@@ -100,3 +100,6 @@
 [submodule "bundle/delimitMate"]
 	path = bundle/delimitMate
 	url = https://github.com/Raimondi/delimitMate.git
+[submodule "bundle/checkSyntax"]
+	path = bundle/checkSyntax
+	url = https://github.com/tomtom/checksyntax_vim.git
