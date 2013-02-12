@@ -328,15 +328,18 @@ if  has("gui_running")
     "colorscheme candy
     "colorscheme colorer
     "colorscheme darkZ "Good
-    colorscheme darkspectrum
+    "colorscheme darkspectrum "Good
+    "colorscheme zenburn
     "colorscheme rdark
-    "colorscheme solarized
+    "colorscheme solarized "Good
+    "colorscheme molokai
     "colorscheme two2tango "Good
     "colorscheme evening
     "colorscheme darkblue
     "colorscheme desertEx
     "colorscheme desertedocean
     "colorscheme koehler
+    colorscheme symfony
 "--------------------------------------------------------------------------------
 "
 "--------------------------------------------------------------------------------
@@ -531,10 +534,13 @@ hi Cursorline cterm=None ctermbg=Black ctermfg=None guibg=#555555
 autocmd InsertEnter * hi Cursorline cterm=None ctermbg=Black ctermfg=None guibg=black
 autocmd InsertLeave * hi Cursorline cterm=None ctermbg=Black ctermfg=None guibg=#555555
 highlight cCursor guifg=white guibg=steelblue ctermfg=white ctermbg=black
-hi LineNr ctermfg=grey guifg=grey
+"line number highlight
+hi LineNr ctermfg=grey guifg=black
 
-"*** Highlighting ***
+"*** Search Highlighting ***
 highlight Search ctermbg=DarkCyan
+"guibg=blue
+"guifg=red
 highlight clear Folded
 highlight Folded term=bold gui=bold
 set foldopen-=search
@@ -547,6 +553,9 @@ set scrolloff=2 "skip 2 lines when scrolling
 "        augroup end
 "        setl updatetime=200
 "endfunction
+
+"so that i can move out of the terminal
+let g:ConqueTerm_ReadUnfocused = 1
 
 "Filter out the greppings
 command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | new | setlocal bt=nofile | put! a
@@ -592,6 +601,5 @@ if has('win32')
                 set guifont=Lucida\ Console:h11
 else
                 set guifont=Monospace\ 11 
-                let g:ConqueTerm_ReadUnfocused = 1
 endif
 
