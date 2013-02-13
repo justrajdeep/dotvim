@@ -195,6 +195,7 @@ augroup filetype_verilog
 :au BufNewFile,BufRead *.svhx setf verilog
 :au BufNewFile,BufRead *.log setlocal wrap
 :au BufNewFile,BufRead *.log setf log
+:au BufNewFile,BufRead *.log.retry setf log
 
 :au BufReadPost * if exists("b:current_syntax")
 :au BufReadPost *   if b:current_syntax == "verilog"
@@ -350,11 +351,11 @@ else
     "colorscheme slate
     "colorscheme aiseered
     "colorscheme manxome
-    colorscheme murphy
+    "colorscheme jellybeans
+    colorscheme default
     set guifont=-b&h-lucidatypewriter-medium-r-normal-*-*-140-*-*-m-*-iso8859-15    
     se mouse=a
     "se t_Co=256
-    se t_Co=128
 endif
 se nowrap
 " Turn backup off, since most stuff is in SVN, git anyway...
@@ -529,13 +530,14 @@ endfunction
 
 set guioptions+=b
 set cursorline
-"hi Cursorline ctermbg=Red guibg=#771c1c
-hi Cursorline cterm=None ctermbg=Black ctermfg=None guibg=#555555
-autocmd InsertEnter * hi Cursorline cterm=None ctermbg=Black ctermfg=None guibg=black
-autocmd InsertLeave * hi Cursorline cterm=None ctermbg=Black ctermfg=None guibg=#555555
-highlight cCursor guifg=white guibg=steelblue ctermfg=white ctermbg=black
+"hi Cursorline 
+hi Cursorline cterm=bold ctermbg=None ctermfg=None guibg=#555555
+autocmd InsertEnter * hi Cursorline cterm=Bold ctermbg=None ctermfg=None guibg=black
+autocmd InsertLeave * hi Cursorline cterm=Bold ctermbg=None ctermfg=None guibg=#555555
+"highlight cCursor guifg=white guibg=steelblue ctermfg=Black ctermbg=blue
+"
 "line number highlight
-hi LineNr ctermfg=grey guifg=black
+"hi LineNr guifg=black
 
 "*** Search Highlighting ***
 highlight Search ctermbg=DarkCyan
