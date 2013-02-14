@@ -53,3 +53,14 @@ Remove the submodule's entry in the .git/config
 Remove the path created for the submodule
 git rm --cached <path>
 path should not have the trailing slash
+
+Installing Monaco Font
+the font is also available in --> wget -q http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
+cp Monaco_Linux.ttf to ~/.fonts (if dir is not there create one)
+$ cd ~/.fonts
+$ mkfontscale
+$ mkfontdir
+$ fc-cache -fv ~/.fonts
+
+Check if it is installed correctly
+$ fc-list | grep Monaco

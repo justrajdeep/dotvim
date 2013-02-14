@@ -602,11 +602,14 @@ if has('win32')
 		"colorscheme lettuce
                 set guifont=Lucida\ Console:h11
 else
-                "set guifont=Monospace\ 12 
+                "set guifont=Monospace\ 14
                 "set guifont=Inconsolata\ 12
                 "set guifont=Courier\ New\ 12
                 "set guifont=Andale\ Mono\ 12
-                set guifont=Droid\ Sans\ Mono\ 12
+                "set guifont=Droid\ Sans\ Mono\ 12
+                "set guifont=Bitstream\ Charter\ 12
+                "set guifont=Century\ Schoolbook\ L\ 12
                 "set guifont=DejaVu\ Sans\ Mono\ 12
+                set guifont=Monaco\ 14
 endif
 
