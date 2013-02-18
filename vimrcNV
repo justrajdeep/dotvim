@@ -17,6 +17,9 @@ set tw=79
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
 
+"remove toolbar
+set go-=T
+
 "I want mouse settings also ..
 "set mouse=a
 	set viminfo='20,\"50	" read/write a .viminfo file, don't store more
