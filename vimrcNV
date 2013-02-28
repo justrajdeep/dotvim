@@ -172,6 +172,7 @@ augroup filetype_make
 :au BufNewFile,BufRead rtlmakefile.inc setf make
 :au BufNewFile,BufRead vplmakefile.inc setf make
 :au BufNewFile,BufRead vcsmakefile.inc setf make
+:au BufNewFile,BufRead *.config setf make
 augroup END
 
 augroup filetype_verilog
@@ -225,6 +226,8 @@ augroup END
 ":au BufNewFile,BufRead *.svcp,*.svi set ft=bsv
 
 filetype off
+"disble individual pathogen
+"let g:pathogen_disabled = ['delimitMate']
 call pathogen#infect()
 call pathogen#helptags()
 syntax on
@@ -355,10 +358,19 @@ else
     "colorscheme aiseered
     "colorscheme manxome
     "colorscheme jellybeans
-    colorscheme default
+    "colorscheme default
+    "colorscheme torte
+    colorscheme earendel
     set guifont=-b&h-lucidatypewriter-medium-r-normal-*-*-140-*-*-m-*-iso8859-15    
     se mouse=a
     "se t_Co=256
+    "FIXING the arrow problem
+    imap <ESC>oA <ESC>ki
+    imap <ESC>oB <ESC>ji
+    imap <ESC>oC <ESC>li
+    imap <ESC>oD <ESC>hi
+    "Setting light background
+    highlight Normal ctermfg=grey ctermbg=darkblue
 endif
 se nowrap
 " Turn backup off, since most stuff is in SVN, git anyway...
@@ -445,6 +457,7 @@ cno $L <C-U>!p4 filelog %
 cno $D <C-U>!p4 diff % &
 cno $N <C-U>!nedit %
 cno $G <C-U>!gnome-terminal &
+cno $K <C-U>!konsole &
 cno $M <C-U>!mutt -s "" -a % rmondal@nvidia.com < /dev/null
 cno $H <C-U>!p4 have %
 cno $S <C-U>!p4 sync %
@@ -533,10 +546,11 @@ endfunction
 
 set guioptions+=b
 set cursorline
+"set the color of the cursor line
 "hi Cursorline 
-hi Cursorline cterm=bold ctermbg=None ctermfg=None guibg=#555555
-autocmd InsertEnter * hi Cursorline cterm=Bold ctermbg=None ctermfg=None guibg=black
-autocmd InsertLeave * hi Cursorline cterm=Bold ctermbg=None ctermfg=None guibg=#555555
+"hi Cursorline cterm=bold ctermbg=None ctermfg=None guibg=#555555
+"autocmd InsertEnter * hi Cursorline cterm=Bold ctermbg=None ctermfg=None guibg=black
+"autocmd InsertLeave * hi Cursorline cterm=Bold ctermbg=None ctermfg=None guibg=#555555
 "highlight cCursor guifg=white guibg=steelblue ctermfg=Black ctermbg=blue
 "
 "line number highlight
