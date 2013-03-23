@@ -58,9 +58,9 @@
 [submodule "bundle/bufexplorer"]
 	path = bundle/bufexplorer
 	url = https://github.com/thisivan/vim-bufexplorer.git
-[submodule "bundle/searchcomplete"]
-	path = bundle/searchcomplete
-	url = https://github.com/vim-scripts/SearchComplete.git
+#[submodule "bundle/searchcomplete"]
+#	path = bundle/searchcomplete
+#	url = https://github.com/vim-scripts/SearchComplete.git
 #[submodule "bundle/yankRing"]
 #	path = bundle/yankRing
 #	url = https://github.com/vim-scripts/YankRing.vim.git

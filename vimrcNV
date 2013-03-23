@@ -177,7 +177,7 @@ augroup END
 
 augroup filetype_verilog
 :autocmd!
-:au BufNewFile,BufRead *.sv set filetype=verilog
+:au BufNewFile,BufRead *.sv setf verilog
 :au BufNewFile,BufRead *.vx setf verilog
 :au BufNewFile,BufRead *.v setf verilog
 :au BufNewFile,BufRead *.vcp setf verilog
@@ -230,6 +230,7 @@ filetype off
 "let g:pathogen_disabled = ['delimitMate']
 call pathogen#infect()
 call pathogen#helptags()
+"let g:pathogen_disabled = ['searchcomplete']
 syntax on
 
 
@@ -347,6 +348,7 @@ if  has("gui_running")
     "colorscheme desertedocean
     "colorscheme koehler
     colorscheme symfony
+    set cursorline
 "--------------------------------------------------------------------------------
 "
 "--------------------------------------------------------------------------------
@@ -382,7 +384,7 @@ set noswapfile
 "call pathogen#infect()
 "call pathogen#helptags()
 "syntax on
-filetype plugin indent on
+"filetype plugin indent on
 "Show matching bracets when text indicator is over them
 set showmatch
 se hlsearch
@@ -545,7 +547,6 @@ function! HasPaste()
 endfunction
 
 set guioptions+=b
-set cursorline
 "set the color of the cursor line
 "hi Cursorline 
 "hi Cursorline cterm=bold ctermbg=None ctermfg=None guibg=#555555
@@ -557,7 +558,7 @@ set cursorline
 "hi LineNr guifg=black
 
 "*** Search Highlighting ***
-highlight Search ctermbg=DarkCyan
+"highlight Search ctermbg=DarkCyan
 "guibg=blue
 "guifg=red
 highlight clear Folded
