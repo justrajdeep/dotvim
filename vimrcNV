@@ -347,7 +347,16 @@ if  has("gui_running")
     "colorscheme desertEx
     "colorscheme desertedocean
     "colorscheme koehler
-    colorscheme symfony
+    colorscheme gruvbox "Good
+    "colorscheme codeblocks_dark "Good
+    "FIXME
+    "TODO
+    "colorscheme jellybeans "Good
+    "colorscheme railscasts "Good
+    "colorscheme twilight "Good
+    "colorscheme molokai "Good
+    "colorscheme xoria256 "Good
+    "colorscheme symfony
     set cursorline
 "--------------------------------------------------------------------------------
 "
@@ -360,6 +369,7 @@ else
     "colorscheme aiseered
     "colorscheme manxome
     "colorscheme jellybeans
+    "colorscheme candy
     "colorscheme default
     "colorscheme torte
     colorscheme earendel
