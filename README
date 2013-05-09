@@ -32,6 +32,8 @@ git submodule init
 Get the submodule
 git submodule update
 
+if something in submodule 
+git submodule update --init
 ----------------------------------------
 GIT:
 If you get certificate error add 
