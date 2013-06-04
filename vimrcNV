@@ -6,7 +6,11 @@
      set t_mr=[00;33;44m
 
 "settings handy ..
-set autoindent backspace=2  showmode  showmatch  showcmd
+set autoindent  showmode  showmatch  showcmd
+"allow to delete using backspace
+set backspace=2
+set sw=4
+set ts=4
 set laststatus=2 ruler ignorecase wrapmargin=8
 set expandtab
 "set shiftwidth=8 tabstop=8 nowrap joinspaces magic report=0 dict=/usr/dict/words
@@ -16,6 +20,10 @@ set tw=79
 " Make shift-insert work like in Xterm
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
+
+"home moves cursor to the first non-blank char
+noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+imap <silent> <Home> <C-O><Home>
 
 "remove toolbar
 set go-=T
@@ -68,7 +76,11 @@ map <C-^> <C-]>
 
 "menu
 :source $VIMRUNTIME/menu.vim
-:set wildmenu
+
+"filelist Completion options
+set wildmode=longest,list,full
+set wildignorecase
+set wildmenu
 :set cpo-=<
 :set wcm=<C-Z>
 :map <F4> :emenu <C-Z>
@@ -173,11 +185,13 @@ augroup filetype_make
 :au BufNewFile,BufRead vplmakefile.inc setf make
 :au BufNewFile,BufRead vcsmakefile.inc setf make
 :au BufNewFile,BufRead *.config setf make
+:autocmd BufLeave,FocusLost  Makefile* silent! wall
 augroup END
 
 augroup filetype_verilog
 :autocmd!
 :au BufNewFile,BufRead *.sv setf verilog
+:au BufNewFile,BufRead *.spp setf verilog
 :au BufNewFile,BufRead *.vx setf verilog
 :au BufNewFile,BufRead *.v setf verilog
 :au BufNewFile,BufRead *.vcp setf verilog
@@ -381,7 +395,8 @@ else
     "colorscheme candy
     "colorscheme default
     "colorscheme torte
-    colorscheme earendel "Black
+    colorscheme earendel "Black Good
+    "colorscheme default "Black Good
     "colorscheme murphy "Black
     "colorscheme metacosm "Black
     "colorscheme motus "Black
@@ -634,7 +649,14 @@ inoremap <c-s> <esc>ddi
 set iskeyword+=_
 set confirm
 set nostartofline
+"change to the current dir automatically
 set autochdir
+"open file in the current buffer dir
+set browsedir=buffer
+"change the cmd window 
+"set cmdheight=2
+"small status msg for vim
+set shortmess=a
 if has('win32')
         "Avoid mswin.vim making Ctrl-v as paste
         noremap <C-V> <C-V>
