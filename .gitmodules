@@ -118,3 +118,6 @@
 [submodule "bundle/color_badwolf"]
 	path = bundle/color_badwolf
 	url = https://github.com/sjl/badwolf.git
+[submodule "bundle/LargeFile"]
+	path = bundle/LargeFile
+	url = https://github.com/vim-scripts/LargeFile.git

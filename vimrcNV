@@ -629,7 +629,7 @@ let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*'  " For Unix
 let MRU_Max_Entries = 100
 "FuzzyFinder
 "noremap <F3> :FufFile<CR>
-noremap <F4> :FufDir<CR>
+noremap <F4> :FufBuffer<CR>
 noremap <F5> :BufExplorerVerticalSplit<CR>
 noremap <F6> :MRU<CR>
 noremap <F3> :TagbarToggle<CR>

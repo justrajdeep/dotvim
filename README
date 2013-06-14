@@ -16,6 +16,10 @@ ln -fs ~/.vim/bundle/pathogen/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim
 Plugins
 Install
 git submodule add <path-to git repo> <local path>
+git add .gitmodules == this will add the submodule
+
+Updating the summodule
+git submodule foreach git pull origin master
 
 This will create a file .gitmodules
 commit it by
