@@ -25,8 +25,6 @@ map! <S-Insert> <MiddleMouse>
 noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 imap <silent> <Home> <C-O><Home>
 
-"remove toolbar
-set go-=T
 
 "I want mouse settings also ..
 "set mouse=a
@@ -84,6 +82,11 @@ set wildmenu
 :set cpo-=<
 :set wcm=<C-Z>
 :map <F4> :emenu <C-Z>
+"visual special charaters
+"" Highlight problematic whitespace
+set list
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
+"set listchars=tab:>.,trail:.,extends:\#,nbsp:.
 
 " kick off emax
 "map <F10> :!emacs -nw %<CR>:e!<CR><CR>
@@ -116,6 +119,11 @@ augroup filetype_perl
 :autocmd BufLeave  *.pl		set nosi nocin formatoptions=tcq
 :autocmd BufEnter  *.pl		set comments=b:#
 :autocmd BufLeave  *.pl		set comments=sr:/*,mb:*,el:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+augroup END
+"without this crontab does not work
+augroup filetype_crontab
+:autocmd!
+:autocmd FileType crontab :set backupcopy=yes
 augroup END
 
 "-------------> Create tags   <-------------
@@ -190,7 +198,8 @@ augroup END
 
 augroup filetype_verilog
 :autocmd!
-:au BufNewFile,BufRead *.sv setf verilog
+":au BufNewFile,BufRead *.sv setf verilog |set foldmethod=indent/syntax|set foldnestmax=12|set shiftwidth=4|set softtabstop=4|set tabstop=4
+:au BufNewFile,BufRead *.sv setf verilog |set foldnestmax=12|set shiftwidth=4|set softtabstop=4|set tabstop=4|source \~/.vim/cus_fold/folding.vim|call MarkdownSVFolds()
 :au BufNewFile,BufRead *.spp setf verilog
 :au BufNewFile,BufRead *.vx setf verilog
 :au BufNewFile,BufRead *.v setf verilog
@@ -342,6 +351,10 @@ se smartcase
 "se bg=light
 if  has("gui_running")
     set background=dark
+    "remove toolbar
+    "set lines=40
+    set guioptions-=T
+    set guioptions+=b
 "--------------preferred--------------------------------------------------------
     "colorscheme darkblue
     "colorscheme wombat "Good
@@ -381,12 +394,16 @@ if  has("gui_running")
     "colorscheme xoria256 "Good
     "colorscheme symfony
     set cursorline
+    """"""""""""""""""""""""""""""
+    " => Statusline
+    """"""""""""""""""""""""""""""
+    let g:Powerline_colorscheme = 'solarized'
 "--------------------------------------------------------------------------------
 "
 "--------------------------------------------------------------------------------
     se mouse=a
 else
-    set bg=light
+    "set bg=light
     "colorscheme desert
     "colorscheme slate
     "colorscheme aiseered
@@ -395,8 +412,8 @@ else
     "colorscheme candy
     "colorscheme default
     "colorscheme torte
-    colorscheme earendel "Black Good
-    "colorscheme default "Black Good
+    "colorscheme earendel "Black Good
+    colorscheme default
     "colorscheme murphy "Black
     "colorscheme metacosm "Black
     "colorscheme motus "Black
@@ -411,6 +428,7 @@ else
     imap <ESC>oD <ESC>hi
     "Setting light background
     highlight Normal ctermfg=grey ctermbg=darkblue
+    set bg=light
 endif
 se nowrap
 " Turn backup off, since most stuff is in SVN, git anyway...
@@ -505,7 +523,7 @@ cno $S <C-U>!p4 sync %
 cno $t <C-U>sp `depth`/
 cno $T <C-U>tabe `depth`/
 cno $V <C-U>vs `depth`/
-cno $F <C-U>setf verilog
+cno $F <C-U>set foldopen-=search
 cno $x <C-U>.s/\d\+/\=printf("0x%04x", submatch(0))
 
 " $q is super useful when browsing on the command line
@@ -555,7 +573,6 @@ let g:Powerline_mode_n = 'N'
 let g:Powerline_mode_i = 'I'
 let g:Powerline_mode_R = 'R'
 let g:Powerline_mode_v = 'V'
-let g:Powerline_colorscheme = 'solarized'
 call Pl#Theme#RemoveSegment('fileencoding')
 call Pl#Theme#RemoveSegment('fileformat')
 call Pl#Theme#InsertSegment('filesize', 'before', 'filetype')
@@ -585,7 +602,6 @@ function! HasPaste()
     endif
 endfunction
 
-set guioptions+=b
 "set the color of the cursor line
 "hi Cursorline 
 "hi Cursorline cterm=bold ctermbg=None ctermfg=None guibg=#555555
@@ -602,7 +618,7 @@ set guioptions+=b
 "guifg=red
 highlight clear Folded
 highlight Folded term=bold gui=bold
-set foldopen-=search
+"set foldopen-=search
 set scrolloff=2 "skip 2 lines when scrolling
 "call AutoHighlightToggle()
 "function AutoHighlightToggle()
@@ -638,9 +654,24 @@ map * *''zz
 map g* g*''zz
 map # #''zz
 map g# g#''zz
+"Yank from the cursor to the end of the line, to be consistentwith C and D.
+nnoremap Y y$
 inoremap <c-s> <esc>ddi
-"cnoremap W w
-"cnoremap Q q
+cmap W w
+cmap WQ wq
+cmap wQ wq
+cmap Wq wq
+cmap Q q
+cmap Tabe tabe
+" visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv 
+
+" SnipMate {
+" Setting the author var
+" If forking, please overwrite in your .vimrc.local file
+let g:snips_author = 'Rajdeep <[[rmondal@nvidia.com]](mailto:rmondal@nvidia.com)>'
+
 "this is only for me
 "nnoremap <left> <nop>
 "nnoremap <right> <nop>
@@ -677,3 +708,12 @@ else
                 set guifont=Monaco\ 14
 endif
 
+" Use local vimrc if available {
+"if filereadable(expand("\~/.vimrc.local"))
+"    source \~/.vimrc.local
+"endif
+" }
+"custom files to source
+if filereadable(expand("\~/.vim/cus_fold/folding.vim"))
+    source \~/.vim/cus_fold/folding.vim
+endif
