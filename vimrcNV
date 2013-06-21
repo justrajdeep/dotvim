@@ -35,6 +35,9 @@ imap <silent> <Home> <C-O><Home>
 "sets color of cursor according to the color of its text ..... looks fundu
 set t_vs=[5%dm
 
+"disable all folding
+"set nofoldenable
+
 " I work  in javascript also ...
 set textwidth=2000
 
@@ -199,7 +202,7 @@ augroup END
 augroup filetype_verilog
 :autocmd!
 ":au BufNewFile,BufRead *.sv setf verilog |set foldmethod=indent/syntax|set foldnestmax=12|set shiftwidth=4|set softtabstop=4|set tabstop=4
-:au BufNewFile,BufRead *.sv setf verilog |set foldnestmax=12|set shiftwidth=4|set softtabstop=4|set tabstop=4|source \~/.vim/cus_fold/folding.vim|call MarkdownSVFolds()
+:au BufNewFile,BufRead *.sv setf verilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4|setlocal fdc=3|setlocal foldopen+=search|source \~/.vim/cus_fold/folding.vim|call MarkdownSVFolds()
 :au BufNewFile,BufRead *.spp setf verilog
 :au BufNewFile,BufRead *.vx setf verilog
 :au BufNewFile,BufRead *.v setf verilog
@@ -523,7 +526,7 @@ cno $S <C-U>!p4 sync %
 cno $t <C-U>sp `depth`/
 cno $T <C-U>tabe `depth`/
 cno $V <C-U>vs `depth`/
-cno $F <C-U>set foldopen-=search
+cno $F <C-U>set filetype=verilog_systemverilog
 cno $x <C-U>.s/\d\+/\=printf("0x%04x", submatch(0))
 
 " $q is super useful when browsing on the command line
@@ -618,7 +621,7 @@ endfunction
 "guifg=red
 highlight clear Folded
 highlight Folded term=bold gui=bold
-"set foldopen-=search
+set foldopen-=search
 set scrolloff=2 "skip 2 lines when scrolling
 "call AutoHighlightToggle()
 "function AutoHighlightToggle()
@@ -714,6 +717,6 @@ endif
 "endif
 " }
 "custom files to source
-if filereadable(expand("\~/.vim/cus_fold/folding.vim"))
-    source \~/.vim/cus_fold/folding.vim
-endif
+"if filereadable(expand("\~/.vim/cus_fold/folding.vim"))
+"    source \~/.vim/cus_fold/folding.vim
+"endif
