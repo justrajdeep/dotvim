@@ -87,7 +87,7 @@ set wildmenu
 :map <F4> :emenu <C-Z>
 "visual special charaters
 "" Highlight problematic whitespace
-set list
+"set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 "set listchars=tab:>.,trail:.,extends:\#,nbsp:.
 
@@ -100,9 +100,19 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:.
 cnoremap <C-A> <Home>
 cnoremap <C-F> <Right>
 cnoremap <C-B> <Left>
+cnoremap <C-d>  <Delete>
+cnoremap <M-b>  <S-Left>
+cnoremap <M-f>  <S-Right>
+cnoremap <M-d>  <S-right><Delete>
 cnoremap <ESC>b <S-Left>
+cnoremap <Esc>d <S-right><Delete>
+cnoremap <C-g>  <C-c>
 cnoremap <ESC>f <S-Right>
 cnoremap <ESC><C-H> <C-W>
+"buffer navigation
+nmap <C-e> :e#<CR>
+nmap <C-n> :bnext<CR>
+nmap <C-p> :bprev<CR>
 
 "-------------> Edit compressed files <-------------
 ":autocmd! BufReadPre,FileReadPre  	*.gz set bin
@@ -202,7 +212,8 @@ augroup END
 augroup filetype_verilog
 :autocmd!
 ":au BufNewFile,BufRead *.sv setf verilog |set foldmethod=indent/syntax|set foldnestmax=12|set shiftwidth=4|set softtabstop=4|set tabstop=4
-:au BufNewFile,BufRead *.sv setf verilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4|setlocal fdc=3|setlocal foldopen+=search|source \~/.vim/cus_fold/folding.vim|call MarkdownSVFolds()
+":au BufNewFile,BufRead *.sv setf verilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4|setlocal fdc=4|setlocal foldopen+=search|source \~/.vim/cus_fold/folding.vim|call MarkdownSVFolds()
+:au BufNewFile,BufRead *.sv setf verilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4
 :au BufNewFile,BufRead *.spp setf verilog
 :au BufNewFile,BufRead *.vx setf verilog
 :au BufNewFile,BufRead *.v setf verilog
@@ -221,7 +232,7 @@ augroup filetype_verilog
 :au BufNewFile,BufRead *.vhxcp setf verilog
 :au BufNewFile,BufRead *.pl setf perl
 :au BufNewFile,BufRead *.pm setf perl
-:au BufNewFile,BufRead *.svh setf verilog
+:au BufNewFile,BufRead *.svh setf verilog|setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4
 :au BufNewFile,BufRead *.svhx setf verilog
 :au BufNewFile,BufRead *.log setlocal wrap
 :au BufNewFile,BufRead *.log setf log
@@ -406,6 +417,8 @@ if  has("gui_running")
 "--------------------------------------------------------------------------------
     se mouse=a
 else
+    highlight Normal ctermfg=grey ctermbg=darkblue
+    set bg=light
     "set bg=light
     "colorscheme desert
     "colorscheme slate
@@ -416,8 +429,8 @@ else
     "colorscheme default
     "colorscheme torte
     "colorscheme earendel "Black Good
-    colorscheme default
-    "colorscheme murphy "Black
+    "colorscheme default
+    colorscheme murphy "Black
     "colorscheme metacosm "Black
     "colorscheme motus "Black
     "colorscheme midnight2 "Blue
@@ -430,8 +443,6 @@ else
     imap <ESC>oC <ESC>li
     imap <ESC>oD <ESC>hi
     "Setting light background
-    highlight Normal ctermfg=grey ctermbg=darkblue
-    set bg=light
 endif
 se nowrap
 " Turn backup off, since most stuff is in SVN, git anyway...
