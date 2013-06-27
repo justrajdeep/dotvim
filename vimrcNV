@@ -111,8 +111,11 @@ cnoremap <ESC>f <S-Right>
 cnoremap <ESC><C-H> <C-W>
 "buffer navigation
 nmap <C-e> :e#<CR>
-nmap <C-n> :bnext<CR>
-nmap <C-p> :bprev<CR>
+"ctrlp options
+let g:ctrlp_root_markers = 'TOT'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'cra'
 
 "-------------> Edit compressed files <-------------
 ":autocmd! BufReadPre,FileReadPre  	*.gz set bin
@@ -661,7 +664,7 @@ let MRU_Max_Entries = 100
 "noremap <F3> :FufFile<CR>
 noremap <F4> :FufBuffer<CR>
 noremap <F5> :BufExplorerVerticalSplit<CR>
-noremap <F6> :MRU<CR>
+noremap <F6> :GundoToggle<CR>
 noremap <F3> :TagbarToggle<CR>
 "noremap <F7> :YRShow<CR>
 map * *''zz
@@ -710,6 +713,7 @@ if has('win32')
 		behave xterm
 		"colorscheme lettuce
                 set guifont=Lucida\ Console:h11
+                set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe
 else
                 "set guifont=Monospace\ 14
                 "set guifont=Inconsolata\ 12
@@ -720,6 +724,7 @@ else
                 "set guifont=Century\ Schoolbook\ L\ 12
                 "set guifont=DejaVu\ Sans\ Mono\ 12
                 set guifont=Monaco\ 14
+                set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 endif
 
 " Use local vimrc if available {
