@@ -100,7 +100,6 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:.
 cnoremap <C-A> <Home>
 cnoremap <C-F> <Right>
 cnoremap <C-B> <Left>
-cnoremap <C-d>  <Delete>
 cnoremap <M-b>  <S-Left>
 cnoremap <M-f>  <S-Right>
 cnoremap <M-d>  <S-right><Delete>
@@ -114,8 +113,11 @@ nmap <C-e> :e#<CR>
 "ctrlp options
 let g:ctrlp_root_markers = 'TOT'
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'cra'
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_working_path_mode = 'ra'
+"j and k should follow the screen
+:nmap j gj
+:nmap k gk
 
 "-------------> Edit compressed files <-------------
 ":autocmd! BufReadPre,FileReadPre  	*.gz set bin
@@ -269,6 +271,14 @@ augroup END
 filetype off
 "disble individual pathogen
 "let g:pathogen_disabled = ['delimitMate']
+" To disable a plugin, add it's bundle name to the following list
+let g:pathogen_disabled = []
+
+" for some reason the csscolor plugin is very slow when run on the terminal
+" but not in GVim, so disable it if no GUI is running
+if !has('gui_running')
+        call add(g:pathogen_disabled, 'powerline')
+endif
 call pathogen#infect()
 call pathogen#helptags()
 "let g:pathogen_disabled = ['searchcomplete']
@@ -355,7 +365,7 @@ syntax on
   ab  Ycut  \| <a href="#"<C-I>></a><ESC>F#a
   vmap ,cut  "zdi<a href="#<C-R>z"<C-I>><C-R>z</a><ESC>2F>
 
-se nu
+se rnu
 se nowrapscan
 se diffopt+=iwhite
 se autoindent
@@ -420,6 +430,7 @@ if  has("gui_running")
 "--------------------------------------------------------------------------------
     se mouse=a
 else
+    let g:Powerline_colorscheme = 'solarized'
     highlight Normal ctermfg=grey ctermbg=darkblue
     set bg=light
     "set bg=light
@@ -475,6 +486,7 @@ let g:NERDTreeDirArrows=0
  "
  command CPWD cd %:p:h
  command LPWD lcd %:p:h
+ command TOT lcd `depth`
  "for replacing a test
  vmap <C-r> "_dP
 """"""""""""""""""""""""""""""
@@ -590,21 +602,28 @@ let g:Powerline_mode_n = 'N'
 let g:Powerline_mode_i = 'I'
 let g:Powerline_mode_R = 'R'
 let g:Powerline_mode_v = 'V'
-call Pl#Theme#RemoveSegment('fileencoding')
-call Pl#Theme#RemoveSegment('fileformat')
-call Pl#Theme#InsertSegment('filesize', 'before', 'filetype')
-call Pl#Theme#InsertSegment('pwd', 'before', 'filesize')
-set rtp+=~/.vim/bundle/powerline/bindings/vim
+if has('gui_running')
+    call Pl#Theme#RemoveSegment('fileencoding')
+    call Pl#Theme#RemoveSegment('fileformat')
+    call Pl#Theme#InsertSegment('filesize', 'before', 'filetype')
+    call Pl#Theme#InsertSegment('pwd', 'before', 'filesize')
+"hide the insert mode displays
+    set noshowmode
+endif
+"set rtp+=~/.vim/bundle/powerline/bindings/vim
 set laststatus=2
+"dont show statusline messages
 
 " Format the statusline
 " %= is to right align
-"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
- set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ 
- set statusline+=%=Line:\ %l/%L(%p%%):%c
- set statusline+=\ 
- set statusline+=Ftype:
- set statusline+=%y
+if !has('gui_running')
+    "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
+    set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ 
+    set statusline+=%=Line:\ %l/%L(%p%%):%c
+    set statusline+=\ 
+    set statusline+=Ftype:
+    set statusline+=%y
+endif
 
 function! CurDir()
     let curdir = substitute(getcwd(), '/users/rmondal/', "~/", "g")
@@ -674,12 +693,12 @@ map g# g#''zz
 "Yank from the cursor to the end of the line, to be consistentwith C and D.
 nnoremap Y y$
 inoremap <c-s> <esc>ddi
-cmap W w
-cmap WQ wq
-cmap wQ wq
-cmap Wq wq
-cmap Q q
-cmap Tabe tabe
+"cmap W w
+"cmap WQ wq
+"cmap wQ wq
+"cmap Wq wq
+"cmap Q q
+"cmap Tabe tabe
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv 
