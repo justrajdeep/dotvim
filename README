@@ -1,43 +1,49 @@
 My vim REPO
-
+====================
 Installation
-
+====================
 git clone https://github.com/justrajdeep/dotvim.git ~/.vim
 OR
 git clone git@github.com:justrajdeep/dotvim.git ~/.vim
 OR (FOR READ-ONLY ACCESS)
 git clone git://github.com/justrajdeep/dotvim.git ~/.vim
 
+====================
 Symbolic Links
+====================
 ln -fs ~/.vim/vimrcNV ~/.vimrc
 make sure you have cloned pathogen first
 ln -fs ~/.vim/bundle/pathogen/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim
 
-Plugins
-Install
+====================
+Plugins Install
+====================
 git submodule add <path-to git repo> <local path>
 git add .gitmodules == this will add the submodule
-
-Updating the summodule
-git submodule foreach git pull origin master
-
-This will create a file .gitmodules
-commit it by
+This will create a file .gitmodules commit it by
 git commit -m "Installing <plugin name> plugin"
 git push
 
-First time when pushing use the following(creating the repo)
-git push -u origin master
+====================
+Updating the submodule
+====================
+git submodule foreach git pull origin master
 
+====================
 Cloning
+====================
 git pull 
+====================
 Add the submodule
+====================
 git submodule init
+====================
 Get the submodule
+====================
 git submodule update
 
-if something in submodule 
-git submodule update --init
+#if something in submodule 
+#git submodule update --init
 ----------------------------------------
 GIT:
 If you get certificate error add 
@@ -53,7 +59,9 @@ git config --global user.name "Rajdeep"
 git config --global user.email rmondal@nvidia.com
 git config --global color.ui auto
 
+====================
 Removing Submodule
+====================
 Remove the submodule's entry in the .gitmodules file.
 Remove the submodule's entry in the .git/config
 Remove the path created for the submodule
@@ -70,3 +78,21 @@ $ fc-cache -fv ~/.fonts
 
 Check if it is installed correctly
 $ fc-list | grep Monaco
+
+---------------------------
+Adding viva support
+---------------------------
+ln -fs /home/vim-nv/plugins/viva ~/.vim/bundle/viva
+
+===========
+Help on Git
+===========
+Git initialization
+ git init
+ git add .
+ git commit -m "Initial commit"
+ git config --global user.name "Your Name Here"
+ git config --global user.email "your_email@example.com"
+ git remote add origin https://github.com/username/Hello-World.git
+ git push -u origin master
+

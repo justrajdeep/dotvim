@@ -81,6 +81,7 @@ map <C-^> <C-]>
 "filelist Completion options
 set wildmode=longest,list,full
 set wildignorecase
+"command line suggestion
 set wildmenu
 :set cpo-=<
 :set wcm=<C-Z>
@@ -206,6 +207,7 @@ augroup END
 augroup filetype_make
 :autocmd!
 :au BufNewFile,BufRead Makeppfile setf make
+:au BufNewFile,BufRead Makeppfile.* setf make
 :au BufNewFile,BufRead *.make setf make
 :au BufNewFile,BufRead rtlmakefile.inc setf make
 :au BufNewFile,BufRead vplmakefile.inc setf make
@@ -218,7 +220,7 @@ augroup filetype_verilog
 :autocmd!
 ":au BufNewFile,BufRead *.sv setf verilog |set foldmethod=indent/syntax|set foldnestmax=12|set shiftwidth=4|set softtabstop=4|set tabstop=4
 ":au BufNewFile,BufRead *.sv setf verilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4|setlocal fdc=4|setlocal foldopen+=search|source \~/.vim/cus_fold/folding.vim|call MarkdownSVFolds()
-:au BufNewFile,BufRead *.sv setf verilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4
+:au BufNewFile,BufRead *.sv setf verilog_systemverilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4
 :au BufNewFile,BufRead *.spp setf verilog
 :au BufNewFile,BufRead *.vx setf verilog
 :au BufNewFile,BufRead *.v setf verilog
@@ -227,18 +229,18 @@ augroup filetype_verilog
 :au BufNewFile,BufRead *.vhx setf verilog
 :au BufNewFile,BufRead *.vhxcp.err setf verilog
 :au BufNewFile,BufRead *.vtx setf verilog
-:au BufNewFile,BufRead *.svx setf verilog
-:au BufNewFile,BufRead *.svix setf verilog
-:au BufNewFile,BufRead *.svcp setf verilog
-:au BufNewFile,BufRead *.svi setf verilog
-:au BufNewFile,BufRead *.svixcp setf verilog
+:au BufNewFile,BufRead *.svx setf verilog_systemverilog
+:au BufNewFile,BufRead *.svix setf verilog_systemverilog
+:au BufNewFile,BufRead *.svcp setf verilog_systemverilog
+:au BufNewFile,BufRead *.svi setf verilog_systemverilog
+:au BufNewFile,BufRead *.svixcp setf verilog_systemverilog
 :au BufNewFile,BufRead *.gv setf verilog
 :au BufNewFile,BufRead *.spec setf verilog
 :au BufNewFile,BufRead *.vhxcp setf verilog
 :au BufNewFile,BufRead *.pl setf perl
 :au BufNewFile,BufRead *.pm setf perl
-:au BufNewFile,BufRead *.svh setf verilog|setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4
-:au BufNewFile,BufRead *.svhx setf verilog
+:au BufNewFile,BufRead *.svh setf verilog_systemverilog|setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4
+:au BufNewFile,BufRead *.svhx setf verilog_systemverilog
 :au BufNewFile,BufRead *.log setlocal wrap
 :au BufNewFile,BufRead *.log setf log
 :au BufNewFile,BufRead *.log.retry setf log
@@ -377,6 +379,7 @@ set smarttab
 se smartcase
 "se bg=light
 if  has("gui_running")
+    set guitablabel=%N:\ %t\ %M
     set background=dark
     "remove toolbar
     "set lines=40
@@ -405,7 +408,9 @@ if  has("gui_running")
     "colorscheme mayansmoke "Good light
     "colorscheme mickeysoft "Good light
     "colorscheme mophiaSmoke "Good light
-    colorscheme gruvbox "Good
+    "colorscheme gruvbox "Good
+    colorscheme habilight "Good light
+    "colorscheme earendel "white Good
     "colorscheme codeblocks_dark "Good
     "colorscheme manuscript "Good
     "colorscheme mint "Good
@@ -703,6 +708,11 @@ inoremap <c-s> <esc>ddi
 vnoremap < <gv
 vnoremap > >gv 
 
+let g:Perl_AuthorName      = 'Rajdeep'
+let g:Perl_AuthorRef       = ''
+let g:Perl_Email           = 'rmondal@nvidia'
+let g:Perl_Company         = 'nVidia'
+
 " SnipMate {
 " Setting the author var
 " If forking, please overwrite in your .vimrc.local file
@@ -721,7 +731,7 @@ set autochdir
 "open file in the current buffer dir
 set browsedir=buffer
 "change the cmd window 
-"set cmdheight=2
+"set cmdheight=3
 "small status msg for vim
 set shortmess=a
 if has('win32')
@@ -742,7 +752,7 @@ else
                 "set guifont=Bitstream\ Charter\ 12
                 "set guifont=Century\ Schoolbook\ L\ 12
                 "set guifont=DejaVu\ Sans\ Mono\ 12
-                set guifont=Monaco\ 14
+                set guifont=Monaco\ 11
                 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 endif
 
