@@ -408,8 +408,8 @@ if  has("gui_running")
     "colorscheme mayansmoke "Good light
     "colorscheme mickeysoft "Good light
     "colorscheme mophiaSmoke "Good light
-    "colorscheme gruvbox "Good
-    colorscheme habilight "Good light
+    colorscheme gruvbox "Good
+    "colorscheme habilight "Good light
     "colorscheme earendel "white Good
     "colorscheme codeblocks_dark "Good
     "colorscheme manuscript "Good
@@ -705,8 +705,8 @@ inoremap <c-s> <esc>ddi
 "cmap Q q
 "cmap Tabe tabe
 " visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv 
+"vnoremap < <gv
+"vnoremap > >gv 
 
 let g:Perl_AuthorName      = 'Rajdeep'
 let g:Perl_AuthorRef       = ''
