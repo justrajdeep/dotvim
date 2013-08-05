@@ -57,6 +57,7 @@ syntax on
 
  " correct these frequent typographical errors
  ab alos also
+ ab instanciate instantiate
  ab aslo also
  ab charcter character
  ab charcters characters
@@ -110,7 +111,7 @@ cnoremap <C-g>  <C-c>
 cnoremap <ESC>f <S-Right>
 cnoremap <ESC><C-H> <C-W>
 "buffer navigation
-nmap <C-e> :e#<CR>
+nmap <C-e> :e!<CR>
 "ctrlp options
 let g:ctrlp_root_markers = 'TOT'
 let g:ctrlp_map = '<c-p>'
@@ -153,18 +154,18 @@ augroup filetype_java
 :autocmd!
 :autocmd BufEnter *.java,*.l,*.y,*.c,*.cc,*.h,*.r set ai si cin formatoptions=crql
 :autocmd BufLeave *.java,*.l,*.y,*.c,*.cc,*.h,*.r set nosi nocin formatoptions=tcq
-:autocmd BufEnter *.java,*.l,*.y,*.c,*.cc,*.h,*.r set comments=sr:/*,mb:*,el:*/,://
-:autocmd BufLeave *.java,*.l,*.y,*.c,*.cc,*.h,*.r set comments=sr:/*,mb:*,el:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-:autocmd BufEnter *.java,*.l,*.y,*.c,*.cc,*.h,*.r map <F1> :!man -a <cword><CR><CR>
-:autocmd BufEnter *.l,*.y,*.c,*.cc,*.h,*.r map <F2> mpI/* <ESC>A */<ESC>`pj
-:autocmd BufEnter *.l,*.y,*.c,*.cc,*.h,*.r map <F3> mp^3x$xxx`pj
-:autocmd BufEnter *.java                   map <F2> mpI//<ESC>`pj
-:autocmd BufEnter *.java                   map <F3> mp^2x`pj
-:autocmd BufEnter *.java,*.l,*.y,?akefile*,*.c,*.cc,*.h,*.r map <F4> :!ctags -t *.{c,cc,h}<CR>
-:autocmd BufLeave *.java,*.l,*.y,*.c,*.cc,*.h,*.r unmap <F1>
-:autocmd BufLeave *.java,*.l,*.y,*.c,*.cc,*.h,*.r unmap <F2>
-:autocmd BufLeave *.java,*.l,*.y,*.c,*.cc,*.h,*.r unmap <F3>
-:autocmd BufLeave *.java,*.l,*.y,?akefile*,*.c,*.cc,*.h,*.r unmap <F4>
+":autocmd BufEnter *.java,*.l,*.y,*.c,*.cc,*.h,*.r set comments=sr:/*,mb:*,el:*/,://
+":autocmd BufLeave *.java,*.l,*.y,*.c,*.cc,*.h,*.r set comments=sr:/*,mb:*,el:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+":autocmd BufEnter *.java,*.l,*.y,*.c,*.cc,*.h,*.r map <F1> :!man -a <cword><CR><CR>
+":autocmd BufEnter *.l,*.y,*.c,*.cc,*.h,*.r map <F2> mpI/* <ESC>A */<ESC>`pj
+":autocmd BufEnter *.l,*.y,*.c,*.cc,*.h,*.r map <F3> mp^3x$xxx`pj
+":autocmd BufEnter *.java                   map <F2> mpI//<ESC>`pj
+":autocmd BufEnter *.java                   map <F3> mp^2x`pj
+":autocmd BufEnter *.java,*.l,*.y,?akefile*,*.c,*.cc,*.h,*.r map <F4> :!ctags -t *.{c,cc,h}<CR>
+":autocmd BufLeave *.java,*.l,*.y,*.c,*.cc,*.h,*.r unmap <F1>
+":autocmd BufLeave *.java,*.l,*.y,*.c,*.cc,*.h,*.r unmap <F2>
+":autocmd BufLeave *.java,*.l,*.y,*.c,*.cc,*.h,*.r unmap <F3>
+":autocmd BufLeave *.java,*.l,*.y,?akefile*,*.c,*.cc,*.h,*.r unmap <F4>
 augroup END
 
 "-------------> Lisp source files <-------------
@@ -379,7 +380,7 @@ set smarttab
 se smartcase
 "se bg=light
 if  has("gui_running")
-    set guitablabel=%N:\ %t\ %M
+    set guitablabel=%N:\ %t#\%-10.3n\ %M
     set background=dark
     "remove toolbar
     "set lines=40
@@ -491,7 +492,7 @@ let g:NERDTreeDirArrows=0
  "
  command CPWD cd %:p:h
  command LPWD lcd %:p:h
- command TOT lcd `depth`
+ command TOT lcd `my_depth`
  "for replacing a test
  vmap <C-r> "_dP
 """"""""""""""""""""""""""""""
@@ -554,9 +555,9 @@ cno $K <C-U>!konsole &
 cno $M <C-U>!mutt -s "%" -a % rmondal@nvidia.com < /dev/null
 cno $H <C-U>!p4 have %
 cno $S <C-U>!p4 sync %
-cno $t <C-U>sp `depth`/
-cno $T <C-U>tabe `depth`/
-cno $V <C-U>vs `depth`/
+cno $t <C-U>sp `my_depth`/
+cno $T <C-U>tabe `my_depth`/
+cno $V <C-U>vs `my_depth`/
 cno $F <C-U>set filetype=verilog_systemverilog
 cno $x <C-U>.s/\d\+/\=printf("0x%04x", submatch(0))
 
@@ -679,7 +680,7 @@ command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | new | setlocal bt=
 
 command -nargs=0 Blame :call P4blame()
 function! P4blame()
-       exec "!`depth`/bin/p4blame %:" . line(".")
+       exec "!`my_depth`/bin/p4blame %:" . line(".")
 endfunction
 "MRU CONFIG
 let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*'  " For Unix
