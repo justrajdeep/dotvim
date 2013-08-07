@@ -168,6 +168,15 @@ augroup filetype_java
 ":autocmd BufLeave *.java,*.l,*.y,?akefile*,*.c,*.cc,*.h,*.r unmap <F4>
 augroup END
 
+augroup filetype_xml
+:autocmd!
+:autocmd BufEnter *.xml set filetype=xml
+:autocmd BufEnter *.xml set foldcolumn=4
+let g:xml_syntax_folding=1
+:autocmd FileType xml setlocal foldmethod=syntax
+:autocmd BufUnload *.xml syntax clear
+augroup END
+
 "-------------> Lisp source files <-------------
 augroup filetype_lisp
 :autocmd!
@@ -409,7 +418,8 @@ if  has("gui_running")
     "colorscheme mayansmoke "Good light
     "colorscheme mickeysoft "Good light
     "colorscheme mophiaSmoke "Good light
-    colorscheme gruvbox "Good
+    "colorscheme gruvbox "Good
+    colorscheme badwolf
     "colorscheme habilight "Good light
     "colorscheme earendel "white Good
     "colorscheme codeblocks_dark "Good
@@ -451,6 +461,7 @@ else
     "colorscheme earendel "Black Good
     "colorscheme default
     colorscheme murphy "Black
+    "colorscheme badwolf
     "colorscheme metacosm "Black
     "colorscheme motus "Black
     "colorscheme midnight2 "Blue
@@ -766,3 +777,15 @@ endif
 "if filereadable(expand("\~/.vim/cus_fold/folding.vim"))
 "    source \~/.vim/cus_fold/folding.vim
 "endif
+"fold --> check if file has folding then show foldcolum"
+"function HasFoldedLine() 
+"    let lnum=1 
+"    while lnum <= line("$") 
+"        if (foldclosed(lnum) > -1) 
+"            return 1 
+"        endif 
+"        let lnum+=1 
+"    endwhile 
+"    return 0 
+" endfu
+":au CursorHold * if HasFoldedLine() == 1 | set fdc=1 | else |set fdc=0 | endif
