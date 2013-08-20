@@ -571,6 +571,7 @@ cno $T <C-U>tabe `my_depth`/
 cno $V <C-U>vs `my_depth`/
 cno $F <C-U>set filetype=verilog_systemverilog
 cno $x <C-U>.s/\d\+/\=printf("0x%04x", submatch(0))
+cno $Z <C-U>!tar cvf %.tar % && mutt -s "%" -a %.tar rmondal@nvidia.com < /dev/null && \rm -f %.tar
 
 " $q is super useful when browsing on the command line
 "cno $q <C-\>eDeleteTillSlash()<cr>

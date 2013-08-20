@@ -136,3 +136,6 @@
 [submodule "bundle/xml"]
 	path = bundle/xml
 	url = https://github.com/sukima/xmledit.git
+[submodule "bundle/vim-expand-region"]
+	path = bundle/vim-expand-region
+	url = https://github.com/terryma/vim-expand-region.git
