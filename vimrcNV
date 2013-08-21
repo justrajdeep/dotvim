@@ -701,7 +701,7 @@ let MRU_Max_Entries = 100
 "noremap <F3> :FufFile<CR>
 noremap <F4> :FufBuffer<CR>
 noremap <F5> :BufExplorerVerticalSplit<CR>
-noremap <F6> :GundoToggle<CR>
+"noremap <F6> :GundoToggle<CR>
 noremap <F3> :TagbarToggle<CR>
 "noremap <F7> :YRShow<CR>
 map * *''zz

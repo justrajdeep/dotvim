@@ -139,3 +139,6 @@
 [submodule "bundle/vim-expand-region"]
 	path = bundle/vim-expand-region
 	url = https://github.com/terryma/vim-expand-region.git
+[submodule "bundle/autocomplete"]
+	path = bundle/autocomplete
+	url = https://github.com/vim-scripts/AutoComplPop.git
