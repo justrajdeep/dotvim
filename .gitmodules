@@ -121,9 +121,18 @@
 [submodule "bundle/vim-expand-region"]
 	path = bundle/vim-expand-region
 	url = https://github.com/terryma/vim-expand-region.git
-#[submodule "bundle/autocomplete"]
-#	path = bundle/autocomplete
-#	url = https://github.com/vim-scripts/AutoComplPop.git
 [submodule "bundle/vim_indent_guides"]
 	path = bundle/vim_indent_guides
 	url = https://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "bundle/autocomplete"]
+	path = bundle/autocomplete
+	url = https://github.com/vim-scripts/AutoComplPop.git
+[submodule "bundle/vim_airline"]
+	path = bundle/vim_airline
+	url = https://github.com/bling/vim-airline.git
+[submodule "bundle/vundle"]
+	path = bundle/vundle
+	url = https://github.com/gmarik/vundle.git
+[submodule "bundle/vim_nocturne"]
+	path = bundle/vim_nocturne
+	url = https://github.com/euclio/vim-nocturne.git

@@ -4,6 +4,39 @@
      set t_Sf=[3%dm
      set t_Sb=[4%dm
      set t_mr=[00;33;44m
+     set encoding=utf-8
+
+"PATHOGEN/VUNDLE
+filetype off
+"disble individual pathogen
+"let g:pathogen_disabled = ['delimitMate']
+" To disable a plugin, add it's bundle name to the following list
+let g:pathogen_disabled = []
+
+" for some reason the csscolor plugin is very slow when run on the terminal
+" but not in GVim, so disable it if no GUI is running
+"if !has('gui_running')
+"        call add(g:pathogen_disabled, 'powerline')
+"endif
+call pathogen#infect()
+call pathogen#helptags()
+"VUNDLE
+"set rtp+=~/.vim/bundle/vundle/
+"call vundle#rc()
+" let Vundle manage Vundle
+" required! 
+"Bundle 'gmarik/vundle'
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+
+syntax on
+filetype plugin indent on
 
 "settings handy ..
 set autoindent  showmode  showmatch  showcmd
@@ -59,19 +92,7 @@ set t_vb=
 syntax on
 
  " correct these frequent typographical errors
- ab alos also
- ab instanciate instantiate
- ab aslo also
- ab charcter character
- ab charcters characters
- ab exmaple example
- ab shoudl should
- ab seperate separate
- ab teh the
- ab hte the
- ab abotu about
- ab togglig toggling
- ab conneted connected
+ source $HOME/.vim/spell_correct
 
 "source $VIM/macros/file_select.vim
 map - :se wrapmargin=0<CR>
@@ -93,7 +114,8 @@ set wildmenu
 "visual special charaters
 "" Highlight problematic whitespace
 set list
-set listchars=tab:>-,extends:#,eol:<
+"get new chanracters from dig
+set listchars=tab:»»,extends:¶,eol:¬
 " Make trailing whitespace annoyingly highlighted.
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -291,21 +313,6 @@ augroup END
 ":au BufNewFile,BufRead *.svx,*.svix set ft=bsv
 ":au BufNewFile,BufRead *.svcp,*.svi set ft=bsv
 
-filetype off
-"disble individual pathogen
-"let g:pathogen_disabled = ['delimitMate']
-" To disable a plugin, add it's bundle name to the following list
-let g:pathogen_disabled = []
-
-" for some reason the csscolor plugin is very slow when run on the terminal
-" but not in GVim, so disable it if no GUI is running
-if !has('gui_running')
-        call add(g:pathogen_disabled, 'powerline')
-endif
-call pathogen#infect()
-call pathogen#helptags()
-"let g:pathogen_disabled = ['searchcomplete']
-syntax on
 
 
 
@@ -434,7 +441,8 @@ if  has("gui_running")
     "colorscheme mickeysoft "Good light
     "colorscheme mophiaSmoke "Good light
     "colorscheme gruvbox "Good
-    colorscheme badwolf
+    "colorscheme badwolf
+    colorscheme nocturne
     "colorscheme habilight "Good light
     "colorscheme earendel "white Good
     "colorscheme codeblocks_dark "Good
@@ -496,10 +504,6 @@ set nobackup
 set nowb
 set noswapfile
 
-"filetype off
-"call pathogen#infect()
-"call pathogen#helptags()
-"syntax on
 "filetype plugin indent on
 "Show matching bracets when text indicator is over them
 set showmatch
@@ -509,12 +513,13 @@ se undolevels=10000
  " reopening a file
   if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-  endif  
+  endif
 
  map <F2> :NERDTreeToggle<CR>
  "If there is an issue in Nerdtree
  "Cannot browse subdirs
 let g:NERDTreeDirArrows=0
+let NERDTreeShowHidden=1
  "
  command CPWD cd %:p:h
  command LPWD lcd %:p:h
@@ -610,7 +615,7 @@ func! DeleteTillSlash()
     else
       let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
     endif
-  endif   
+  endif
   return g:cmd_edited
 endfunc
 
@@ -636,14 +641,30 @@ let g:Powerline_mode_i = 'I'
 let g:Powerline_mode_R = 'R'
 let g:Powerline_mode_v = 'V'
 if has('gui_running')
-    call Pl#Theme#RemoveSegment('fileencoding')
-    call Pl#Theme#RemoveSegment('fileformat')
-    call Pl#Theme#InsertSegment('filesize', 'before', 'filetype')
-    call Pl#Theme#InsertSegment('pwd', 'before', 'filesize')
+    "call Pl#Theme#RemoveSegment('fileencoding')
+    "call Pl#Theme#RemoveSegment('fileformat')
+    "call Pl#Theme#InsertSegment('filesize', 'before', 'filetype')
+    "call Pl#Theme#InsertSegment('pwd', 'before', 'filesize')
 "hide the insert mode displays
     set noshowmode
+    "airline settings
+    "nice looking fonts
+    "let g:airline_powerline_fonts=0
+    let g:airline_theme='light'
+    " remove separators
+    "let g:airline_left_sep=''
+    "let g:airline_right_sep=''
+    " remove unused modes
+    "let g:airline_enable_fugitive=0
+    "let g:airline_enable_syntastic=0
+    " put filetype in fifth section
+    let g:airline_section_b = '#[%N] %{getcwd()}'
+    let g:airline_section_c = '%t %m'
+    let g:airline_section_x = ""
+    let g:airline_section_y = "%Y"
+    let g:airline_section_z = "%p%% :%l/%L: %c"
+    let g:airline_section_warning = ""
 endif
-"set rtp+=~/.vim/bundle/powerline/bindings/vim
 set laststatus=2
 "dont show statusline messages
 
@@ -715,8 +736,8 @@ let MRU_Max_Entries = 100
 "FuzzyFinder
 "noremap <F3> :FufFile<CR>
 noremap <F4> :FufBuffer<CR>
-noremap <F5> :BufExplorerVerticalSplit<CR>
-"noremap <F6> :GundoToggle<CR>
+"noremap <F5> :BufExplorerVerticalSplit<CR>
+noremap <F5> :GundoToggle<CR>
 noremap <F3> :TagbarToggle<CR>
 "noremap <F7> :YRShow<CR>
 map * *''zz
