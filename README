@@ -64,9 +64,13 @@ Removing Submodule
 ====================
 Remove the submodule's entry in the .gitmodules file.
 Remove the submodule's entry in the .git/config
-Remove the path created for the submodule
+Remove the path created for the submodule (dont include trailing slash)
 git rm --cached <path>
-path should not have the trailing slash
+rm -rf .git/modules/submodule_name
+rm -rf <path to submodule>
+///ALTERNATE
+git submodule deinit
+git rm -r <path>
 
 Installing Monaco Font
 the font is also available in --> wget -q http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
