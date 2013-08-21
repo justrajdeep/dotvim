@@ -15,9 +15,9 @@ let g:pathogen_disabled = []
 
 " for some reason the csscolor plugin is very slow when run on the terminal
 " but not in GVim, so disable it if no GUI is running
-"if !has('gui_running')
-"        call add(g:pathogen_disabled, 'powerline')
-"endif
+if !has('gui_running')
+        call add(g:pathogen_disabled, 'vim_airline')
+endif
 call pathogen#infect()
 call pathogen#helptags()
 "VUNDLE
@@ -35,24 +35,77 @@ call pathogen#helptags()
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
 
+"syntax highlighting..
 syntax on
 filetype plugin indent on
 
 "settings handy ..
-set autoindent  showmode  showmatch  showcmd
+set showcmd
 "allow to delete using backspace
 "set backspace=2
 set backspace=indent,eol,start
 " Set xterm2 mouse mode to allow resizing of splits with mouse inside Tmux.
 set ttymouse=xterm2
+" other whitespace and indenting related settings
+" auto-indent amount when using cindent, >>, << and stuff like that
+set shiftwidth=4
+set softtabstop=2
+" multiples of shiftwidth when using >
+set shiftround
 set sw=2
-set ts=2
-set laststatus=2 ruler ignorecase wrapmargin=8
+" real tabs should be 8, and they will show with set list on
+set tabstop=8
+"dont show statusline messages
+"hide the insert mode displays
+set noshowmode
+set laststatus=2 ruler wrapmargin=8
 set expandtab
 "set shiftwidth=8 tabstop=8 nowrap joinspaces magic report=0 dict=/usr/dict/words
-set bs=2 shell=csh wildchar=<TAB> incsearch
+set shell=csh wildchar=<TAB> incsearch
 "set guifont=-b&h-lucidatypewriter-medium-r-normal-*-*-140-*-*-m-*-iso8859-15
 set tw=79
+
+"set rel num and current line number"
+se rnu
+se nu
+se nowrapscan
+se nowrap
+" Turn backup off, since most stuff is in SVN, git anyway...
+set nobackup
+set nowb
+set noswapfile
+
+"Show matching bracets when text indicator is over them
+set showmatch
+se hlsearch
+se undolevels=10000
+se diffopt+=iwhite
+se autoindent
+set smartindent
+" This is a personal preference, I copy with 'as is' indent, the use '<' or '>' on visual to change it
+set copyindent
+" For smartindent, don't handle # specially
+" don't force preprocessor lines at column 1
+set cinkeys-=0#
+"inoremap # X#
+set smarttab
+set cindent
+let indent_guides_enable_on_vim_startup = 1
+"se ignorecase
+se smartcase
+set scrolloff=2 "skip 2 lines when scrolling
+set iskeyword+=_
+set confirm
+set nostartofline
+"change to the current dir automatically
+set autochdir
+"open file in the current buffer dir
+set browsedir=buffer
+"change the cmd window
+"set cmdheight=3
+"small status msg for vim
+set shortmess=a
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.o,*.obj,*.a,*.lib,*.elf,*.dll
 " Make shift-insert work like in Xterm
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
@@ -88,11 +141,8 @@ set t_vb=
 " echo something on leaving .......
 "au VimLeave * echo "Another file ..... gosh I am tired !!"
 
-"syntax highlighting..
-syntax on
-
  " correct these frequent typographical errors
- source $HOME/.vim/spell_correct
+source $HOME/.vim/spell_correct
 
 "source $VIM/macros/file_select.vim
 map - :se wrapmargin=0<CR>
@@ -110,10 +160,12 @@ set wildignorecase
 set wildmenu
 :set cpo-=<
 :set wcm=<C-Z>
-:map <F4> :emenu <C-Z>
+"":map <F4> :emenu <C-Z>
 "visual special charaters
 "" Highlight problematic whitespace
-set list
+if  has("gui_running")
+  set list
+endif
 "get new chanracters from dig
 set listchars=tab:»»,extends:¶,eol:¬
 " Make trailing whitespace annoyingly highlighted.
@@ -249,13 +301,13 @@ augroup END
 
 augroup filetype_make
 :autocmd!
-:au BufNewFile,BufRead Makeppfile setf make
-:au BufNewFile,BufRead Makeppfile.* setf make
-:au BufNewFile,BufRead *.make setf make
-:au BufNewFile,BufRead rtlmakefile.inc setf make
-:au BufNewFile,BufRead vplmakefile.inc setf make
-:au BufNewFile,BufRead vcsmakefile.inc setf make
-:au BufNewFile,BufRead *.config setf make
+:au BufNewFile,BufRead Makeppfile setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
+:au BufNewFile,BufRead Makeppfile.* setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
+:au BufNewFile,BufRead *.make setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
+:au BufNewFile,BufRead rtlmakefile.inc setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
+:au BufNewFile,BufRead vplmakefile.inc setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
+:au BufNewFile,BufRead vcsmakefile.inc setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
+:au BufNewFile,BufRead *.config setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
 :autocmd BufLeave,FocusLost  Makefile* silent! wall
 augroup END
 
@@ -263,7 +315,7 @@ augroup filetype_verilog
 :autocmd!
 ":au BufNewFile,BufRead *.sv setf verilog |set foldmethod=indent/syntax|set foldnestmax=12|set shiftwidth=4|set softtabstop=4|set tabstop=4
 ":au BufNewFile,BufRead *.sv setf verilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4|setlocal fdc=4|setlocal foldopen+=search|source \~/.vim/cus_fold/folding.vim|call MarkdownSVFolds()
-:au BufNewFile,BufRead *.sv setf verilog_systemverilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4
+:au BufNewFile,BufRead *.sv setf verilog_systemverilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4
 :au BufNewFile,BufRead *.spp setf verilog
 :au BufNewFile,BufRead *.vx setf verilog
 :au BufNewFile,BufRead *.v setf verilog
@@ -282,13 +334,13 @@ augroup filetype_verilog
 :au BufNewFile,BufRead *.vhxcp setf verilog
 :au BufNewFile,BufRead *.pl setf perl
 :au BufNewFile,BufRead *.pm setf perl
-:au BufNewFile,BufRead *.svh setf verilog_systemverilog|setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4
+:au BufNewFile,BufRead *.svh setf verilog_systemverilog|setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4
 :au BufNewFile,BufRead *.svhx setf verilog_systemverilog
 :au BufNewFile,BufRead *.log setlocal wrap
 :au BufNewFile,BufRead *.log setf log
 :au BufNewFile,BufRead *.log.retry setf log
 
-:au Filetype *verilog* set tabstop=4
+:au Filetype *verilog* set softtabstop=2
 :au BufReadPost * if exists("b:current_syntax")
 :au BufReadPost *   if b:current_syntax == "verilog"
 :au BufReadPost *     let b:verilog_indent_modules = 1
@@ -312,10 +364,6 @@ augroup END
 ":au BufNewFile,BufRead *.vtx,*.v set ft=bsv
 ":au BufNewFile,BufRead *.svx,*.svix set ft=bsv
 ":au BufNewFile,BufRead *.svcp,*.svi set ft=bsv
-
-
-
-
 "-------------> Html Files <-------------------------
   nmap  ,e :e ~/.P/
   map   ,rn :0r ~/.P/txt/New.page.form.html
@@ -395,20 +443,6 @@ augroup END
   ab  Ycut  \| <a href="#"<C-I>></a><ESC>F#a
   vmap ,cut  "zdi<a href="#<C-R>z"<C-I>><C-R>z</a><ESC>2F>
 
-"set rel num and current line number"
-se rnu
-se nu
-se nowrapscan
-se diffopt+=iwhite
-se autoindent
-set smartindent
-" For smartindent, don't handle # specially
-"inoremap # X#
-set smarttab
-set cindent
-let indent_guides_enable_on_vim_startup = 1
-"se ignorecase
-se smartcase
 "se bg=light
 if  has("gui_running")
     set guitablabel=%N:\ %t#\%-10.3n\ %M
@@ -498,17 +532,6 @@ else
     imap <ESC>oD <ESC>hi
     "Setting light background
 endif
-se nowrap
-" Turn backup off, since most stuff is in SVN, git anyway...
-set nobackup
-set nowb
-set noswapfile
-
-"filetype plugin indent on
-"Show matching bracets when text indicator is over them
-set showmatch
-se hlsearch
-se undolevels=10000
  " Uncomment the following to have Vim jump to the last position when
  " reopening a file
   if has("autocmd")
@@ -645,8 +668,6 @@ if has('gui_running')
     "call Pl#Theme#RemoveSegment('fileformat')
     "call Pl#Theme#InsertSegment('filesize', 'before', 'filetype')
     "call Pl#Theme#InsertSegment('pwd', 'before', 'filesize')
-"hide the insert mode displays
-    set noshowmode
     "airline settings
     "nice looking fonts
     "let g:airline_powerline_fonts=0
@@ -665,18 +686,16 @@ if has('gui_running')
     let g:airline_section_z = "%p%% :%l/%L: %c"
     let g:airline_section_warning = ""
 endif
-set laststatus=2
-"dont show statusline messages
 
 " Format the statusline
 " %= is to right align
 if !has('gui_running')
-    "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
-    set statusline=\ %{HasPaste()}%F%m%r%h\ %w\
-    set statusline+=%=Line:\ %l/%L(%p%%):%c
-    set statusline+=\
-    set statusline+=Ftype:
-    set statusline+=%y
+"    "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
+"    set statusline=\ %{HasPaste()}%F%m%r%h\ %w\
+"    set statusline+=%=Line:\ %l/%L(%p%%):%c
+"    set statusline+=\
+"    set statusline+=Ftype:
+"    set statusline+=%y
 endif
 
 function! CurDir()
@@ -709,7 +728,6 @@ endfunction
 highlight clear Folded
 highlight Folded term=bold gui=bold
 set foldopen-=search
-set scrolloff=2 "skip 2 lines when scrolling
 "call AutoHighlightToggle()
 "function AutoHighlightToggle()
 "        augroup auto_highlight
@@ -772,17 +790,6 @@ let g:snips_author = 'Rajdeep <[[rmondal@nvidia.com]](mailto:rmondal@nvidia.com)
 "nnoremap <right> <nop>
 "nnoremap <up> <nop>
 "nnoremap <down> <nop>
-set iskeyword+=_
-set confirm
-set nostartofline
-"change to the current dir automatically
-set autochdir
-"open file in the current buffer dir
-set browsedir=buffer
-"change the cmd window
-"set cmdheight=3
-"small status msg for vim
-set shortmess=a
 if has('win32')
         "Avoid mswin.vim making Ctrl-v as paste
         noremap <C-V> <C-V>
@@ -791,7 +798,6 @@ if has('win32')
 		behave xterm
 		"colorscheme lettuce
                 set guifont=Lucida\ Console:h11
-                set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe
 else
                 "set guifont=Monospace\ 14
                 "set guifont=Inconsolata\ 12
@@ -802,7 +808,6 @@ else
                 "set guifont=Century\ Schoolbook\ L\ 12
                 "set guifont=DejaVu\ Sans\ Mono\ 12
                 set guifont=Monaco\ 11
-                set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 endif
 
 " Use local vimrc if available {
