@@ -1,16 +1,19 @@
 " ************************ My own vimrc ******************************
 
-     set t_Co=8                  
-     set t_Sf=[3%dm        
+     set t_Co=8
+     set t_Sf=[3%dm
      set t_Sb=[4%dm
      set t_mr=[00;33;44m
 
 "settings handy ..
 set autoindent  showmode  showmatch  showcmd
 "allow to delete using backspace
-set backspace=2
-set sw=4
-set ts=4
+"set backspace=2
+set backspace=indent,eol,start
+" Set xterm2 mouse mode to allow resizing of splits with mouse inside Tmux.
+set ttymouse=xterm2
+set sw=2
+set ts=2
 set laststatus=2 ruler ignorecase wrapmargin=8
 set expandtab
 "set shiftwidth=8 tabstop=8 nowrap joinspaces magic report=0 dict=/usr/dict/words
@@ -65,8 +68,8 @@ syntax on
  ab shoudl should
  ab seperate separate
  ab teh the
- ab hte the 
- ab abotu about 
+ ab hte the
+ ab abotu about
  ab togglig toggling
  ab conneted connected
 
@@ -89,8 +92,16 @@ set wildmenu
 :map <F4> :emenu <C-Z>
 "visual special charaters
 "" Highlight problematic whitespace
-"set list
-set listchars=tab:>.,trail:.,extends:#,nbsp:.
+set list
+set listchars=tab:>-,extends:#,eol:<
+" Make trailing whitespace annoyingly highlighted.
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+"highlight NonText ctermfg=8 guifg=gray
 "set listchars=tab:>.,trail:.,extends:\#,nbsp:.
 
 " kick off emax
@@ -194,8 +205,8 @@ augroup END
 augroup filetype_tex
 :autocmd!
 :autocmd BufEnter *.tex		map! <F1> }
-:autocmd BufEnter *.tex		map! <F2> {\bf 
-:autocmd BufEnter *.tex		map! <F3> {\em 
+:autocmd BufEnter *.tex		map! <F2> {\bf
+:autocmd BufEnter *.tex		map! <F3> {\em
 :autocmd BufEnter *.tex		map! <F4> {\
 
 :autocmd BufEnter *.tex		ab hp hyperplane
@@ -377,7 +388,9 @@ syntax on
   ab  Ycut  \| <a href="#"<C-I>></a><ESC>F#a
   vmap ,cut  "zdi<a href="#<C-R>z"<C-I>><C-R>z</a><ESC>2F>
 
+"set rel num and current line number"
 se rnu
+se nu
 se nowrapscan
 se diffopt+=iwhite
 se autoindent
@@ -385,6 +398,8 @@ set smartindent
 " For smartindent, don't handle # specially
 "inoremap # X#
 set smarttab
+set cindent
+let indent_guides_enable_on_vim_startup = 1
 "se ignorecase
 se smartcase
 "se bg=light
@@ -433,7 +448,7 @@ if  has("gui_running")
     "colorscheme jellybeans "Good
     "colorscheme railscasts "Good
     "colorscheme twilight "Good
-    "colorscheme molokai "Good 
+    "colorscheme molokai "Good
     "colorscheme xoria256 "Good
     "colorscheme symfony
     set cursorline
@@ -465,7 +480,7 @@ else
     "colorscheme metacosm "Black
     "colorscheme motus "Black
     "colorscheme midnight2 "Blue
-    set guifont=-b&h-lucidatypewriter-medium-r-normal-*-*-140-*-*-m-*-iso8859-15    
+    set guifont=-b&h-lucidatypewriter-medium-r-normal-*-*-140-*-*-m-*-iso8859-15
     se mouse=a
     "se t_Co=256
     "FIXING the arrow problem
@@ -490,10 +505,10 @@ set noswapfile
 set showmatch
 se hlsearch
 se undolevels=10000
- " Uncomment the following to have Vim jump to the last position when 
- " reopening a file 
-  if has("autocmd") 
-    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif 
+ " Uncomment the following to have Vim jump to the last position when
+ " reopening a file
+  if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
   endif  
 
  map <F2> :NERDTreeToggle<CR>
@@ -544,7 +559,7 @@ function! VisualSearch(direction) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
- 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Command mode related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -579,7 +594,7 @@ cno $Z <C-U>!tar cvf %.tar % && mutt -s "%" -a %.tar rmondal@nvidia.com < /dev/n
 " Bash like keys for the command line
 func! Cwd()
   let cwd = getcwd()
-  return "e " . cwd 
+  return "e " . cwd
 endfunc
 
 func! DeleteTillSlash()
@@ -636,9 +651,9 @@ set laststatus=2
 " %= is to right align
 if !has('gui_running')
     "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
-    set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ 
+    set statusline=\ %{HasPaste()}%F%m%r%h\ %w\
     set statusline+=%=Line:\ %l/%L(%p%%):%c
-    set statusline+=\ 
+    set statusline+=\
     set statusline+=Ftype:
     set statusline+=%y
 endif
@@ -657,7 +672,7 @@ function! HasPaste()
 endfunction
 
 "set the color of the cursor line
-"hi Cursorline 
+"hi Cursorline
 "hi Cursorline cterm=bold ctermbg=None ctermfg=None guibg=#555555
 "autocmd InsertEnter * hi Cursorline cterm=Bold ctermbg=None ctermfg=None guibg=black
 "autocmd InsertLeave * hi Cursorline cterm=Bold ctermbg=None ctermfg=None guibg=#555555
@@ -719,7 +734,7 @@ inoremap <c-s> <esc>ddi
 "cmap Tabe tabe
 " visual shifting (does not exit Visual mode)
 "vnoremap < <gv
-"vnoremap > >gv 
+"vnoremap > >gv
 
 let g:Perl_AuthorName      = 'Rajdeep'
 let g:Perl_AuthorRef       = ''
@@ -743,7 +758,7 @@ set nostartofline
 set autochdir
 "open file in the current buffer dir
 set browsedir=buffer
-"change the cmd window 
+"change the cmd window
 "set cmdheight=3
 "small status msg for vim
 set shortmess=a
@@ -779,14 +794,14 @@ endif
 "    source \~/.vim/cus_fold/folding.vim
 "endif
 "fold --> check if file has folding then show foldcolum"
-"function HasFoldedLine() 
-"    let lnum=1 
-"    while lnum <= line("$") 
-"        if (foldclosed(lnum) > -1) 
-"            return 1 
-"        endif 
-"        let lnum+=1 
-"    endwhile 
-"    return 0 
+"function HasFoldedLine()
+"    let lnum=1
+"    while lnum <= line("$")
+"        if (foldclosed(lnum) > -1)
+"            return 1
+"        endif
+"        let lnum+=1
+"    endwhile
+"    return 0
 " endfu
 ":au CursorHold * if HasFoldedLine() == 1 | set fdc=1 | else |set fdc=0 | endif
