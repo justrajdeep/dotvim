@@ -31,6 +31,7 @@ call pathogen#helptags()
 " :BundleInstall(!)    - install(update) bundles
 " :BundleSearch(!) foo - search(or refresh cache first) for foo
 " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" :BundleUpdate
 "
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
@@ -40,6 +41,7 @@ syntax on
 filetype plugin indent on
 
 "settings handy ..
+" Display an incomplete command in the lower right corner of the Vim window
 set showcmd
 "allow to delete using backspace
 "set backspace=2
@@ -90,6 +92,8 @@ set cinkeys-=0#
 "inoremap # X#
 set smarttab
 set cindent
+set cinoptions=:s,ps,ts,cs
+set cinwords=if,else,while,do,for,switch,case
 let indent_guides_enable_on_vim_startup = 1
 "se ignorecase
 se smartcase
@@ -104,7 +108,7 @@ set browsedir=buffer
 "change the cmd window
 "set cmdheight=3
 "small status msg for vim
-set shortmess=a
+set shortmess=atI
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.o,*.obj,*.a,*.lib,*.elf,*.dll
 " Make shift-insert work like in Xterm
 map <S-Insert> <MiddleMouse>
@@ -130,13 +134,15 @@ set t_vs=[5%dm
 " I work  in javascript also ...
 set textwidth=2000
 
-"Change buffer - without saving
-set hid
+"Change buffer - without saving 
+"buffer to background without saving
+set hidden
 
 " I don't like bells .
 set noerrorbells
 set visualbell
-set t_vb=
+" disable any beeps or flashes on error
+set vb t_vb=
 
 " echo something on leaving .......
 "au VimLeave * echo "Another file ..... gosh I am tired !!"
@@ -165,6 +171,7 @@ set wildmenu
 "" Highlight problematic whitespace
 if  has("gui_running")
   set list
+  "highlight NonText ctermfg=8 guifg=gray
 endif
 "get new chanracters from dig
 set listchars=tab:»»,extends:¶,eol:¬
@@ -175,7 +182,6 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
-"highlight NonText ctermfg=8 guifg=gray
 "set listchars=tab:>.,trail:.,extends:\#,nbsp:.
 
 " kick off emax
@@ -522,7 +528,7 @@ else
     "colorscheme metacosm "Black
     "colorscheme motus "Black
     "colorscheme midnight2 "Blue
-    set guifont=-b&h-lucidatypewriter-medium-r-normal-*-*-140-*-*-m-*-iso8859-15
+    "set guifont=-b&h-lucidatypewriter-medium-r-normal-*-*-140-*-*-m-*-iso8859-15
     se mouse=a
     "se t_Co=256
     "FIXING the arrow problem
@@ -798,6 +804,11 @@ if has('win32')
 		behave xterm
 		"colorscheme lettuce
                 set guifont=Lucida\ Console:h11
+                "set guifont=* 
+                ":FontList
+                ":Font Dingbats
+                ":FontSize 14
+                ":FontStyle bold italic
 else
                 "set guifont=Monospace\ 14
                 "set guifont=Inconsolata\ 12
@@ -808,6 +819,11 @@ else
                 "set guifont=Century\ Schoolbook\ L\ 12
                 "set guifont=DejaVu\ Sans\ Mono\ 12
                 set guifont=Monaco\ 11
+                "set guifont=* 
+                ":FontList
+                ":Font Dingbats
+                ":FontSize 14
+                ":FontStyle bold italic
 endif
 
 " Use local vimrc if available {

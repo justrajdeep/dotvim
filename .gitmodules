@@ -136,3 +136,6 @@
 [submodule "bundle/vim_nocturne"]
 	path = bundle/vim_nocturne
 	url = https://github.com/euclio/vim-nocturne.git
+[submodule "bundle/fontmanager"]
+	path = bundle/fontmanager
+	url = https://github.com/takac/vim-fontmanager
