@@ -78,7 +78,9 @@ cp Monaco_Linux.ttf to ~/.fonts (if dir is not there create one)
 $ cd ~/.fonts
 $ mkfontscale
 $ mkfontdir
-$ fc-cache -fv ~/.fonts
+$ ttmkfdir -o fonts.dir
+$ fc-cache -f -v ~/.fonts
+$ fc-cache -f -v
 
 Check if it is installed correctly
 $ fc-list | grep Monaco
