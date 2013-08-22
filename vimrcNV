@@ -828,17 +828,18 @@ if has('win32')
                 ":FontSize 14
                 ":FontStyle bold italic
 else
-                "set guifont=Monospace\ 14
                 "set guifont=Courier\ New\ 12
-                "set guifont=Andale\ Mono\ 12
                 "set guifont=Droid\ Sans\ Mono\ 12
                 "set guifont=Bitstream\ Charter\ 12
                 "set guifont=Century\ Schoolbook\ L\ 12
                 "set guifont=DejaVu\ Sans\ Mono\ 12
+                "
                 set guifont=Monaco\ 11
+                "set guifont=Andale\ Mono\ 14
                 "set guifont=Monofur\ 14
                 "set guifont=Consolas\ 13
                 "set guifont=Inconsolata\ 14
+                "set guifont=Monospace\ 14
                 "set guifont=* 
                 ":FontList
                 ":Font Dingbats
