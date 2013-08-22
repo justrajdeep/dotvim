@@ -76,11 +76,24 @@ se nowrap
 set nobackup
 set nowb
 set noswapfile
-
+se undolevels=10000
+" viminfo stores the the state of your previous editing session
+set viminfo+=n~/.vim/viminfo
+if exists("+undofile")
+  " undofile - This allows you to use undos after exiting and restarting
+  " This, like swap and backups, uses .vim-undo first, then ~/.vim/undo
+  " :help undo-persistence
+  " This is only present in 7.3+
+  "if isdirectory($HOME . '/.vim/undo') == 0
+  "  :silent !mkdir -p ~/.vim/undo >& /dev/null 
+  "endif
+  set undodir=./.vim-undo//
+  set undodir+=~/.vim/undo//
+  set undofile
+endif
 "Show matching bracets when text indicator is over them
 set showmatch
 se hlsearch
-se undolevels=10000
 se diffopt+=iwhite
 se autoindent
 set smartindent
@@ -222,6 +235,11 @@ let g:ctrlp_working_path_mode = 'ra'
 ":autocmd  FileAppendPre			*.gz !mv <afile>:r <afile>
 ":autocmd! FileAppendPost		*.gz !mv <afile> <afile>:r
 ":autocmd  FileAppendPost		*.gz !gzip <afile>:r
+"autoload vimrc
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+    augroup END
 
 "-------------> Perl programs <-------------
 augroup filetype_perl
@@ -811,7 +829,6 @@ if has('win32')
                 ":FontStyle bold italic
 else
                 "set guifont=Monospace\ 14
-                "set guifont=Inconsolata\ 12
                 "set guifont=Courier\ New\ 12
                 "set guifont=Andale\ Mono\ 12
                 "set guifont=Droid\ Sans\ Mono\ 12
@@ -819,6 +836,9 @@ else
                 "set guifont=Century\ Schoolbook\ L\ 12
                 "set guifont=DejaVu\ Sans\ Mono\ 12
                 set guifont=Monaco\ 11
+                "set guifont=Monofur\ 14
+                "set guifont=Consolas\ 13
+                "set guifont=Inconsolata\ 14
                 "set guifont=* 
                 ":FontList
                 ":Font Dingbats
