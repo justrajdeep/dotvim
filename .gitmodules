@@ -154,3 +154,12 @@
 [submodule "bundle/multiple_cursor"]
 	path = bundle/multiple_cursor
 	url = https://github.com/terryma/vim-multiple-cursors.git
+[submodule "bundle/signature"]
+	path = bundle/signature
+	url = https://github.com/kshenoy/vim-signature.git
+[submodule "bundle/vimproc"]
+	path = bundle/vimproc
+	url = https://github.com/Shougo/vimproc.vim.git
+[submodule "bundle/dirdiff"]
+	path = bundle/dirdiff
+	url = https://github.com/vim-scripts/DirDiff.vim.git

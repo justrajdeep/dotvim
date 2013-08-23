@@ -1,6 +1,6 @@
 " ************************ My own vimrc ******************************
 
-     set t_Co=8
+     set t_Co=256
      set t_Sf=[3%dm
      set t_Sb=[4%dm
      set t_mr=[00;33;44m
@@ -24,7 +24,7 @@ call pathogen#helptags()
 "set rtp+=~/.vim/bundle/vundle/
 "call vundle#rc()
 " let Vundle manage Vundle
-" required! 
+" required!
 "Bundle 'gmarik/vundle'
 " Brief help
 " :BundleList          - list configured bundles
@@ -39,6 +39,25 @@ call pathogen#helptags()
 "syntax highlighting..
 syntax on
 filetype plugin indent on
+" source neocomplete
+source $HOME/.vim/neo_complete
+" setting lazyredraw to be on during automatic popup...
+set lazyredraw
+" Solid line for vsplit separator
+set fcs=vert:'|'
+"
+" Always splits to the right and below
+"set splitright
+"set splitbelow
+"
+" Set to auto read when a file is changed from the outside
+"set autoread
+"
+" Set to auto write file
+"set autowriteall
+"
+" Give one virtual space at end of line
+set virtualedit=onemore
 
 "settings handy ..
 " Display an incomplete command in the lower right corner of the Vim window
@@ -65,7 +84,12 @@ set expandtab
 "set shiftwidth=8 tabstop=8 nowrap joinspaces magic report=0 dict=/usr/dict/words
 set shell=csh wildchar=<TAB> incsearch
 "set guifont=-b&h-lucidatypewriter-medium-r-normal-*-*-140-*-*-m-*-iso8859-15
-set tw=79
+
+" Make regex a little easier to type
+set magic
+
+" Column width indicator
+set colorcolumn=+1
 
 "set rel num and current line number"
 se rnu
@@ -74,7 +98,7 @@ se nowrapscan
 se nowrap
 " Turn backup off, since most stuff is in SVN, git anyway...
 set nobackup
-set nowb
+set nowritebackup
 set noswapfile
 se undolevels=10000
 " viminfo stores the the state of your previous editing session
@@ -85,7 +109,7 @@ if exists("+undofile")
   " :help undo-persistence
   " This is only present in 7.3+
   "if isdirectory($HOME . '/.vim/undo') == 0
-  "  :silent !mkdir -p ~/.vim/undo >& /dev/null 
+  "  :silent !mkdir -p ~/.vim/undo >& /dev/null
   "endif
   set undodir=./.vim-undo//
   set undodir+=~/.vim/undo//
@@ -95,6 +119,7 @@ endif
 set showmatch
 se hlsearch
 se diffopt+=iwhite
+set linebreak
 se autoindent
 set smartindent
 " This is a personal preference, I copy with 'as is' indent, the use '<' or '>' on visual to change it
@@ -108,10 +133,12 @@ set cindent
 set cinoptions=:s,ps,ts,cs
 set cinwords=if,else,while,do,for,switch,case
 let indent_guides_enable_on_vim_startup = 1
-"se ignorecase
+se ignorecase
 se smartcase
 set scrolloff=2 "skip 2 lines when scrolling
 set iskeyword+=_
+set iskeyword-='
+set iskeyword-=:
 set confirm
 set nostartofline
 "change to the current dir automatically
@@ -121,11 +148,18 @@ set browsedir=buffer
 "change the cmd window
 "set cmdheight=3
 "small status msg for vim
-set shortmess=atI
+"set shortmess=atI
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.o,*.obj,*.a,*.lib,*.elf,*.dll
 " Make shift-insert work like in Xterm
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
+" Writes to the unnamed register also writes to the * and + registers. This
+" makes it easy to interact with the system clipboard
+"if has ('unnamedplus')
+"  set clipboard=unnamedplus
+"else
+"  set clipboard=unnamed
+"endif
 
 "home moves cursor to the first non-blank char
 noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
@@ -147,7 +181,7 @@ set t_vs=[5%dm
 " I work  in javascript also ...
 set textwidth=2000
 
-"Change buffer - without saving 
+"Change buffer - without saving
 "buffer to background without saving
 set hidden
 
@@ -173,6 +207,7 @@ map <C-^> <C-]>
 :source $VIMRUNTIME/menu.vim
 
 "filelist Completion options
+set completeopt=longest,menuone
 set wildmode=longest,list,full
 set wildignorecase
 "command line suggestion
@@ -187,14 +222,20 @@ if  has("gui_running")
   "highlight NonText ctermfg=8 guifg=gray
 endif
 "get new chanracters from dig
-set listchars=tab:»»,extends:¶,eol:¬
+" use C-k to insert
+set listchars=tab:§»,extends:¶,eol:¬
+"set showbreak=§
 " Make trailing whitespace annoyingly highlighted.
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
+augroup MyAutoCmd
+  autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+  autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+  autocmd BufWinLeave * call clearmatches()
+  " add this so that future colorscheme changes dont overwrite it"
+  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+augroup END
 "set listchars=tab:>.,trail:.,extends:\#,nbsp:.
 
 " kick off emax
@@ -211,7 +252,6 @@ cnoremap <M-f>  <S-Right>
 cnoremap <M-d>  <S-right><Delete>
 cnoremap <ESC>b <S-Left>
 cnoremap <Esc>d <S-right><Delete>
-cnoremap <C-g>  <C-c>
 cnoremap <ESC>f <S-Right>
 cnoremap <ESC><C-H> <C-W>
 "buffer navigation
@@ -239,7 +279,7 @@ let g:ctrlp_working_path_mode = 'ra'
 augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-    augroup END
+augroup END
 
 "-------------> Perl programs <-------------
 augroup filetype_perl
@@ -378,7 +418,6 @@ augroup filetype_verilog
 :au BufReadPost,BufNewFile *
   \ runtime macros/matchit.vim |
   \ let b:match_words = '\<begin\>:\<end\>,\<fork\>:\<join\>,\<module\>:\<endmodule\>,\<task\>:\<endtask\>,\<function\>:\<endfunction\>,\<class\>:\<endclass\>,\<program\>:\<endprogram\>,\<case\>:^[ |<C-I>]*[^"]\+ *\::\<endcase\>,`ifdef:`else:`elsif:`endif,'
-
 augroup END
 
 "-------------> VIVA Files <-------------------------
@@ -389,6 +428,8 @@ augroup END
 ":au BufNewFile,BufRead *.svx,*.svix set ft=bsv
 ":au BufNewFile,BufRead *.svcp,*.svi set ft=bsv
 "-------------> Html Files <-------------------------
+augroup filetype_html
+  :autocmd!
   nmap  ,e :e ~/.P/
   map   ,rn :0r ~/.P/txt/New.page.form.html
   nmap  ,p :!chmod 644 %<CR>
@@ -466,6 +507,7 @@ augroup END
   nmap  ,= :%s/^===\(.*\)$/<h1>\1<\/h1>/c<CR>
   ab  Ycut  \| <a href="#"<C-I>></a><ESC>F#a
   vmap ,cut  "zdi<a href="#<C-R>z"<C-I>><C-R>z</a><ESC>2F>
+augroup END
 
 "se bg=light
 if  has("gui_running")
@@ -556,30 +598,41 @@ else
     imap <ESC>oD <ESC>hi
     "Setting light background
 endif
+" Turn on cursorline only on active window
+augroup MyAutoCmd
+  autocmd WinLeave * setlocal nocursorline
+  autocmd WinEnter,BufRead * setlocal cursorline
+augroup END
+"
  " Uncomment the following to have Vim jump to the last position when
  " reopening a file
   if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
   endif
 
- map <F2> :NERDTreeToggle<CR>
+nmap <F1> h
+map <F2> :NERDTreeToggle<CR>
  "If there is an issue in Nerdtree
  "Cannot browse subdirs
 let g:NERDTreeDirArrows=0
 let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\~$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+let NERDSpaceDelims=1
  "
- command CPWD cd %:p:h
- command LPWD lcd %:p:h
- command TOT lcd `my_depth`
- "for replacing a test
- vmap <C-r> "_dP
+command CPWD cd %:p:h
+command LPWD lcd %:p:h
+command TOT lcd `my_depth`
+"for replacing a visual
+"vmap <C-r> "_dP
+vnoremap p "0p
+vnoremap P "0P
 """"""""""""""""""""""""""""""
 " => Visual mode related
 """"""""""""""""""""""""""""""
 " Really useful!
 "  In visual mode when you press * or # to search for the current selection
-vnoremap  <F9> :call VisualSearch('f')<CR>
-vnoremap  <F10> :call VisualSearch('b')<CR>
+vnoremap  # :call VisualSearch('f')<CR>
+vnoremap  * :call VisualSearch('b')<CR>
 
 " When you press gv you vimgrep after the selected text
 "vnoremap <silent> gv :call VisualSearch('gv')<CR>
@@ -587,29 +640,29 @@ vnoremap  <F10> :call VisualSearch('b')<CR>
 
 
 function! CmdLine(str)
-    exe "menu Foo.Bar :" . a:str
-    emenu Foo.Bar
-    unmenu Foo
-endfunction 
+  exe "menu Foo.Bar :" . a:str
+  emenu Foo.Bar
+  unmenu Foo
+endfunction
 
 " From an idea by Michael Naumann
 function! VisualSearch(direction) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
+  let l:saved_reg = @"
+  execute "normal! vgvy"
 
-    let l:pattern = escape(@", '\\/.*$^~[]')
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
+  let l:pattern = escape(@", '\\/.*$^~[]')
+  let l:pattern = substitute(l:pattern, "\n$", "", "")
 
-    if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
-    elseif a:direction == 'gv'
-        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
-    elseif a:direction == 'f'
-        execute "normal /" . l:pattern . "^M"
-    endif
+  if a:direction == 'b'
+    execute "normal ?" . l:pattern . "^M"
+  elseif a:direction == 'gv'
+    call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+  elseif a:direction == 'f'
+    execute "normal /" . l:pattern . "^M"
+  endif
 
-    let @/ = l:pattern
-    let @" = l:saved_reg
+  let @/ = l:pattern
+  let @" = l:saved_reg
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -688,51 +741,52 @@ let g:Powerline_mode_i = 'I'
 let g:Powerline_mode_R = 'R'
 let g:Powerline_mode_v = 'V'
 if has('gui_running')
-    "call Pl#Theme#RemoveSegment('fileencoding')
-    "call Pl#Theme#RemoveSegment('fileformat')
-    "call Pl#Theme#InsertSegment('filesize', 'before', 'filetype')
-    "call Pl#Theme#InsertSegment('pwd', 'before', 'filesize')
-    "airline settings
-    "nice looking fonts
-    let g:airline_powerline_fonts=0
-    let g:airline_theme='light'
-    " remove separators
-    "let g:airline_left_sep=''
-    "let g:airline_right_sep=''
-    " remove unused modes
-    "let g:airline_enable_fugitive=0
-    "let g:airline_enable_syntastic=0
-    " put filetype in fifth section
-    let g:airline_section_b = '#[%N] %{getcwd()}'
-    let g:airline_section_c = '%t %m'
-    let g:airline_section_x = ""
-    let g:airline_section_y = "%Y"
-    let g:airline_section_z = "%p%% :%l/%L: %c"
-    let g:airline_section_warning = ""
+  "call Pl#Theme#RemoveSegment('fileencoding')
+  "call Pl#Theme#RemoveSegment('fileformat')
+  "call Pl#Theme#InsertSegment('filesize', 'before', 'filetype')
+  "call Pl#Theme#InsertSegment('pwd', 'before', 'filesize')
+  "airline settings
+  "nice looking fonts
+  let g:airline_inactive_collapse=0
+  let g:airline_powerline_fonts=0
+  let g:airline_theme='light'
+  " remove separators
+  "let g:airline_left_sep=''
+  "let g:airline_right_sep=''
+  " remove unused modes
+  "let g:airline_enable_fugitive=0
+  "let g:airline_enable_syntastic=0
+  " put filetype in fifth section
+  let g:airline_section_c = 'Buf#[%n] Path:%{getcwd()} '
+  let g:airline_section_b = 'File:%t %m'
+  let g:airline_section_x = ""
+  let g:airline_section_y = "Type:%Y"
+  let g:airline_section_z = "%p%% : Line:%l/%L: Col:%c"
+  let g:airline_section_warning = ""
 endif
 
 " Format the statusline
 " %= is to right align
 if !has('gui_running')
-"    "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
-"    set statusline=\ %{HasPaste()}%F%m%r%h\ %w\
-"    set statusline+=%=Line:\ %l/%L(%p%%):%c
-"    set statusline+=\
-"    set statusline+=Ftype:
-"    set statusline+=%y
+  "    "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
+  "    set statusline=\ %{HasPaste()}%F%m%r%h\ %w\
+  "    set statusline+=%=Line:\ %l/%L(%p%%):%c
+  "    set statusline+=\
+  "    set statusline+=Ftype:
+  "    set statusline+=%y
 endif
 
 function! CurDir()
-    let curdir = substitute(getcwd(), '/users/rmondal/', "~/", "g")
-    return curdir
+  let curdir = substitute(getcwd(), '/users/rmondal/', "~/", "g")
+  return curdir
 endfunction
 
 function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    else
-        return ''
-    endif
+  if &paste
+    return 'PASTE MODE  '
+  else
+    return ''
+  endif
 endfunction
 
 "set the color of the cursor line
@@ -760,6 +814,7 @@ set foldopen-=search
 "        augroup end
 "        setl updatetime=200
 "endfunction
+"
 
 "so that i can move out of the terminal
 let g:ConqueTerm_ReadUnfocused = 1
@@ -770,7 +825,7 @@ command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | new | setlocal bt=
 
 command -nargs=0 Blame :call P4blame()
 function! P4blame()
-       exec "!`my_depth`/bin/p4blame %:" . line(".")
+  exec "!`my_depth`/bin/p4blame %:" . line(".")
 endfunction
 "MRU CONFIG
 let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*'  " For Unix
@@ -779,13 +834,16 @@ let MRU_Max_Entries = 100
 "noremap <F3> :FufFile<CR>
 noremap <F4> :FufBuffer<CR>
 "noremap <F5> :BufExplorerVerticalSplit<CR>
-noremap <F5> :GundoToggle<CR>
+noremap <F5> :<C-u>GundoToggle<CR>
+"let g:tagbar_usearrows = 1
 noremap <F3> :TagbarToggle<CR>
 "noremap <F7> :YRShow<CR>
-map * *''zz
-map g* g*''zz
-map # #''zz
-map g# g#''zz
+nnoremap * *''zz
+nnoremap g* g*''zz
+nnoremap # #''zz
+nnoremap g# g#''zz
+"map so that ctrl-g shows the full path"
+nnoremap <C-g>  11<C-g>
 "Yank from the cursor to the end of the line, to be consistentwith C and D.
 nnoremap Y y$
 inoremap <c-s> <esc>ddi
@@ -815,36 +873,36 @@ let g:snips_author = 'Rajdeep <[[rmondal@nvidia.com]](mailto:rmondal@nvidia.com)
 "nnoremap <up> <nop>
 "nnoremap <down> <nop>
 if has('win32')
-        "Avoid mswin.vim making Ctrl-v as paste
-        noremap <C-V> <C-V>
-        "make arrow keys extend visual
-        set keymodel-=stopsel
-		behave xterm
-		"colorscheme lettuce
-                set guifont=Lucida\ Console:h11
-                "set guifont=* 
-                ":FontList
-                ":Font Dingbats
-                ":FontSize 14
-                ":FontStyle bold italic
+  "Avoid mswin.vim making Ctrl-v as paste
+  noremap <C-V> <C-V>
+  "make arrow keys extend visual
+  set keymodel-=stopsel
+  behave xterm
+  "colorscheme lettuce
+  set guifont=Lucida\ Console:h11
+  "set guifont=*
+  ":FontList
+  ":Font Dingbats
+  ":FontSize 14
+  ":FontStyle bold italic
 else
-                "set guifont=Courier\ New\ 12
-                "set guifont=Droid\ Sans\ Mono\ 12
-                "set guifont=Bitstream\ Charter\ 12
-                "set guifont=Century\ Schoolbook\ L\ 12
-                "set guifont=DejaVu\ Sans\ Mono\ 12
-                "
-                set guifont=Monaco\ 11
-                "set guifont=Andale\ Mono\ 14
-                "set guifont=Monofur\ 14
-                "set guifont=Consolas\ 13
-                "set guifont=Inconsolata\ 14
-                "set guifont=Monospace\ 14
-                "set guifont=* 
-                ":FontList
-                ":Font Dingbats
-                ":FontSize 14
-                ":FontStyle bold italic
+  "set guifont=Courier\ New\ 12
+  "set guifont=Droid\ Sans\ Mono\ 12
+  "set guifont=Bitstream\ Charter\ 12
+  "set guifont=Century\ Schoolbook\ L\ 12
+  "set guifont=DejaVu\ Sans\ Mono\ 12
+  "
+  set guifont=Monaco\ 11
+  "set guifont=Andale\ Mono\ 14
+  "set guifont=Monofur\ 14
+  "set guifont=Consolas\ 13
+  "set guifont=Inconsolata\ 14
+  "set guifont=Monospace\ 14
+  "set guifont=*
+  ":FontList
+  ":Font Dingbats
+  ":FontSize 14
+  ":FontStyle bold italic
 endif
 
 " Use local vimrc if available {
@@ -868,3 +926,7 @@ endif
 "    return 0
 " endfu
 ":au CursorHold * if HasFoldedLine() == 1 | set fdc=1 | else |set fdc=0 | endif
+" Multicursor "
+let g:multi_cursor_exit_from_visual_mode=0
+let g:multi_cursor_exit_from_insert_mode=0
+
