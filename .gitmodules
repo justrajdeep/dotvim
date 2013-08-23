@@ -139,3 +139,18 @@
 [submodule "bundle/fontmanager"]
 	path = bundle/fontmanager
 	url = https://github.com/takac/vim-fontmanager
+[submodule "bundle/fugitive"]
+	path = bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "bundle/unite"]
+	path = bundle/unite
+	url = https://github.com/Shougo/unite.vim.git
+[submodule "bundle/color_tomorrow"]
+	path = bundle/color_tomorrow
+	url = https://github.com/csexton/tomorrow-theme.vim.git
+[submodule "bundle/neocomplcache"]
+	path = bundle/neocomplcache
+	url = https://github.com/Shougo/neocomplcache.vim.git
+[submodule "bundle/multiple_cursor"]
+	path = bundle/multiple_cursor
+	url = https://github.com/terryma/vim-multiple-cursors.git
