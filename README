@@ -105,4 +105,10 @@ Git initialization
  git push -u origin master
 
 
- # vim: filetype=note syntax=git :
+ # vim: filetype=README syntax=git :
+
+ GOOD vim sources
+ https://github.com/terryma/dotfiles
+ https://github.com/venkatapraveenr/dotvim2
+ https://github.com/joedicastro/dotfiles
+ http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
