@@ -32,7 +32,7 @@ git submodule foreach git pull origin master
 ====================
 Cloning
 ====================
-git pull 
+git pull
 ====================
 Add the submodule
 ====================
@@ -42,11 +42,11 @@ Get the submodule
 ====================
 git submodule update
 
-#if something in submodule 
+#if something in submodule
 #git submodule update --init
 ----------------------------------------
 GIT:
-If you get certificate error add 
+If you get certificate error add
 git config --global http.sslVerify false
 
 if you get login
@@ -112,3 +112,4 @@ Git initialization
  https://github.com/venkatapraveenr/dotvim2
  https://github.com/joedicastro/dotfiles
  http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
+ https://github.com/bling/dotvim

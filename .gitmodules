@@ -163,3 +163,12 @@
 [submodule "bundle/dirdiff"]
 	path = bundle/dirdiff
 	url = https://github.com/vim-scripts/DirDiff.vim.git
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
+[submodule "bundle/outline"]
+	path = bundle/outline
+	url = https://github.com/Shougo/unite-outline.git
+[submodule "bundle/vimfiler"]
+	path = bundle/vimfiler
+	url = https://github.com/Shougo/vimfiler.vim.git

@@ -542,7 +542,8 @@ if  has("gui_running")
     "colorscheme mophiaSmoke "Good light
     "colorscheme gruvbox "Good
     "colorscheme badwolf
-    colorscheme nocturne
+    "colorscheme nocturne
+    colorscheme molokai
     "colorscheme habilight "Good light
     "colorscheme earendel "white Good
     "colorscheme codeblocks_dark "Good
@@ -686,9 +687,9 @@ cno $K <C-U>!konsole &
 cno $M <C-U>!mutt -s "%" -a % rmondal@nvidia.com < /dev/null
 cno $H <C-U>!p4 have %
 cno $S <C-U>!p4 sync %
-cno $t <C-U>sp `my_depth`/
-cno $T <C-U>tabe `my_depth`/
-cno $V <C-U>vs `my_depth`/
+cno $t <C-U>sp <C-\>eMy_Depth("sp")<cr>/
+cno $T <C-U>tabe <C-\>eMy_Depth("tabe")<cr>/
+cno $V <C-U>vs <C-\>eMy_Depth("vs")<cr>/
 cno $F <C-U>set filetype=verilog_systemverilog
 cno $x <C-U>.s/\d\+/\=printf("0x%04x", submatch(0))
 cno $Z <C-U>!tar cvf %.tar % && mutt -s "%" -a %.tar rmondal@nvidia.com < /dev/null && \rm -f %.tar
@@ -728,6 +729,17 @@ endfunc
 func! CurrentFileDirP4(cmd)
   return a:cmd . " | enew | r !p4 print -q " . expand("%:p") . ""
 endfunc
+function! My_Depth(cmd)
+  let output=system("/home/rmondal/bin/scripts/my_depth")
+  return a:cmd . " " . output . ""
+endfunction
+function! My_DepthNoSpace(cmd)
+  let output=system("/home/rmondal/bin/scripts/my_depth")
+  return a:cmd . "" . output . ""
+endfunction
+func! CurrentFileUnite(cmd)
+  return "Unite -buffer-name=files -input=" . expand("%:p:t:r") . " file_rec:" . a:cmd
+endfunc
 """"""""""""""""""""""""""""""
 " => Statusline
 """"""""""""""""""""""""""""""
@@ -748,7 +760,7 @@ if has('gui_running')
   "airline settings
   "nice looking fonts
   let g:airline_inactive_collapse=0
-  let g:airline_powerline_fonts=0
+  let g:airline_powerline_fonts=1
   let g:airline_theme='light'
   " remove separators
   "let g:airline_left_sep=''
@@ -929,4 +941,40 @@ endif
 " Multicursor "
 let g:multi_cursor_exit_from_visual_mode=0
 let g:multi_cursor_exit_from_insert_mode=0
+"Unite configurations"
+let g:unite_source_history_yank_enable = 1
+let g:unite_source_history_yank_limit=10000
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+let g:unite_enable_start_insert=1
+let g:unite_source_rec_max_cache_files=100000
+call unite#custom#source('file_rec', 'ignore_pattern', '\.abc$')
+"let g:unite_source_grep_command='ack'
+"let g:unite_source_grep_default_opts='--no-heading --no-color -a -C4'
+"let g:unite_source_grep_recursive_opt=''
+"let g:unite_source_find_command =
+"    \ 'find `depth` -type f -o \( -name .git -o -name tmp -o -name .hg -name .svn \) -prune -type f | head -100 | grep -v -E "\.(jpe?g|png|gif|[ot]tf|ico)$"'
+"let g:unite_source_rec_async_command=
+"  \ 'find `depth` -type f -o \( -name .git -o -name tmp -o -name .hg -name .svn \) -prune -type f | head -100 | grep -v -E "\.(jpe?g|png|gif|[ot]tf|ico)$"'
+nnoremap <leader>t :<C-u>Unite -buffer-name=files   file_rec:<C-\>eMy_DepthNoSpace("Unite -buffer-name=files   file_rec:")<cr>/
+nnoremap <leader>d :<C-u>Unite -buffer-name=files   file_rec:<C-\>eMy_DepthNoSpace("Unite -buffer-name=dir   directory:")<cr>/
+nnoremap <leader>f :<C-u>Unite -buffer-name=files   file<cr>
+nnoremap <leader>fr :<C-u>Unite -buffer-name=files   file_rec:../../
+nnoremap <leader>ft :<C-u><C-\>eCurrentFileUnite("../..")<cr>
+nnoremap <leader>o :<C-u>Unite -buffer-name=outline outline<cr>
+nnoremap <leader>y :<C-u>Unite -buffer-name=yank    history/yank<cr>
+nnoremap <leader>r :<C-u>Unite -buffer-name=yank    register<cr>
+nnoremap <leader>b :<C-u>Unite -buffer-name=buffer  buffer<cr>
+nnoremap <leader>g :<C-u>Unite -buffer-name=grep  vimgrep:%<cr>
+nnoremap <leader>gr :<C-u>Unite -buffer-name=grep  vimgrep:##<cr>
+nnoremap <leader>l :<C-u>Unite -buffer-name=search  line<cr>
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()
+  " Play nice with supertab
+  let b:SuperTabDisabled=1
+  " Overwrite settings.
+  imap <silent><buffer><expr> <C-s>     unite#do_action('split')
+  imap <silent><buffer><expr> <C-v>     unite#do_action('vsplit')
+  imap <buffer> <esc> <plug>(unite_exit)
+  nmap <buffer> <esc> <plug>(unite_exit)
+endfunction
 
