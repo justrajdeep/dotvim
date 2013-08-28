@@ -218,7 +218,7 @@ set wildmenu
 "visual special charaters
 "" Highlight problematic whitespace
 if  has("gui_running")
-  set list
+  "set list
   "highlight NonText ctermfg=8 guifg=gray
 endif
 "get new chanracters from dig
@@ -371,7 +371,7 @@ augroup filetype_make
 :au BufNewFile,BufRead rtlmakefile.inc setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
 :au BufNewFile,BufRead vplmakefile.inc setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
 :au BufNewFile,BufRead vcsmakefile.inc setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
-:au BufNewFile,BufRead *.config setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
+:au BufNewFile,BufRead *.config setf make |setlocal ts=4 sts=4 sw=4 expandtab
 :autocmd BufLeave,FocusLost  Makefile* silent! wall
 augroup END
 
@@ -948,6 +948,8 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 let g:unite_enable_start_insert=1
 let g:unite_source_rec_max_cache_files=100000
 call unite#custom#source('file_rec', 'ignore_pattern', '\.abc$')
+call unite#custom#source('file_rec', 'max_candidates', '0')
+call unite#custom#source('file', 'max_candidates', '0')
 "let g:unite_source_grep_command='ack'
 "let g:unite_source_grep_default_opts='--no-heading --no-color -a -C4'
 "let g:unite_source_grep_recursive_opt=''
@@ -965,7 +967,7 @@ nnoremap <leader>y :<C-u>Unite -buffer-name=yank    history/yank<cr>
 nnoremap <leader>r :<C-u>Unite -buffer-name=yank    register<cr>
 nnoremap <leader>b :<C-u>Unite -buffer-name=buffer  buffer<cr>
 nnoremap <leader>g :<C-u>Unite -buffer-name=grep  vimgrep:%<cr>
-nnoremap <leader>gr :<C-u>Unite -buffer-name=grep  vimgrep:##<cr>
+nnoremap <leader>gb :<C-u>Unite -buffer-name=grep  vimgrep:##<cr>
 nnoremap <leader>l :<C-u>Unite -buffer-name=search  line<cr>
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
@@ -974,7 +976,7 @@ function! s:unite_my_settings()
   " Overwrite settings.
   imap <silent><buffer><expr> <C-s>     unite#do_action('split')
   imap <silent><buffer><expr> <C-v>     unite#do_action('vsplit')
-  imap <buffer> <esc> <plug>(unite_exit)
+  "imap <buffer> <esc> <plug>(unite_exit)
   nmap <buffer> <esc> <plug>(unite_exit)
 endfunction
 
