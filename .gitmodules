@@ -172,3 +172,6 @@
 [submodule "bundle/vimfiler"]
 	path = bundle/vimfiler
 	url = https://github.com/Shougo/vimfiler.vim.git
+[submodule "bundle/ultiSnips"]
+	path = bundle/ultiSnips
+	url = https://github.com/vim-scripts/UltiSnips.git
