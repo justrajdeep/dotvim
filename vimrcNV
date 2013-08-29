@@ -37,8 +37,8 @@ call pathogen#helptags()
 " NOTE: comments after Bundle command are not allowed..
 
 "syntax highlighting..
-syntax on
-filetype plugin indent on
+"syntax on
+"filetype plugin indent on
 " source neocomplete
 source $HOME/.vim/neo_complete
 " setting lazyredraw to be on during automatic popup...
@@ -62,7 +62,7 @@ set virtualedit=onemore
 "settings handy ..
 " Display an incomplete command in the lower right corner of the Vim window
 set showcmd
-set cpoptions=Asq
+set cpoptions=Aq
 "
 "allow to delete using backspace
 "set backspace=2
@@ -153,7 +153,7 @@ set iskeyword-=:
 ""confirm action using a dialog box
 set confirm
 set nostartofline
-" always show something in report"
+" always show something in statusline
 set report=0 " tell us when anything is changed via :...
 "leave my cursor where it was"
 "change to the current dir automatically
@@ -279,9 +279,18 @@ let g:ctrlp_root_markers = 'TOT'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_working_path_mode = 'ra'
+"cursor movement 
 "j and k should follow the screen
-:nmap j gj
-:nmap k gk
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up> gk
+vnoremap <Down> gj
+vnoremap <Up> gk
+inoremap <Down> <C-o>gj
+inoremap <Up> <C-o>gk
 
 "-------------> Edit compressed files <-------------
 ":autocmd! BufReadPre,FileReadPre  	*.gz set bin
@@ -296,7 +305,7 @@ let g:ctrlp_working_path_mode = 'ra'
 "autoload vimrc
 augroup myvimrc
     au!
-    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYVIMRC | endif
 augroup END
 
 "-------------> Perl programs <-------------
@@ -534,7 +543,8 @@ if  has("gui_running")
     "remove toolbar
     "set lines=40
     set guioptions-=T
-    set guioptions+=ceb
+    set guioptions+=eb
+    "set guioptions+=c "console dialog instead of popup"
 "--------------preferred--------------------------------------------------------
     "colorscheme darkblue
     "colorscheme wombat "Good
@@ -638,9 +648,9 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\~$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
 let NERDSpaceDelims=1
  "
-command CPWD cd %:p:h
-command LPWD lcd %:p:h
-command TOT lcd `my_depth`
+command! CPWD cd %:p:h
+command! LPWD lcd %:p:h
+command! TOT lcd `my_depth`
 "for replacing a visual
 "vmap <C-r> "_dP
 vnoremap p "0p
@@ -853,7 +863,7 @@ let g:ConqueTerm_ReadUnfocused = 1
 command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | new | setlocal bt=nofile | put! a
 
 
-command -nargs=0 Blame :call P4blame()
+command! -nargs=0 Blame :call P4blame()
 function! P4blame()
   exec "!`my_depth`/bin/p4blame %:" . line(".")
 endfunction
@@ -982,6 +992,7 @@ nnoremap <leader>fr :<C-u>Unite -buffer-name=files   file_rec:../../
 nnoremap <leader>ft :<C-u><C-\>eCurrentFileUnite("../..")<cr>
 nnoremap <leader>o :<C-u>Unite -buffer-name=outline outline<cr>
 nnoremap <leader>y :<C-u>Unite -buffer-name=yank    history/yank<cr>
+nnoremap <leader>h :<C-u>Unite -buffer-name=yank    history/yank<cr>
 nnoremap <leader>r :<C-u>Unite -buffer-name=yank    register<cr>
 nnoremap <leader>b :<C-u>Unite -buffer-name=buffer  buffer<cr>
 nnoremap <leader>g :<C-u>Unite -buffer-name=grep  vimgrep:%<cr>
@@ -998,3 +1009,8 @@ function! s:unite_my_settings()
   nmap <buffer> <esc> <plug>(unite_exit)
 endfunction
 
+" load filetype detection last"
+syntax on
+filetype on
+filetype plugin on
+filetype indent on
