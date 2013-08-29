@@ -62,6 +62,8 @@ set virtualedit=onemore
 "settings handy ..
 " Display an incomplete command in the lower right corner of the Vim window
 set showcmd
+set cpoptions=Asq
+"
 "allow to delete using backspace
 "set backspace=2
 set backspace=indent,eol,start
@@ -73,13 +75,20 @@ set shiftwidth=4
 set softtabstop=2
 " multiples of shiftwidth when using >
 set shiftround
+set grepprg=grep\ -rnH\ --exclude='.*.swp'\ --exclude='*~'\ --exclude=tags
 set sw=2
 " real tabs should be 8, and they will show with set list on
 set tabstop=8
 "dont show statusline messages
 "hide the insert mode displays
 set noshowmode
+"set modeline parsing
+set modeline
+" rt clk pops up a menu"
+set mousemodel=popup
 set laststatus=2 ruler wrapmargin=8
+"dont refresh screen when executing macros
+set lazyredraw
 set expandtab
 "set shiftwidth=8 tabstop=8 nowrap joinspaces magic report=0 dict=/usr/dict/words
 set shell=csh wildchar=<TAB> incsearch
@@ -92,8 +101,8 @@ set magic
 set colorcolumn=+1
 
 "set rel num and current line number"
-se rnu
-se nu
+se relativenumber
+se number
 se nowrapscan
 se nowrap
 " Turn backup off, since most stuff is in SVN, git anyway...
@@ -134,13 +143,19 @@ set cinoptions=:s,ps,ts,cs
 set cinwords=if,else,while,do,for,switch,case
 let indent_guides_enable_on_vim_startup = 1
 se ignorecase
+set infercase " case inferred by default
 se smartcase
+"scroll offset"
 set scrolloff=2 "skip 2 lines when scrolling
 set iskeyword+=_
 set iskeyword-='
 set iskeyword-=:
+""confirm action using a dialog box
 set confirm
 set nostartofline
+" always show something in report"
+set report=0 " tell us when anything is changed via :...
+"leave my cursor where it was"
 "change to the current dir automatically
 set autochdir
 "open file in the current buffer dir
@@ -149,6 +164,7 @@ set browsedir=buffer
 "set cmdheight=3
 "small status msg for vim
 "set shortmess=atI
+"set shortmess=aOstT " shortens messages to avoid 'press a key' prompt
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.o,*.obj,*.a,*.lib,*.elf,*.dll
 " Make shift-insert work like in Xterm
 map <S-Insert> <MiddleMouse>
@@ -160,6 +176,7 @@ map! <S-Insert> <MiddleMouse>
 "else
 "  set clipboard=unnamed
 "endif
+set clipboard+=unnamed " share windows clipboard
 
 "home moves cursor to the first non-blank char
 noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
@@ -190,7 +207,8 @@ set noerrorbells
 set visualbell
 " disable any beeps or flashes on error
 set vb t_vb=
-
+""
+set virtualedit=block
 " echo something on leaving .......
 "au VimLeave * echo "Another file ..... gosh I am tired !!"
 
@@ -516,7 +534,7 @@ if  has("gui_running")
     "remove toolbar
     "set lines=40
     set guioptions-=T
-    set guioptions+=b
+    set guioptions+=ceb
 "--------------preferred--------------------------------------------------------
     "colorscheme darkblue
     "colorscheme wombat "Good
