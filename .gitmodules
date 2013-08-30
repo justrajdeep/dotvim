@@ -175,3 +175,6 @@
 [submodule "bundle/ultiSnips"]
 	path = bundle/ultiSnips
 	url = https://github.com/vim-scripts/UltiSnips.git
+[submodule "bundle/neocomplcache-ultisnips"]
+	path = bundle/neocomplcache-ultisnips
+	url = https://github.com/JazzCore/neocomplcache-ultisnips.git
