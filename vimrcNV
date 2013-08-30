@@ -184,7 +184,7 @@ imap <silent> <Home> <C-O><Home>
 
 
 "I want mouse settings also ..
-"set mouse=a
+set mouse=a
 	set viminfo='20,\"50	" read/write a .viminfo file, don't store more
 				" than 50 lines of registers
 	set history=50000       " keep 50 lines of command line history
@@ -238,10 +238,10 @@ set wildmenu
 if  has("gui_running")
   "set list
   "highlight NonText ctermfg=8 guifg=gray
+  "set listchars=tab:§»,extends:¶,eol:¬
 endif
 "get new chanracters from dig
 " use C-k to insert
-set listchars=tab:§»,extends:¶,eol:¬
 "set showbreak=§
 " Make trailing whitespace annoyingly highlighted.
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -268,6 +268,9 @@ cnoremap <C-B> <Left>
 cnoremap <M-b>  <S-Left>
 cnoremap <M-f>  <S-Right>
 cnoremap <M-d>  <S-right><Delete>
+"make alt arrows to behave like browser"
+nnoremap <M-Left> <C-o>
+nnoremap <M-Right> <C-i>
 cnoremap <ESC>b <S-Left>
 cnoremap <Esc>d <S-right><Delete>
 cnoremap <ESC>f <S-Right>
@@ -279,7 +282,7 @@ let g:ctrlp_root_markers = 'TOT'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_working_path_mode = 'ra'
-"cursor movement 
+"cursor movement
 "j and k should follow the screen
 nnoremap j gj
 nnoremap k gk
@@ -319,7 +322,12 @@ augroup END
 "without this crontab does not work
 augroup filetype_crontab
 :autocmd!
-:autocmd FileType crontab :set backupcopy=yes
+:autocmd FileType crontab set backupcopy=yes
+augroup END
+
+augroup filetype_snippets
+:autocmd!
+:autocmd FileType snippets setlocal nomodeline
 augroup END
 
 "-------------> Create tags   <-------------
@@ -424,7 +432,7 @@ augroup filetype_verilog
 :au BufNewFile,BufRead *.spec setf verilog
 :au BufNewFile,BufRead *.vhxcp setf verilog
 :au BufNewFile,BufRead *.pl setf perl
-:au BufNewFile,BufRead *.pm setf perl
+:au BufNewFile,BufRead *.pm setf pod|setlocal syntax=perl
 :au BufNewFile,BufRead *.svh setf verilog_systemverilog|setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4
 :au BufNewFile,BufRead *.svhx setf verilog_systemverilog
 :au BufNewFile,BufRead *.log setlocal wrap
@@ -596,7 +604,6 @@ if  has("gui_running")
 "--------------------------------------------------------------------------------
 "
 "--------------------------------------------------------------------------------
-    se mouse=a
 else
     let g:Powerline_colorscheme = 'solarized'
     highlight Normal ctermfg=grey ctermbg=darkblue
@@ -901,6 +908,8 @@ let g:Perl_AuthorName      = 'Rajdeep'
 let g:Perl_AuthorRef       = ''
 let g:Perl_Email           = 'rmondal@nvidia'
 let g:Perl_Company         = 'nVidia'
+"disable boilter plate code insertion"
+let g:Perl_TemplateOverwrittenMsg= 'no'
 
 " SnipMate {
 " Setting the author var
@@ -917,7 +926,7 @@ if has('win32')
   noremap <C-V> <C-V>
   "make arrow keys extend visual
   set keymodel-=stopsel
-  behave xterm
+  behave win32
   "colorscheme lettuce
   set guifont=Lucida\ Console:h11
   "set guifont=*
@@ -1007,7 +1016,15 @@ function! s:unite_my_settings()
   imap <silent><buffer><expr> <C-v>     unite#do_action('vsplit')
   "imap <buffer> <esc> <plug>(unite_exit)
   nmap <buffer> <esc> <plug>(unite_exit)
+  nmap <buffer> <C-j> <plug>(unite_toggle_auto_preview)
+  imap <buffer> <TAB> <plug>(unite_select_next_line)
 endfunction
+
+"UltiSnips"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
+"let g:UltiSnipsExpandTrigger  <c-space>
+let g:UltiSnipsListSnippets="<C-Space>"
+"
 
 " load filetype detection last"
 syntax on

@@ -1,0 +1,84 @@
+snippet pod "insert boilerplate perl pod code" bws
+=head1 NAME
+
+${1:`!p snip.rv = snip.fn`}
+
+=head1 SYNOPSYS
+
+DESCRIPTION: ${2:enter short description}
+
+ REQUIREMENTS: ---
+         BUGS: ---
+        NOTES: ---
+       AUTHOR: ${3:`whoami`}
+ ORGANIZATION: ${4:NVIDIA}
+      VERSION: 1.0
+      CREATED: ${5:${6:`date +%d`}.${7:`date +%m`}}.`date +%Y`
+     REVISION: ---
+        EMAIL: ${8:`echo $USER`}@nvidia.com
+
+=head1 Copyright Information
+
+----------------------------------------------------------------------
+
+Copyright (c) ${8:`date +%Y`}, $4 Corp.
+All Rights Reserved.
+
+This is UNPUBLISHED PROPRIETARY SOURCE CODE of $4 Corp.;
+the contents of this file may not be disclosed to third parties, copied or
+duplicated in any form, in whole or in part, without the prior written
+permission of NVIDIA Corp.
+
+RESTRICTED RIGHTS LEGEND:
+
+Use, duplication or disclosure by the Government is subject to restrictions
+as set forth in subdivision (c)(1)(ii) of the Rights in Technical Data
+and Computer Software clause at DFARS 252.227-7013, and/or in similar or
+successor clauses in the FAR, DOD or NASA FAR Supplement. Unpublished -
+rights reserved under the Copyright Laws of the United States.
+
+----------------------------------------------------------------------
+
+
+=head1 USAGE
+
+./$1 [options]
+
+=head2 OPTIONS
+
+ --help|h|?         : prints help
+ --usage|u          : prints usage
+ --name|n           : prints the name of the script
+ --copyright|c      : prints the name of the script
+
+=cut
+################################################################################
+use strict;
+use warnings;
+use FindBin qw(\$Script);
+use FindBin qw(\$Bin);
+use Pod::Usage;
+use Getopt::Long;
+use Cwd qw(abs_path);
+
+my \$opt_help;
+my \$opt_name;
+my \$opt_copyright;
+
+# parse the arguments
+my \$test = GetOptions (
+        'help'          => \\\$opt_help,
+        'h|?'           => \\\$opt_help,
+        'usage|u'       => sub{pod2usage(2)},
+        'name|n'        => \\\$opt_name,
+        'copyright|c'   => \\\$opt_copyright,
+        '<>'            => sub{pod2usage({-msg => "Unknown Argument(s): " . join(' ', @_) ." " . join(" ", @ARGV)})},
+        ) || pod2usage({-verbose => 0, -output => \*STDERR});
+
+pod2usage({-msg => 'PRINTING HELP .....', -verbose => 3, -output => \*STDERR}) if defined \$opt_help;
+pod2usage({-msg => 'PRINTING SCRIPT DEATILS .....', -verbose => 99, -sections => [qw(NAME SYNOPSYS)], -output => \*STDERR}) if defined \$opt_name;
+pod2usage({-msg => 'PRINTING COPYRIGHT INFO .....', -verbose => 99, -sections => "Copyright Information", -output => \*STDERR}) if defined \$opt_copyright;
+
+__END__
+endsnippet
+

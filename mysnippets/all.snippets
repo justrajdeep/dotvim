@@ -1,0 +1,15 @@
+snippet date "insert date" ws
+${1:${2:`date +%d`}.${3:`date +%m`}}.`date +%Y`
+endsnippet
+
+snippet TODO "insert boilerplate TODO" sw
+TODO: ${1:`whoami`}: ${2:${3:`date +%d`}.${4:`date +%m`}}.`date +%Y`: ${5:comment}
+endsnippet
+
+snippet FIXME "insert boilerplate FIXME" sw
+FIXME: ${1:`whoami`}: ${2:${3:`date +%d`}.${4:`date +%m`}}.`date +%Y`: ${5:comment}
+endsnippet
+
+snippet modline "add the modline" sw
+vim: set filetype=${1:`!p snip.rv = snip.ft`} sw=2:
+endsnippet
