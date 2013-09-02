@@ -178,3 +178,9 @@
 [submodule "bundle/neocomplcache-ultisnips"]
 	path = bundle/neocomplcache-ultisnips
 	url = https://github.com/JazzCore/neocomplcache-ultisnips.git
+[submodule "bundle/unite_qfix"]
+	path = bundle/unite_qfix
+	url = https://github.com/soh335/unite-qflist.git
+[submodule "bundle/snippets"]
+	path = bundle/snippets
+	url = https://github.com/honza/vim-snippets.git
