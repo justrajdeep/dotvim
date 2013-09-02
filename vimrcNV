@@ -41,8 +41,6 @@ call pathogen#helptags()
 "filetype plugin indent on
 " source neocomplete
 source $HOME/.vim/neo_complete
-" setting lazyredraw to be on during automatic popup...
-set lazyredraw
 " Solid line for vsplit separator
 set fcs=vert:'|'
 "
@@ -196,7 +194,7 @@ set t_vs=[5%dm
 "set nofoldenable
 
 " I work  in javascript also ...
-set textwidth=2000
+set textwidth=79
 
 "Change buffer - without saving
 "buffer to background without saving
@@ -331,7 +329,7 @@ augroup filetype_snippets
 augroup END
 
 "-------------> Create tags   <-------------
-set tags=/home/rmondal/ctags/vrtl/tags
+set tags=$HOME/ctags/vrtl/tags
 
 "-------------> C programs and header files <-------------
 augroup filetype_java
@@ -396,6 +394,12 @@ augroup filetype_haskell
 :autocmd!
 :autocmd BufEnter *.gs		map <F1> :w<CR>:!gofer %<CR>
 :autocmd BufLeave *.gs		unmap <F1>
+augroup END
+
+augroup filetype_patch
+:autocmd!
+:autocmd BufEnter *patch* setlocal filetype=patch |setlocal syntax=diff
+:autocmd Bufunload *patch* syntax clear
 augroup END
 
 augroup filetype_make
@@ -528,17 +532,9 @@ augroup filetype_html
   vmap ,Cgre "zdi<FONT COLOR="#00FF00"><C-R>z</FONT>
   vmap ,Cred "zdi<FONT COLOR="#FF0000"><C-R>z</FONT>
   imap ;& &amp;
-  imap ;K &copy;
   imap ;" &quot;
   imap ;< &lt;
   imap ;> &gt;
-  imap \Ae &Auml;
-  imap \Oe &Ouml;
-  imap \Ue &Uuml;
-  imap \ae &auml;
-  imap \oe &ouml;
-  imap \ue &uuml;
-  imap \ss &szlig;
   nmap  ,= :%s/^===\(.*\)$/<h1>\1<\/h1>/c<CR>
   ab  Ycut  \| <a href="#"<C-I>></a><ESC>F#a
   vmap ,cut  "zdi<a href="#<C-R>z"<C-I>><C-R>z</a><ESC>2F>
@@ -719,7 +715,7 @@ cno $N <C-U>!nedit %
 cno $G <C-U>!gnome-terminal &
 cno $X <C-U>!xterm -e xx &
 cno $K <C-U>!konsole &
-cno $M <C-U>!mutt -s "%" -a % rmondal@nvidia.com < /dev/null
+cno $M <C-U>!mutt -s "%" -a % $USER@nvidia.com < /dev/null
 cno $H <C-U>!p4 have %
 cno $S <C-U>!p4 sync %
 cno $t <C-U>sp <C-\>eMy_Depth("sp")<cr>/
@@ -727,7 +723,7 @@ cno $T <C-U>tabe <C-\>eMy_Depth("tabe")<cr>/
 cno $V <C-U>vs <C-\>eMy_Depth("vs")<cr>/
 cno $F <C-U>set filetype=verilog_systemverilog
 cno $x <C-U>.s/\d\+/\=printf("0x%04x", submatch(0))
-cno $Z <C-U>!tar cvf %.tar % && mutt -s "%" -a %.tar rmondal@nvidia.com < /dev/null && \rm -f %.tar
+cno $Z <C-U>!tar cvf %.tar % && mutt -s "%" -a %.tar $USER@nvidia.com < /dev/null && \rm -f %.tar
 
 " $q is super useful when browsing on the command line
 "cno $q <C-\>eDeleteTillSlash()<cr>
@@ -824,7 +820,7 @@ if !has('gui_running')
 endif
 
 function! CurDir()
-  let curdir = substitute(getcwd(), '/users/rmondal/', "~/", "g")
+  let curdir = substitute(getcwd(), $HOME, "~/", "g")
   return curdir
 endfunction
 
@@ -906,7 +902,7 @@ inoremap <c-s> <esc>ddi
 
 let g:Perl_AuthorName      = 'Rajdeep'
 let g:Perl_AuthorRef       = ''
-let g:Perl_Email           = 'rmondal@nvidia'
+let g:Perl_Email           = '$USER@nvidia'
 let g:Perl_Company         = 'nVidia'
 "disable boilter plate code insertion"
 let g:Perl_TemplateOverwrittenMsg= 'no'
@@ -914,7 +910,7 @@ let g:Perl_TemplateOverwrittenMsg= 'no'
 " SnipMate {
 " Setting the author var
 " If forking, please overwrite in your .vimrc.local file
-let g:snips_author = 'Rajdeep <[[rmondal@nvidia.com]](mailto:rmondal@nvidia.com)>'
+let g:snips_author = 'Rajdeep <[[$USER@nvidia.com]](mailto:$USER@nvidia.com)>'
 
 "this is only for me
 "nnoremap <left> <nop>
@@ -1000,15 +996,18 @@ nnoremap <leader>f :<C-u>Unite -buffer-name=files   file<cr>
 nnoremap <leader>fr :<C-u>Unite -buffer-name=files   file_rec:../../
 nnoremap <leader>ft :<C-u><C-\>eCurrentFileUnite("../..")<cr>
 nnoremap <leader>o :<C-u>Unite -buffer-name=outline outline<cr>
+nnoremap <leader>c :<C-u>Unite -buffer-name=output output<cr>
 nnoremap <leader>y :<C-u>Unite -buffer-name=yank    history/yank<cr>
 nnoremap <leader>h :<C-u>Unite -buffer-name=yank    history/yank<cr>
 nnoremap <leader>r :<C-u>Unite -buffer-name=yank    register<cr>
 nnoremap <leader>b :<C-u>Unite -buffer-name=buffer  buffer<cr>
+nnoremap <leader>q :<C-u>Unite -buffer-name=quickfix qflist<cr>
 nnoremap <leader>g :<C-u>Unite -buffer-name=grep  vimgrep:%<cr>
 nnoremap <leader>gb :<C-u>Unite -buffer-name=grep  vimgrep:##<cr>
 nnoremap <leader>l :<C-u>Unite -buffer-name=search  line<cr>
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
+  "set paste
   " Play nice with supertab
   let b:SuperTabDisabled=1
   " Overwrite settings.
@@ -1018,13 +1017,16 @@ function! s:unite_my_settings()
   nmap <buffer> <esc> <plug>(unite_exit)
   nmap <buffer> <C-j> <plug>(unite_toggle_auto_preview)
   imap <buffer> <TAB> <plug>(unite_select_next_line)
+  imap <buffer> <S-TAB> <plug>(unite_select_previous_line)
+  imap <buffer> <BS> <BS>
 endfunction
 
 "UltiSnips"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 "let g:UltiSnipsExpandTrigger  <c-space>
 let g:UltiSnipsListSnippets="<C-Space>"
-"
+"let g:UltiSnipsJumpForwardTrigger="<c-j>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " load filetype detection last"
 syntax on

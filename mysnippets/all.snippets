@@ -1,15 +1,155 @@
+# This file contains snippets that are always defined. I personally
+# have snippets for signatures and often needed texts
+
+##############
+# NICE BOXES #
+##############
+global !p
+import string, vim
+
+""" Maps a filetype to comment format used for boxes.
+Automatically filled during usage"""
+_commentDict = { }
+
+def _parse_comments(s):
+    """ Parses vim's comments option to extract comment format """
+    i = iter(s.split(","))
+
+    rv = []
+    try:
+        while True:
+            # get the flags and text of a comment part
+            flags,text = i.next().split(':', 1)
+
+            if len(flags) == 0:
+                if len(text) == 1:
+                    rv.append((text,text,text, ""))
+            # parse 3-part comment, but ignore those with O flag
+            elif flags[0] == 's' and 'O' not in flags:
+                ctriple = []
+                indent = ""
+
+                if flags[-1] in string.digits:
+                    indent = " " * int(flags[-1])
+                ctriple.append(text)
+
+                flags,text = i.next().split(':', 1)
+                assert(flags[0] == 'm')
+                ctriple.append(text)
+
+                flags,text = i.next().split(':', 1)
+                assert(flags[0] == 'e')
+                ctriple.append(text)
+                ctriple.append(indent)
+
+                rv.append(ctriple)
+
+            elif flags[0] == 'b':
+                if len(text) == 1:
+                    rv.insert(0, (text,text,text, ""))
+
+    except StopIteration:
+       return rv
+
+def _get_comment_format():
+    """ Returns a 4-element tuple representing the comment format for
+    the current file. """
+
+    ft = vim.eval("&filetype")
+    # check if the comment dict has the format for the current file
+    if _commentDict.has_key(ft):
+        return _commentDict[ft]
+
+    # otherwise parse vim's comments and add it for later use
+    commentformat = _parse_comments(vim.eval("&comments"))[0]
+    _commentDict[ft] = commentformat
+
+    return commentformat
+
+
+endglobal
+
+################################################################################
 snippet date "insert date" ws
 ${1:${2:`date +%d`}.${3:`date +%m`}}.`date +%Y`
 endsnippet
 
 snippet TODO "insert boilerplate TODO" sw
-TODO: ${1:`whoami`}: ${2:${3:`date +%d`}.${4:`date +%m`}}.`date +%Y`: ${5:comment}
+${1:`!p snip.rv = _get_comment_format()[0]`} TODO: ${2:`whoami`}: ${3:${4:`date +%d`}.${5:`date +%m`}}.`date +%Y`
+$1 ${6:comment}
+$0
 endsnippet
 
 snippet FIXME "insert boilerplate FIXME" sw
-FIXME: ${1:`whoami`}: ${2:${3:`date +%d`}.${4:`date +%m`}}.`date +%Y`: ${5:comment}
+${1:`!p snip.rv = _get_comment_format()[0]`} FIXME: ${2:`whoami`}: ${3:${4:`date +%d`}.${5:`date +%m`}}.`date +%Y`
+$1 ${6:comment}
+$0
+endsnippet
+
+snippet INFO "insert boilerplate INFO" sw
+${1:`!p snip.rv = _get_comment_format()[0]`} INFO: ${2:`whoami`}: ${3:${4:`date +%d`}.${5:`date +%m`}}.`date +%Y`
+$1 ${6:comment}
+$0
 endsnippet
 
 snippet modline "add the modline" sw
-vim: set filetype=${1:`!p snip.rv = snip.ft`} sw=2:
+${1:`!p snip.rv = _get_comment_format()[0]`} vim: filetype=${2:`!p snip.rv = snip.ft`} sw=2:
+$0
+endsnippet
+
+snippet copyright "add copyright Information" bsw
+${1:`!p snip.rv = _get_comment_format()[0]`}----------------------------------------------------------------------
+$1
+$1 Copyright (c) ${2:`date +%Y`}, ${3:NVIDIA} Corp.
+$1 All Rights Reserved.
+$1
+$1 This is UNPUBLISHED PROPRIETARY SOURCE CODE of $3 Corp.;
+$1 the contents of this file may not be disclosed to third parties, copied or
+$1 duplicated in any form, in whole or in part, without the prior written
+$1 permission of $3 Corp.
+$1
+$1 RESTRICTED RIGHTS LEGEND:
+$1
+$1 Use, duplication or disclosure by the Government is subject to restrictions
+$1 as set forth in subdivision (c)(1)(ii) of the Rights in Technical Data
+$1 and Computer Software clause at DFARS 252.227-7013, and/or in similar or
+$1 successor clauses in the FAR, DOD or NASA FAR Supplement. Unpublished -
+$1 rights reserved under the Copyright Laws of the United States.
+$1
+$1----------------------------------------------------------------------
+$0
+endsnippet
+
+snippet header "adding a header for perforce files" bsw
+${1:`!p snip.rv = _get_comment_format()[0]`}----------------------------------------------------------------------
+$1
+$1 Copyright (c) ${2:`date +%Y`}, ${3:NVIDIA} Corp.
+$1 All Rights Reserved.
+$1
+$1 This is UNPUBLISHED PROPRIETARY SOURCE CODE of $3 Corp.;
+$1 the contents of this file may not be disclosed to third parties, copied or
+$1 duplicated in any form, in whole or in part, without the prior written
+$1 permission of $3 Corp.
+$1
+$1 RESTRICTED RIGHTS LEGEND:
+$1
+$1 Use, duplication or disclosure by the Government is subject to restrictions
+$1 as set forth in subdivision (c)(1)(ii) of the Rights in Technical Data
+$1 and Computer Software clause at DFARS 252.227-7013, and/or in similar or
+$1 successor clauses in the FAR, DOD or NASA FAR Supplement. Unpublished -
+$1 rights reserved under the Copyright Laws of the United States.
+$1
+$1----------------------------------------------------------------------
+$1      File Name : ${4:`!p snip.rv = snip.fn`}
+$1	Created	  : ${5:${6:`date +%d`}.${7:`date +%m`}}.`date +%Y`
+$1	Author	  : ${8:`whoami`}
+$1	Email	  : ${9:`whoami`}@${3/.*/\L$0\E/}.com
+$1
+$1     \$File:\$
+$1     \$Revision:\$
+$1     \$Change:\$
+$1     \$Author:\$
+$1     \$DateTime:\$
+$1----------------------------------------------------------------------
+$0
 endsnippet
