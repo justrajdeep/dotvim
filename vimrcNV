@@ -248,11 +248,11 @@ map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
 " Writes to the unnamed register also writes to the * and + registers. This
 " makes it easy to interact with the system clipboard
-if has ('unnamedplus')
-  set clipboard=unnamedplus
-else
-  set clipboard=unnamed
-endif
+"if has ('unnamedplus')
+"  set clipboard=unnamedplus
+"else
+"  set clipboard=unnamed
+"endif
 "set clipboard+=unnamed " share windows clipboard
 
 "home moves cursor to the first non-blank char
@@ -1016,7 +1016,9 @@ else
   "set guifont=Century\ Schoolbook\ L\ 12
   "set guifont=DejaVu\ Sans\ Mono\ 12
   "
-  set guifont=Monaco\ 11
+  "set guifont=Monaco\ 11 "favourite
+  set guifont=Menlo\ 12 "favourite
+  "set guifont=DejaVu\ LGC\ Sans\ Mono\ 12
   "set guifont=Andale\ Mono\ 14
   "set guifont=Monofur\ 14
   "set guifont=Consolas\ 13
