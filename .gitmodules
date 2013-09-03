@@ -184,3 +184,9 @@
 [submodule "bundle/snippets"]
 	path = bundle/snippets
 	url = https://github.com/honza/vim-snippets.git
+[submodule "bundle/neocomplete"]
+	path = bundle/neocomplete
+	url = https://github.com/Shougo/neocomplete.vim.git
+[submodule "bundle/color_flatui"]
+	path = bundle/color_flatui
+	url = https://github.com/john2x/flatui.vim.git
