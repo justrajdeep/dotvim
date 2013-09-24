@@ -118,5 +118,6 @@ Git initialization
  https://github.com/square/maximum-awesome
  https://github.com/SirVer/ultisnips
  https://vimcolorschemetest.googlecode.com/svn/html/index-c.html
+ http://vimcolorschemetest.googlecode.com/svn/html/index-html.html
 
  # vim: set filetype=README syntax=git:
