@@ -190,3 +190,18 @@
 [submodule "bundle/color_flatui"]
 	path = bundle/color_flatui
 	url = https://github.com/john2x/flatui.vim.git
+[submodule "bundle/color_colorschemes"]
+	path = bundle/color_colorschemes
+	url = https://github.com/flazz/vim-colorschemes.git
+[submodule "bundle/color_greyhouse"]
+	path = bundle/color_greyhouse
+	url = https://github.com/gregstallings/vim-greyhouse.git
+[submodule "bundle/color_hemisu"]
+	path = bundle/color_hemisu
+	url = https://github.com/noahfrederick/vim-hemisu.git
+[submodule "bundle/vim-shell"]
+	path = bundle/vim-shell
+	url = https://github.com/xolox/vim-shell.git
+[submodule "bundle/vim-misc"]
+	path = bundle/vim-misc
+	url = https://github.com/xolox/vim-misc.git

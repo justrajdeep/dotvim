@@ -166,8 +166,8 @@ set laststatus=2 ruler wrapmargin=8
 set lazyredraw
 set expandtab
 "set shiftwidth=8 tabstop=8 nowrap joinspaces magic report=0 dict=/usr/dict/words
-set shell=csh 
-set wildchar=<TAB> 
+set shell=csh
+set wildchar=<TAB>
 set incsearch
 "set guifont=-b&h-lucidatypewriter-medium-r-normal-*-*-140-*-*-m-*-iso8859-15
 
@@ -324,13 +324,16 @@ endif
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 augroup MyAutoCmd
-  autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+  autocmd BufEnter * match ExtraWhitespace /\s\+$/
   autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-  autocmd BufWinLeave * call clearmatches()
+  autocmd BufUnload * call clearmatches()
   " add this so that future colorscheme changes dont overwrite it"
   autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+  " remove trailing spaces"
+  autocmd FileType c,cpp,java,php,perl,yaml,vim autocmd BufWritePre <buffer> :%s/\s\+$\|^\s\+$//e
 augroup END
+"remove the trailing white spaces
 "set listchars=tab:>.,trail:.,extends:\#,nbsp:.
 
 " kick off emax
@@ -383,15 +386,16 @@ inoremap <Up> <C-o>gk
 ":autocmd! FileAppendPost		*.gz !mv <afile> <afile>:r
 ":autocmd  FileAppendPost		*.gz !gzip <afile>:r
 "autoload vimrc
-augroup myvimrc
-    au!
-    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYVIMRC | endif
-augroup END
+"autoload VIMRC
+"augroup myvimrc
+"    au!
+"    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYVIMRC | endif
+"augroup END
 
 "-------------> Perl programs <-------------
 augroup filetype_perl
 :autocmd!
-:autocmd BufEnter  *.pl		set ai si cin formatoptions=croql
+:autocmd BufEnter  *.pl		set ai si cin formatoptions=croql|setlocal iskeyword+=_
 :autocmd BufLeave  *.pl		set nosi nocin formatoptions=tcq
 :autocmd BufEnter  *.pl		set comments=b:#
 :autocmd BufLeave  *.pl		set comments=sr:/*,mb:*,el:*/,://,b:#,:%,:XCOMM,n:>,fb:-
@@ -622,7 +626,6 @@ augroup END
 "set bg=light
 if  has("gui_running")
     set guitablabel=%N:\ %t#\%-10.3n\ %M
-    set background=dark
     "remove toolbar
     "set lines=40
     set guioptions-=T
@@ -654,7 +657,10 @@ if  has("gui_running")
     "colorscheme gruvbox "Good
     "colorscheme badwolf
     "colorscheme nocturne
-    colorscheme molokai
+    "colorscheme molokai
+    "colorscheme xemacs
+    colorscheme soso
+    set background=light
     "colorscheme habilight "Good light
     "colorscheme earendel "white Good
     "colorscheme codeblocks_dark "Good
@@ -879,12 +885,15 @@ if has('gui_running')
   "let g:airline_enable_fugitive=0
   "let g:airline_enable_syntastic=0
   " put filetype in fifth section
-  let g:airline_section_c = 'Buf#[%n] Path:%{getcwd()} '
-  let g:airline_section_b = 'File:%t %m'
-  let g:airline_section_x = ""
+  let g:airline_section_b = 'Buf#[%{bufnr("%")}] Path:%{getcwd()} '
+  let g:airline_section_c = 'File:%t %m'
+  let g:airline_section_x = airline#section#create_right(['tagbar'])
   let g:airline_section_y = "Type:%Y"
   let g:airline_section_z = "%p%% : Line:%l/%L: Col:%c"
   let g:airline_section_warning = ""
+  "let g:airline#extensions#tabline#enabled=1
+  let g:airline#extensions#tagbar#enabled = 1
+  let g:airline#extensions#tabline#fnamemod = ':t'
 endif
 
 " Format the statusline
@@ -953,6 +962,11 @@ endfunction
 let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*'  " For Unix
 let MRU_Max_Entries = 100
 "FuzzyFinder
+"let g:fuf_keyOpen='<CR>'
+"let g:fuf_keyOpenSplit='<C-s>'
+"let g:fuf_keyOpenVsplit='<C-v>'
+"let g:fuf_keyOpenTabpage='<C-t'
+
 "noremap <F3> :FufFile<CR>
 noremap <F4> :FufBuffer<CR>
 "noremap <F5> :BufExplorerVerticalSplit<CR>
@@ -1016,8 +1030,8 @@ else
   "set guifont=Century\ Schoolbook\ L\ 12
   "set guifont=DejaVu\ Sans\ Mono\ 12
   "
-  "set guifont=Monaco\ 11 "favourite
-  set guifont=Menlo\ 12 "favourite
+  set guifont=Monaco\ 11 "favourite
+  "set guifont=Menlo\ 12 "favourite
   "set guifont=DejaVu\ LGC\ Sans\ Mono\ 12
   "set guifont=Andale\ Mono\ 14
   "set guifont=Monofur\ 14
@@ -1110,6 +1124,7 @@ let g:UltiSnipsListSnippets="<S-Space>"
 let g:UltiSnipsJumpBackwardTrigger="<C-S-Space>"
 "let g:UltiSnipsJumpForwardTrigger="<c-j>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"
 
 " load filetype detection last"
 syntax on
