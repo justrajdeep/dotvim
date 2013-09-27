@@ -238,7 +238,7 @@ set autochdir
 "open file in the current buffer dir
 set browsedir=buffer
 "change the cmd window
-"set cmdheight=3
+"set cmdheight=2
 "small status msg for vim
 "set shortmess=atI
 "set shortmess=aOstT " shortens messages to avoid 'press a key' prompt
@@ -331,7 +331,7 @@ augroup MyAutoCmd
   " add this so that future colorscheme changes dont overwrite it"
   autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
   " remove trailing spaces"
-  autocmd FileType c,cpp,java,php,perl,yaml,vim autocmd BufWritePre <buffer> :%s/\s\+$\|^\s\+$//e
+  "autocmd FileType c,cpp,java,php,perl,yaml,vim autocmd BufWritePre <buffer> :%s/\s\+$\|^\s\+$//e
 augroup END
 "remove the trailing white spaces
 "set listchars=tab:>.,trail:.,extends:\#,nbsp:.
@@ -658,9 +658,9 @@ if  has("gui_running")
     "colorscheme badwolf
     "colorscheme nocturne
     "colorscheme molokai
-    "colorscheme xemacs
-    colorscheme soso
-    set background=light
+    "colorscheme emacs
+    colorscheme vimhut
+    "set background=light
     "colorscheme habilight "Good light
     "colorscheme earendel "white Good
     "colorscheme codeblocks_dark "Good
@@ -843,7 +843,7 @@ func! CurrentFileDir(cmd)
   return a:cmd . " " . expand("%:p:r") . ""
 endfunc
 func! CurrentFileDirP4(cmd)
-  return a:cmd . " | enew | r !p4 print -q " . expand("%:p") . ""
+  return a:cmd . " | enew | setlocal bt=nofile |  r !p4 print -q " . expand("%:p") . ""
 endfunc
 function! My_Depth(cmd)
   let output=system("/home/rmondal/bin/scripts/my_depth")
@@ -886,12 +886,15 @@ if has('gui_running')
   "let g:airline_enable_syntastic=0
   " put filetype in fifth section
   let g:airline_section_b = 'Buf#[%{bufnr("%")}] Path:%{getcwd()} '
-  let g:airline_section_c = 'File:%t %m'
+  "let g:airline_section_c = 'File:%t %m'
   let g:airline_section_x = airline#section#create_right(['tagbar'])
   let g:airline_section_y = "Type:%Y"
   let g:airline_section_z = "%p%% : Line:%l/%L: Col:%c"
   let g:airline_section_warning = ""
-  "let g:airline#extensions#tabline#enabled=1
+  let g:airline#extensions#tabline#enabled=0
+  let g:airline#extensions#tabline#show_buffers = 1
+  let g:airline#extensions#tabline#buffer_nr_show = 1
+  let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
   let g:airline#extensions#tagbar#enabled = 1
   let g:airline#extensions#tabline#fnamemod = ':t'
 endif
@@ -951,7 +954,7 @@ set foldopen-=search
 let g:ConqueTerm_ReadUnfocused = 1
 
 "Filter out the greppings
-command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | new | setlocal bt=nofile | put! a
+command! -nargs=? Filter let @i='' | execute 'g/<args>/y I' | redraw | new | setlocal bt=nofile | put! I
 
 
 command! -nargs=0 Blame :call P4blame()

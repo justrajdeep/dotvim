@@ -205,3 +205,21 @@
 [submodule "bundle/vim-misc"]
 	path = bundle/vim-misc
 	url = https://github.com/xolox/vim-misc.git
+[submodule "bundle/color_grb256"]
+	path = bundle/color_grb256
+	url = https://github.com/quanganhdo/grb256.git
+[submodule "bundle/color_solarized"]
+	path = bundle/color_solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule "bundle/color_lizard"]
+	path = bundle/color_lizard
+	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule "bundle/csv"]
+	path = bundle/csv
+	url = https://github.com/chrisbra/csv.vim.git
+[submodule "bundle/color_luna"]
+	path = bundle/color_luna
+	url = https://github.com/Pychimp/vim-luna.git
+[submodule "bundle/color_sol"]
+	path = bundle/color_sol
+	url = https://github.com/Pychimp/vim-sol.git
