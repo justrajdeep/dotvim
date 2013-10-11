@@ -223,3 +223,9 @@
 [submodule "bundle/color_sol"]
 	path = bundle/color_sol
 	url = https://github.com/Pychimp/vim-sol.git
+[submodule "bundle/quicktask"]
+	path = bundle/quicktask
+	url = https://github.com/aaronbieber/quicktask.git
+[submodule "bundle/zoomwin"]
+	path = bundle/zoomwin
+	url = https://github.com/vim-scripts/ZoomWin.git
