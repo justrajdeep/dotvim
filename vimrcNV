@@ -273,7 +273,8 @@ set t_vs=[5%dm
 "set nofoldenable
 
 " I work  in javascript also ...
-set textwidth=79
+set textwidth=0
+set formatoptions-=tc
 
 "Change buffer - without saving
 "buffer to background without saving
@@ -374,6 +375,14 @@ vnoremap <Down> gj
 vnoremap <Up> gk
 inoremap <Down> <C-o>gj
 inoremap <Up> <C-o>gk
+nnoremap gf gF
+nnoremap <C-w><C-f> <C-w><S-f>
+nnoremap <C-w>gf <C-w>gF
+:command WQ wq
+:command Wq wq
+:command W w
+:command Q q
+nnoremap 0 ^
 
 "-------------> Edit compressed files <-------------
 ":autocmd! BufReadPre,FileReadPre  	*.gz set bin
@@ -396,6 +405,7 @@ inoremap <Up> <C-o>gk
 augroup filetype_perl
 :autocmd!
 :autocmd BufEnter  *.pl		set ai si cin formatoptions=croql|setlocal iskeyword+=_
+:autocmd BufEnter  *.pm		set ai si cin formatoptions=croql|setlocal iskeyword+=_
 :autocmd BufLeave  *.pl		set nosi nocin formatoptions=tcq
 :autocmd BufEnter  *.pl		set comments=b:#
 :autocmd BufLeave  *.pl		set comments=sr:/*,mb:*,el:*/,://,b:#,:%,:XCOMM,n:>,fb:-
@@ -660,6 +670,7 @@ if  has("gui_running")
     "colorscheme molokai
     "colorscheme emacs
     colorscheme vimhut
+    "colorscheme bclear
     "set background=light
     "colorscheme habilight "Good light
     "colorscheme earendel "white Good
@@ -790,7 +801,7 @@ cno $c <C-U>sp <C-\>eCurrentFile("sp")<cr>
 cno $C <C-U>tabe <C-\>eCurrentFile("tabe")<cr>
 cno $p <C-U>sp <C-\>eCurrentFileDir("sp")<cr>
 cno $P <C-U>tabe <C-\>eCurrentFileDir("tabe")<cr>
-cno $0 <C-U>vs <C-\>eCurrentFileDirP4("vs")<cr>
+cno $1 <C-U>vs <C-\>eCurrentFileDirP4("vs")<cr>
 cno $E <C-U>!p4 edit %
 cno $R <C-U>!p4 revert %
 cno $A <C-U>!p4 add %
@@ -803,9 +814,10 @@ cno $K <C-U>!konsole &
 cno $M <C-U>!mutt -s "%" -a % $USER@nvidia.com < /dev/null
 cno $H <C-U>!p4 have %
 cno $S <C-U>!p4 sync %
-cno $t <C-U>sp <C-\>eMy_Depth("sp")<cr>/
-cno $T <C-U>tabe <C-\>eMy_Depth("tabe")<cr>/
+cno $t <C-U>sp <C-\>eMy_Depth("tabe")<cr>/
+cno $T <C-U>tabe <C-\>eMy_Depth("NERDTreeToggle")<cr>/
 cno $V <C-U>vs <C-\>eMy_Depth("vs")<cr>/
+cno $v <C-U>vs <C-\>eMy_Depth("sp")<cr>/
 cno $F <C-U>set filetype=verilog_systemverilog
 cno $x <C-U>.s/\d\+/\=printf("0x%04x", submatch(0))
 cno $Z <C-U>!tar cvf %.tar % && mutt -s "%" -a %.tar $USER@nvidia.com < /dev/null && \rm -f %.tar
@@ -875,28 +887,32 @@ if has('gui_running')
   "call Pl#Theme#InsertSegment('pwd', 'before', 'filesize')
   "airline settings
   "nice looking fonts
-  let g:airline_inactive_collapse=1
-  let g:airline_powerline_fonts=1
-  let g:airline_theme='light'
-  " remove separators
-  "let g:airline_left_sep=''
-  "let g:airline_right_sep=''
-  " remove unused modes
-  "let g:airline_enable_fugitive=0
-  "let g:airline_enable_syntastic=0
-  " put filetype in fifth section
-  let g:airline_section_b = 'Buf#[%{bufnr("%")}] Path:%{getcwd()} '
-  "let g:airline_section_c = 'File:%t %m'
-  let g:airline_section_x = airline#section#create_right(['tagbar'])
-  let g:airline_section_y = "Type:%Y"
-  let g:airline_section_z = "%p%% : Line:%l/%L: Col:%c"
-  let g:airline_section_warning = ""
-  let g:airline#extensions#tabline#enabled=0
-  let g:airline#extensions#tabline#show_buffers = 1
-  let g:airline#extensions#tabline#buffer_nr_show = 1
-  let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-  let g:airline#extensions#tagbar#enabled = 1
-  let g:airline#extensions#tabline#fnamemod = ':t'
+  function! AirlineInit()
+    let g:airline_inactive_collapse=1
+    let g:airline_powerline_fonts=1
+    "let g:airline_theme='light'
+    let g:airline_theme='wombat'
+    " remove separators
+    "let g:airline_left_sep=''
+    "let g:airline_right_sep=''
+    " remove unused modes
+    "let g:airline_enable_fugitive=0
+    "let g:airline_enable_syntastic=0
+    " put filetype in fifth section
+    let g:airline_section_b = 'Buf#[%{bufnr("%")}] Path:%{getcwd()} '
+    "let g:airline_section_c = 'File:%t %m'
+    let g:airline_section_x = "" "airline#section#create_right(['tagbar'])
+    let g:airline_section_y = "Type:%Y"
+    let g:airline_section_z = "%p%% : Line:%l/%L: Col:%c"
+    let g:airline_section_warning = ""
+    let g:airline#extensions#tabline#enabled=0
+    let g:airline#extensions#tabline#show_buffers = 1
+    let g:airline#extensions#tabline#buffer_nr_show = 1
+    let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+    let g:airline#extensions#tagbar#enabled = 1
+    let g:airline#extensions#tabline#fnamemod = ':t'
+  endfunction
+  autocmd VimEnter * call AirlineInit()
 endif
 
 " Format the statusline
