@@ -246,6 +246,8 @@ set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.o,*.obj,*.a,*.lib,*.elf,*.dll
 " Make shift-insert work like in Xterm
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
+map <C-S-Insert> <MiddleMouse>
+map! <C-S-Insert> <MiddleMouse>
 " Writes to the unnamed register also writes to the * and + registers. This
 " makes it easy to interact with the system clipboard
 "if has ('unnamedplus')
@@ -254,11 +256,17 @@ map! <S-Insert> <MiddleMouse>
 "  set clipboard=unnamed
 "endif
 "set clipboard+=unnamed " share windows clipboard
+"for replacing a visual
+"vmap <C-r> "_dP
+vnoremap p "0p
+vnoremap P "0P
+xnoremap p "_dp
+xnoremap P "_dP
 
 "home moves cursor to the first non-blank char
 noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 imap <silent> <Home> <C-O><Home>
-
+nnoremap 0 ^
 
 "I want mouse settings also ..
 set mouse=a
@@ -333,6 +341,9 @@ augroup MyAutoCmd
   autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
   " remove trailing spaces"
   "autocmd FileType c,cpp,java,php,perl,yaml,vim autocmd BufWritePre <buffer> :%s/\s\+$\|^\s\+$//e
+" Turn on cursorline only on active window
+  autocmd WinLeave * setlocal nocursorline
+  autocmd WinEnter,BufRead * setlocal cursorline
 augroup END
 "remove the trailing white spaces
 "set listchars=tab:>.,trail:.,extends:\#,nbsp:.
@@ -382,7 +393,7 @@ nnoremap <C-w>gf <C-w>gF
 :command Wq wq
 :command W w
 :command Q q
-nnoremap 0 ^
+":cabbrev w <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'W' : 'w')<CR>
 
 "-------------> Edit compressed files <-------------
 ":autocmd! BufReadPre,FileReadPre  	*.gz set bin
@@ -726,11 +737,6 @@ else
     imap <ESC>oD <ESC>hi
     "Setting light background
 endif
-" Turn on cursorline only on active window
-augroup MyAutoCmd
-  autocmd WinLeave * setlocal nocursorline
-  autocmd WinEnter,BufRead * setlocal cursorline
-augroup END
 "
  " Uncomment the following to have Vim jump to the last position when
  " reopening a file
@@ -750,10 +756,6 @@ let NERDSpaceDelims=1
 command! CPWD cd %:p:h
 command! LPWD lcd %:p:h
 command! TOT lcd `my_depth`
-"for replacing a visual
-"vmap <C-r> "_dP
-vnoremap p "0p
-vnoremap P "0P
 """"""""""""""""""""""""""""""
 " => Visual mode related
 """"""""""""""""""""""""""""""
@@ -819,7 +821,7 @@ cno $T <C-U>tabe <C-\>eMy_Depth("NERDTreeToggle")<cr>/
 cno $V <C-U>vs <C-\>eMy_Depth("vs")<cr>/
 cno $v <C-U>vs <C-\>eMy_Depth("sp")<cr>/
 cno $F <C-U>set filetype=verilog_systemverilog
-cno $x <C-U>.s/\d\+/\=printf("0x%04x", submatch(0))
+cno $x <C-U>.s/\\d\\+/\\=printf("0x%04x", submatch(0))
 cno $Z <C-U>!tar cvf %.tar % && mutt -s "%" -a %.tar $USER@nvidia.com < /dev/null && \rm -f %.tar
 
 " $q is super useful when browsing on the command line
@@ -888,10 +890,13 @@ if has('gui_running')
   "airline settings
   "nice looking fonts
   function! AirlineInit()
+    let spc = g:airline_symbols.space
     let g:airline_inactive_collapse=1
     let g:airline_powerline_fonts=1
+    let g:airline_powerline_symbol=1
     "let g:airline_theme='light'
     let g:airline_theme='wombat'
+    "let g:airline_theme='zenburn'
     " remove separators
     "let g:airline_left_sep=''
     "let g:airline_right_sep=''
@@ -899,11 +904,19 @@ if has('gui_running')
     "let g:airline_enable_fugitive=0
     "let g:airline_enable_syntastic=0
     " put filetype in fifth section
-    let g:airline_section_b = 'Buf#[%{bufnr("%")}] Path:%{getcwd()} '
-    "let g:airline_section_c = 'File:%t %m'
-    let g:airline_section_x = "" "airline#section#create_right(['tagbar'])
+    "let g:airline_section_b = 'File:%t %m'
+    let g:airline_section_c = airline#section#create(['%<', 'file', spc, 'readonly'])
+    call airline#parts#define_function('cwd', 'getcwd')
+    call airline#parts#define_minwidth('cwd', 80) "adjust as necessary, it'll check against windwidth()
+    let g:airline_section_b = airline#section#create(['Buf#[%n] ', 'cwd']) "'Buf#[%{bufnr("%")}] Path:%{getcwd()} '
+    "let g:airline_section_gutter = ""
+    let g:airline_section_x = airline#section#create_right(['tagbar'])
     let g:airline_section_y = "Type:%Y"
-    let g:airline_section_z = "%p%% : Line:%l/%L: Col:%c"
+    if &encoding == "utf-8"
+      let g:airline_section_z = "%3p%% : \ue0a1:%l/%L: Col:%3c"
+    else
+      let g:airline_section_z = "%3p%% : Line:%l/%L: Col:%3c"
+    endif
     let g:airline_section_warning = ""
     let g:airline#extensions#tabline#enabled=0
     let g:airline#extensions#tabline#show_buffers = 1
@@ -911,6 +924,19 @@ if has('gui_running')
     let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
     let g:airline#extensions#tagbar#enabled = 1
     let g:airline#extensions#tabline#fnamemod = ':t'
+    let g:airline_mode_map = {
+          \ '__' : '-',
+          \ 'n'  : 'N',
+          \ 'i'  : 'I',
+          \ 'R'  : 'R',
+          \ 'c'  : 'C',
+          \ 'v'  : 'V',
+          \ 'V'  : 'V',
+          \ '' : 'V',
+          \ 's'  : 'S',
+          \ 'S'  : 'S',
+          \ '' : 'S',
+          \ }
   endfunction
   autocmd VimEnter * call AirlineInit()
 endif
@@ -1002,15 +1028,13 @@ nnoremap <C-g>  11<C-g>
 "Yank from the cursor to the end of the line, to be consistentwith C and D.
 nnoremap Y y$
 inoremap <c-s> <esc>ddi
-"cmap W w
-"cmap WQ wq
-"cmap wQ wq
-"cmap Wq wq
-"cmap Q q
 "cmap Tabe tabe
 " visual shifting (does not exit Visual mode)
 "vnoremap < <gv
 "vnoremap > >gv
+"CoVim settings"
+let CoVim_default_name = "rmondal"
+let CoVim_default_port = "3456"
 
 let g:Perl_AuthorName      = 'Rajdeep'
 let g:Perl_AuthorRef       = ''
@@ -1144,6 +1168,14 @@ let g:UltiSnipsJumpBackwardTrigger="<C-S-Space>"
 "let g:UltiSnipsJumpForwardTrigger="<c-j>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 "
+" Underline the current line with various symbols (such that the number of
+" underline matches line length and indendation)
+nnoremap <Leader>= yypv$r=
+nnoremap <Leader>- yypv$r-
+nnoremap <Leader># yypv$r#
+nnoremap <Leader>" yypv$r"
+" A fancy unicode underline
+nnoremap <Leader>U yypv$r-
 
 " load filetype detection last"
 syntax on

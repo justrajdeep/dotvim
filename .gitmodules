@@ -229,3 +229,18 @@
 [submodule "bundle/zoomwin"]
 	path = bundle/zoomwin
 	url = https://github.com/vim-scripts/ZoomWin.git
+[submodule "bundle/bling"]
+	path = bundle/bling
+	url = https://github.com/ivyl/vim-bling.git
+[submodule "bundle/sneak"]
+	path = bundle/sneak
+	url = https://github.com/justinmk/vim-sneak.git
+[submodule "bundle/easymotion"]
+	path = bundle/easymotion
+	url = https://github.com/Lokaltog/vim-easymotion.git
+[submodule "bundle/color_seoul256"]
+	path = bundle/color_seoul256
+	url = https://github.com/junegunn/seoul256.vim.git
+[submodule "bundle/coVim"]
+	path = bundle/coVim
+	url = https://github.com/FredKSchott/CoVim.git
