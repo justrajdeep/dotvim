@@ -244,3 +244,6 @@
 [submodule "bundle/coVim"]
 	path = bundle/coVim
 	url = https://github.com/FredKSchott/CoVim.git
+[submodule "bundle/YouCompleteMe"]
+	path = bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git
