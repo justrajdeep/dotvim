@@ -120,4 +120,12 @@ Git initialization
  https://vimcolorschemetest.googlecode.com/svn/html/index-c.html
  http://vimcolorschemetest.googlecode.com/svn/html/index-html.html
 
+ NVIDIA specific installs
+=========================
+cd ~/.vim/bundle
+ln -fs /home/vim-nv nvidia
+ln -fs /home/vim-nv/plugins/nvbug nvbug
+mkdir -p ~/.vim/nvbug
+touch ~/.vim/nvbug/bug_history
+
  # vim: set filetype=README syntax=git:

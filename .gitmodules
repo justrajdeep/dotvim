@@ -247,3 +247,6 @@
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "bundle/vim_monokai"]
+	path = bundle/vim_monokai
+	url = https://github.com/sickill/vim-monokai.git
