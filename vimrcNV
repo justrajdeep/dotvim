@@ -50,7 +50,7 @@ endif
 "call add(g:pathogen_disabled, 'l9')
 "call add(g:pathogen_disabled, 'linediff')
 "call add(g:pathogen_disabled, 'matchit')
-"call add(g:pathogen_disabled, 'mru')
+call add(g:pathogen_disabled, 'mru')
 "call add(g:pathogen_disabled, 'multipleHilight')
 "call add(g:pathogen_disabled, 'multiple_cursor')
 "call add(g:pathogen_disabled, 'mw_utils')
@@ -87,6 +87,7 @@ call add(g:pathogen_disabled, 'vimfiler')
 "call add(g:pathogen_disabled, 'viva')
 "call add(g:pathogen_disabled, 'vundle')
 "call add(g:pathogen_disabled, 'xml')
+call add(g:pathogen_disabled, 'YouCompleteMe')
 
 call pathogen#infect()
 call pathogen#helptags()
@@ -256,6 +257,7 @@ map! <C-S-Insert> <MiddleMouse>
 "  set clipboard=unnamed
 "endif
 "set clipboard+=unnamed " share windows clipboard
+"set clipboard^=unnamed " share windows clipboard
 "for replacing a visual
 "vmap <C-r> "_dP
 vnoremap p "0p
@@ -325,6 +327,11 @@ if  has("gui_running")
   "set list
   "highlight NonText ctermfg=8 guifg=gray
   "set listchars=tab:§»,extends:¶,eol:¬
+  "if &encoding == "utf-8"
+  "   set listchars=nbsp:\u2422,conceal:\u22ef,tab:\u2595\u2014,trail:\u02d1,precedes:\u2026,extends:\u2026"
+  "else
+  "   set listchars=eol:$,trail:-,tab:>-,extends:>,precedes:<,conceal:+
+  "endif
 endif
 "get new chanracters from dig
 " use C-k to insert
@@ -389,6 +396,8 @@ inoremap <Up> <C-o>gk
 nnoremap gf gF
 nnoremap <C-w><C-f> <C-w><S-f>
 nnoremap <C-w>gf <C-w>gF
+:command Qa qa
+:command QA qa
 :command WQ wq
 :command Wq wq
 :command W w
@@ -411,6 +420,10 @@ nnoremap <C-w>gf <C-w>gF
 "    au!
 "    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYVIMRC | endif
 "augroup END
+augroup filetype_vim
+:autocmd!
+:autocmd FileType vim setlocal textwidth=0
+augroup END
 
 "-------------> Perl programs <-------------
 augroup filetype_perl
@@ -421,6 +434,7 @@ augroup filetype_perl
 :autocmd BufEnter  *.pl		set comments=b:#
 :autocmd BufLeave  *.pl		set comments=sr:/*,mb:*,el:*/,://,b:#,:%,:XCOMM,n:>,fb:-
 augroup END
+
 "without this crontab does not work
 augroup filetype_crontab
 :autocmd!
@@ -515,7 +529,7 @@ augroup filetype_make
 :au BufNewFile,BufRead vplmakefile.inc setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
 :au BufNewFile,BufRead vcsmakefile.inc setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
 :au BufNewFile,BufRead *.config setf make |setlocal ts=4 sts=4 sw=4 expandtab
-:autocmd BufLeave,FocusLost  Makefile* silent! wall
+":autocmd BufLeave,FocusLost  Makefile* silent! wall
 augroup END
 
 augroup filetype_verilog
@@ -524,12 +538,12 @@ augroup filetype_verilog
 ":au BufNewFile,BufRead *.sv setf verilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4|setlocal fdc=4|setlocal foldopen+=search|source \~/.vim/cus_fold/folding.vim|call MarkdownSVFolds()
 :au BufNewFile,BufRead *.sv setf verilog_systemverilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4
 :au BufNewFile,BufRead *.spp setf verilog
-:au BufNewFile,BufRead *.vx setf verilog
-:au BufNewFile,BufRead *.v setf verilog
-:au BufNewFile,BufRead *.vcp setf verilog
-:au BufNewFile,BufRead *.vcp.err setf verilog
-:au BufNewFile,BufRead *.vhx setf verilog
-:au BufNewFile,BufRead *.vhxcp.err setf verilog
+:au BufNewFile,BufRead *.vx setf viva
+:au BufNewFile,BufRead *.v setf viva
+:au BufNewFile,BufRead *.vcp setf viva
+:au BufNewFile,BufRead *.vcp.err setf viva
+:au BufNewFile,BufRead *.vhx setf viva
+:au BufNewFile,BufRead *.vhxcp.err setf viva
 :au BufNewFile,BufRead *.vtx setf verilog
 :au BufNewFile,BufRead *.svx setf verilog_systemverilog
 :au BufNewFile,BufRead *.svix setf verilog_systemverilog
@@ -680,7 +694,8 @@ if  has("gui_running")
     "colorscheme nocturne
     "colorscheme molokai
     "colorscheme emacs
-    colorscheme vimhut
+    "colorscheme vimhut
+    colorscheme grape
     "colorscheme bclear
     "set background=light
     "colorscheme habilight "Good light
@@ -802,8 +817,8 @@ endfunction
 cno $c <C-U>sp <C-\>eCurrentFile("sp")<cr>
 cno $C <C-U>tabe <C-\>eCurrentFile("tabe")<cr>
 cno $p <C-U>sp <C-\>eCurrentFileDir("sp")<cr>
-cno $P <C-U>tabe <C-\>eCurrentFileDir("tabe")<cr>
-cno $1 <C-U>vs <C-\>eCurrentFileDirP4("vs")<cr>
+"cno $P <C-U>tabe <C-\>eCurrentFileDir("tabe")<cr>
+cno $P <C-U>vs <C-\>eCurrentFileDirP4("vs")<cr>
 cno $E <C-U>!p4 edit %
 cno $R <C-U>!p4 revert %
 cno $A <C-U>!p4 add %
@@ -813,11 +828,11 @@ cno $N <C-U>!nedit %
 cno $G <C-U>!gnome-terminal &
 cno $X <C-U>!xterm -e xx &
 cno $K <C-U>!konsole &
-cno $M <C-U>!mutt -s "%" -a % $USER@nvidia.com < /dev/null
+cno $M <C-U>!pwd \| mutt -s "%" -a % $USER@nvidia.com
 cno $H <C-U>!p4 have %
 cno $S <C-U>!p4 sync %
-cno $t <C-U>sp <C-\>eMy_Depth("tabe")<cr>/
-cno $T <C-U>tabe <C-\>eMy_Depth("NERDTreeToggle")<cr>/
+cno $T <C-U>sp <C-\>eMy_Depth("tabe")<cr>/
+cno $t <C-U>tabe <C-\>eMy_Depth("NERDTreeToggle")<cr>/
 cno $V <C-U>vs <C-\>eMy_Depth("vs")<cr>/
 cno $v <C-U>vs <C-\>eMy_Depth("sp")<cr>/
 cno $F <C-U>set filetype=verilog_systemverilog
@@ -1168,6 +1183,7 @@ let g:UltiSnipsJumpBackwardTrigger="<C-S-Space>"
 "let g:UltiSnipsJumpForwardTrigger="<c-j>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 "
+let g:matchparen_insert_timeout=5
 " Underline the current line with various symbols (such that the number of
 " underline matches line length and indendation)
 nnoremap <Leader>= yypv$r=
