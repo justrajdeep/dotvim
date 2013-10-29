@@ -694,8 +694,9 @@ if  has("gui_running")
     "colorscheme nocturne
     "colorscheme molokai
     "colorscheme emacs
-    "colorscheme vimhut
-    colorscheme grape
+    colorscheme vimhut
+    "colorscheme 
+    "colorscheme grape
     "colorscheme bclear
     "set background=light
     "colorscheme habilight "Good light
@@ -910,7 +911,8 @@ if has('gui_running')
     let g:airline_powerline_fonts=1
     let g:airline_powerline_symbol=1
     "let g:airline_theme='light'
-    let g:airline_theme='wombat'
+    "let g:airline_theme='wombat'
+    let g:airline_theme='dark'
     "let g:airline_theme='zenburn'
     " remove separators
     "let g:airline_left_sep=''
