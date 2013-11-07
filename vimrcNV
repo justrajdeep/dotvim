@@ -18,76 +18,98 @@ let g:pathogen_disabled = []
 if !has('gui_running')
         call add(g:pathogen_disabled, 'vim_airline')
 endif
-
-"call add(g:pathogen_disabled, 'FuzzyFinder')
-"call add(g:pathogen_disabled, 'LargeFile')
-"call add(g:pathogen_disabled, 'MultipleSearch')
-"call add(g:pathogen_disabled, 'NERD_tree')
-"call add(g:pathogen_disabled, 'VisIncr')
-"call add(g:pathogen_disabled, 'abolish')
-"call add(g:pathogen_disabled, 'autocomplete')
-"call add(g:pathogen_disabled, 'autohighlight')
-"call add(g:pathogen_disabled, 'bluespec')
-"call add(g:pathogen_disabled, 'bufexplorer')
-"call add(g:pathogen_disabled, 'buffergrep')
-"call add(g:pathogen_disabled, 'checkSyntax')
-"call add(g:pathogen_disabled, 'colorSchemeDegrade')
-"call add(g:pathogen_disabled, 'colorSchemeEx')
-"call add(g:pathogen_disabled, 'color_badwolf')
-"call add(g:pathogen_disabled, 'color_flatui')
-"call add(g:pathogen_disabled, 'color_gruvbox')
-"call add(g:pathogen_disabled, 'color_hybrid')
-"call add(g:pathogen_disabled, 'color_tomorrow')
-"call add(g:pathogen_disabled, 'colour_sampler_pack')
-"call add(g:pathogen_disabled, 'compview')
-"call add(g:pathogen_disabled, 'conque')
-"call add(g:pathogen_disabled, 'ctrlp')
-"call add(g:pathogen_disabled, 'delimitMate')
-"call add(g:pathogen_disabled, 'dirdiff')
-"call add(g:pathogen_disabled, 'fontmanager')
-"call add(g:pathogen_disabled, 'fugitive')
-"call add(g:pathogen_disabled, 'gundo')
-"call add(g:pathogen_disabled, 'l9')
-"call add(g:pathogen_disabled, 'linediff')
-"call add(g:pathogen_disabled, 'matchit')
 call add(g:pathogen_disabled, 'mru')
-"call add(g:pathogen_disabled, 'multipleHilight')
-"call add(g:pathogen_disabled, 'multiple_cursor')
-"call add(g:pathogen_disabled, 'mw_utils')
-"call add(g:pathogen_disabled, 'my_colors')
-"call add(g:pathogen_disabled, 'narrow')
 call add(g:pathogen_disabled, 'neocomplcache')
 call add(g:pathogen_disabled, 'neocomplcache-ultisnips')
-"call add(g:pathogen_disabled, 'neocomplete')
-"call add(g:pathogen_disabled, 'outline')
-"call add(g:pathogen_disabled, 'pathogen')
-"call add(g:pathogen_disabled, 'perl-support')
-"call add(g:pathogen_disabled, 'perldoc')
-"call add(g:pathogen_disabled, 'python')
-"call add(g:pathogen_disabled, 'snippets')
-"call add(g:pathogen_disabled, 'solarized')
-"call add(g:pathogen_disabled, 'surround')
-"call add(g:pathogen_disabled, 'table')
-"call add(g:pathogen_disabled, 'tabular')
-"call add(g:pathogen_disabled, 'tagbar')
-"call add(g:pathogen_disabled, 'tlib')
-"call add(g:pathogen_disabled, 'tmp.patch')
-"call add(g:pathogen_disabled, 'ultisnips')
-"call add(g:pathogen_disabled, 'unite')
-"call add(g:pathogen_disabled, 'unite_qfix')
-"call add(g:pathogen_disabled, 'verilog')
-"call add(g:pathogen_disabled, 'verilog_systemverilog')
-"call add(g:pathogen_disabled, 'vim-expand-region')
-"call add(g:pathogen_disabled, 'vim-support')
-"call add(g:pathogen_disabled, 'vim_airline')
-"call add(g:pathogen_disabled, 'vim_indent_guides')
-"call add(g:pathogen_disabled, 'vim_nocturne')
 call add(g:pathogen_disabled, 'vimfiler')
-"call add(g:pathogen_disabled, 'vimproc')
-"call add(g:pathogen_disabled, 'viva')
-"call add(g:pathogen_disabled, 'vundle')
-"call add(g:pathogen_disabled, 'xml')
 call add(g:pathogen_disabled, 'YouCompleteMe')
+
+"call add (g:pathogen_disabled, 'FuzzyFinder')
+"call add (g:pathogen_disabled, 'l9')
+"call add (g:pathogen_disabled, 'my_colors')
+"call add (g:pathogen_disabled, 'vim_airline')
+"
+"call add (g:pathogen_disabled, 'LargeFile')
+"call add (g:pathogen_disabled, 'MultipleSearch')
+"call add (g:pathogen_disabled, 'NERD_tree')
+"call add (g:pathogen_disabled, 'VisIncr')
+"call add (g:pathogen_disabled, 'abolish')
+"call add (g:pathogen_disabled, 'autocomplete')
+"call add (g:pathogen_disabled, 'autohighlight')
+"call add (g:pathogen_disabled, 'bluespec')
+"call add (g:pathogen_disabled, 'bufexplorer')
+"call add (g:pathogen_disabled, 'buffergrep')
+"call add (g:pathogen_disabled, 'checkSyntax')
+call add (g:pathogen_disabled, 'coVim')
+"call add (g:pathogen_disabled, 'colorSchemeDegrade')
+"call add (g:pathogen_disabled, 'colorSchemeEx')
+"call add (g:pathogen_disabled, 'color_badwolf')
+"call add (g:pathogen_disabled, 'color_base16')
+"call add (g:pathogen_disabled, 'color_bubblegum')
+"call add (g:pathogen_disabled, 'color_colorschemes')
+"call add (g:pathogen_disabled, 'color_flatui')
+"call add (g:pathogen_disabled, 'color_grb256')
+"call add (g:pathogen_disabled, 'color_greyhouse')
+"call add (g:pathogen_disabled, 'color_gruvbox')
+"call add (g:pathogen_disabled, 'color_hemisu')
+"call add (g:pathogen_disabled, 'color_hybrid')
+"call add (g:pathogen_disabled, 'color_laederon')
+"call add (g:pathogen_disabled, 'color_lizard')
+"call add (g:pathogen_disabled, 'color_luna')
+"call add (g:pathogen_disabled, 'color_seoul256')
+"call add (g:pathogen_disabled, 'color_sol')
+"call add (g:pathogen_disabled, 'color_solarized')
+"call add (g:pathogen_disabled, 'color_tomorrow')
+"call add (g:pathogen_disabled, 'colour_sampler_pack')
+"call add (g:pathogen_disabled, 'compview')
+"call add (g:pathogen_disabled, 'conque')
+"call add (g:pathogen_disabled, 'csv')
+"call add (g:pathogen_disabled, 'ctrlp')
+"call add (g:pathogen_disabled, 'delimitMate')
+"call add (g:pathogen_disabled, 'dirdiff')
+"call add (g:pathogen_disabled, 'easy_align')
+"call add (g:pathogen_disabled, 'easymotion')
+"call add (g:pathogen_disabled, 'fontmanager')
+"call add (g:pathogen_disabled, 'fugitive')
+"call add (g:pathogen_disabled, 'gundo')
+"call add (g:pathogen_disabled, 'linediff')
+"call add (g:pathogen_disabled, 'matchTagAlways')
+"call add (g:pathogen_disabled, 'matchit')
+"call add (g:pathogen_disabled, 'multipleHilight')
+"call add (g:pathogen_disabled, 'multiple_cursor')
+"call add (g:pathogen_disabled, 'mw_utils')
+"call add (g:pathogen_disabled, 'narrow')
+"call add (g:pathogen_disabled, 'neocomplete')
+"call add (g:pathogen_disabled, 'nvbug')
+"call add (g:pathogen_disabled, 'nvdia')
+"call add (g:pathogen_disabled, 'outline')
+"call add (g:pathogen_disabled, 'perl-support')
+"call add (g:pathogen_disabled, 'perldoc')
+"call add (g:pathogen_disabled, 'python')
+"call add (g:pathogen_disabled, 'quicktask')
+"call add (g:pathogen_disabled, 'snippets')
+"call add (g:pathogen_disabled, 'solarized')
+"call add (g:pathogen_disabled, 'surround')
+"call add (g:pathogen_disabled, 'table')
+"call add (g:pathogen_disabled, 'tabular')
+"call add (g:pathogen_disabled, 'tagbar')
+"call add (g:pathogen_disabled, 'tlib')
+"call add (g:pathogen_disabled, 'ultisnips')
+"call add (g:pathogen_disabled, 'unite')
+"call add (g:pathogen_disabled, 'unite_qfix')
+"call add (g:pathogen_disabled, 'verilog')
+"call add (g:pathogen_disabled, 'verilog_systemverilog')
+"call add (g:pathogen_disabled, 'vim-expand-region')
+"call add (g:pathogen_disabled, 'vim-misc')
+"call add (g:pathogen_disabled, 'vim-shell')
+"call add (g:pathogen_disabled, 'vim-support')
+"call add (g:pathogen_disabled, 'vim_indent_guides')
+"call add (g:pathogen_disabled, 'vim_monokai')
+"call add (g:pathogen_disabled, 'vim_nocturne')
+"call add (g:pathogen_disabled, 'vimproc')
+"call add (g:pathogen_disabled, 'vundle')
+"call add (g:pathogen_disabled, 'xml')
+"call add (g:pathogen_disabled, 'zoomwin')
 
 call pathogen#infect()
 call pathogen#helptags()
@@ -187,7 +209,7 @@ set nowrap
 set nobackup
 set nowritebackup
 set noswapfile
-set undolevels=10000
+set undolevels=1000
 " viminfo stores the the state of your previous editing session
 set viminfo+=n~/.vim/viminfo
 if exists("+undofile")
@@ -274,7 +296,7 @@ nnoremap 0 ^
 set mouse=a
 	set viminfo='20,\"50	" read/write a .viminfo file, don't store more
 				" than 50 lines of registers
-	set history=50000       " keep 50 lines of command line history
+	set history=500000         " keep 50 lines of command line history
 
 "sets color of cursor according to the color of its text ..... looks fundu
 set t_vs=[5%dm
@@ -833,7 +855,7 @@ cno $M <C-U>!pwd \| mutt -s "%" -a % $USER@nvidia.com
 cno $H <C-U>!p4 have %
 cno $S <C-U>!p4 sync %
 cno $T <C-U>sp <C-\>eMy_Depth("tabe")<cr>/
-cno $t <C-U>tabe <C-\>eMy_Depth("NERDTreeToggle")<cr>/
+cno $t <C-U>tabe <C-\>eMy_Depth("NERDTree")<cr>/
 cno $V <C-U>vs <C-\>eMy_Depth("vs")<cr>/
 cno $v <C-U>vs <C-\>eMy_Depth("sp")<cr>/
 cno $F <C-U>set filetype=verilog_systemverilog
@@ -927,7 +949,7 @@ if has('gui_running')
     call airline#parts#define_minwidth('cwd', 80) "adjust as necessary, it'll check against windwidth()
     let g:airline_section_b = airline#section#create(['Buf#[%n] ', 'cwd']) "'Buf#[%{bufnr("%")}] Path:%{getcwd()} '
     "let g:airline_section_gutter = ""
-    let g:airline_section_x = airline#section#create_right(['tagbar'])
+    let g:airline_section_x = "" "airline#section#create_right(['tagbar'])
     let g:airline_section_y = "Type:%Y"
     if &encoding == "utf-8"
       let g:airline_section_z = "%3p%% : \ue0a1:%l/%L: Col:%3c"
@@ -1131,7 +1153,7 @@ let g:multi_cursor_exit_from_visual_mode=0
 let g:multi_cursor_exit_from_insert_mode=0
 "Unite configurations"
 let g:unite_source_history_yank_enable = 1
-let g:unite_source_history_yank_limit=10000
+let g:unite_source_history_yank_limit=100
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 let g:unite_enable_start_insert=1
 let g:unite_source_rec_max_cache_files=100000

@@ -259,3 +259,9 @@
 [submodule "bundle/color_laederon"]
 	path = bundle/color_laederon
 	url = https://github.com/Donearm/Laederon.git
+[submodule "bundle/matchTagAlways"]
+	path = bundle/matchTagAlways
+	url = https://github.com/Valloric/MatchTagAlways.git
+[submodule "bundle/easy_align"]
+	path = bundle/easy_align
+	url = https://github.com/junegunn/vim-easy-align.git
