@@ -265,3 +265,15 @@
 [submodule "bundle/easy_align"]
 	path = bundle/easy_align
 	url = https://github.com/junegunn/vim-easy-align.git
+[submodule "bundle/over"]
+	path = bundle/over
+	url = https://github.com/osyo-manga/vim-over.git
+[submodule "bundle/vmath"]
+	path = bundle/vmath
+	url = https://github.com/atweiden/vim-vmath.git
+[submodule "bundle/vmath/plugin"]
+	path = bundle/vmath/plugin
+	url = https://github.com/atweiden/vim-vmath.git
+[submodule "bundle/dragvisuals/plugin"]
+	path = bundle/dragvisuals/plugin
+	url = https://github.com/atweiden/vim-dragvisuals.git

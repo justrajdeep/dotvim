@@ -154,6 +154,8 @@ set virtualedit=onemore
 " Display an incomplete command in the lower right corner of the Vim window
 set showcmd
 set cpoptions=Aq
+" no long listing"
+set nomore          "Don't page long listings
 "
 "allow to delete using backspace
 "set backspace=2
@@ -197,8 +199,10 @@ set incsearch
 " Make regex a little easier to type
 set magic
 
-" Column width indicator
-set colorcolumn=+1
+" Column width indicator only for lines exceeding
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
+"set colorcolumn=+1
 
 "set rel num and current line number"
 set relativenumber
@@ -294,9 +298,19 @@ nnoremap 0 ^
 
 "I want mouse settings also ..
 set mouse=a
-	set viminfo='20,\"50	" read/write a .viminfo file, don't store more
+"           +--Disable hlsearch while loading viminfo
+"           | +--Remember marks for last 50 files
+"           | |   +--Remember up to 10000 lines in each register
+"           | |   |      +--Remember up to 1MB in each register
+"           | |   |      |     +--Remember last 1000 search patterns
+"           | |   |      |     |     +---Remember last 1000 commands
+"           | |   |      |     |     |
+"           v v   v      v     v     v
+set viminfo=h,'50,<10000,s1000,/1000,:1000
+
+"set viminfo='20,\"50	" read/write a .viminfo file, don't store more
 				" than 50 lines of registers
-	set history=500000         " keep 50 lines of command line history
+set history=500000         " keep 50 lines of command line history
 
 "sets color of cursor according to the color of its text ..... looks fundu
 set t_vs=[5%dm
@@ -382,6 +396,9 @@ augroup END
 
 " exeute current line
 " map <F10> "hyy@h
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 cnoremap <C-A> <Home>
 cnoremap <C-F> <Right>
@@ -424,6 +441,9 @@ nnoremap <C-w>gf <C-w>gF
 :command Wq wq
 :command W w
 :command Q q
+" Take off and nuke the entire buffer contents from space
+" (It's the only way to be sure)...
+nmap XX 1GdG
 ":cabbrev w <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'W' : 'w')<CR>
 
 "-------------> Edit compressed files <-------------
@@ -540,6 +560,11 @@ augroup filetype_patch
 :autocmd!
 :autocmd BufEnter *patch* setlocal filetype=patch |setlocal syntax=diff
 :autocmd Bufunload *patch* syntax clear
+augroup END
+
+augroup PatchDiffHighlight
+  autocmd!
+  autocmd FileType  diff   syntax enable
 augroup END
 
 augroup filetype_make
@@ -991,6 +1016,32 @@ if !has('gui_running')
   "    set statusline+=%y
 endif
 
+"======[ Magically build interim directories if necessary ]===================
+function! AskQuit (msg, options, quit_option)
+    if confirm(a:msg, a:options) == a:quit_option
+        exit
+    endif
+endfunction
+
+function! EnsureDirExists ()
+    let required_dir = expand("%:h")
+    if !isdirectory(required_dir)
+        call AskQuit("Parent directory '" . required_dir . "' doesn't exist.",
+             \       "&Create it\nor &Quit?", 2)
+
+        try
+            call mkdir( required_dir, 'p' )
+        catch
+            call AskQuit("Can't create '" . required_dir . "'",
+            \            "&Quit\nor &Continue anyway?", 1)
+        endtry
+    endif
+endfunction
+augroup AutoMkdir
+    autocmd!
+    autocmd  BufNewFile  *  :call EnsureDirExists()
+augroup END
+
 function! CurDir()
   let curdir = substitute(getcwd(), $HOME, "~/", "g")
   return curdir
@@ -1062,6 +1113,69 @@ nnoremap * *''zz
 nnoremap g* g*''zz
 nnoremap # #''zz
 nnoremap g# g#''zz
+nnoremap <silent> n n:call HLNext(0.2)<cr>
+nnoremap <silent> N N:call HLNext(0.2)<cr>
+
+" blink search results
+" EITHER blink the line containing the match...
+function! HLNext (blinktime)
+  set invcursorline
+  redraw
+  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  set invcursorline
+  redraw
+endfunction
+"
+" OR ELSE ring the match in red...
+"function! HLNext (blinktime)
+"  highlight RedOnRed ctermfg=red ctermbg=red
+"  let [bufnum, lnum, col, off] = getpos('.')
+"  let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+"  echo matchlen
+"  let ring_pat = (lnum > 1 ? '\%'.(lnum-1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.\|' : '')
+"        \ . '\%'.lnum.'l\%>'.max([col-4,1]) .'v\%<'.col.'v.'
+"        \ . '\|'
+"        \ . '\%'.lnum.'l\%>'.max([col+matchlen-1,1]) .'v\%<'.(col+matchlen+3).'v.'
+"        \ . '\|'
+"        \ . '\%'.(lnum+1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.'
+"  let ring = matchadd('RedOnRed', ring_pat, 101)
+"  redraw
+"  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+"  call matchdelete(ring)
+"  redraw
+"endfunction
+"
+" OR ELSE briefly hide everything except the match...
+"function! HLNext (blinktime)
+"  highlight BlackOnBlack ctermfg=black ctermbg=black
+"  let [bufnum, lnum, col, off] = getpos('.')
+"  let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+"  let hide_pat = '\%<'.lnum.'l.'
+"        \ . '\|'
+"        \ . '\%'.lnum.'l\%<'.col.'v.'
+"        \ . '\|'
+"        \ . '\%'.lnum.'l\%>'.(col+matchlen-1).'v.'
+"        \ . '\|'
+"        \ . '\%>'.lnum.'l.'
+"  let ring = matchadd('BlackOnBlack', hide_pat, 101)
+"  redraw
+"  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+"  call matchdelete(ring)
+"  redraw
+"endfunction
+highlight WHITE_ON_RED    ctermfg=white  ctermbg=red
+"OR ELSE just highlight the match in red...
+"function! HLNext (blinktime)
+"  let [bufnum, lnum, col, off] = getpos('.')
+"  let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+"  let target_pat = '\c\%#'.@/
+"  let ring = matchadd('WHITE_ON_RED', target_pat, 101)
+"  redraw
+"  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+"  call matchdelete(ring)
+"  redraw
+"endfunction
+
 "map so that ctrl-g shows the full path"
 nnoremap <C-g>  11<C-g>
 "Yank from the cursor to the end of the line, to be consistentwith C and D.
@@ -1071,6 +1185,44 @@ inoremap <c-s> <esc>ddi
 " visual shifting (does not exit Visual mode)
 "vnoremap < <gv
 "vnoremap > >gv
+"visual drag
+vmap  <expr>  <S-LEFT>   DVB_Drag('left')
+vmap  <expr>  <S-RIGHT>  DVB_Drag('right')
+vmap  <expr>  <S-DOWN>   DVB_Drag('down')
+vmap  <expr>  <S-UP>     DVB_Drag('up')
+vmap  <expr>  D        DVB_Duplicate()
+"math "
+vmap <expr>  ++  VMATH_YankAndAnalyse()
+"" Temporarily add a column indicator when inserting or appending in visual mode...
+"" (Should use <C-O> instead, but it doesn't seem to work)
+"vnoremap <silent>  I  I<C-R>=TemporaryColumnMarkerOn()<CR>
+"vnoremap <silent>  A  A<C-R>=TemporaryColumnMarkerOn()<CR>
+"
+"function! TemporaryColumnMarkerOn ()
+"  let g:prev_cursorcolumn_state = g:cursorcolumn_visible ? 'on' : 'off'
+"  call Toggle_CursorColumn('on')
+"  inoremap <silent>  <ESC>  <ESC>:call TemporaryColumnMarkerOff(g:prev_cursorcolumn_state)<CR>
+"  return ""
+"endfunction
+"
+"function! TemporaryColumnMarkerOff (newstate)
+"  call Toggle_CursorColumn(a:newstate)
+"  iunmap <ESC>
+"endfunction
+"
+"" Implement cursor toggle...
+"let g:cursorcolumn_visible = 0
+"function! Toggle_CursorColumn (requested_state)
+"  if a:requested_state == 'off' || g:cursorcolumn_visible && a:requested_state == 'flip'
+"    let g:cursorcolumn_visible = 0
+"    highlight clear CursorColumn
+"    highlight CursorColumn term=none cterm=none
+"  else
+"    let g:cursorcolumn_visible = 1
+"    highlight CursorColumn term=bold ctermfg=black ctermbg=cyan cterm=bold
+"  endif
+"endfunction
+
 "CoVim settings"
 let CoVim_default_name = "rmondal"
 let CoVim_default_port = "3456"
@@ -1188,14 +1340,14 @@ function! s:unite_my_settings()
   " Play nice with supertab
   let b:SuperTabDisabled=1
   " Overwrite settings.
-  imap <silent><buffer><expr> <C-s>     unite#do_action('split')
-  imap <silent><buffer><expr> <C-v>     unite#do_action('vsplit')
+  inoremap <silent><buffer><expr> <C-s>     unite#do_action('split')
+  inoremap <silent><buffer><expr> <C-v>     unite#do_action('vsplit')
   "imap <buffer> <esc> <plug>(unite_exit)
-  nmap <buffer> <esc> <plug>(unite_exit)
-  nmap <buffer> <C-j> <plug>(unite_toggle_auto_preview)
-  imap <buffer> <TAB> <plug>(unite_select_next_line)
-  imap <buffer> <S-TAB> <plug>(unite_select_previous_line)
-  imap <buffer> <BS> <BS>
+  nnoremap <buffer> <esc> <plug>(unite_exit)
+  nnoremap <buffer> <C-j> <plug>(unite_toggle_auto_preview)
+  inoremap <buffer> <TAB> <plug>(unite_select_next_line)
+  inoremap <buffer> <S-TAB> <plug>(unite_select_previous_line)
+  inoremap <buffer> <BS> <BS>
 endfunction
 
 "UltiSnips"
