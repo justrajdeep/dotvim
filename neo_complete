@@ -1,9 +1,6 @@
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 0
-let g:neocomplete#enable_at_startup=1
 "let g:neocomplete#enable_auto_close_preview=1
 " Use smartcase.
 let g:neocomplete#enable_smart_case=1
@@ -46,8 +43,8 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 "inoremap <expr><Tab>  neocomplete#start_manual_complete()
 
-"inoremap <expr><Down>  pumvisible() ? "\<C-n>" : "\<Down>"
-"inoremap <expr><Up>  pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr><Down> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr><Up> pumvisible() ? "\<C-p>" : "\<Up>"
 
 " <C-h>, <BS>: close popup and delete backword char.
 "inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
@@ -58,14 +55,14 @@ inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 "inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
 
 " For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplcache#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
+inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
 "inoremap <expr><Up>    neocomplcache#close_popup() . "\<Up>"
 "inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"
 " Or set this.
-let g:neocomplete#enable_cursor_hold_i = 1
+"let g:neocomplete#enable_cursor_hold_i = 1
 " Or set this.
-let g:neocomplete#enable_insert_char_pre = 1
+"let g:neocomplete#enable_insert_char_pre = 1
 
 " AutoComplPop like behavior
 "let g:neocomplete#enable_auto_select = 1
@@ -100,5 +97,8 @@ let g:neocomplete#same_filetypes._ = '_'
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 0
+let g:neocomplete#enable_at_startup=1
 
 " vim: filetype=VIM syntax=vim:

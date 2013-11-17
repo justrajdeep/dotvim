@@ -277,3 +277,18 @@
 [submodule "bundle/dragvisuals/plugin"]
 	path = bundle/dragvisuals/plugin
 	url = https://github.com/atweiden/vim-dragvisuals.git
+[submodule "bundle/tabpagecolorscheme"]
+	path = bundle/tabpagecolorscheme
+	url = https://github.com/ujihisa/tabpagecolorscheme.git
+[submodule "bundle/vimux"]
+	path = bundle/vimux
+	url = https://github.com/benmills/vimux.git
+[submodule "bundle/CSApprox"]
+	path = bundle/CSApprox
+	url = https://github.com/vim-scripts/CSApprox.git
+[submodule "bundle/vim_session"]
+	path = bundle/vim_session
+	url = https://github.com/xolox/vim-session.git
+[submodule "bundle/taglist"]
+	path = bundle/taglist
+	url = https://github.com/vim-scripts/taglist.vim.git
