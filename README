@@ -69,7 +69,7 @@ git rm --cached <path>
 rm -rf .git/modules/submodule_name
 rm -rf <path to submodule>
 ///ALTERNATE
-git submodule deinit
+git submodule deinit <path>
 git rm -r <path>
 
 Installing Monaco Font
