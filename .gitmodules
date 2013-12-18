@@ -292,3 +292,27 @@
 [submodule "bundle/taglist"]
 	path = bundle/taglist
 	url = https://github.com/vim-scripts/taglist.vim.git
+[submodule "bundle/neosnippet"]
+	path = bundle/neosnippet
+	url = https://github.com/Shougo/neosnippet.vim.git
+[submodule "bundle/context_filetype"]
+	path = bundle/context_filetype
+	url = https://github.com/Shougo/context_filetype.vim.git
+[submodule "bundle/YankRing"]
+	path = bundle/YankRing
+	url = https://github.com/vim-scripts/YankRing.vim.git
+[submodule "bundle/easymotion_2"]
+	path = bundle/easymotion_2
+	url = https://github.com/liujoey/vim-easymotion.git
+[submodule "bundle/color_FlatColor"]
+	path = bundle/color_FlatColor
+	url = https://github.com/MaxSt/FlatColor.git
+[submodule "bundle/color_harlequin"]
+	path = bundle/color_harlequin
+	url = https://github.com/nielsmadan/harlequin.git
+[submodule "bundle/color_ChasingLogic"]
+	path = bundle/color_ChasingLogic
+	url = https://github.com/ChasingLogic/ChasingLogic-colorscheme-vim.git
+[submodule "bundle/buffergator"]
+	path = bundle/buffergator
+	url = https://github.com/jeetsukumaran/vim-buffergator.git
