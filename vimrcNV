@@ -24,6 +24,9 @@ call add(g:pathogen_disabled, 'neocomplcache-ultisnips')
 call add(g:pathogen_disabled, 'vimfiler')
 call add(g:pathogen_disabled, 'YouCompleteMe')
 call add (g:pathogen_disabled, 'coVim')
+call add(g:pathogen_disabled, 'easymotion')
+call add(g:pathogen_disabled, 'neosnippet')
+call add(g:pathogen_disabled, 'YankRing')
 
 "call add(g:pathogen_disabled, 'CSApprox')
 "call add(g:pathogen_disabled, 'FuzzyFinder')
@@ -64,7 +67,6 @@ call add (g:pathogen_disabled, 'coVim')
 "call add(g:pathogen_disabled, 'dirdiff')
 "call add(g:pathogen_disabled, 'dragvisuals')
 "call add(g:pathogen_disabled, 'easy_align')
-"call add(g:pathogen_disabled, 'easymotion')
 "call add(g:pathogen_disabled, 'fontmanager')
 "call add(g:pathogen_disabled, 'fugitive')
 "call add(g:pathogen_disabled, 'gundo')
@@ -152,7 +154,11 @@ set fcs=vert:'|'
 "set autowriteall
 "
 " Give one virtual space at end of line
-set virtualedit=onemore
+"set virtualedit=onemore
+"Square up visual selections...
+set virtualedit=block
+" when switching buffer go to the open one"
+set switchbuf=useopen,usetab
 
 "settings handy ..
 " Display an incomplete command in the lower right corner of the Vim window
@@ -237,12 +243,13 @@ if exists("+undofile")
   "endif
   set undodir=./.vim-undo//
   set undodir+=~/.vim/undo//
-  set undofile
 endif
+set undofile
 "Show matching bracets when text indicator is over them
 set showmatch
 set hlsearch
 set diffopt+=iwhite
+set diffopt+=context:3
 set linebreak
 set autoindent
 set smartindent
@@ -262,9 +269,6 @@ set infercase " case inferred by default
 set smartcase
 "scroll offset"
 set scrolloff=2 "skip 2 lines when scrolling
-set iskeyword+=_
-set iskeyword-='
-set iskeyword-=:
 ""confirm action using a dialog box
 set confirm
 set nostartofline
@@ -278,7 +282,7 @@ set browsedir=buffer
 "change the cmd window
 "set cmdheight=2
 "small status msg for vim
-"set shortmess=atI
+set shortmess=atToOI
 "set shortmess=aOstT " shortens messages to avoid 'press a key' prompt
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.o,*.obj,*.a,*.lib,*.elf,*.dll
 " Make shift-insert work like in Xterm
@@ -295,6 +299,7 @@ map! <C-S-Insert> <MiddleMouse>
 "endif
 "set clipboard+=unnamed " share windows clipboard
 "set clipboard^=unnamed " share windows clipboard
+set clipboard=unnamed,unnamedplus,autoselect
 "for replacing a visual
 "vmap <C-r> "_dP
 vnoremap p "0P
@@ -331,7 +336,8 @@ set t_vs=[5%dm
 
 " I work  in javascript also ...
 set textwidth=0
-set formatoptions-=tc
+"set formatoptions-=tc
+set formatoptions=tcrqwnl1
 
 "Change buffer - without saving
 "buffer to background without saving
@@ -343,7 +349,6 @@ set visualbell
 " disable any beeps or flashes on error
 set vb t_vb=
 ""
-set virtualedit=block
 " echo something on leaving .......
 "au VimLeave * echo "Another file ..... gosh I am tired !!"
 
@@ -353,7 +358,7 @@ source $HOME/.vim/spell_correct
 "source $VIM/macros/file_select.vim
 map - :set wrapmargin=0<CR>
 map + :set wrapmargin=8<CR>
-map K j.
+"map K j.
 map <C-^> <C-]>
 
 "menu
@@ -452,6 +457,19 @@ nnoremap <C-w>gf <C-w>gF
 :command Wq wq
 :command W w
 :command Q q
+:command Sp sp
+:command Vs vs
+"follow symlinks"
+"command! -nargs=1 -complete=file EF call EditFile(<f-args>)
+"nnoremap EF :execute "edit " . resolve(expand(<f-args>))
+"":cabbrev e <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'EF' : 'e')<CR>
+function! EditFile(filename)
+  if getftype(a:filename) == "link"
+    edit resolve(expand(a:filename))
+  else
+    edit a:filename
+  endif
+endfunction
 " Take off and nuke the entire buffer contents from space
 " (It's the only way to be sure)...
 nmap XX 1GdG
@@ -486,8 +504,8 @@ augroup END
 "-------------> Perl programs <-------------
 augroup filetype_perl
 :autocmd!
-:autocmd BufEnter  *.pl		set ai si cin formatoptions=croql|setlocal iskeyword+=_ |setlocal filetype=perl |setlocal comments=b:# |setlocal iskeyword-=:
-:autocmd BufEnter  *.pm		set ai si cin formatoptions=croql|setlocal iskeyword+=_ |setlocal filetype=perl |setlocal comments=b:# |setlocal iskeyword-=:
+:autocmd BufEnter  *.pl		set ai si cin formatoptions=croql|set iskeyword+=_ |set filetype=perl |setlocal comments=b:# |set iskeyword-=:
+:autocmd BufEnter  *.pm		set ai si cin formatoptions=croql|set iskeyword+=_ |set filetype=perl |setlocal comments=b:# |set iskeyword-=:
 :autocmd BufLeave  *.pl		set nosi nocin formatoptions=tcq |set comments=sr:/*,mb:*,el:*/,://,b:#,:%,:XCOMM,n:>,fb:-
 ":au BufNewFile,BufRead *.pl setf perl
 ":au BufNewFile,BufRead *.pm setf pod|setlocal syntax=perl
@@ -501,7 +519,7 @@ augroup END
 
 augroup filetype_snippets
 :autocmd!
-:autocmd FileType snippets setlocal nomodeline
+:autocmd FileType snippets setlocal modeline
 augroup END
 
 "-------------> Create tags   <-------------
@@ -827,8 +845,8 @@ endif
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
   endif
 
-nmap <F1> h
-map <F2> :NERDTreeToggle<CR>
+nnoremap <F1> :BuffergatorToggle<CR>
+nnoremap <F2> :NERDTreeToggle<CR>
  "If there is an issue in Nerdtree
  "Cannot browse subdirs
 let g:NERDTreeDirArrows=0
@@ -867,11 +885,13 @@ function! VisualSearch(direction) range
   let l:pattern = substitute(l:pattern, "\n$", "", "")
 
   if a:direction == 'b'
-    execute "normal ?" . l:pattern . "^M"
+    "execute "normal ?" . l:pattern . "^M"
+    execute "normal ?" . l:pattern
   elseif a:direction == 'gv'
     call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
   elseif a:direction == 'f'
-    execute "normal /" . l:pattern . "^M"
+    "execute "normal /" . l:pattern . "^M"
+    execute "normal /" . l:pattern
   endif
 
   let @/ = l:pattern
@@ -1107,7 +1127,20 @@ let g:ConqueTerm_ReadUnfocused = 1
 
 "Filter out the greppings
 command! -nargs=? Filter let @i='' | execute 'g/<args>/y I' | redraw | new | setlocal bt=nofile | put! I
-
+" bind K to grep word under cursor
+nnoremap K :execute "vimgrep /" . expand("<cword>") . "/j " . expand("%")
+function! GrepQuickFix(pat)
+  let all = getqflist()
+  for d in all
+    if bufname(d['bufnr']) !~ a:pat && d['text'] !~ a:pat
+        call remove(all, index(all,d))
+    endif
+  endfor
+  call setqflist(all)
+endfunction
+command! -nargs=* GrepQF call GrepQuickFix(<q-args>)
+nnoremap <C-n> :cnext<CR>
+nnoremap <C-p> :cprev<CR>
 
 command! -nargs=0 Blame :call P4blame()
 function! P4blame()
@@ -1128,13 +1161,13 @@ noremap <F4> :FufBuffer<CR>
 noremap <F5> :<C-u>GundoToggle<CR>
 "let g:tagbar_usearrows = 1
 noremap <F3> :TlistToggle<CR>
-"noremap <F7> :YRShow<CR>
+noremap <F7> :YRShow<CR>
 nnoremap * *''zz
 nnoremap g* g*''zz
 nnoremap # #''zz
 nnoremap g# g#''zz
-nnoremap <silent> n n:call HLNext(0.2)<cr>
-nnoremap <silent> N N:call HLNext(0.2)<cr>
+"nnoremap <silent> n n:call HLNext(0.2)<cr>
+"nnoremap <silent> N N:call HLNext(0.2)<cr>
 
 " blink search results
 " EITHER blink the line containing the match...
@@ -1211,8 +1244,6 @@ vmap  <expr>  <S-RIGHT>  DVB_Drag('right')
 vmap  <expr>  <S-DOWN>   DVB_Drag('down')
 vmap  <expr>  <S-UP>     DVB_Drag('up')
 vmap  <expr>  D        DVB_Duplicate()
-"Square up visual selections...
-set virtualedit=block
 
 "math "
 vmap <expr>  ++  VMATH_YankAndAnalyse()
@@ -1329,7 +1360,9 @@ let g:multi_cursor_exit_from_visual_mode=0
 let g:multi_cursor_exit_from_insert_mode=0
 "Unite configurations"
 let g:unite_source_history_yank_enable = 1
-let g:unite_source_history_yank_limit=100
+let g:unite_source_history_yank_limit=1000
+let g:yankring_max_history = 1000
+let g:yankring_manage_numbered_reg = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 let g:unite_enable_start_insert=1
 let g:unite_source_rec_max_cache_files=100000
@@ -1374,12 +1407,32 @@ function! s:unite_my_settings()
   inoremap <buffer> <BS> <BS>
 endfunction
 
+"NarrowRegion Writeback"
+let g:nrrw_rgn_protect = 'n'
+
 "UltiSnips"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 let g:UltiSnipsExpandTrigger="<C-Space>"
 let g:UltiSnipsJumpForwardTrigger="<C-Space>"
 let g:UltiSnipsListSnippets="<S-Space>"
 let g:UltiSnipsJumpBackwardTrigger="<C-S-Space>"
+" neosnippet"
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+" SuperTab like snippets behavior.
+"imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"\ "\<Plug>(neosnippet_expand_or_jump)"
+"\: pumvisible() ? "\<C-n>" : "\<TAB>"
+"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"\ "\<Plug>(neosnippet_expand_or_jump)"
+"\: "\<TAB>"
+let g:neosnippet#snippets_directory='~/.vim/bundle/snippets/snippets, ~/.vim/mysnippets/'
+let g:neosnippet#enable_preview=1
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+"", ~/.vim/bundle/snippets/UltiSnips, ~/.vim/mysnippets/'
+
 "let g:UltiSnipsJumpForwardTrigger="<c-j>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 "
@@ -1394,6 +1447,9 @@ nnoremap <Leader>" yypv$r"
 nnoremap <Leader>U yypv$r-
 
 " load filetype detection last"
+set iskeyword+=_
+set iskeyword-='
+set iskeyword-=:
 syntax on
 filetype on
 filetype plugin on

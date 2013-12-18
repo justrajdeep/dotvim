@@ -86,6 +86,12 @@ $1 ${6:comment}
 $0
 endsnippet
 
+snippet NOTE "insert boilerplate NOTE" sw
+${1:`!p snip.rv = _get_comment_format()[0]`} NOTE: ${2:`whoami`}: ${3:${4:`date +%m`}.${5:`date +%d`}}.`date +%Y`
+$1 ${6:comment}
+$0
+endsnippet
+
 snippet INFO "insert boilerplate INFO" sw
 ${1:`!p snip.rv = _get_comment_format()[0]`} INFO: ${2:`whoami`}: ${3:${4:`date +%m`}.${5:`date +%d`}}.`date +%Y`
 $1 ${6:comment}
@@ -93,7 +99,7 @@ $0
 endsnippet
 
 snippet modline "add the modline" sw
-${1:`!p snip.rv = _get_comment_format()[0]`} vim: filetype=${2:`!p snip.rv = snip.ft`} sw=2 expandtab:
+${1:`!p snip.rv = _get_comment_format()[0]`} vim: filetype=${2:`!p snip.rv = snip.ft`}:sw=2:expandtab:norl:
 $0
 endsnippet
 
