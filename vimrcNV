@@ -195,7 +195,7 @@ set noshowmode
 "set modeline parsing
 set modeline
 " rt clk pops up a menu"
-set mousemodel=popup
+" set mousemodel=popup
 set laststatus=2 ruler wrapmargin=8
 "dont refresh screen when executing macros
 set lazyredraw
@@ -211,7 +211,8 @@ set magic
 
 " Column width indicator only for lines exceeding
 highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+" FIXME this is slowing vim down
+" call matchadd('ColorColumn', '\%81v', 100)
 "set colorcolumn=+1
 
 "set rel num and current line number"
@@ -299,13 +300,14 @@ map! <C-S-Insert> <MiddleMouse>
 "endif
 "set clipboard+=unnamed " share windows clipboard
 "set clipboard^=unnamed " share windows clipboard
-set clipboard=unnamed,unnamedplus,autoselect
+set clipboard=autoselect
+vnoremap p "_dP
 "for replacing a visual
-"vmap <C-r> "_dP
-vnoremap p "0P
-vnoremap P "0P
-xnoremap p "_dP
-xnoremap P "_dP
+" vmap <C-r> "_dP
+" vnoremap p "0P
+" vnoremap P "0P
+" xnoremap p "_dP
+" xnoremap P "_dP
 
 "home moves cursor to the first non-blank char
 noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
@@ -523,7 +525,9 @@ augroup filetype_snippets
 augroup END
 
 "-------------> Create tags   <-------------
+" cscope
 set tags+=$HOME/ctags/vrtl/tags,tags;`depth`
+:set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
 
 "-------------> C programs and header files <-------------
 augroup filetype_java
