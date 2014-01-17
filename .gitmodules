@@ -316,3 +316,21 @@
 [submodule "bundle/buffergator"]
 	path = bundle/buffergator
 	url = https://github.com/jeetsukumaran/vim-buffergator.git
+[submodule "bundle/orgmode"]
+	path = bundle/orgmode
+	url = https://github.com/jceb/vim-orgmode.git
+[submodule "bundle/utl"]
+	path = bundle/utl
+	url = https://github.com/vim-scripts/utl.vim.git
+[submodule "bundle/color_distinguished"]
+	path = bundle/color_distinguished
+	url = https://github.com/Lokaltog/vim-distinguished.git
+[submodule "bundle/ripple"]
+	path = bundle/ripple
+	url = https://github.com/pydave/vim-ripple.git
+[submodule "bundle/scratch"]
+	path = bundle/scratch
+	url = https://github.com/vim-scripts/scratch.vim.git
+[submodule "bundle/PyScratch"]
+	path = bundle/PyScratch
+	url = https://github.com/hsitz/PyScratch.git
