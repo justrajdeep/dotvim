@@ -139,6 +139,7 @@ call pathogen#helptags()
 "syntax on
 "filetype plugin indent on
 " source neocomplete
+" neocomplcache is older one
 source $HOME/.vim/neo_complete
 " Solid line for vsplit separator
 set fcs=vert:'|'
@@ -921,6 +922,7 @@ cno $G <C-U>!gnome-terminal &
 cno $X <C-U>!xterm -e xx &
 cno $K <C-U>!konsole &
 cno $M <C-U>!pwd \| mutt -s "%" -a % $USER@nvidia.com
+cno $m <C-U>:set modifiable!
 cno $H <C-U>!p4 have %
 cno $S <C-U>!p4 sync %
 cno $T <C-U>sp <C-\>eMy_Depth("tabe")<cr>/

@@ -334,3 +334,9 @@
 [submodule "bundle/PyScratch"]
 	path = bundle/PyScratch
 	url = https://github.com/hsitz/PyScratch.git
+[submodule "bundle/Pydiction"]
+	path = bundle/Pydiction
+	url = https://github.com/vim-scripts/Pydiction.git
+[submodule "bundle/perlOmni"]
+	path = bundle/perlOmni
+	url = https://github.com/c9s/perlomni.vim.git

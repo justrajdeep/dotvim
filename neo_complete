@@ -79,6 +79,7 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType perl setlocal omnifunc=perlcomplete#Complete
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -92,12 +93,14 @@ if !exists('g:neocomplete#same_filetypes')
   let g:neocomplete#same_filetypes = {}
 endif
 let g:neocomplete#same_filetypes._ = '_'
+" show a minimal set of results
+let g:neocomplete#max_list = 5
 
 
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-" Use neocomplcache.
+" Use neocomplete
 let g:neocomplcache_enable_at_startup = 0
 let g:neocomplete#enable_at_startup=1
 
