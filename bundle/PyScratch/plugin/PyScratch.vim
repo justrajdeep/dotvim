@@ -18,7 +18,7 @@ function! CRForPy()
   if getline(line('.')) =~ '^>>>'
     call PyRun()
   else
-    " normal! 
+    " normal!
   endif
   return ''
 endfunction
@@ -94,8 +94,8 @@ function! DoCommand()
   return g:result
 endfunction
 
-nnoremap <CR> :call CRForPy()<cr>
-inoremap <CR> <c-r>=CRForPyI()<cr>
+nnoremap <c-CR> :call CRForPy()<cr>
+inoremap <c-CR> <c-r>=CRForPyI()<cr>
 vnoremap <c-cr> :call VisualPyCommand()<cr>
 syn region PyErr start='^Error detected while' end='^\S\+Error:.*$'
 hi PyErr guifg=red
