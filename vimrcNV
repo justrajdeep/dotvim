@@ -27,10 +27,12 @@ call add (g:pathogen_disabled, 'coVim')
 call add(g:pathogen_disabled, 'easymotion')
 call add(g:pathogen_disabled, 'neosnippet')
 call add(g:pathogen_disabled, 'YankRing')
+call add(g:pathogen_disabled, 'LargeFile')
+call add(g:pathogen_disabled, 'perforce')
+call add(g:pathogen_disabled, 'vim_perforce')
 
 "call add(g:pathogen_disabled, 'CSApprox')
 "call add(g:pathogen_disabled, 'FuzzyFinder')
-"call add(g:pathogen_disabled, 'LargeFile')
 "call add(g:pathogen_disabled, 'MultipleSearch')
 "call add(g:pathogen_disabled, 'NERD_tree')
 "call add(g:pathogen_disabled, 'VisIncr')
@@ -932,6 +934,9 @@ cno $v <C-U>vs <C-\>eMy_Depth("sp")<cr>/
 cno $F <C-U>set filetype=verilog_systemverilog
 cno $x <C-U>.s/\\d\\+/\\=printf("0x%04x", submatch(0))
 cno $Z <C-U>!tar cvf %.tar % && mutt -s "%" -a %.tar $USER@nvidia.com < /dev/null && \rm -f %.tar
+" map %
+"cnoremap %% <C-r>=expand('%')<CR>
+cnoremap %% <C-r>%
 
 " $q is super useful when browsing on the command line
 "cno $q <C-\>eDeleteTillSlash()<cr>
@@ -1451,6 +1456,7 @@ nnoremap <Leader># yypv$r#
 nnoremap <Leader>" yypv$r"
 " A fancy unicode underline
 nnoremap <Leader>U yypv$r-
+" get back space behaviour
 
 " load filetype detection last"
 set iskeyword+=_
