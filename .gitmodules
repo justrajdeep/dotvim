@@ -340,3 +340,12 @@
 [submodule "bundle/perlOmni"]
 	path = bundle/perlOmni
 	url = https://github.com/c9s/perlomni.vim.git
+[submodule "bundle/perforce"]
+	path = bundle/perforce
+	url = https://github.com/vim-scripts/perforce.vim.git
+[submodule "bundle/vim_perforce"]
+	path = bundle/vim_perforce
+	url = https://github.com/pydave/vim-perforce.git
+[submodule "bundle/genutils"]
+	path = bundle/genutils
+	url = https://github.com/vim-scripts/genutils.git
