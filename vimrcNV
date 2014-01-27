@@ -73,14 +73,14 @@ call add(g:pathogen_disabled, 'vim_perforce')
 "call add(g:pathogen_disabled, 'fugitive')
 "call add(g:pathogen_disabled, 'gundo')
 "call add(g:pathogen_disabled, 'l9')
-"call add(g:pathogen_disabled, 'linediff')
 "call add(g:pathogen_disabled, 'matchTagAlways')
+"call add(g:pathogen_disabled, 'linediff')
 "call add(g:pathogen_disabled, 'matchit')
 "call add(g:pathogen_disabled, 'multipleHilight')
 "call add(g:pathogen_disabled, 'multiple_cursor')
 "call add(g:pathogen_disabled, 'mw_utils')
 "call add(g:pathogen_disabled, 'narrow')
-"call add(g:pathogen_disabled, 'neocomplete')
+call add(g:pathogen_disabled, 'neocomplete')
 "call add(g:pathogen_disabled, 'nvbug')
 "call add(g:pathogen_disabled, 'nvdia')
 "call add(g:pathogen_disabled, 'outline')
@@ -1457,6 +1457,8 @@ nnoremap <Leader>" yypv$r"
 " A fancy unicode underline
 nnoremap <Leader>U yypv$r-
 " get back space behaviour
+" Pydiction path
+let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
 
 " load filetype detection last"
 set iskeyword+=_
