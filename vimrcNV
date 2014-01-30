@@ -80,7 +80,7 @@ call add(g:pathogen_disabled, 'vim_perforce')
 "call add(g:pathogen_disabled, 'multiple_cursor')
 "call add(g:pathogen_disabled, 'mw_utils')
 "call add(g:pathogen_disabled, 'narrow')
-call add(g:pathogen_disabled, 'neocomplete')
+"call add(g:pathogen_disabled, 'neocomplete')
 "call add(g:pathogen_disabled, 'nvbug')
 "call add(g:pathogen_disabled, 'nvdia')
 "call add(g:pathogen_disabled, 'outline')
@@ -184,7 +184,7 @@ endif
 set ttymouse=xterm2
 " other whitespace and indenting related settings
 " auto-indent amount when using cindent, >>, << and stuff like that
-set shiftwidth=4
+set shiftwidth=2
 set softtabstop=2
 " multiples of shiftwidth when using >
 set shiftround
@@ -199,7 +199,7 @@ set noshowmode
 set modeline
 " rt clk pops up a menu"
 " set mousemodel=popup
-set laststatus=2 ruler wrapmargin=8
+set laststatus=2 ruler 
 "dont refresh screen when executing macros
 set lazyredraw
 set expandtab
@@ -247,6 +247,9 @@ if exists("+undofile")
   "endif
   set undodir=./.vim-undo//
   set undodir+=~/.vim/undo//
+endif
+if has("persistent_undo")
+  set undodir+=~/.vim/undo/
 endif
 set undofile
 "Show matching bracets when text indicator is over them
@@ -340,9 +343,11 @@ set t_vs=[5%dm
 "set nofoldenable
 
 " I work  in javascript also ...
-set textwidth=0
 "set formatoptions-=tc
-set formatoptions=tcrqwnl1
+set wrapmargin=0
+set textwidth=0
+set formatoptions=crqwnl1
+set formatoptions-=t
 
 "Change buffer - without saving
 "buffer to background without saving
@@ -361,9 +366,9 @@ set vb t_vb=
 source $HOME/.vim/spell_correct
 
 "source $VIM/macros/file_select.vim
-map - :set wrapmargin=0<CR>
-map + :set wrapmargin=8<CR>
-"map K j.
+"map - :set wrapmargin=0<CR>
+"map + :set wrapmargin=8<CR>
+""map K j.
 map <C-^> <C-]>
 
 "menu
@@ -1170,9 +1175,10 @@ let MRU_Max_Entries = 100
 noremap <F4> :FufBuffer<CR>
 "noremap <F5> :BufExplorerVerticalSplit<CR>
 noremap <F5> :<C-u>GundoToggle<CR>
+noremap <F7> :UndotreeToggle<CR>
 "let g:tagbar_usearrows = 1
 noremap <F3> :TlistToggle<CR>
-noremap <F7> :YRShow<CR>
+"noremap <F7> :YRShow<CR>
 nnoremap * *''zz
 nnoremap g* g*''zz
 nnoremap # #''zz
