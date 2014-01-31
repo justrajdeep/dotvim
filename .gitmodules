@@ -352,3 +352,6 @@
 [submodule "bundle/undoTree"]
 	path = bundle/undoTree
 	url = https://github.com/mbbill/undotree.git
+[submodule "bundle/vim_colors_babymate256"]
+	path = bundle/vim_colors_babymate256
+	url = https://github.com/baverman/vim-babymate256.git

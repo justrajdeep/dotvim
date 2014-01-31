@@ -1,0 +1,21 @@
+#!/bin/env tcsh
+\rm -fv src/auto/config.cache
+./configure --prefix=$HOME/local --enable-fail-if-missing --with-features=huge \
+  --enable-luainterp=yes --with-lua-prefix=/home/utils/lua-5.2.2 \
+  --enable-perlinterp=yes \
+  --enable-pythoninterp=yes \
+  --enable-cscope \
+  --enable-rubyinterp=yes \
+  --enable-multibyte \
+  --enable-fontset \
+  --with-tlib=ncurses \
+  --enable-sniff \
+  --enable-mzschemeinterp=yes \
+  --enable-hangulinput \
+  --enable-gtk2-check \
+  --enable-gnome-check \
+  --enable-motif-check \
+  --enable-athena-check \
+  --enable-nextaw-check \
+  --enable-carbon-check \
+  --enable-gui=auto

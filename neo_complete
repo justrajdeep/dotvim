@@ -94,7 +94,7 @@ if !exists('g:neocomplete#same_filetypes')
 endif
 let g:neocomplete#same_filetypes._ = '_'
 " show a minimal set of results
-let g:neocomplete#max_list = 5
+let g:neocomplete#max_list = 20
 
 
 " For perlomni.vim setting.
