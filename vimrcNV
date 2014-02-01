@@ -270,7 +270,9 @@ set smarttab
 set cindent
 set cinoptions=:s,ps,ts,cs
 set cinwords=if,else,while,do,for,switch,case
-let indent_guides_enable_on_vim_startup = 1
+if  has("gui_running")
+  let indent_guides_enable_on_vim_startup = 1
+endif
 set ignorecase
 set infercase " case inferred by default
 set smartcase
