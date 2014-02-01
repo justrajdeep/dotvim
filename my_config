@@ -4,6 +4,7 @@
   --enable-luainterp=yes --with-lua-prefix=/home/utils/lua-5.2.2 \
   --enable-perlinterp=yes \
   --enable-pythoninterp=yes \
+  --enable-python3interp=no \
   --enable-cscope \
   --enable-rubyinterp=yes \
   --enable-multibyte \
