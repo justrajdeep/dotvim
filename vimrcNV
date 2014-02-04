@@ -444,10 +444,13 @@ cnoremap <ESC><C-H> <C-W>
 "buffer navigation
 nmap <C-q> :e!<CR>
 "ctrlp options
-let g:ctrlp_root_markers = 'TOT'
+let g:ctrlp_root_markers = ['TOT']
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_working_path_mode = 'ra'
+"let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'rw'
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_follow_symlinks = 1
 "cursor movement
 "j and k should follow the screen
 nnoremap j gj
@@ -763,7 +766,7 @@ if  has("gui_running")
   "remove toolbar
   "set lines=40
   set guioptions-=T
-  set guioptions+=eb
+  set guioptions+=ebLh
   "set guioptions+=c "console dialog instead of popup"
   "--------------preferred--------------------------------------------------------
   "colorscheme darkblue
