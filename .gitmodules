@@ -361,3 +361,12 @@
 [submodule "bundle/Command-T"]
 	path = bundle/Command-T
 	url = https://github.com/wincent/Command-T.git
+[submodule "bundle/savevers"]
+	path = bundle/savevers
+	url = https://github.com/vim-scripts/savevers.vim.git
+[submodule "bundle/diffchanges"]
+	path = bundle/diffchanges
+	url = https://github.com/vim-scripts/diffchanges.vim.git
+[submodule "bundle/vim-diffchanges"]
+	path = bundle/vim-diffchanges
+	url = https://github.com/jmcantrell/vim-diffchanges.git
