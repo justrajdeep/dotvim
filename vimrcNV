@@ -30,6 +30,7 @@ call add(g:pathogen_disabled, 'YankRing')
 call add(g:pathogen_disabled, 'LargeFile')
 call add(g:pathogen_disabled, 'perforce')
 call add(g:pathogen_disabled, 'vim_perforce')
+call add(g:pathogen_disabled, 'diffchanges')
 
 "call add(g:pathogen_disabled, 'CSApprox')
 "call add(g:pathogen_disabled, 'FuzzyFinder')
@@ -224,8 +225,11 @@ set number
 set nowrapscan
 set nowrap
 " Turn backup off, since most stuff is in SVN, git anyway...
-set nobackup
-set nowritebackup
+" now i am trying to have backup files
+set backup
+set writebackup
+set patchmode=.clean
+let savevers_max = 99
 set noswapfile
 set undolevels=1000
 " viminfo stores the the state of your previous editing session
@@ -448,7 +452,7 @@ let g:ctrlp_root_markers = ['TOT']
 let g:ctrlp_map = '<c-p>'
 "let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'rw'
+let g:ctrlp_working_path_mode = 'carw'
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_follow_symlinks = 1
 "cursor movement
@@ -629,6 +633,9 @@ augroup filetype_make
 :au BufNewFile,BufRead *.config setf make |setlocal ts=4 sts=4 sw=4 expandtab
 ":autocmd BufLeave,FocusLost  Makefile* silent! wall
 augroup END
+"local make
+set makeprg=mk\ $*
+
 
 augroup filetype_verilog
 :autocmd!
@@ -924,29 +931,29 @@ cno $C <C-U>tabe <C-\>eCurrentFile("tabe")<cr>
 cno $p <C-U>sp <C-\>eCurrentFileDir("sp")<cr>
 "cno $P <C-U>tabe <C-\>eCurrentFileDir("tabe")<cr>
 cno $P <C-U>vs <C-\>eCurrentFileDirP4("vs")<cr>
-cno $E <C-U>!p4 edit %
-cno $R <C-U>!p4 revert %
-cno $A <C-U>!p4 add %
-cno $L <C-U>!p4 filelog %
-cno $D <C-U>!p4 diff % &
-cno $N <C-U>!nedit %
+cno $E <C-U>!p4 edit <C-r>=resolve(expand('%'))<CR>
+cno $R <C-U>!p4 revert <C-r>=resolve(expand('%'))<CR>
+cno $A <C-U>!p4 add <C-r>=resolve(expand('%'))<CR>
+cno $L <C-U>!p4 filelog <C-r>=resolve(expand('%'))<CR>
+cno $D <C-U>!p4 diff <C-r>=resolve(expand('%'))<CR> &
+cno $N <C-U>!nedit <C-r>=resolve(expand('%'))<CR>
 cno $G <C-U>!gnome-terminal &
 cno $X <C-U>!xterm -e xx &
 cno $K <C-U>!konsole &
-cno $M <C-U>!pwd \| mutt -s "%" -a % $USER@nvidia.com
+cno $M <C-U>!pwd \| mutt -s <C-r>=resolve(expand('%'))<CR> -a <C-r>=resolve(expand('%'))<CR> $USER@nvidia.com
 cno $m <C-U>:set modifiable!
-cno $H <C-U>!p4 have %
-cno $S <C-U>!p4 sync %
+cno $H <C-U>!p4 have <C-r>=resolve(expand('%'))<CR>
+cno $S <C-U>!p4 sync <C-r>=resolve(expand('%'))<CR>
 cno $T <C-U>sp <C-\>eMy_Depth("tabe")<cr>/
 cno $t <C-U>tabe <C-\>eMy_Depth("NERDTree")<cr>/
 cno $V <C-U>vs <C-\>eMy_Depth("vs")<cr>/
 cno $v <C-U>vs <C-\>eMy_Depth("sp")<cr>/
 cno $F <C-U>set filetype=verilog_systemverilog
 cno $x <C-U>.s/\\d\\+/\\=printf("0x%04x", submatch(0))
-cno $Z <C-U>!tar cvf %.tar % && mutt -s "%" -a %.tar $USER@nvidia.com < /dev/null && \rm -f %.tar
+cno $Z <C-U>!tar cvf %.tar <C-r>=resolve(expand('%'))<CR> && mutt -s <C-r>=resolve(expand('%'))<CR> -a %.tar $USER@nvidia.com < /dev/null && \rm -f %.tar
 " map %
 "cnoremap %% <C-r>=expand('%')<CR>
-cnoremap %% <C-r>%
+cnoremap %% <C-r>=resolve(expand('%'))<CR>
 
 " $q is super useful when browsing on the command line
 "cno $q <C-\>eDeleteTillSlash()<cr>
