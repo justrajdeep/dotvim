@@ -370,3 +370,6 @@
 [submodule "bundle/vim-diffchanges"]
 	path = bundle/vim-diffchanges
 	url = https://github.com/jmcantrell/vim-diffchanges.git
+[submodule "bundle/striptease"]
+	path = bundle/striptease
+	url = https://github.com/tpope/vim-scriptease.git
