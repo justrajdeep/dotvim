@@ -31,7 +31,10 @@ call add(g:pathogen_disabled, 'LargeFile')
 call add(g:pathogen_disabled, 'perforce')
 call add(g:pathogen_disabled, 'vim_perforce')
 call add(g:pathogen_disabled, 'diffchanges')
+call add(g:pathogen_disabled, 'vim-diffchanges')
+call add(g:pathogen_disabled, 'diminactive')
 
+"call add(g:pathogen_disabled, 'Command-T')
 "call add(g:pathogen_disabled, 'CSApprox')
 "call add(g:pathogen_disabled, 'FuzzyFinder')
 "call add(g:pathogen_disabled, 'MultipleSearch')
@@ -229,7 +232,10 @@ set nowrap
 set backup
 set writebackup
 set patchmode=.clean
+set backupdir=./backup,~/backup,~/.vim/backup,.
+" save backups in some dir
 let savevers_max = 99
+let savevers_dirs = &backupdir
 set noswapfile
 set undolevels=1000
 " viminfo stores the the state of your previous editing session
@@ -409,6 +415,7 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 augroup MyAutoCmd
   autocmd BufEnter * match ExtraWhitespace /\s\+$/
+  autocmd VimLeavePre * bufdo Purge
   autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
   autocmd BufUnload * call clearmatches()
@@ -447,6 +454,7 @@ cnoremap <ESC>f <S-Right>
 cnoremap <ESC><C-H> <C-W>
 "buffer navigation
 nmap <C-q> :e!<CR>
+nnoremap gb :ls<CR>:b
 "ctrlp options
 let g:ctrlp_root_markers = ['TOT']
 let g:ctrlp_map = '<c-p>'
@@ -546,6 +554,7 @@ augroup END
 "-------------> Create tags   <-------------
 " cscope
 set tags+=$HOME/ctags/vrtl/tags,tags;`depth`
+let g:easytags_dynamic_files = 1
 :set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
 
 "-------------> C programs and header files <-------------
@@ -636,7 +645,7 @@ augroup filetype_make
 ":autocmd BufLeave,FocusLost  Makefile* silent! wall
 augroup END
 "local make
-set makeprg=mk\ $*
+set makeprg=mk64\ $*
 
 
 augroup filetype_verilog
@@ -849,7 +858,8 @@ else
     "colorscheme torte
     "colorscheme earendel "Black Good
     "colorscheme default
-    colorscheme murphy "Black
+    "colorscheme murphy "Black
+    colorscheme molokai
     "colorscheme badwolf
     "colorscheme metacosm "Black
     "colorscheme motus "Black
@@ -1127,6 +1137,8 @@ endfunction
 
 "set the color of the cursor line
 "hi Cursorline
+let g:cursorcross_disable = 1
+let g:cursorcross_dynamic = 'l'
 "hi Cursorline cterm=bold ctermbg=None ctermfg=None guibg=#555555
 "autocmd InsertEnter * hi Cursorline cterm=Bold ctermbg=None ctermfg=None guibg=black
 "autocmd InsertLeave * hi Cursorline cterm=Bold ctermbg=None ctermfg=None guibg=#555555

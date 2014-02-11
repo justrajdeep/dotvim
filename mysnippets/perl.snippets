@@ -1,4 +1,47 @@
 snippet pod "insert boilerplate perl pod code" bws
+################################################################################
+use FindBin qw(\$Bin);
+BEGIN{
+push(@INC, $Bin);
+}
+use strict;
+use warnings;
+no autovivification;
+use Cwd;
+use Cwd qw(abs_path);
+my $dir = getcwd;
+use FindBin qw(\$Script);
+use Pod::Usage;
+use Term::ANSIColor qw(:constants);
+use Getopt::Long;
+use v5.16;
+use YAML;
+
+my \$debug = 0;
+my \$in_file;
+
+# parse the arguments
+my \$test = GetOptions (
+        'help'          => sub{pod2usage({-msg => 'PRINTING HELP .....', -verbose => 3, -output => \*STDERR})},
+        'h|?'           => sub{pod2usage({-msg => 'PRINTING HELP .....', -verbose => 3, -output => \*STDERR})},
+        'usage|u'       => sub{pod2usage(2)},
+        'name|n'        => sub{pod2usage({-msg => 'PRINTING SCRIPT DEATILS .....', -verbose => 99, -sections => [qw(NAME SYNOPSYS)], -output => \*STDERR})},
+        'copyright|c'   => sub{pod2usage({-msg => 'PRINTING COPYRIGHT INFO .....', -verbose => 99, -sections => "Copyright Information", -output => \*STDERR})},
+        'last|l'        => sub{pod2usage({-msg => 'PRINTING LAST CHECKIN INFO .....', -verbose => 99, -sections => "CHECKIN INFORMATION", -output => \*STDERR})},
+        'debug|d+'      => \\\$debug,
+        'in=s{1}'       => \\\$in_file,
+        '<>'            => sub{pod2usage({-msg => "Unknown Argument(s): " . join(' ', @_) ." " . join(" ", @ARGV)})},
+        ) || pod2usage({-verbose => 0, -output => \*STDERR});
+
+pod2usage({-msg => "-in is a mandatory argument\n", -verbose => 99, -sections => [qw(USAGE)], -output => \*STDERR}) if (!defined \$in_file);
+
+my \$body=<<'PRINT_STRING';
+// vim: filetype=verilog_systemverilog:sw=2:expandtab:norl:
+PRINT_STRING
+
+print STDOUT \$body;
+
+__END__
 =head1 NAME
 
 ${1:`!p snip.rv = snip.fn`}
@@ -42,7 +85,7 @@ rights reserved under the Copyright Laws of the United States.
 
 =head1 USAGE
 
-./$1 [options]
+perl $1 [options]
 
 =head2 OPTIONS
 
@@ -50,35 +93,11 @@ rights reserved under the Copyright Laws of the United States.
  --usage|u          : prints usage
  --name|n           : prints the name of the script
  --copyright|c      : prints the name of the script
+ --last|l           : prints the last ckeckin information
+ --debug|d          : specify the debug level
+                      -d is counted to determine the verbosity level
+ --in*              : input file
 
 =cut
-################################################################################
-use strict;
-use warnings;
-use FindBin qw(\$Script);
-use FindBin qw(\$Bin);
-use Pod::Usage;
-use Getopt::Long;
-use Cwd qw(abs_path);
-
-my \$opt_help;
-my \$opt_name;
-my \$opt_copyright;
-
-# parse the arguments
-my \$test = GetOptions (
-        'help'          => \\\$opt_help,
-        'h|?'           => \\\$opt_help,
-        'usage|u'       => sub{pod2usage(2)},
-        'name|n'        => \\\$opt_name,
-        'copyright|c'   => \\\$opt_copyright,
-        '<>'            => sub{pod2usage({-msg => "Unknown Argument(s): " . join(' ', @_) ." " . join(" ", @ARGV)})},
-        ) || pod2usage({-verbose => 0, -output => \*STDERR});
-
-pod2usage({-msg => 'PRINTING HELP .....', -verbose => 3, -output => \*STDERR}) if defined \$opt_help;
-pod2usage({-msg => 'PRINTING SCRIPT DEATILS .....', -verbose => 99, -sections => [qw(NAME SYNOPSYS)], -output => \*STDERR}) if defined \$opt_name;
-pod2usage({-msg => 'PRINTING COPYRIGHT INFO .....', -verbose => 99, -sections => "Copyright Information", -output => \*STDERR}) if defined \$opt_copyright;
-
-__END__
 endsnippet
 

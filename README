@@ -60,7 +60,7 @@ git config --global user.email rmondal@nvidia.com
 git config --global color.ui auto
 
 ====================
-Removing Submodule
+Removing Submodule +
 ====================
 Remove the submodule's entry in the .gitmodules file.
 Remove the submodule's entry in the .git/config
@@ -148,5 +148,10 @@ update to latest version
 cd ~/vim_latest
 hg pull
 hg update
+
+=================================
+GIT how to list all tracked files
+=================================
+git ls-tree -r master --name-only
 
  # vim: set filetype=README syntax=git:

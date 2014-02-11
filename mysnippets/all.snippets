@@ -104,7 +104,7 @@ $0
 endsnippet
 
 snippet uvm_info "add uvm_info macro" sw
-`uvm_info(get_type_name(), $sformatf(""), UVM_DEBUG);
+`uvm_info(get_type_name(), $psprintf(""), UVM_DEBUG);
 endsnippet
 
 snippet copyright "add copyright Information" bsw

@@ -373,3 +373,24 @@
 [submodule "bundle/striptease"]
 	path = bundle/striptease
 	url = https://github.com/tpope/vim-scriptease.git
+[submodule "bundle/kolor"]
+	path = bundle/kolor
+	url = https://github.com/zeis/vim-kolor.git
+[submodule "bundle/vim-dispatch"]
+	path = bundle/vim-dispatch
+	url = https://github.com/tpope/vim-dispatch.git
+[submodule "bundle/minibufexpl"]
+	path = bundle/minibufexpl
+	url = https://github.com/fholgado/minibufexpl.vim.git
+[submodule "bundle/easytags"]
+	path = bundle/easytags
+	url = https://github.com/xolox/vim-easytags.git
+[submodule "bundle/cursorcross"]
+	path = bundle/cursorcross
+	url = https://github.com/mtth/cursorcross.vim.git
+[submodule "bundle/diminactive"]
+	path = bundle/diminactive
+	url = https://github.com/blueyed/vim-diminactive.git
+[submodule "bundle/color_tomorrow_theme"]
+	path = bundle/color_tomorrow_theme
+	url = https://github.com/chriskempson/vim-tomorrow-theme.git
