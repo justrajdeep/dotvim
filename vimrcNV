@@ -33,6 +33,8 @@ call add(g:pathogen_disabled, 'vim_perforce')
 call add(g:pathogen_disabled, 'diffchanges')
 call add(g:pathogen_disabled, 'vim-diffchanges')
 call add(g:pathogen_disabled, 'diminactive')
+call add(g:pathogen_disabled, 'easytags')
+call add(g:pathogen_disabled, 'minibufexpl')
 
 "call add(g:pathogen_disabled, 'Command-T')
 "call add(g:pathogen_disabled, 'CSApprox')
@@ -353,6 +355,18 @@ set t_vs=[5%dm
 
 "disable all folding
 "set nofoldenable
+function! NeatFoldText() "{{{2
+  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  let lines_count = v:foldend - v:foldstart + 1
+  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+  let foldchar = matchstr(&fillchars, 'fold:\zs.')
+  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+  let foldtextend = lines_count_text . repeat(foldchar, 8)
+  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+endfunction
+set foldtext=NeatFoldText()
+" }}}2
 
 " I work  in javascript also ...
 "set formatoptions-=tc
@@ -454,7 +468,7 @@ cnoremap <ESC>f <S-Right>
 cnoremap <ESC><C-H> <C-W>
 "buffer navigation
 nmap <C-q> :e!<CR>
-nnoremap gb :ls<CR>:b
+nnoremap gb :ls<CR>:sb
 "ctrlp options
 let g:ctrlp_root_markers = ['TOT']
 let g:ctrlp_map = '<c-p>'
@@ -814,7 +828,8 @@ if  has("gui_running")
   "colorscheme nocturne
   "colorscheme molokai
   "colorscheme emacs
-  colorscheme vimhut
+  "colorscheme vimhut
+  colorscheme peaksea
   "colorscheme 
   "colorscheme grape
   "colorscheme bclear
