@@ -394,3 +394,6 @@
 [submodule "bundle/color_tomorrow_theme"]
 	path = bundle/color_tomorrow_theme
 	url = https://github.com/chriskempson/vim-tomorrow-theme.git
+[submodule "bundle/vinegar"]
+	path = bundle/vinegar
+	url = https://github.com/tpope/vim-vinegar.git
