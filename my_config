@@ -12,7 +12,6 @@
   --with-tlib=ncurses \
   --enable-sniff \
   --enable-mzschemeinterp=yes \
-  --enable-hangulinput \
   --enable-gtk2-check \
   --enable-gnome-check \
   --enable-motif-check \
