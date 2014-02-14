@@ -397,3 +397,9 @@
 [submodule "bundle/vinegar"]
 	path = bundle/vinegar
 	url = https://github.com/tpope/vim-vinegar.git
+[submodule "bundle/startify"]
+	path = bundle/startify
+	url = https://github.com/mhinz/vim-startify.git
+[submodule "bundle/project"]
+	path = bundle/project
+	url = https://github.com/amiorin/vim-project.git

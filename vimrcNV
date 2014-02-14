@@ -35,6 +35,7 @@ call add(g:pathogen_disabled, 'vim-diffchanges')
 call add(g:pathogen_disabled, 'diminactive')
 call add(g:pathogen_disabled, 'easytags')
 call add(g:pathogen_disabled, 'minibufexpl')
+call add(g:pathogen_disabled, 'vim-shell')
 
 "call add(g:pathogen_disabled, 'CSApprox')
 "call add(g:pathogen_disabled, 'Command-T')
@@ -860,8 +861,10 @@ if  has("gui_running")
   "colorscheme molokai
   "colorscheme emacs
   colorscheme vimhut
+  "colorscheme pyte
+  "colorscheme greyhouse
+  "colorscheme solarized
   "colorscheme peaksea
-  "colorscheme 
   "colorscheme grape
   "colorscheme bclear
   "set background=light
@@ -1243,13 +1246,13 @@ let MRU_Max_Entries = 100
 "let g:fuf_keyOpenVsplit='<C-v>'
 "let g:fuf_keyOpenTabpage='<C-t'
 
-"noremap <F3> :FufFile<CR>
-noremap <F4> :FufBuffer<CR>
+noremap <F4> :FufFile<CR>
+noremap <F3> :FufBuffer<CR>
 "noremap <F5> :BufExplorerVerticalSplit<CR>
 noremap <F5> :<C-u>GundoToggle<CR>
-noremap <F7> :UndotreeToggle<CR>
+noremap <F6> :UndotreeToggle<CR>
 "let g:tagbar_usearrows = 1
-noremap <F3> :TlistToggle<CR>
+noremap <F7> :TlistToggle<CR>
 "noremap <F7> :YRShow<CR>
 nnoremap * *''zz
 nnoremap g* g*''zz
@@ -1408,8 +1411,13 @@ else
   "set guifont=Century\ Schoolbook\ L\ 12
   "set guifont=DejaVu\ Sans\ Mono\ 12
   "
-  set guifont=Monaco\ 11 "favourite
+  "set guifont=Monaco\ 11 "favourite
+  "set guifont=Ubuntu\ Mono\ 14 "beautiful
   "set guifont=Menlo\ 12 "favourite
+  set guifont=Fira\ Mono\ 12 "beautiful
+  "set guifont=BPmono\ 14
+  "set guifont=PT\ Mono\ 13
+  "
   "set guifont=DejaVu\ LGC\ Sans\ Mono\ 12
   "set guifont=Andale\ Mono\ 14
   "set guifont=Monofur\ 14
