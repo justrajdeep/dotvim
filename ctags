@@ -1,9 +1,9 @@
-# Basic options
 --recurse=yes
 --tag-relative=yes
 --extra=+f
 --fields=afmikKlnsStz
 -B
+--totals
 
 --exclude=*.git*
 --exclude=*.pyc
@@ -12,15 +12,6 @@
 --exclude=*.md
 --exclude=*.mkd
 
---python-kinds=-i
---systemverilog-kinds=+ctfmpied
---PHP-kinds=+cf-v
---c-kinds=+pm
---c++-kinds=+cpmn
-
---totals
-
-# Regex for Clojure
 --langdef=Clojure
 --langmap=Clojure:.clj
 --regex-clojure=/\([ \t]*create-ns[ \t]+([-[:alnum:]*+!_:\/.?]+)/\1/n,namespace/
@@ -35,7 +26,6 @@
 --regex-clojure=/\([ \t]*intern[ \t]+([-[:alnum:]*+!_:\/.?]+)/\1/v,intern/
 --regex-clojure=/\([ \t]*ns[ \t]+([-[:alnum:]*+!_:\/.?]+)/\1/n,namespace/
 
-# Regex for System verilog
 --langdef=systemverilog
 --langmap=systemverilog:.sv.svx.svh.svhx.svi.svix.v.vh.vhx.vx
 --regex-systemverilog=/^[ \t]*(virtual)?[ \t]*class[ \t]*([a-zA-Z_0-9]+)/\2/c,class/
@@ -77,10 +67,8 @@
 --regex-altsystemverilog=/^[ \t]*(virtual)?[ \t]*task[ \t]*.*[ \t]+([a-zA-Z_0-9]+)[\t]*[(;]/\2/t,task/
 --regex-altsystemverilog=/^[ \t]*(virtual)?[ \t]*function[ \t]*.*[ \t]+([a-zA-Z_0-9]+)[ \t]*[(;]/\2/f,function/
 
-# PHP
 --langmap=php:.engine.inc.module.theme.install.php
 
-#latex
 --langdef=latex
 --langmap=latex:.tex
 --regex-latex=/^\\tableofcontents/TABLE OF CONTENTS/s,toc/
@@ -103,3 +91,9 @@
 --regex-latex=/\\label[[:space:]]*\{([^}]+)\}/\1/l,label/
 --regex-latex=/\\ref[[:space:]]*\{([^}]+)\}/\1/r,ref/
 --regex-latex=/\\pageref[[:space:]]*\{([^}]+)\}/\1/p,pageref/
+
+--python-kinds=-i
+--systemverilog-kinds=+ctfmpied
+--PHP-kinds=+cf-v
+--c-kinds=+pm
+--c++-kinds=+cpmn

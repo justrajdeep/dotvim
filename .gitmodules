@@ -403,3 +403,21 @@
 [submodule "bundle/project"]
 	path = bundle/project
 	url = https://github.com/amiorin/vim-project.git
+[submodule "bundle/TagmaTasks"]
+	path = bundle/TagmaTasks
+	url = https://github.com/JessicaKMcIntosh/TagmaTasks.git
+[submodule "bundle/TaskList"]
+	path = bundle/TaskList
+	url = https://github.com/vim-scripts/TaskList.vim.git
+[submodule "bundle/bufkill"]
+	path = bundle/bufkill
+	url = https://github.com/mattdbridges/bufkill.vim.git
+[submodule "fonts/consolas-powerline"]
+	path = fonts/consolas-powerline
+	url = https://github.com/eugeneching/consolas-powerline-vim.git
+[submodule "bundle/rainbow_parentheses"]
+	path = bundle/rainbow_parentheses
+	url = https://github.com/kien/rainbow_parentheses.vim.git
+[submodule "bundle/yankstack"]
+	path = bundle/yankstack
+	url = https://github.com/maxbrunsfeld/vim-yankstack.git
