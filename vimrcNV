@@ -23,7 +23,7 @@ call add(g:pathogen_disabled, 'neocomplcache')
 call add(g:pathogen_disabled, 'neocomplcache-ultisnips')
 call add(g:pathogen_disabled, 'vimfiler')
 call add(g:pathogen_disabled, 'YouCompleteMe')
-call add (g:pathogen_disabled, 'coVim')
+call add(g:pathogen_disabled, 'coVim')
 call add(g:pathogen_disabled, 'easymotion')
 call add(g:pathogen_disabled, 'neosnippet')
 call add(g:pathogen_disabled, 'YankRing')
@@ -36,6 +36,7 @@ call add(g:pathogen_disabled, 'diminactive')
 call add(g:pathogen_disabled, 'easytags')
 call add(g:pathogen_disabled, 'minibufexpl')
 call add(g:pathogen_disabled, 'vim-shell')
+call add(g:pathogen_disabled, 'Command-T')
 
 "call add(g:pathogen_disabled, 'CSApprox')
 "call add(g:pathogen_disabled, 'Command-T')
@@ -472,7 +473,34 @@ augroup MyAutoCmd
 " Turn on cursorline only on active window
   autocmd WinLeave * setlocal nocursorline
   autocmd WinEnter,BufRead * setlocal cursorline
+  " rainbow parenthesis
+  autocmd VimEnter * RainbowParenthesesToggle
+  autocmd Syntax * RainbowParenthesesLoadRound
+  autocmd Syntax * RainbowParenthesesLoadSquare
+  autocmd Syntax * RainbowParenthesesLoadBraces
 augroup END
+"Rainbow paren
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+
 "remove the trailing white spaces
 "set listchars=tab:>.,trail:.,extends:\#,nbsp:.
 
@@ -931,6 +959,7 @@ endif
   endif
 
 nnoremap <F1> :BuffergatorToggle<CR>
+let g:buffergator_suppress_keymaps=1
 nnoremap <F2> :NERDTreeToggle<CR>
  "If there is an issue in Nerdtree
  "Cannot browse subdirs
@@ -1415,6 +1444,7 @@ else
   "set guifont=Ubuntu\ Mono\ 14 "beautiful
   "set guifont=Menlo\ 12 "favourite
   set guifont=Fira\ Mono\ 12 "beautiful
+  "set guifont=Consolas\ for\ Powerline\ 13
   "set guifont=BPmono\ 14
   "set guifont=PT\ Mono\ 13
   "
@@ -1473,9 +1503,9 @@ call unite#custom#source('file', 'max_candidates', '0')
 "    \ 'find `depth` -type f -o \( -name .git -o -name tmp -o -name .hg -name .svn \) -prune -type f | head -100 | grep -v -E "\.(jpe?g|png|gif|[ot]tf|ico)$"'
 "let g:unite_source_rec_async_command=
 "  \ 'find `depth` -type f -o \( -name .git -o -name tmp -o -name .hg -name .svn \) -prune -type f | head -100 | grep -v -E "\.(jpe?g|png|gif|[ot]tf|ico)$"'
-nnoremap <leader>t :<C-u>Unite -buffer-name=files   file_rec:<C-\>eMy_DepthNoSpace("Unite -buffer-name=files   file_rec:")<cr>/
+"nnoremap <leader>t :<C-u>Unite -buffer-name=files   file_rec:<C-\>eMy_DepthNoSpace("Unite -buffer-name=files   file_rec:")<cr>/
 nnoremap <leader>d :<C-u>Unite -buffer-name=files   file_rec:<C-\>eMy_DepthNoSpace("Unite -buffer-name=dir   directory:")<cr>/
-nnoremap <leader>f :<C-u>Unite -buffer-name=files   file<cr>
+"nnoremap <leader>f :<C-u>Unite -buffer-name=files   file<cr>
 nnoremap <leader>fr :<C-u>Unite -buffer-name=files   file_rec:../../
 nnoremap <leader>ft :<C-u><C-\>eCurrentFileUnite("../..")<cr>
 nnoremap <leader>o :<C-u>Unite -buffer-name=outline outline<cr>
