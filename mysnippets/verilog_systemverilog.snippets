@@ -71,7 +71,7 @@ endglobal
 
 ################################################################################
 snippet uvm_info "add uvm_info macro" sw
-`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_DEBUG});
+\`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_DEBUG});
 endsnippet
 
 snippet uvm_fatal "add uvm_fatal macro" sw

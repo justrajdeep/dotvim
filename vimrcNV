@@ -265,12 +265,13 @@ set nowrap
 " Turn backup off, since most stuff is in SVN, git anyway...
 " now i am trying to have backup files
 set backup
-set writebackup
+set nowritebackup
 set patchmode=.clean
 set backupdir=./backup,~/backup,~/.vim/backup,.
 " save backups in some dir
 let savevers_max = 99
 let savevers_dirs = &backupdir
+let savevers_types = "*.c,*.h,.vimrc,*.vim,vimrcNV,*.sv,*.svx,*.svh,*.svhx,*.svi,*.svix,README,readme,Readme,*.vxh,*.vh,*.vhx,*.svi,*.svix,*.v,*.vx,*.vt,*.vtx,*.vxt,*.snippets,*.config,cmd_line.*.mk,*.nvmk,*.make,Make*,*.inc,*.weld,*.testlist,*.xml,*.tcl,*.pl,*.pm,*.yaml,*.py,*.sh,*.csh.*.spec,*.def"
 set noswapfile
 set undolevels=1000
 " viminfo stores the the state of your previous editing session
@@ -478,6 +479,10 @@ augroup MyAutoCmd
   autocmd Syntax * RainbowParenthesesLoadRound
   autocmd Syntax * RainbowParenthesesLoadSquare
   autocmd Syntax * RainbowParenthesesLoadBraces
+  autocmd BufNewFile,BufRead,BufWritePre *.log setf log|setlocal wrap|setlocal nobackup|setlocal noundofile
+  autocmd BufNewFile,BufRead,BufWritePre *.log.retry setf log|setlocal nobackup|setlocal noundofile
+  autocmd BufNewFile,BufRead,BufWritePre *testout* setf log|setlocal nobackup|setlocal noundofile
+  autocmd BufNewFile,BufRead,BufWritePre /tmp/* setf log|setlocal nobackup|setlocal noundofile
 augroup END
 "Rainbow paren
 let g:rbpt_colorpairs = [
@@ -745,9 +750,6 @@ augroup filetype_verilog
 :au BufNewFile,BufRead *.vhxcp setf verilog
 :au BufNewFile,BufRead *.svh setf verilog_systemverilog|setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4
 :au BufNewFile,BufRead *.svhx setf verilog_systemverilog
-:au BufNewFile,BufRead *.log setlocal wrap
-:au BufNewFile,BufRead *.log setf log
-:au BufNewFile,BufRead *.log.retry setf log
 
 :au Filetype *verilog* set softtabstop=2
 :au BufReadPost * if exists("b:current_syntax")
@@ -1289,6 +1291,15 @@ nnoremap # #''zz
 nnoremap g# g#''zz
 "nnoremap <silent> n n:call HLNext(0.2)<cr>
 "nnoremap <silent> N N:call HLNext(0.2)<cr>
+" hex dec conversion
+" Return hex string equivalent to given decimal string or number.
+function! Dec2hex(arg)
+  return printf('%x', a:arg + 0)
+endfunction
+" Return number equivalent to given hex string ('0x' is optional).
+function! Hex2dec(arg)
+  return (a:arg =~? '^0x') ? a:arg + 0 : ('0x'.a:arg) + 0
+endfunction
 
 " blink search results
 " EITHER blink the line containing the match...
