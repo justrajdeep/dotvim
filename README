@@ -154,4 +154,26 @@ GIT how to list all tracked files
 =================================
 git ls-tree -r master --name-only
 
+===========================
+git how to make a submodule
+===========================
+Get a fresh copy of the repository to split.
+$ git clone <git repository A url>
+$ cd <git repository A directory>
+
+The current folder will be the new repository so remove the current remote.
+$ git remote rm origin
+
+Extract history of the desired folder and commit it
+$ git filter-branch --subdirectory-filter <directory 1> -- --all
+
+Create your repository online and push your new repository!
+$ git remote add origin <git repository B url>
+$ git push -u origin master
+
+Now we want to delete traces (files and commit history) of <git repository B> from <git repository A>.
+$ git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch <directory 1> -r' --prune-empty --tag-name-filter cat -- --all
+
+
+
  # vim: set filetype=README syntax=git:
