@@ -24,7 +24,7 @@ call add(g:pathogen_disabled, 'neocomplcache-ultisnips')
 call add(g:pathogen_disabled, 'vimfiler')
 call add(g:pathogen_disabled, 'YouCompleteMe')
 call add(g:pathogen_disabled, 'coVim')
-call add(g:pathogen_disabled, 'easymotion')
+call add(g:pathogen_disabled, 'easymotion_2')
 call add(g:pathogen_disabled, 'neosnippet')
 call add(g:pathogen_disabled, 'YankRing')
 call add(g:pathogen_disabled, 'LargeFile')
@@ -544,6 +544,22 @@ let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_max_files = 0
 let g:ctrlp_user_command = ['TOT', 'cd %s && cat files | grep -v -e "/\." ', 'find %s -type f']
+"sneak
+let g:sneak#streak = 1
+let g:sneak#s_next = 0
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+xmap f <Plug>Sneak_f
+xmap F <Plug>Sneak_F
+omap f <Plug>Sneak_f
+omap F <Plug>Sneak_F
+nmap t <Plug>Sneak_t
+nmap T <Plug>Sneak_T
+xmap t <Plug>Sneak_t
+xmap T <Plug>Sneak_T
+omap t <Plug>Sneak_t
+omap T <Plug>Sneak_T
+
 "cursor movement
 "j and k should follow the screen
 nnoremap j gj
@@ -1113,6 +1129,7 @@ if has('gui_running')
   "airline settings
   "nice looking fonts
   function! AirlineInit()
+    let g:airline_exclude_preview = 1
     let spc = g:airline_symbols.space
     let g:airline_inactive_collapse=1
     let g:airline_powerline_fonts=1
@@ -1451,10 +1468,10 @@ else
   "set guifont=Century\ Schoolbook\ L\ 12
   "set guifont=DejaVu\ Sans\ Mono\ 12
   "
-  "set guifont=Monaco\ 11 "favourite
+  set guifont=Monaco\ 11 "favourite
   "set guifont=Ubuntu\ Mono\ 14 "beautiful
   "set guifont=Menlo\ 12 "favourite
-  set guifont=Fira\ Mono\ 12 "beautiful
+  "set guifont=Fira\ Mono\ 12 "beautiful
   "set guifont=Consolas\ for\ Powerline\ 13
   "set guifont=BPmono\ 14
   "set guifont=PT\ Mono\ 13

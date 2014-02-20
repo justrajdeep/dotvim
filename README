@@ -28,6 +28,10 @@ git push
 Updating the submodule
 ====================
 git submodule foreach git pull origin master
+or
+cd into the submodule folder
+git checkout master
+git pull
 
 ====================
 Cloning
