@@ -424,3 +424,12 @@
 [submodule "bundle/ctrlspace"]
 	path = bundle/ctrlspace
 	url = https://github.com/szw/vim-ctrlspace.git
+[submodule "bundle/shell-executor"]
+	path = bundle/shell-executor
+	url = https://github.com/JarrodCTaylor/vim-shell-executor.git
+[submodule "bundle/chronos"]
+	path = bundle/chronos
+	url = https://github.com/saevarb/chronos.git
+[submodule "bundle/exchange"]
+	path = bundle/exchange
+	url = https://github.com/tommcdo/vim-exchange.git

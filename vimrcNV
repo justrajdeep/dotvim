@@ -37,6 +37,8 @@ call add(g:pathogen_disabled, 'easytags')
 call add(g:pathogen_disabled, 'minibufexpl')
 call add(g:pathogen_disabled, 'vim-shell')
 call add(g:pathogen_disabled, 'Command-T')
+call add(g:pathogen_disabled, 'sneak')
+call add(g:pathogen_disabled, 'chronos')
 
 "call add(g:pathogen_disabled, 'CSApprox')
 "call add(g:pathogen_disabled, 'Command-T')
@@ -271,7 +273,7 @@ set backupdir=./backup,~/backup,~/.vim/backup,.
 " save backups in some dir
 let savevers_max = 99
 let savevers_dirs = &backupdir
-let savevers_types = "*.c,*.h,.vimrc,*.vim,vimrcNV,*.sv,*.svx,*.svh,*.svhx,*.svi,*.svix,README,readme,Readme,*.vxh,*.vh,*.vhx,*.svi,*.svix,*.v,*.vx,*.vt,*.vtx,*.vxt,*.snippets,*.config,cmd_line.*.mk,*.nvmk,*.make,Make*,*.inc,*.weld,*.testlist,*.xml,*.tcl,*.pl,*.pm,*.yaml,*.py,*.sh,*.csh.*.spec,*.def"
+let savevers_types = "*.txt,*.c,*.h,.vimrc,*.vim,vimrcNV,*.sv,*.svx,*.svh,*.svhx,*.svi,*.svix,README,readme,Readme,*.vxh,*.vh,*.vhx,*.svi,*.svix,*.v,*.vx,*.vt,*.vtx,*.vxt,*.snippets,*.config,cmd_line.*.mk,*.nvmk,*.make,Make*,*.inc,*.weld,*.testlist,*.xml,*.tcl,*.pl,*.pm,*.yaml,*.py,*.sh,*.csh.*.spec,*.def,*.csv"
 set noswapfile
 set undolevels=1000
 " viminfo stores the the state of your previous editing session
@@ -483,6 +485,10 @@ augroup MyAutoCmd
   autocmd BufNewFile,BufRead,BufWritePre *.log.retry setf log|setlocal nobackup|setlocal noundofile
   autocmd BufNewFile,BufRead,BufWritePre *testout* setf log|setlocal nobackup|setlocal noundofile
   autocmd BufNewFile,BufRead,BufWritePre /tmp/* setf log|setlocal nobackup|setlocal noundofile
+  autocmd BufNewFile,BufRead,BufEnter */t186/* setlocal nomodifiable
+  autocmd BufNewFile,BufRead,BufEnter */tlit4/* setlocal nomodifiable
+  autocmd BufNewFile,BufRead,BufEnter */t210/* setlocal nomodifiable
+  autocmd BufNewFile,BufRead,BufEnter */tlit2/* setlocal nomodifiable
 augroup END
 "Rainbow paren
 let g:rbpt_colorpairs = [
@@ -545,20 +551,20 @@ let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_max_files = 0
 let g:ctrlp_user_command = ['TOT', 'cd %s && cat files | grep -v -e "/\." ', 'find %s -type f']
 "sneak
-let g:sneak#streak = 1
-let g:sneak#s_next = 0
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-xmap f <Plug>Sneak_f
-xmap F <Plug>Sneak_F
-omap f <Plug>Sneak_f
-omap F <Plug>Sneak_F
-nmap t <Plug>Sneak_t
-nmap T <Plug>Sneak_T
-xmap t <Plug>Sneak_t
-xmap T <Plug>Sneak_T
-omap t <Plug>Sneak_t
-omap T <Plug>Sneak_T
+"let g:sneak#streak = 1
+"let g:sneak#s_next = 0
+"nmap f <Plug>Sneak_f
+"nmap F <Plug>Sneak_F
+"xmap f <Plug>Sneak_f
+"xmap F <Plug>Sneak_F
+"omap f <Plug>Sneak_f
+"omap F <Plug>Sneak_F
+"nmap t <Plug>Sneak_t
+"nmap T <Plug>Sneak_T
+"xmap t <Plug>Sneak_t
+"xmap T <Plug>Sneak_T
+"omap t <Plug>Sneak_t
+"omap T <Plug>Sneak_T
 
 "cursor movement
 "j and k should follow the screen
@@ -931,6 +937,7 @@ if  has("gui_running")
   "colorscheme xoria256 "Good
   "colorscheme symfony
   set cursorline
+  set cursorcolumn
   """"""""""""""""""""""""""""""
   " => Statusline
   """"""""""""""""""""""""""""""
@@ -1234,8 +1241,8 @@ endfunction
 
 "set the color of the cursor line
 "hi Cursorline
-let g:cursorcross_disable = 1
-let g:cursorcross_dynamic = 'l'
+let g:cursorcross_disable = 0
+let g:cursorcross_dynamic = 'clw'
 "hi Cursorline cterm=bold ctermbg=None ctermfg=None guibg=#555555
 "autocmd InsertEnter * hi Cursorline cterm=Bold ctermbg=None ctermfg=None guibg=black
 "autocmd InsertLeave * hi Cursorline cterm=Bold ctermbg=None ctermfg=None guibg=#555555
