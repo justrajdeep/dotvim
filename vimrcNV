@@ -69,7 +69,7 @@ call add(g:pathogen_disabled, 'GoldenView')
 "call add(g:pathogen_disabled, 'checkSyntax')
 "call add(g:pathogen_disabled, 'chronos')
 "call add(g:pathogen_disabled, 'coVim')
-""call add(g:pathogen_disabled, 'colorSchemeDegrade')
+"call add(g:pathogen_disabled, 'colorSchemeDegrade')
 "call add(g:pathogen_disabled, 'colorSchemeEx')
 "call add(g:pathogen_disabled, 'color_ChasingLogic')
 "call add(g:pathogen_disabled, 'color_FlatColor')
@@ -92,7 +92,7 @@ call add(g:pathogen_disabled, 'GoldenView')
 "call add(g:pathogen_disabled, 'color_solarized')
 "call add(g:pathogen_disabled, 'color_tomorrow')
 "call add(g:pathogen_disabled, 'color_tomorrow_theme')
-""call add(g:pathogen_disabled, 'colour_sampler_pack')
+"call add(g:pathogen_disabled, 'colour_sampler_pack')
 "call add(g:pathogen_disabled, 'compview')
 "call add(g:pathogen_disabled, 'conque')
 "call add(g:pathogen_disabled, 'context_filetype')
@@ -124,13 +124,11 @@ call add(g:pathogen_disabled, 'GoldenView')
 "call add(g:pathogen_disabled, 'multipleHilight')
 "call add(g:pathogen_disabled, 'multiple_cursor')
 "call add(g:pathogen_disabled, 'mw_utils')
-"call add(g:pathogen_disabled, 'my_colors')
+""call add(g:pathogen_disabled, 'my_colors')
 "call add(g:pathogen_disabled, 'narrow')
 "call add(g:pathogen_disabled, 'neocomplcache')
 "call add(g:pathogen_disabled, 'neocomplcache-ultisnips')
-
 "call add(g:pathogen_disabled, 'neocomplete')
-
 "call add(g:pathogen_disabled, 'neosnippet')
 "call add(g:pathogen_disabled, 'nvbug')
 "call add(g:pathogen_disabled, 'nvdia')
@@ -145,9 +143,9 @@ call add(g:pathogen_disabled, 'GoldenView')
 "call add(g:pathogen_disabled, 'project')
 "call add(g:pathogen_disabled, 'python')
 "call add(g:pathogen_disabled, 'quicktask')
-""call add(g:pathogen_disabled, 'genutils')
-"call add(g:pathogen_disabled, 'rainbow_parentheses')
-""call add(g:pathogen_disabled, 'savevers')
+"call add(g:pathogen_disabled, 'genutils')
+""call add(g:pathogen_disabled, 'rainbow_parentheses')
+"call add(g:pathogen_disabled, 'savevers')
 "call add(g:pathogen_disabled, 'scratch')
 "call add(g:pathogen_disabled, 'shell-executor')
 "call add(g:pathogen_disabled, 'sneak')
@@ -166,18 +164,18 @@ call add(g:pathogen_disabled, 'GoldenView')
 "call add(g:pathogen_disabled, 'tmp.patch')
 "call add(g:pathogen_disabled, 'ultisnips')
 "call add(g:pathogen_disabled, 'undoTree')
-"call add(g:pathogen_disabled, 'unite')
-""call add(g:pathogen_disabled, 'unite_qfix')
+""call add(g:pathogen_disabled, 'unite')
+"call add(g:pathogen_disabled, 'unite_qfix')
 "call add(g:pathogen_disabled, 'utl')
 "call add(g:pathogen_disabled, 'verilog')
 "call add(g:pathogen_disabled, 'verilog_systemverilog')
 "call add(g:pathogen_disabled, 'vim-diffchanges')
 "call add(g:pathogen_disabled, 'vim-dispatch')
 "call add(g:pathogen_disabled, 'vim-expand-region')
-"call add(g:pathogen_disabled, 'vim-misc')
 "call add(g:pathogen_disabled, 'vim-shell')
 "call add(g:pathogen_disabled, 'vim-support')
 ""call add(g:pathogen_disabled, 'vim_airline')
+"call add(g:pathogen_disabled, 'vim-misc')
 "call add(g:pathogen_disabled, 'vim_colors_babymate256')
 "call add(g:pathogen_disabled, 'vim_indent_guides')
 "call add(g:pathogen_disabled, 'vim_monokai')
@@ -308,7 +306,7 @@ set backupdir=./backup,~/backup,~/.vim/backup,.
 " save backups in some dir
 let savevers_max = 99
 let savevers_dirs = &backupdir
-let savevers_types = ".vimrc,.tmux.conf,.my_cshrc_custom,.my_custom_aliases,tmp_*,cmd_line,neo_complcache,neo_complete,*.txt,*.c,*.h,.vimrc,*.vim,vimrcNV,*.sv,*.svx,*.svh,*.svhx,*.svi,*.svix,README,readme,Readme,*.vxh,*.vh,*.vhx,*.svi,*.svix,*.v,*.vx,*.vt,*.vtx,*.vxt,*.snippets,*.config,cmd_line.*.mk,*.nvmk,*.make,Make*,*.inc,*.weld,*.testlist,*.xml,*.tcl,*.pl,*.pm,*.yaml,*.py,*.sh,*.csh.*.spec,*.def,*.csv"
+let savevers_types = ".vimrc,.tmux.conf,.my_cshrc_custom,.my_custom_aliases,tmp_*,cmd_line,neo_complcache,neo_complete,*.txt,*.c,*.cpp,*.h,.vimrc,*.vim,vimrcNV,*.sv,*.svx,*.svh,*.svhx,*.svi,*.svix,README,readme,Readme,*.vxh,*.vh,*.vhx,*.svi,*.svix,*.v,*.vx,*.vt,*.vtx,*.vxt,*.snippets,*.config,cmd_line.*.mk,*.nvmk,*.make,Make*,*.inc,*.weld,*.testlist,*.xml,*.tcl,*.pl,*.pm,*.yaml,*.py,*.sh,*.csh.*.spec,*.def,*.csv"
 set noswapfile
 set undolevels=1000
 " viminfo stores the the state of your previous editing session
@@ -405,6 +403,11 @@ noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^
 imap <silent> <Home> <C-O><Home>
 nnoremap 0 ^
 
+"perforce settings
+let g:p4EnableRuler=0
+let g:p4EnableActiveStatus=0
+let g:p4OptimizeActiveStatus = 1
+
 "I want mouse settings also ..
 set mouse=a
 "           +--Disable hlsearch while loading viminfo
@@ -475,6 +478,9 @@ map <C-^> <C-]>
 set completeopt=longest,menuone
 set wildmode=longest,list,full
 set wildignorecase
+" tmux complete
+let g:tmux_complete_location = "~/.vim/bundle/tmux_complete"
+
 "command line suggestion
 set wildmenu
 :set cpo-=<
@@ -1429,11 +1435,11 @@ inoremap <c-s> <esc>ddi
 "vnoremap < <gv
 "vnoremap > >gv
 "visual drag
-vmap  <expr>  <S-LEFT>   DVB_Drag('left')
-vmap  <expr>  <S-RIGHT>  DVB_Drag('right')
-vmap  <expr>  <S-DOWN>   DVB_Drag('down')
-vmap  <expr>  <S-UP>     DVB_Drag('up')
-vmap  <expr>  D        DVB_Duplicate()
+vnoremap  <expr>  <S-LEFT>   DVB_Drag('left')
+vnoremap  <expr>  <S-RIGHT>  DVB_Drag('right')
+vnoremap  <expr>  <S-DOWN>   DVB_Drag('down')
+vnoremap  <expr>  <S-UP>     DVB_Drag('up')
+vnoremap  <expr>  D          DVB_Duplicate()
 
 "math "
 vmap <expr>  ++  VMATH_YankAndAnalyse()

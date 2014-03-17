@@ -439,3 +439,6 @@
 [submodule "bundle/GoldenView"]
 	path = bundle/GoldenView
 	url = https://github.com/zhaocai/GoldenView.Vim.git
+[submodule "bundle/tmux_complete"]
+	path = bundle/tmux_complete
+	url = https://github.com/wellle/tmux-complete.vim.git
