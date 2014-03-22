@@ -19,17 +19,23 @@ if !has('gui_running')
         call add(g:pathogen_disabled, 'vim_airline')
 endif
 call add(g:pathogen_disabled, 'mru')
+"we use neocomplete
+"call add(g:pathogen_disabled, 'neocomplete')
 call add(g:pathogen_disabled, 'neocomplcache')
 call add(g:pathogen_disabled, 'neocomplcache-ultisnips')
 call add(g:pathogen_disabled, 'vimfiler')
-"call add(g:pathogen_disabled, 'YouCompleteMe')
+call add(g:pathogen_disabled, 'YouCompleteMe')
 call add(g:pathogen_disabled, 'coVim')
 call add(g:pathogen_disabled, 'easymotion_2')
 call add(g:pathogen_disabled, 'neosnippet')
 call add(g:pathogen_disabled, 'YankRing')
 call add(g:pathogen_disabled, 'LargeFile')
+call add(g:pathogen_disabled, 'cursorcross')
 call add(g:pathogen_disabled, 'perforce')
-"call add(g:pathogen_disabled, 'vim_perforce')
+call add(g:pathogen_disabled, 'p4python')
+"this is the better plugin: vim_perforce
+call add(g:pathogen_disabled, 'vim_perforce')
+"call add(g:pathogen_disabled, 'yankstack')
 call add(g:pathogen_disabled, 'diffchanges')
 call add(g:pathogen_disabled, 'vim-diffchanges')
 call add(g:pathogen_disabled, 'diminactive')
@@ -190,8 +196,8 @@ call add(g:pathogen_disabled, 'GoldenView')
 "call add(g:pathogen_disabled, 'vmath')
 "call add(g:pathogen_disabled, 'vundle')
 "call add(g:pathogen_disabled, 'xml')
-"call add(g:pathogen_disabled, 'yankstack')
 "call add(g:pathogen_disabled, 'zoomwin')
+
 
 call pathogen#infect()
 call pathogen#helptags()
@@ -210,6 +216,9 @@ call pathogen#helptags()
 "
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
+"
+"do yankstack mapping before everything
+call yankstack#setup()
 
 "syntax highlighting..
 "syntax on
@@ -297,16 +306,17 @@ set relativenumber
 set number
 set nowrapscan
 set nowrap
-" Turn backup off, since most stuff is in SVN, git anyway...
 " now i am trying to have backup files
 set backup
 set nowritebackup
 set patchmode=.clean
+"set backupskip+=*
 set backupdir=./backup,~/backup,~/.vim/backup,.
 " save backups in some dir
 let savevers_max = 99
 let savevers_dirs = &backupdir
-let savevers_types = ".vimrc,.tmux.conf,.my_cshrc_custom,.my_custom_aliases,tmp_*,cmd_line,neo_complcache,neo_complete,*.txt,*.c,*.cpp,*.h,.vimrc,*.vim,vimrcNV,*.sv,*.svx,*.svh,*.svhx,*.svi,*.svix,README,readme,Readme,*.vxh,*.vh,*.vhx,*.svi,*.svix,*.v,*.vx,*.vt,*.vtx,*.vxt,*.snippets,*.config,cmd_line.*.mk,*.nvmk,*.make,Make*,*.inc,*.weld,*.testlist,*.xml,*.tcl,*.pl,*.pm,*.yaml,*.py,*.sh,*.csh.*.spec,*.def,*.csv"
+"making backup
+let savevers_types = "*,.vimrc,.tmux.conf,.my_cshrc_custom,.my_custom_aliases,tmp_*,cmd_line,neo_complcache,neo_complete,*.txt,*.c,*.cpp,*.h,.vimrc,*.vim,vimrcNV,*.sv,*.svx,*.svh,*.svhx,*.svi,*.svix,README,readme,Readme,*.vxh,*.vh,*.vhx,*.svi,*.svix,*.v,*.vx,*.vt,*.vtx,*.vxt,*.snippets,*.config,cmd_line.*.mk,*.nvmk,*.make,Make*,*.inc,*.weld,*.testlist,*.xml,*.tcl,*.pl,*.pm,*.yaml,*.py,*.sh,*.csh.*.spec,*.def,*.csv"
 set noswapfile
 set undolevels=1000
 " viminfo stores the the state of your previous editing session
@@ -391,6 +401,10 @@ map! <C-S-Insert> <MiddleMouse>
 "set clipboard^=unnamed " share windows clipboard
 set clipboard=autoselect
 vnoremap p "_dP
+"automatically go to the last of the paste
+nnoremap p p`]
+"quickly select text u pasted
+noremap gV `[v`]
 "for replacing a visual
 " vmap <C-r> "_dP
 " vnoremap p "0P
@@ -1086,10 +1100,11 @@ cno $C <C-U>tabe <C-\>eCurrentFile("tabe")<cr>
 cno $p <C-U>sp <C-\>eCurrentFileDir("sp")<cr>
 "cno $P <C-U>tabe <C-\>eCurrentFileDir("tabe")<cr>
 cno $P <C-U>vs <C-\>eCurrentFileDirP4("vs")<cr>
-cno $E <C-U>!p4 edit <C-r>=resolve(expand('%'))<CR>
-cno $R <C-U>!p4 revert <C-r>=resolve(expand('%'))<CR>
-cno $A <C-U>!p4 add <C-r>=resolve(expand('%'))<CR>
-cno $L <C-U>!p4 filelog <C-r>=resolve(expand('%'))<CR>
+cno $E <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 edit <C-r>=resolve(expand('%'))<CR>
+cno $R <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 revert <C-r>=resolve(expand('%'))<CR>
+cno $A <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 add <C-r>=resolve(expand('%'))<CR>
+cno $a <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 annotate <C-r>=resolve(expand('%'))<CR>
+cno $L <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 filelog <C-r>=resolve(expand('%'))<CR>
 cno $D <C-U>!p4 diff <C-r>=resolve(expand('%'))<CR> &
 cno $N <C-U>!nedit <C-r>=resolve(expand('%'))<CR>
 cno $G <C-U>!gnome-terminal &
@@ -1097,8 +1112,8 @@ cno $X <C-U>!xterm -e xx &
 cno $K <C-U>!konsole &
 cno $M <C-U>!pwd \| mutt -s <C-r>=resolve(expand('%'))<CR> -a <C-r>=resolve(expand('%'))<CR> $USER@nvidia.com
 cno $m <C-U>:set modifiable!
-cno $H <C-U>!p4 have <C-r>=resolve(expand('%'))<CR>
-cno $S <C-U>!p4 sync <C-r>=resolve(expand('%'))<CR>
+cno $H <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 have <C-r>=resolve(expand('%'))<CR>
+cno $S <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 sync <C-r>=resolve(expand('%'))<CR>
 cno $T <C-U>sp <C-\>eMy_Depth("tabe")<cr>/
 cno $t <C-U>tabe <C-\>eMy_Depth("NERDTree")<cr>/
 cno $V <C-U>vs <C-\>eMy_Depth("vs")<cr>/
@@ -1137,13 +1152,13 @@ func! DeleteTillSlash()
 endfunc
 
 func! CurrentFile(cmd)
-  return a:cmd . " ./" . expand("%:p:t:r") . "."
+  return a:cmd . " ./" . resolve(expand("%:p:t:r")) . "."
 endfunc
 func! CurrentFileDir(cmd)
-  return a:cmd . " " . expand("%:p:r") . ""
+  return a:cmd . " " . resolve(expand("%:p:r")) . ""
 endfunc
 func! CurrentFileDirP4(cmd)
-  return a:cmd . " | enew | setlocal bt=nofile |  r !p4 print -q " . expand("%:p") . ""
+  return a:cmd . " | enew | setlocal bt=nofile |  r !p4 print -q " . resolve(expand("%:p")) . ""
 endfunc
 function! My_Depth(cmd)
   let output=system("/home/rmondal/bin/scripts/my_depth")
@@ -1298,6 +1313,11 @@ let g:cursorcross_dynamic = 'clw'
 highlight clear Folded
 highlight Folded term=bold gui=bold
 set foldopen-=search
+"search and replace
+" Make a simple "search" text object. gn replaces this so no need
+"vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
+"    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
+"onoremap s :normal vs<CR>
 "call AutoHighlightToggle()
 "function AutoHighlightToggle()
 "        augroup auto_highlight

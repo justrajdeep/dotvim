@@ -442,3 +442,18 @@
 [submodule "bundle/tmux_complete"]
 	path = bundle/tmux_complete
 	url = https://github.com/wellle/tmux-complete.vim.git
+[submodule "bundle/tmux-navigator"]
+	path = bundle/tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "bundle/endwise"]
+	path = bundle/endwise
+	url = https://github.com/tpope/vim-endwise.git
+[submodule "bundle/repeat"]
+	path = bundle/repeat
+	url = https://github.com/tpope/vim-repeat.git
+[submodule "bundle/sleuth"]
+	path = bundle/sleuth
+	url = https://github.com/tpope/vim-sleuth.git
+[submodule "bundle/ack"]
+	path = bundle/ack
+	url = https://github.com/mileszs/ack.vim.git
