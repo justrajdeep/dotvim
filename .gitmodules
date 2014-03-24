@@ -457,3 +457,6 @@
 [submodule "bundle/ack"]
 	path = bundle/ack
 	url = https://github.com/mileszs/ack.vim.git
+[submodule "bundle/color_noctu"]
+	path = bundle/color_noctu
+	url = https://github.com/noahfrederick/vim-noctu.git

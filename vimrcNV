@@ -24,7 +24,7 @@ call add(g:pathogen_disabled, 'mru')
 call add(g:pathogen_disabled, 'neocomplcache')
 call add(g:pathogen_disabled, 'neocomplcache-ultisnips')
 call add(g:pathogen_disabled, 'vimfiler')
-call add(g:pathogen_disabled, 'YouCompleteMe')
+"call add(g:pathogen_disabled, 'YouCompleteMe')
 call add(g:pathogen_disabled, 'coVim')
 call add(g:pathogen_disabled, 'easymotion_2')
 call add(g:pathogen_disabled, 'neosnippet')
@@ -226,6 +226,8 @@ call yankstack#setup()
 " source neocomplete
 " neocomplcache is older one
 source $HOME/.vim/neo_complete
+" youcompleteme disable on certain filetypes
+let g:ycm_filetype_specific_completion_to_disable = {}
 " Solid line for vsplit separator
 set fcs=vert:'|'
 "
@@ -385,6 +387,10 @@ set browsedir=buffer
 set shortmess=atToOI
 "set shortmess=aOstT " shortens messages to avoid 'press a key' prompt
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.o,*.obj,*.a,*.lib,*.elf,*.dll
+set wildignore+=*.a,*.o
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+set wildignore+=.DS_Store,.git,.hg,.svn
+set wildignore+=*~,*.swp,*.tmp
 " Make shift-insert work like in Xterm
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
@@ -1105,7 +1111,9 @@ cno $R <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 revert <C-r>=res
 cno $A <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 add <C-r>=resolve(expand('%'))<CR>
 cno $a <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 annotate <C-r>=resolve(expand('%'))<CR>
 cno $L <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 filelog <C-r>=resolve(expand('%'))<CR>
+cno $l <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !/home/nv/bin//p4print <C-r>=resolve(expand('%'))<CR>
 cno $D <C-U>!p4 diff <C-r>=resolve(expand('%'))<CR> &
+cno $d <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 describe <C-r><C-w>
 cno $N <C-U>!nedit <C-r>=resolve(expand('%'))<CR>
 cno $G <C-U>!gnome-terminal &
 cno $X <C-U>!xterm -e xx &
