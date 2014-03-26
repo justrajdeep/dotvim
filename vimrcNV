@@ -21,6 +21,7 @@ endif
 call add(g:pathogen_disabled, 'mru')
 "we use neocomplete
 "call add(g:pathogen_disabled, 'neocomplete')
+call add(g:pathogen_disabled, 'checkSyntax')
 call add(g:pathogen_disabled, 'neocomplcache')
 call add(g:pathogen_disabled, 'neocomplcache-ultisnips')
 call add(g:pathogen_disabled, 'vimfiler')
