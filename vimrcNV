@@ -313,7 +313,7 @@ set nowrap
 " now i am trying to have backup files
 set nobackup
 set nowritebackup
-set patchmode=.clean
+"set patchmode=.clean
 "set backupskip+=*
 set backupdir=./backup,~/backup,~/.vim/backup,.
 " save backups in some dir
