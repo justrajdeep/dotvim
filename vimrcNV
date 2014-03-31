@@ -528,7 +528,7 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 augroup MyAutoCmd
   autocmd BufEnter * match ExtraWhitespace /\s\+$/
-  autocmd VimLeavePre * bufdo Purge
+  "autocmd VimLeavePre * bufdo Purge
   autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
   autocmd BufUnload * call clearmatches()
