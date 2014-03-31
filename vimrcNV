@@ -22,6 +22,7 @@ call add(g:pathogen_disabled, 'mru')
 "we use neocomplete
 "call add(g:pathogen_disabled, 'neocomplete')
 call add(g:pathogen_disabled, 'checkSyntax')
+call add(g:pathogen_disabled, 'savevers')
 call add(g:pathogen_disabled, 'neocomplcache')
 call add(g:pathogen_disabled, 'neocomplcache-ultisnips')
 call add(g:pathogen_disabled, 'vimfiler')
@@ -310,7 +311,7 @@ set number
 set nowrapscan
 set nowrap
 " now i am trying to have backup files
-set backup
+set nobackup
 set nowritebackup
 set patchmode=.clean
 "set backupskip+=*
