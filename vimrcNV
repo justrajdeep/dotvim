@@ -1108,6 +1108,7 @@ cno $C <C-U>tabe <C-\>eCurrentFile("tabe")<cr>
 cno $p <C-U>sp <C-\>eCurrentFileDir("sp")<cr>
 "cno $P <C-U>tabe <C-\>eCurrentFileDir("tabe")<cr>
 cno $P <C-U>vs <C-\>eCurrentFileDirP4("vs")<cr>
+cno $b <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !`depth`/bin/p4blame <C-r>=resolve(expand('%'))<CR>:<C-R>=line(".")<CR>
 cno $E <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 edit <C-r>=resolve(expand('%'))<CR>
 cno $R <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 revert <C-r>=resolve(expand('%'))<CR>
 cno $A <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 add <C-r>=resolve(expand('%'))<CR>
