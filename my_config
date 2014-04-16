@@ -18,4 +18,5 @@
   --enable-athena-check \
   --enable-nextaw-check \
   --enable-carbon-check \
+  --disable-smack \
   --enable-gui=auto

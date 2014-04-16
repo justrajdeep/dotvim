@@ -460,3 +460,9 @@
 [submodule "bundle/color_noctu"]
 	path = bundle/color_noctu
 	url = https://github.com/noahfrederick/vim-noctu.git
+[submodule "bundle/speeddating"]
+	path = bundle/speeddating
+	url = https://github.com/tpope/vim-speeddating.git
+[submodule "bundle/schlepp"]
+	path = bundle/schlepp
+	url = https://github.com/zirrostig/vim-schlepp.git
