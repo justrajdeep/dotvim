@@ -828,6 +828,7 @@ augroup filetype_verilog
 :au BufNewFile,BufRead *.vcp setf viva
 :au BufNewFile,BufRead *.vcp.err setf viva
 :au BufNewFile,BufRead *.vhx setf viva
+:au BufNewFile,BufRead *.vxh setf viva
 :au BufNewFile,BufRead *.vhxcp.err setf viva
 :au BufNewFile,BufRead *.vtx setf verilog
 :au BufNewFile,BufRead *.svx setf verilog_systemverilog
