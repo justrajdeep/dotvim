@@ -466,3 +466,15 @@
 [submodule "bundle/schlepp"]
 	path = bundle/schlepp
 	url = https://github.com/zirrostig/vim-schlepp.git
+[submodule "bundle/table-mode"]
+	path = bundle/table-mode
+	url = https://github.com/dhruvasagar/vim-table-mode.git
+[submodule "bundle/express"]
+	path = bundle/express
+	url = https://github.com/tommcdo/vim-express.git
+[submodule "bundle/eunuch"]
+	path = bundle/eunuch
+	url = https://github.com/tpope/vim-eunuch.git
+[submodule "bundle/enmasse"]
+	path = bundle/enmasse
+	url = https://github.com/Wolfy87/vim-enmasse.git

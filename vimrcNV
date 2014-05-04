@@ -18,6 +18,9 @@ let g:pathogen_disabled = []
 if !has('gui_running')
         call add(g:pathogen_disabled, 'vim_airline')
 endif
+" disabling due to vim update
+call add(g:pathogen_disabled, 'yankstack')
+call add(g:pathogen_disabled, 'nvbug')
 call add(g:pathogen_disabled, 'mru')
 call add(g:pathogen_disabled, 'multipleHilight')
 "we use neocomplete
@@ -225,7 +228,9 @@ call pathogen#helptags()
 " NOTE: comments after Bundle command are not allowed..
 "
 "do yankstack mapping before everything
-call yankstack#setup()
+if exists(':yankstack')
+  call yankstack#setup()
+endif
 
 "syntax highlighting..
 "syntax on
