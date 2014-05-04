@@ -29,7 +29,7 @@ call add(g:pathogen_disabled, 'checkSyntax')
 call add(g:pathogen_disabled, 'savevers')
 call add(g:pathogen_disabled, 'neocomplcache')
 call add(g:pathogen_disabled, 'neocomplcache-ultisnips')
-call add(g:pathogen_disabled, 'ultisnips')
+"call add(g:pathogen_disabled, 'ultisnips')
 call add(g:pathogen_disabled, 'vimfiler')
 "call add(g:pathogen_disabled, 'YouCompleteMe')
 call add(g:pathogen_disabled, 'coVim')
@@ -55,159 +55,169 @@ call add(g:pathogen_disabled, 'chronos')
 call add(g:pathogen_disabled, 'textabyss')
 call add(g:pathogen_disabled, 'GoldenView')
 
-"call add(g:pathogen_disabled, 'CSApprox')
-"call add(g:pathogen_disabled, 'Command-T')
-"call add(g:pathogen_disabled, 'FuzzyFinder')
-"call add(g:pathogen_disabled, 'GoldenView')
-"call add(g:pathogen_disabled, 'LargeFile')
-"call add(g:pathogen_disabled, 'MultipleSearch')
-"call add(g:pathogen_disabled, 'NERD_tree')
-"call add(g:pathogen_disabled, 'PyScratch')
-"call add(g:pathogen_disabled, 'Pydiction')
-"call add(g:pathogen_disabled, 'TagmaTasks')
-"call add(g:pathogen_disabled, 'TaskList')
-"call add(g:pathogen_disabled, 'VisIncr')
-"call add(g:pathogen_disabled, 'YankRing')
-"call add(g:pathogen_disabled, 'YouCompleteMe')
-"call add(g:pathogen_disabled, 'abolish')
-"call add(g:pathogen_disabled, 'ack')
-"call add(g:pathogen_disabled, 'autocomplete')
-"call add(g:pathogen_disabled, 'autohighlight')
-"call add(g:pathogen_disabled, 'bluespec')
-"call add(g:pathogen_disabled, 'bufexplorer')
-"call add(g:pathogen_disabled, 'buffergator')
-"call add(g:pathogen_disabled, 'buffergrep')
-"call add(g:pathogen_disabled, 'bufkill')
-"call add(g:pathogen_disabled, 'calendar')
-"call add(g:pathogen_disabled, 'checkSyntax')
-"call add(g:pathogen_disabled, 'chronos')
-"call add(g:pathogen_disabled, 'coVim')
-"call add(g:pathogen_disabled, 'colorSchemeDegrade')
-"call add(g:pathogen_disabled, 'colorSchemeEx')
-"call add(g:pathogen_disabled, 'color_ChasingLogic')
-"call add(g:pathogen_disabled, 'color_FlatColor')
-"call add(g:pathogen_disabled, 'color_badwolf')
-"call add(g:pathogen_disabled, 'color_base16')
-"call add(g:pathogen_disabled, 'color_bubblegum')
-"call add(g:pathogen_disabled, 'color_colorschemes')
-"call add(g:pathogen_disabled, 'color_distinguished')
-"call add(g:pathogen_disabled, 'color_flatui')
-"call add(g:pathogen_disabled, 'color_grb256')
-"call add(g:pathogen_disabled, 'color_gruvbox')
-"call add(g:pathogen_disabled, 'color_harlequin')
-"call add(g:pathogen_disabled, 'color_hemisu')
-"call add(g:pathogen_disabled, 'color_hybrid')
-"call add(g:pathogen_disabled, 'color_laederon')
-"call add(g:pathogen_disabled, 'color_lizard')
-"call add(g:pathogen_disabled, 'color_luna')
-"call add(g:pathogen_disabled, 'color_noctu')
-"call add(g:pathogen_disabled, 'color_seoul256')
-"call add(g:pathogen_disabled, 'color_sol')
-"call add(g:pathogen_disabled, 'color_solarized')
-"call add(g:pathogen_disabled, 'color_tomorrow')
-"call add(g:pathogen_disabled, 'color_tomorrow_theme')
-"call add(g:pathogen_disabled, 'colour_sampler_pack')
-"call add(g:pathogen_disabled, 'compview')
-"call add(g:pathogen_disabled, 'conque')
-"call add(g:pathogen_disabled, 'context_filetype')
-"call add(g:pathogen_disabled, 'cscope')
-"call add(g:pathogen_disabled, 'csv')
-"call add(g:pathogen_disabled, 'ctrlp')
-"call add(g:pathogen_disabled, 'ctrlspace')
-"call add(g:pathogen_disabled, 'cursorcross')
-"call add(g:pathogen_disabled, 'delimitMate')
-"call add(g:pathogen_disabled, 'diffchanges')
-"call add(g:pathogen_disabled, 'diminactive')
-"call add(g:pathogen_disabled, 'dirdiff')
-""call add(g:pathogen_disabled, 'dragvisuals')
-"call add(g:pathogen_disabled, 'easy_align')
-"call add(g:pathogen_disabled, 'easymotion')
-"call add(g:pathogen_disabled, 'easymotion_2')
-"call add(g:pathogen_disabled, 'easytags')
-"call add(g:pathogen_disabled, 'endwise')
-"call add(g:pathogen_disabled, 'exchange')
-"call add(g:pathogen_disabled, 'fontmanager')
-"call add(g:pathogen_disabled, 'fugitive')
-"call add(g:pathogen_disabled, 'genutils')
-"call add(g:pathogen_disabled, 'gundo')
-"call add(g:pathogen_disabled, 'kolor')
-"call add(g:pathogen_disabled, 'l9')
-"call add(g:pathogen_disabled, 'linediff')
-"call add(g:pathogen_disabled, 'lose')
-"call add(g:pathogen_disabled, 'matchTagAlways')
-"call add(g:pathogen_disabled, 'matchit')
-"call add(g:pathogen_disabled, 'minibufexpl')
-"call add(g:pathogen_disabled, 'mru')
-"call add(g:pathogen_disabled, 'multiple_cursor')
-"call add(g:pathogen_disabled, 'mw_utils')
-""call add(g:pathogen_disabled, 'my_colors')
-"call add(g:pathogen_disabled, 'narrow')
-"call add(g:pathogen_disabled, 'neocomplcache')
-"call add(g:pathogen_disabled, 'neocomplcache-ultisnips')
-"call add(g:pathogen_disabled, 'neocomplete')
-"call add(g:pathogen_disabled, 'neosnippet')
-"call add(g:pathogen_disabled, 'orgmode')
-"call add(g:pathogen_disabled, 'outline')
-"call add(g:pathogen_disabled, 'over')
-"call add(g:pathogen_disabled, 'p4python')
-"call add(g:pathogen_disabled, 'pathogen')
-"call add(g:pathogen_disabled, 'perforce')
-"call add(g:pathogen_disabled, 'perl-support')
-"call add(g:pathogen_disabled, 'perlOmni')
-"call add(g:pathogen_disabled, 'perldoc')
-"call add(g:pathogen_disabled, 'project')
-"call add(g:pathogen_disabled, 'python')
-"call add(g:pathogen_disabled, 'quicktask')
-""call add(g:pathogen_disabled, 'rainbow_parentheses')
-"call add(g:pathogen_disabled, 'repeat')
-"call add(g:pathogen_disabled, 'savevers')
-"call add(g:pathogen_disabled, 'scratch')
-"call add(g:pathogen_disabled, 'shell-executor')
-"call add(g:pathogen_disabled, 'sleuth')
-"call add(g:pathogen_disabled, 'sneak')
-"call add(g:pathogen_disabled, 'snippets')
-"call add(g:pathogen_disabled, 'solarized')
-"call add(g:pathogen_disabled, 'startify')
-"call add(g:pathogen_disabled, 'striptease')
-"call add(g:pathogen_disabled, 'surround')
-"call add(g:pathogen_disabled, 'table')
-"call add(g:pathogen_disabled, 'tabpagecolorscheme')
-"call add(g:pathogen_disabled, 'tabular')
-"call add(g:pathogen_disabled, 'tagbar')
-"call add(g:pathogen_disabled, 'taglist')
-"call add(g:pathogen_disabled, 'textabyss')
-"call add(g:pathogen_disabled, 'tlib')
-"call add(g:pathogen_disabled, 'tmux-navigator')
-"call add(g:pathogen_disabled, 'tmux_complete')
-"call add(g:pathogen_disabled, 'undoTree')
-"call add(g:pathogen_disabled, 'unite')
-"call add(g:pathogen_disabled, 'unite_qfix')
-"call add(g:pathogen_disabled, 'utl')
-"call add(g:pathogen_disabled, 'verilog')
-"call add(g:pathogen_disabled, 'verilog_systemverilog')
-"call add(g:pathogen_disabled, 'vim-diffchanges')
-"call add(g:pathogen_disabled, 'vim-dispatch')
-"call add(g:pathogen_disabled, 'vim-expand-region')
-"call add(g:pathogen_disabled, 'vim-misc')
-"call add(g:pathogen_disabled, 'vim-shell')
-"call add(g:pathogen_disabled, 'vim-support')
-""call add(g:pathogen_disabled, 'vim_airline')
-"call add(g:pathogen_disabled, 'vim_colors_babymate256')
-"call add(g:pathogen_disabled, 'vim_indent_guides')
-"call add(g:pathogen_disabled, 'vim_monokai')
-"call add(g:pathogen_disabled, 'vim_nocturne')
-"call add(g:pathogen_disabled, 'vim_perforce')
-"call add(g:pathogen_disabled, 'vim_session')
-"call add(g:pathogen_disabled, 'vimfiler')
-"call add(g:pathogen_disabled, 'vimproc')
-"call add(g:pathogen_disabled, 'vimux')
-"call add(g:pathogen_disabled, 'vinegar')
-"call add(g:pathogen_disabled, 'visualGuide')
-"call add(g:pathogen_disabled, 'vmath')
-"call add(g:pathogen_disabled, 'vundle')
-"call add(g:pathogen_disabled, 'xml')
-"call add(g:pathogen_disabled, 'yankstack')
-"call add(g:pathogen_disabled, 'zoomwin')
+"diabling plugins {{{1
+" call add(g:pathogen_disabled, 'CSApprox')
+" call add(g:pathogen_disabled, 'Command-T')
+" call add(g:pathogen_disabled, 'FuzzyFinder')
+" call add(g:pathogen_disabled, 'GoldenView')
+" call add(g:pathogen_disabled, 'LargeFile')
+" call add(g:pathogen_disabled, 'MultipleSearch')
+" call add(g:pathogen_disabled, 'NERD_tree')
+" call add(g:pathogen_disabled, 'Pydiction')
+" call add(g:pathogen_disabled, 'TagmaTasks')
+" call add(g:pathogen_disabled, 'TaskList')
+" call add(g:pathogen_disabled, 'VisIncr')
+" call add(g:pathogen_disabled, 'YankRing')
+" call add(g:pathogen_disabled, 'YouCompleteMe')
+" call add(g:pathogen_disabled, 'abolish')
+" call add(g:pathogen_disabled, 'ack')
+" call add(g:pathogen_disabled, 'autocomplete')
+" call add(g:pathogen_disabled, 'autohighlight')
+" call add(g:pathogen_disabled, 'bluespec')
+" call add(g:pathogen_disabled, 'bufexplorer')
+" call add(g:pathogen_disabled, 'buffergator')
+" call add(g:pathogen_disabled, 'buffergrep')
+" call add(g:pathogen_disabled, 'bufkill')
+" call add(g:pathogen_disabled, 'bundle')
+" call add(g:pathogen_disabled, 'calendar')
+" call add(g:pathogen_disabled, 'checkSyntax')
+" call add(g:pathogen_disabled, 'chronos')
+" call add(g:pathogen_disabled, 'coVim')
+" call add(g:pathogen_disabled, 'colorSchemeDegrade')
+" call add(g:pathogen_disabled, 'colorSchemeEx')
+" call add(g:pathogen_disabled, 'color_ChasingLogic')
+" call add(g:pathogen_disabled, 'color_FlatColor')
+" call add(g:pathogen_disabled, 'color_badwolf')
+" call add(g:pathogen_disabled, 'color_base16')
+" call add(g:pathogen_disabled, 'color_bubblegum')
+" call add(g:pathogen_disabled, 'color_colorschemes')
+" call add(g:pathogen_disabled, 'color_distinguished')
+" call add(g:pathogen_disabled, 'color_flatui')
+" call add(g:pathogen_disabled, 'color_grb256')
+" call add(g:pathogen_disabled, 'color_gruvbox')
+" call add(g:pathogen_disabled, 'color_harlequin')
+" call add(g:pathogen_disabled, 'color_hemisu')
+" call add(g:pathogen_disabled, 'color_hybrid')
+" call add(g:pathogen_disabled, 'color_laederon')
+" call add(g:pathogen_disabled, 'color_lizard')
+" call add(g:pathogen_disabled, 'color_luna')
+" call add(g:pathogen_disabled, 'color_noctu')
+" call add(g:pathogen_disabled, 'color_seoul256')
+" call add(g:pathogen_disabled, 'color_sol')
+" call add(g:pathogen_disabled, 'color_solarized')
+" call add(g:pathogen_disabled, 'color_tomorrow')
+" call add(g:pathogen_disabled, 'color_tomorrow_theme')
+" call add(g:pathogen_disabled, 'colour_sampler_pack')
+" call add(g:pathogen_disabled, 'compview')
+" call add(g:pathogen_disabled, 'conque')
+" call add(g:pathogen_disabled, 'context_filetype')
+" call add(g:pathogen_disabled, 'cscope')
+" call add(g:pathogen_disabled, 'csv')
+" call add(g:pathogen_disabled, 'ctrlp')
+" call add(g:pathogen_disabled, 'ctrlspace')
+" call add(g:pathogen_disabled, 'cursorcross')
+" call add(g:pathogen_disabled, 'delimitMate')
+" call add(g:pathogen_disabled, 'diffchanges')
+" call add(g:pathogen_disabled, 'diminactive')
+" call add(g:pathogen_disabled, 'dirdiff')
+" call add(g:pathogen_disabled, 'dragvisuals')
+" call add(g:pathogen_disabled, 'easy_align')
+" call add(g:pathogen_disabled, 'easymotion')
+" call add(g:pathogen_disabled, 'easymotion_2')
+" call add(g:pathogen_disabled, 'easytags')
+" call add(g:pathogen_disabled, 'endwise')
+" call add(g:pathogen_disabled, 'enmasse')
+" call add(g:pathogen_disabled, 'eunuch')
+" call add(g:pathogen_disabled, 'exchange')
+" call add(g:pathogen_disabled, 'express')
+" call add(g:pathogen_disabled, 'fontmanager')
+" call add(g:pathogen_disabled, 'fugitive')
+" call add(g:pathogen_disabled, 'genutils')
+" call add(g:pathogen_disabled, 'gundo')
+" call add(g:pathogen_disabled, 'kolor')
+" call add(g:pathogen_disabled, 'l9')
+" call add(g:pathogen_disabled, 'linediff')
+" call add(g:pathogen_disabled, 'lose')
+" call add(g:pathogen_disabled, 'matchTagAlways')
+" call add(g:pathogen_disabled, 'matchit')
+" call add(g:pathogen_disabled, 'minibufexpl')
+" call add(g:pathogen_disabled, 'mru')
+" call add(g:pathogen_disabled, 'multipleHilight')
+" call add(g:pathogen_disabled, 'multiple_cursor')
+" call add(g:pathogen_disabled, 'mw_utils')
+" call add(g:pathogen_disabled, 'my_colors')
+" call add(g:pathogen_disabled, 'narrow')
+" call add(g:pathogen_disabled, 'neocomplcache')
+" call add(g:pathogen_disabled, 'neocomplcache-ultisnips')
+" call add(g:pathogen_disabled, 'neocomplete')
+" call add(g:pathogen_disabled, 'neosnippet')
+" call add(g:pathogen_disabled, 'orgmode')
+" call add(g:pathogen_disabled, 'outline')
+" call add(g:pathogen_disabled, 'over')
+" call add(g:pathogen_disabled, 'p4python')
+" call add(g:pathogen_disabled, 'pathogen')
+" call add(g:pathogen_disabled, 'perforce')
+" call add(g:pathogen_disabled, 'perl-support')
+" call add(g:pathogen_disabled, 'perlOmni')
+" call add(g:pathogen_disabled, 'perldoc')
+" call add(g:pathogen_disabled, 'project')
+" call add(g:pathogen_disabled, 'python')
+" call add(g:pathogen_disabled, 'quicktask')
+" call add(g:pathogen_disabled, 'rainbow_parentheses')
+" call add(g:pathogen_disabled, 'repeat')
+" call add(g:pathogen_disabled, 'savevers')
+" call add(g:pathogen_disabled, 'schlepp')
+" call add(g:pathogen_disabled, 'scratch')
+" call add(g:pathogen_disabled, 'shell-executor')
+" call add(g:pathogen_disabled, 'sleuth')
+" call add(g:pathogen_disabled, 'sneak')
+" "call add(g:pathogen_disabled, 'snippets')
+" call add(g:pathogen_disabled, 'solarized')
+" call add(g:pathogen_disabled, 'speeddating')
+" call add(g:pathogen_disabled, 'startify')
+" call add(g:pathogen_disabled, 'striptease')
+" call add(g:pathogen_disabled, 'surround')
+" call add(g:pathogen_disabled, 'table')
+" call add(g:pathogen_disabled, 'table-mode')
+" call add(g:pathogen_disabled, 'tabpagecolorscheme')
+" call add(g:pathogen_disabled, 'tabular')
+" call add(g:pathogen_disabled, 'tagbar')
+" call add(g:pathogen_disabled, 'taglist')
+" call add(g:pathogen_disabled, 'textabyss')
+" call add(g:pathogen_disabled, 'tlib')
+" call add(g:pathogen_disabled, 'tmux-navigator')
+" call add(g:pathogen_disabled, 'tmux_complete')
+" "call add(g:pathogen_disabled, 'ultisnips')
+" call add(g:pathogen_disabled, 'undoTree')
+" call add(g:pathogen_disabled, 'unite')
+" call add(g:pathogen_disabled, 'unite_qfix')
+" call add(g:pathogen_disabled, 'utl')
+" call add(g:pathogen_disabled, 'verilog')
+" call add(g:pathogen_disabled, 'verilog_systemverilog')
+" call add(g:pathogen_disabled, 'vim-diffchanges')
+" call add(g:pathogen_disabled, 'vim-dispatch')
+" call add(g:pathogen_disabled, 'vim-expand-region')
+" call add(g:pathogen_disabled, 'vim-misc')
+" call add(g:pathogen_disabled, 'vim-shell')
+" call add(g:pathogen_disabled, 'vim-support')
+" call add(g:pathogen_disabled, 'vim_airline')
+" call add(g:pathogen_disabled, 'vim_colors_babymate256')
+" call add(g:pathogen_disabled, 'vim_indent_guides')
+" call add(g:pathogen_disabled, 'vim_monokai')
+" call add(g:pathogen_disabled, 'vim_nocturne')
+" call add(g:pathogen_disabled, 'vim_perforce')
+" call add(g:pathogen_disabled, 'vim_session')
+" call add(g:pathogen_disabled, 'vimfiler')
+" call add(g:pathogen_disabled, 'vimproc')
+" call add(g:pathogen_disabled, 'vimux')
+" call add(g:pathogen_disabled, 'vinegar')
+" call add(g:pathogen_disabled, 'visualGuide')
+" call add(g:pathogen_disabled, 'vmath')
+" call add(g:pathogen_disabled, 'vundle')
+" call add(g:pathogen_disabled, 'xml')
+" call add(g:pathogen_disabled, 'yankstack')
+" call add(g:pathogen_disabled, 'zoomwin')
+"}}}1
 
 call pathogen#infect()
 call pathogen#helptags()
@@ -231,13 +241,18 @@ call pathogen#helptags()
 if exists(':yankstack')
   call yankstack#setup()
 endif
+"if exists('g:loaded_surround') && !exists('b:surround_'.char2nr(':'))
+"  let b:surround_{char2nr(':')} = ":\r"
+"endif
 
 "syntax highlighting..
 "syntax on
 "filetype plugin indent on
 " source neocomplete
 " neocomplcache is older one
-source $HOME/.vim/neo_complete
+if exists(':NeoComplete')
+  source $HOME/.vim/neo_complete
+endif
 " youcompleteme disable on certain filetypes
 let g:ycm_filetype_specific_completion_to_disable = {}
 " Solid line for vsplit separator
@@ -461,7 +476,7 @@ set t_vs=[5%dm
 
 "disable all folding
 "set nofoldenable
-function! NeatFoldText() "{{{2
+function! NeatFoldText() "{{{1
   let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
   let lines_count = v:foldend - v:foldstart + 1
   let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
@@ -472,7 +487,7 @@ function! NeatFoldText() "{{{2
   return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
 endfunction
 set foldtext=NeatFoldText()
-" }}}2
+" }}}1
 
 " I work  in javascript also ...
 "set formatoptions-=tc
@@ -550,10 +565,13 @@ augroup MyAutoCmd
   autocmd WinLeave * setlocal nocursorline
   autocmd WinEnter,BufRead * setlocal cursorline
   " rainbow parenthesis
+
+if exists(':RainbowParentheses')
   autocmd VimEnter * RainbowParenthesesToggle
   autocmd Syntax * RainbowParenthesesLoadRound
   autocmd Syntax * RainbowParenthesesLoadSquare
   autocmd Syntax * RainbowParenthesesLoadBraces
+endif
   autocmd BufNewFile,BufRead,BufWritePre *.log setf log|setlocal wrap|setlocal nobackup|setlocal noundofile
   autocmd BufNewFile,BufRead,BufWritePre *.log.retry setf log|setlocal nobackup|setlocal noundofile
   autocmd BufNewFile,BufRead,BufWritePre *testout* setf log|setlocal nobackup|setlocal noundofile
@@ -959,57 +977,61 @@ if  has("gui_running")
   set guioptions+=ebLh
   "set guioptions+=c "console dialog instead of popup"
   "--------------preferred--------------------------------------------------------
-  "colorscheme darkblue
-  "colorscheme wombat "Good
-  "colorscheme anotherdark
-  "colorscheme blacksea "Good
-  "colorscheme camo
-  "colorscheme candy
-  "colorscheme colorer
-  "colorscheme darkZ "Good
-  "colorscheme darkspectrum "Good
-  "colorscheme zenburn
-  "colorscheme rdark
-  "colorscheme solarized "Good
-  "colorscheme molokai
-  "colorscheme two2tango "Good
-  "colorscheme evening
-  "colorscheme darkblue
-  "colorscheme desertEx
-  "colorscheme desertedocean
-  "colorscheme koehler
-  "colorscheme mayansmoke "Good light
-  "colorscheme mickeysoft "Good light
-  "colorscheme mophiaSmoke "Good light
-  "colorscheme gruvbox "Good
-  "colorscheme badwolf
-  "colorscheme nocturne
-  "colorscheme molokai
-  "colorscheme emacs
-  colorscheme vimhut
-  "colorscheme pyte
-  "colorscheme greyhouse
-  "colorscheme solarized
-  "colorscheme peaksea
-  "colorscheme grape
-  "colorscheme bclear
-  "set background=light
-  "colorscheme habilight "Good light
-  "colorscheme earendel "white Good
-  "colorscheme codeblocks_dark "Good
-  "colorscheme manuscript "Good
-  "colorscheme mint "Good
-  "colorscheme mrpink "Good
-  "colorscheme mustang "Good
-  "colorscheme moria "little dull
-  "FIXME
-  "TODO
-  "colorscheme jellybeans "Good
-  "colorscheme railscasts "Good
-  "colorscheme twilight "Good
-  "colorscheme molokai "Good
-  "colorscheme xoria256 "Good
-  "colorscheme symfony
+  try
+    "colorscheme darkblue
+    "colorscheme wombat "Good
+    "colorscheme anotherdark
+    "colorscheme blacksea "Good
+    "colorscheme camo
+    "colorscheme candy
+    "colorscheme colorer
+    "colorscheme darkZ "Good
+    "colorscheme darkspectrum "Good
+    "colorscheme zenburn
+    "colorscheme rdark
+    "colorscheme solarized "Good
+    "colorscheme molokai
+    "colorscheme two2tango "Good
+    "colorscheme evening
+    "colorscheme darkblue
+    "colorscheme desertEx
+    "colorscheme desertedocean
+    "colorscheme koehler
+    "colorscheme mayansmoke "Good light
+    "colorscheme mickeysoft "Good light
+    "colorscheme mophiaSmoke "Good light
+    "colorscheme gruvbox "Good
+    "colorscheme badwolf
+    "colorscheme nocturne
+    "colorscheme molokai
+    "colorscheme emacs
+    colorscheme vimhut
+    "colorscheme pyte
+    "colorscheme greyhouse
+    "colorscheme solarized
+    "colorscheme peaksea
+    "colorscheme grape
+    "colorscheme bclear
+    "set background=light
+    "colorscheme habilight "Good light
+    "colorscheme earendel "white Good
+    "colorscheme codeblocks_dark "Good
+    "colorscheme manuscript "Good
+    "colorscheme mint "Good
+    "colorscheme mrpink "Good
+    "colorscheme mustang "Good
+    "colorscheme moria "little dull
+    "FIXME
+    "TODO
+    "colorscheme jellybeans "Good
+    "colorscheme railscasts "Good
+    "colorscheme twilight "Good
+    "colorscheme molokai "Good
+    "colorscheme xoria256 "Good
+    "colorscheme symfony
+  catch
+    colorscheme default
+  endtry
   set cursorline
   set cursorcolumn
   """"""""""""""""""""""""""""""
@@ -1024,23 +1046,27 @@ else
     highlight Normal ctermfg=grey ctermbg=darkblue
     set bg=light
     "set bg=light
-    "colorscheme desert
-    "colorscheme slate
-    "colorscheme aiseered
-    "colorscheme manxome
-    "colorscheme jellybeans
-    "colorscheme candy
-    "colorscheme default
-    "colorscheme torte
-    "colorscheme earendel "Black Good
-    "colorscheme default
-    "colorscheme murphy "Black
-    colorscheme molokai
-    "colorscheme default
-    "colorscheme badwolf
-    "colorscheme metacosm "Black
-    "colorscheme motus "Black
-    "colorscheme midnight2 "Blue
+    try
+      "colorscheme desert
+      "colorscheme slate
+      "colorscheme aiseered
+      "colorscheme manxome
+      "colorscheme jellybeans
+      "colorscheme candy
+      "colorscheme default
+      "colorscheme torte
+      "colorscheme earendel "Black Good
+      "colorscheme default
+      "colorscheme murphy "Black
+      colorscheme molokai
+      "colorscheme default
+      "colorscheme badwolf
+      "colorscheme metacosm "Black
+      "colorscheme motus "Black
+      "colorscheme midnight2 "Blue
+    catch
+      colorscheme default
+    endtry
     "set guifont=-b&h-lucidatypewriter-medium-r-normal-*-*-140-*-*-m-*-iso8859-15
     set mouse=a
     "set t_Co=256
@@ -1264,7 +1290,9 @@ if has('gui_running')
           \ '' : 'S',
           \ }
   endfunction
-  autocmd VimEnter * call AirlineInit()
+  if exists(':Airline')
+    autocmd VimEnter * call AirlineInit()
+  endif
 endif
 
 " Format the statusline
@@ -1612,12 +1640,8 @@ let g:unite_source_history_yank_enable = 1
 let g:unite_source_history_yank_limit=1000
 let g:yankring_max_history = 1000
 let g:yankring_manage_numbered_reg = 1
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
 let g:unite_enable_start_insert=1
 let g:unite_source_rec_max_cache_files=100000
-call unite#custom#source('file_rec', 'ignore_pattern', '\.abc$')
-call unite#custom#source('file_rec', 'max_candidates', '0')
-call unite#custom#source('file', 'max_candidates', '0')
 "let g:unite_source_grep_command='ack'
 "let g:unite_source_grep_default_opts='--no-heading --no-color -a -C4'
 "let g:unite_source_grep_recursive_opt=''
@@ -1625,22 +1649,28 @@ call unite#custom#source('file', 'max_candidates', '0')
 "    \ 'find `depth` -type f -o \( -name .git -o -name tmp -o -name .hg -name .svn \) -prune -type f | head -100 | grep -v -E "\.(jpe?g|png|gif|[ot]tf|ico)$"'
 "let g:unite_source_rec_async_command=
 "  \ 'find `depth` -type f -o \( -name .git -o -name tmp -o -name .hg -name .svn \) -prune -type f | head -100 | grep -v -E "\.(jpe?g|png|gif|[ot]tf|ico)$"'
-"nnoremap <leader>t :<C-u>Unite -buffer-name=files   file_rec:<C-\>eMy_DepthNoSpace("Unite -buffer-name=files   file_rec:")<cr>/
-nnoremap <leader>d :<C-u>Unite -buffer-name=files   file_rec:<C-\>eMy_DepthNoSpace("Unite -buffer-name=dir   directory:")<cr>/
-"nnoremap <leader>f :<C-u>Unite -buffer-name=files   file<cr>
-nnoremap <leader>fr :<C-u>Unite -buffer-name=files   file_rec:../../
-nnoremap <leader>ft :<C-u><C-\>eCurrentFileUnite("../..")<cr>
-nnoremap <leader>o :<C-u>Unite -buffer-name=outline outline<cr>
-nnoremap <leader>c :<C-u>Unite -buffer-name=output output<cr>
-nnoremap <leader>y :<C-u>Unite -buffer-name=yank    history/yank<cr>
-nnoremap <leader>h :<C-u>Unite -buffer-name=yank    history/yank<cr>
-nnoremap <leader>r :<C-u>Unite -buffer-name=yank    register<cr>
-nnoremap <leader>b :<C-u>Unite -buffer-name=buffer  buffer<cr>
-nnoremap <leader>q :<C-u>Unite -buffer-name=quickfix qflist<cr>
-nnoremap <leader>g :<C-u>Unite -buffer-name=grep  vimgrep:%<cr>
-nnoremap <leader>gb :<C-u>Unite -buffer-name=grep  vimgrep:##<cr>
-nnoremap <leader>l :<C-u>Unite -buffer-name=search  line<cr>
-autocmd FileType unite call s:unite_my_settings()
+if exists(':Unite')
+  call unite#filters#matcher_default#use(['matcher_fuzzy'])
+  call unite#custom#source('file_rec', 'ignore_pattern', '\.abc$')
+  call unite#custom#source('file_rec', 'max_candidates', '0')
+  call unite#custom#source('file', 'max_candidates', '0')
+  "nnoremap <leader>t :<C-u>Unite -buffer-name=files   file_rec:<C-\>eMy_DepthNoSpace("Unite -buffer-name=files   file_rec:")<cr>/
+  nnoremap <leader>d :<C-u>Unite -buffer-name=files   file_rec:<C-\>eMy_DepthNoSpace("Unite -buffer-name=dir   directory:")<cr>/
+  "nnoremap <leader>f :<C-u>Unite -buffer-name=files   file<cr>
+  nnoremap <leader>fr :<C-u>Unite -buffer-name=files   file_rec:../../
+  nnoremap <leader>ft :<C-u><C-\>eCurrentFileUnite("../..")<cr>
+  nnoremap <leader>o :<C-u>Unite -buffer-name=outline outline<cr>
+  nnoremap <leader>c :<C-u>Unite -buffer-name=output output<cr>
+  nnoremap <leader>y :<C-u>Unite -buffer-name=yank    history/yank<cr>
+  nnoremap <leader>h :<C-u>Unite -buffer-name=yank    history/yank<cr>
+  nnoremap <leader>r :<C-u>Unite -buffer-name=yank    register<cr>
+  nnoremap <leader>b :<C-u>Unite -buffer-name=buffer  buffer<cr>
+  nnoremap <leader>q :<C-u>Unite -buffer-name=quickfix qflist<cr>
+  nnoremap <leader>g :<C-u>Unite -buffer-name=grep  vimgrep:%<cr>
+  nnoremap <leader>gb :<C-u>Unite -buffer-name=grep  vimgrep:##<cr>
+  nnoremap <leader>l :<C-u>Unite -buffer-name=search  line<cr>
+  autocmd FileType unite call s:unite_my_settings()
+endif
 function! s:unite_my_settings()
   "set paste
   " Play nice with supertab
@@ -1709,3 +1739,5 @@ filetype on
 filetype plugin on
 filetype indent on
 "set omnifunc=syntaxcomplete#Complete
+"
+" vim: filetype=vim:sw=2:expandtab:norl:foldmethod=marker:
