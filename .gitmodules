@@ -481,3 +481,9 @@
 [submodule "bundle/vim_perforce_fork"]
 	path = bundle/vim_perforce_fork
 	url = https://github.com/coreyoconnor/vim-perforce.git
+[submodule "bundle/MultipleSearch"]
+	path = bundle/MultipleSearch
+	url = https://github.com/vim-scripts/MultipleSearch.git
+[submodule "bundle/calendar"]
+	path = bundle/calendar
+	url = https://github.com/itchyny/calendar.vim.git
