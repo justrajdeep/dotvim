@@ -478,3 +478,6 @@
 [submodule "bundle/enmasse"]
 	path = bundle/enmasse
 	url = https://github.com/Wolfy87/vim-enmasse.git
+[submodule "bundle/vim_perforce_fork"]
+	path = bundle/vim_perforce_fork
+	url = https://github.com/coreyoconnor/vim-perforce.git

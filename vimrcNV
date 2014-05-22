@@ -21,17 +21,20 @@ endif
 " disabling due to vim update
 call add(g:pathogen_disabled, 'yankstack')
 call add(g:pathogen_disabled, 'nvbug')
+" disabling nerdtree since some internal vim error
+call add(g:pathogen_disabled, 'NERD_tree')
 call add(g:pathogen_disabled, 'mru')
 call add(g:pathogen_disabled, 'multipleHilight')
 "we use neocomplete
-"call add(g:pathogen_disabled, 'neocomplete')
+" call add(g:pathogen_disabled, 'neocomplete')
+call add(g:pathogen_disabled, 'YouCompleteMe')
 call add(g:pathogen_disabled, 'checkSyntax')
 call add(g:pathogen_disabled, 'savevers')
 call add(g:pathogen_disabled, 'neocomplcache')
 call add(g:pathogen_disabled, 'neocomplcache-ultisnips')
 "call add(g:pathogen_disabled, 'ultisnips')
+call add(g:pathogen_disabled, 'snippets')
 call add(g:pathogen_disabled, 'vimfiler')
-"call add(g:pathogen_disabled, 'YouCompleteMe')
 call add(g:pathogen_disabled, 'coVim')
 call add(g:pathogen_disabled, 'easymotion_2')
 call add(g:pathogen_disabled, 'neosnippet')
@@ -54,8 +57,12 @@ call add(g:pathogen_disabled, 'sneak')
 call add(g:pathogen_disabled, 'chronos')
 call add(g:pathogen_disabled, 'textabyss')
 call add(g:pathogen_disabled, 'GoldenView')
+call add(g:pathogen_disabled, 'vim_airline')
+call add(g:pathogen_disabled, 'autocomplete')
+call add(g:pathogen_disabled, 'bufexplorer')
 
 "diabling plugins {{{1
+" call add(g:pathogen_disabled, 'l9')
 " call add(g:pathogen_disabled, 'CSApprox')
 " call add(g:pathogen_disabled, 'Command-T')
 " call add(g:pathogen_disabled, 'FuzzyFinder')
@@ -68,10 +75,8 @@ call add(g:pathogen_disabled, 'GoldenView')
 " call add(g:pathogen_disabled, 'TaskList')
 " call add(g:pathogen_disabled, 'VisIncr')
 " call add(g:pathogen_disabled, 'YankRing')
-" call add(g:pathogen_disabled, 'YouCompleteMe')
 " call add(g:pathogen_disabled, 'abolish')
 " call add(g:pathogen_disabled, 'ack')
-" call add(g:pathogen_disabled, 'autocomplete')
 " call add(g:pathogen_disabled, 'autohighlight')
 " call add(g:pathogen_disabled, 'bluespec')
 " call add(g:pathogen_disabled, 'bufexplorer')
@@ -130,12 +135,12 @@ call add(g:pathogen_disabled, 'GoldenView')
 " call add(g:pathogen_disabled, 'eunuch')
 " call add(g:pathogen_disabled, 'exchange')
 " call add(g:pathogen_disabled, 'express')
+" call add(g:pathogen_disabled, 'files')
 " call add(g:pathogen_disabled, 'fontmanager')
 " call add(g:pathogen_disabled, 'fugitive')
 " call add(g:pathogen_disabled, 'genutils')
 " call add(g:pathogen_disabled, 'gundo')
 " call add(g:pathogen_disabled, 'kolor')
-" call add(g:pathogen_disabled, 'l9')
 " call add(g:pathogen_disabled, 'linediff')
 " call add(g:pathogen_disabled, 'lose')
 " call add(g:pathogen_disabled, 'matchTagAlways')
@@ -151,6 +156,8 @@ call add(g:pathogen_disabled, 'GoldenView')
 " call add(g:pathogen_disabled, 'neocomplcache-ultisnips')
 " call add(g:pathogen_disabled, 'neocomplete')
 " call add(g:pathogen_disabled, 'neosnippet')
+" call add(g:pathogen_disabled, 'nvbug')
+" call add(g:pathogen_disabled, 'nvdia')
 " call add(g:pathogen_disabled, 'orgmode')
 " call add(g:pathogen_disabled, 'outline')
 " call add(g:pathogen_disabled, 'over')
@@ -171,7 +178,7 @@ call add(g:pathogen_disabled, 'GoldenView')
 " call add(g:pathogen_disabled, 'shell-executor')
 " call add(g:pathogen_disabled, 'sleuth')
 " call add(g:pathogen_disabled, 'sneak')
-" "call add(g:pathogen_disabled, 'snippets')
+" call add(g:pathogen_disabled, 'snippets')
 " call add(g:pathogen_disabled, 'solarized')
 " call add(g:pathogen_disabled, 'speeddating')
 " call add(g:pathogen_disabled, 'startify')
@@ -187,7 +194,7 @@ call add(g:pathogen_disabled, 'GoldenView')
 " call add(g:pathogen_disabled, 'tlib')
 " call add(g:pathogen_disabled, 'tmux-navigator')
 " call add(g:pathogen_disabled, 'tmux_complete')
-" "call add(g:pathogen_disabled, 'ultisnips')
+" call add(g:pathogen_disabled, 'ultisnips')
 " call add(g:pathogen_disabled, 'undoTree')
 " call add(g:pathogen_disabled, 'unite')
 " call add(g:pathogen_disabled, 'unite_qfix')
@@ -197,7 +204,7 @@ call add(g:pathogen_disabled, 'GoldenView')
 " call add(g:pathogen_disabled, 'vim-diffchanges')
 " call add(g:pathogen_disabled, 'vim-dispatch')
 " call add(g:pathogen_disabled, 'vim-expand-region')
-" call add(g:pathogen_disabled, 'vim-misc')
+" " call add(g:pathogen_disabled, 'vim-misc')
 " call add(g:pathogen_disabled, 'vim-shell')
 " call add(g:pathogen_disabled, 'vim-support')
 " call add(g:pathogen_disabled, 'vim_airline')
@@ -206,7 +213,8 @@ call add(g:pathogen_disabled, 'GoldenView')
 " call add(g:pathogen_disabled, 'vim_monokai')
 " call add(g:pathogen_disabled, 'vim_nocturne')
 " call add(g:pathogen_disabled, 'vim_perforce')
-" call add(g:pathogen_disabled, 'vim_session')
+" call add(g:pathogen_disabled, 'vim_perforce_fork')
+" " call add(g:pathogen_disabled, 'vim_session')
 " call add(g:pathogen_disabled, 'vimfiler')
 " call add(g:pathogen_disabled, 'vimproc')
 " call add(g:pathogen_disabled, 'vimux')
@@ -247,12 +255,14 @@ endif
 
 "syntax highlighting..
 "syntax on
+" don't syntax-highlight long lines
+set synmaxcol=1000
 "filetype plugin indent on
 " source neocomplete
 " neocomplcache is older one
-if exists(':NeoComplete')
+" if exists(':NeoComplete')
   source $HOME/.vim/neo_complete
-endif
+" endif
 " youcompleteme disable on certain filetypes
 let g:ycm_filetype_specific_completion_to_disable = {}
 " Solid line for vsplit separator
@@ -315,6 +325,10 @@ set laststatus=2 ruler
 "dont refresh screen when executing macros
 set lazyredraw
 set expandtab
+
+xmap m     <Plug>(expand_region_expand)
+xmap <m-m> <Plug>(expand_region_shrink)
+
 "set shiftwidth=8 tabstop=8 nowrap joinspaces magic report=0 dict=/usr/dict/words
 set shell=csh
 set wildchar=<TAB>
@@ -398,6 +412,7 @@ set infercase " case inferred by default
 set smartcase
 "scroll offset"
 set scrolloff=2 "skip 2 lines when scrolling
+set sidescrolloff=2
 ""confirm action using a dialog box
 set confirm
 set nostartofline
@@ -410,6 +425,7 @@ set autochdir
 set browsedir=buffer
 "change the cmd window
 "set cmdheight=2
+set noequalalways
 "small status msg for vim
 set shortmess=atToOI
 "set shortmess=aOstT " shortens messages to avoid 'press a key' prompt
@@ -576,10 +592,10 @@ endif
   autocmd BufNewFile,BufRead,BufWritePre *.log.retry setf log|setlocal nobackup|setlocal noundofile
   autocmd BufNewFile,BufRead,BufWritePre *testout* setf log|setlocal nobackup|setlocal noundofile
   autocmd BufNewFile,BufRead,BufWritePre /tmp/* setf log|setlocal nobackup|setlocal noundofile
-  autocmd BufNewFile,BufRead,BufEnter */t186/* setlocal nomodifiable
-  autocmd BufNewFile,BufRead,BufEnter */tlit4/* setlocal nomodifiable
-  autocmd BufNewFile,BufRead,BufEnter */t210/* setlocal nomodifiable
-  autocmd BufNewFile,BufRead,BufEnter */tlit2/* setlocal nomodifiable
+  autocmd BufNewFile,BufRead */t186/* setlocal nomodifiable
+  autocmd BufNewFile,BufRead */tlit4/* setlocal nomodifiable
+  autocmd BufNewFile,BufRead */t210/* setlocal nomodifiable
+  autocmd BufNewFile,BufRead */tlit2/* setlocal nomodifiable
 augroup END
 "Rainbow paren
 let g:rbpt_colorpairs = [
@@ -641,21 +657,23 @@ let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_max_files = 0
 let g:ctrlp_user_command = ['TOT', 'cd %s && cat files | grep -v -e "/\." ', 'find %s -type f']
-"sneak
+""sneak {{{1
 "let g:sneak#streak = 1
 "let g:sneak#s_next = 0
-"nmap f <Plug>Sneak_f
-"nmap F <Plug>Sneak_F
-"xmap f <Plug>Sneak_f
-"xmap F <Plug>Sneak_F
-"omap f <Plug>Sneak_f
-"omap F <Plug>Sneak_F
-"nmap t <Plug>Sneak_t
-"nmap T <Plug>Sneak_T
-"xmap t <Plug>Sneak_t
-"xmap T <Plug>Sneak_T
-"omap t <Plug>Sneak_t
-"omap T <Plug>Sneak_T
+"let g:sneak#use_ic_scs = 1
+"nnoremap f <Plug>Sneak_f
+"nnoremap F <Plug>Sneak_F
+"xnoremap f <Plug>Sneak_f
+"xnoremap F <Plug>Sneak_F
+"onoremap f <Plug>Sneak_f
+"onoremap F <Plug>Sneak_F
+"nnoremap t <Plug>Sneak_t
+"nnoremap T <Plug>Sneak_T
+"xnoremap t <Plug>Sneak_t
+"xnoremap T <Plug>Sneak_T
+"onoremap t <Plug>Sneak_t
+"onoremap T <Plug>Sneak_T
+"}}}1
 
 "cursor movement
 "j and k should follow the screen
@@ -837,7 +855,7 @@ augroup filetype_make
 ":autocmd BufLeave,FocusLost  Makefile* silent! wall
 augroup END
 "local make
-set makeprg=mk64\ $*
+set makeprg=`depth`/bin/nvmk\ -c\ .\ -d\ -v\ NV_BUILD_PLATFORM=Linux_x86_64\ $*
 
 augroup filetype_verilog
 :autocmd!
@@ -1290,21 +1308,21 @@ if has('gui_running')
           \ '' : 'S',
           \ }
   endfunction
-  if exists(':Airline')
-    autocmd VimEnter * call AirlineInit()
-  endif
+  "if exists(':Airline')
+    "autocmd VimEnter * call AirlineInit()
+  "endif
 endif
 
 " Format the statusline
 " %= is to right align
-if !has('gui_running')
+"if !has('gui_running')
   "    "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
-  "    set statusline=\ %{HasPaste()}%F%m%r%h\ %w\
-  "    set statusline+=%=Line:\ %l/%L(%p%%):%c
-  "    set statusline+=\
-  "    set statusline+=Ftype:
-  "    set statusline+=%y
-endif
+      set statusline=%{HasPaste()}%F%m%r%h\ %w
+      set statusline+=%=Line:\ %l/%L(%p%%):%c
+      "set statusline+=\
+      set statusline+=\ Ftype:
+      set statusline+=%y
+"endif
 
 "======[ Magically build interim directories if necessary ]===================
 function! AskQuit (msg, options, quit_option)
