@@ -73,7 +73,6 @@ call add(g:pathogen_disabled, 'bufexplorer')
 " call add(g:pathogen_disabled, 'buffergator')
 " call add(g:pathogen_disabled, 'calendar')
 " call add(g:pathogen_disabled, 'colorSchemeDegrade')
-" call add(g:pathogen_disabled, 'colorSchemeEx')
 " call add(g:pathogen_disabled, 'color_ChasingLogic')
 " call add(g:pathogen_disabled, 'color_FlatColor')
 " call add(g:pathogen_disabled, 'color_badwolf')
@@ -116,7 +115,7 @@ call add(g:pathogen_disabled, 'bufexplorer')
 " call add(g:pathogen_disabled, 'my_colors')
 " call add(g:pathogen_disabled, 'narrow')
 " call add(g:pathogen_disabled, 'neocomplete')
-" call add(g:pathogen_disabled, 'nvdia')
+" call add(g:pathogen_disabled, 'nvidia')
 " call add(g:pathogen_disabled, 'over')
 " call add(g:pathogen_disabled, 'perl-support')
 " call add(g:pathogen_disabled, 'perlOmni')
@@ -128,11 +127,9 @@ call add(g:pathogen_disabled, 'bufexplorer')
 " call add(g:pathogen_disabled, 'shell-executor')
 " call add(g:pathogen_disabled, 'solarized')
 " call add(g:pathogen_disabled, 'speeddating')
-" call add(g:pathogen_disabled, 'startify')
 " call add(g:pathogen_disabled, 'table-mode')
 " call add(g:pathogen_disabled, 'tabpagecolorscheme')
 " call add(g:pathogen_disabled, 'tagbar')
-" call add(g:pathogen_disabled, 'ultisnips')
 " call add(g:pathogen_disabled, 'undoTree')
 " call add(g:pathogen_disabled, 'verilog')
 " call add(g:pathogen_disabled, 'verilog_systemverilog')
@@ -140,17 +137,24 @@ call add(g:pathogen_disabled, 'bufexplorer')
 " call add(g:pathogen_disabled, 'vim_colors_babymate256')
 " call add(g:pathogen_disabled, 'vim_monokai')
 " call add(g:pathogen_disabled, 'vim_nocturne')
-" call add(g:pathogen_disabled, 'vim_perforce_fork')
+" call add(g:pathogen_disabled, 'vim-misc')
 " call add(g:pathogen_disabled, 'vim_session')
 " call add(g:pathogen_disabled, 'vimfiler')
 " call add(g:pathogen_disabled, 'vimproc')
-" call add(g:pathogen_disabled, 'vinegar')
-" call add(g:pathogen_disabled, 'visualGuide')
 " call add(g:pathogen_disabled, 'xml')
 " call add(g:pathogen_disabled, 'yankstack')
-" call add(g:pathogen_disabled, 'vim-misc')
 " call add(g:pathogen_disabled, 'genutils')
+" call add(g:pathogen_disabled, 'targets')
+" call add(g:pathogen_disabled, 'vim_indent_guides')
+" call add(g:pathogen_disabled, 'sensible')
+" call add(g:pathogen_disabled, 'selective-undo')
+" call add(g:pathogen_disabled, 'commentary')
+" call add(g:pathogen_disabled, 'tbone')
+"
+" call add(g:pathogen_disabled, 'ultisnips')
+call add(g:pathogen_disabled, 'vim_perforce_fork')
 
+call add(g:pathogen_disabled, 'colorSchemeEx')
 call add(g:pathogen_disabled, 'Command-T')
 call add(g:pathogen_disabled, 'GoldenView')
 call add(g:pathogen_disabled, 'LargeFile')
@@ -223,10 +227,24 @@ call add(g:pathogen_disabled, 'vim-support')
 call add(g:pathogen_disabled, 'vim_airline')
 call add(g:pathogen_disabled, 'vim_perforce')
 call add(g:pathogen_disabled, 'vimux')
-call add(g:pathogen_disabled, 'vim_indent_guides')
 call add(g:pathogen_disabled, 'vmath')
 call add(g:pathogen_disabled, 'vundle')
 call add(g:pathogen_disabled, 'zoomwin')
+call add(g:pathogen_disabled, 'splitjoin')
+call add(g:pathogen_disabled, 'sexp')
+call add(g:pathogen_disabled, 'lion')
+call add(g:pathogen_disabled, 'rsi')
+call add(g:pathogen_disabled, 'space')
+call add(g:pathogen_disabled, 'visualGuide')
+call add(g:pathogen_disabled, 'vimpanel')
+call add(g:pathogen_disabled, 'vinegar')
+call add(g:pathogen_disabled, 'startify')
+call add(g:pathogen_disabled, 'colorcode')
+call add(g:pathogen_disabled, 'tcomment')
+call add(g:pathogen_disabled, 'fireplace')
+call add(g:pathogen_disabled, 'maktaba')
+call add(g:pathogen_disabled, 'unimpaired')
+call add(g:pathogen_disabled, 'textobj')
 "}}}1
 
 call pathogen#infect()
@@ -425,6 +443,8 @@ set report=0 " tell us when anything is changed via :...
 set autochdir
 "open file in the current buffer dir
 set browsedir=buffer
+" netrw in tree like browsing
+let g:netrw_liststyle=1
 "change the cmd window
 "set cmdheight=2
 set noequalalways
@@ -700,6 +720,16 @@ nnoremap <C-w>gf <C-w>gF
 :command Q q
 :command Sp sp
 :command Vs vs
+" easy buffer navigation
+nnoremap <silent> <A-Up> :wincmd k<CR>
+nnoremap <silent> <A-Down> :wincmd j<CR>
+nnoremap <silent> <A-Left> :wincmd h<CR>
+nnoremap <silent> <A-Right> :wincmd l<CR>
+nnoremap <silent> <A--> <C-W>_
+nnoremap <silent> <A-=> <C-W>=
+"hide minimized splits
+set winminheight=0
+"set winheight=999
 "follow symlinks"
 "command! -nargs=1 -complete=file EF call EditFile(<f-args>)
 "nnoremap EF :execute "edit " . resolve(expand(<f-args>))
@@ -896,9 +926,9 @@ augroup filetype_verilog
   \ if line("'\"") > 0 && line ("'\"") <= line("$") |
   \   exe "normal g'\"" |
   \ endif
-:au BufReadPost,BufNewFile *
-  \ runtime macros/matchit.vim |
+ :au BufReadPost,BufNewFile *
   \ let b:match_words = '\<begin\>:\<end\>,\<fork\>:\<join\>,\<module\>:\<endmodule\>,\<task\>:\<endtask\>,\<function\>:\<endfunction\>,\<class\>:\<endclass\>,\<program\>:\<endprogram\>,\<case\>:^[ |<C-I>]*[^"]\+ *\::\<endcase\>,`ifdef:`else:`elsif:`endif,'
+  " \ runtime macros/matchit.vim |
 augroup END
 
 "-------------> VIVA Files <-------------------------
@@ -1168,8 +1198,8 @@ cno $p <C-U>sp <C-\>eCurrentFileDir("sp")<cr>
 cno $P <C-U>vs <C-\>eCurrentFileDirP4("vs")<cr>
 cno $b <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !`depth`/bin/p4blame <C-r>=resolve(expand('%'))<CR>:<C-R>=line(".")<CR>
 cno $E <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 edit <C-r>=resolve(expand('%'))<CR>
-cno $R <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 revert <C-r>=resolve(expand('%'))<CR>
-cno $A <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 add <C-r>=resolve(expand('%'))<CR>
+cno $R <C-U>!p4 revert <C-r>=resolve(expand('%'))<CR>
+cno $A <C-U>!p4 add -t text+k <C-r>=resolve(expand('%'))<CR>
 cno $a <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 annotate <C-r>=resolve(expand('%'))<CR>
 cno $L <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 filelog <C-r>=resolve(expand('%'))<CR>
 cno $l <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !/home/nv/bin//p4print <C-r>=resolve(expand('%'))<CR>
@@ -1185,6 +1215,7 @@ cno $H <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 have <C-r>=resol
 cno $S <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 sync <C-r>=resolve(expand('%'))<CR>
 cno $T <C-U>sp <C-\>eMy_Depth("tabe")<cr>/
 cno $t <C-U>tabe <C-\>eMy_Depth("NERDTree")<cr>/
+cno $e <C-U>vs <C-\>eMy_Depth("e")<cr>/
 cno $V <C-U>vs <C-\>eMy_Depth("vs")<cr>/
 cno $v <C-U>vs <C-\>eMy_Depth("sp")<cr>/
 cno $F <C-U>set filetype=verilog_systemverilog
@@ -1317,14 +1348,16 @@ endif
 
 " Format the statusline
 " %= is to right align
-"if !has('gui_running')
+if !has('gui_running')
   "    "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
       set statusline=%{HasPaste()}%F%m%r%h\ %w
       set statusline+=%=Line:\ %l/%L(%p%%):%c
       "set statusline+=\
       set statusline+=\ Ftype:
       set statusline+=%y
-"endif
+else
+  set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+endif
 
 "======[ Magically build interim directories if necessary ]===================
 function! AskQuit (msg, options, quit_option)
@@ -1712,9 +1745,10 @@ let g:nrrw_rgn_protect = 'n'
 "UltiSnips"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 "let g:ycm_cache_omnifunc = 1
+let g:UltiSnipsRemoveSelectModeMappings=0
 let g:UltiSnipsExpandTrigger="<C-Space>"
 let g:UltiSnipsJumpForwardTrigger="<C-Space>"
-let g:UltiSnipsListSnippets="<S-Space>"
+let g:UltiSnipsListSnippets="<C-S-Space>"
 let g:UltiSnipsJumpBackwardTrigger="<C-S-Space>"
 "
 " neosnippet"

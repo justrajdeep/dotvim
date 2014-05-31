@@ -93,7 +93,14 @@ $ ttmkfdir -o fonts.dir
 $ fc-cache -f -v ~/.fonts
 $ fc-cache -f -v
 
+Install Powerline
+pip -v install --user git+https://github.com/Lokaltog/powerline
+cd ~/.fonts && wget https://github.com/Lokaltog/powerline/raw/develop/font/PowerlineSymbols.otf && fc-cache -vf ~/.fonts
+cd ~/.config/fontconfig/conf.d && wget https://github.com/Lokaltog/powerline/raw/develop/font/10-powerline-symbols.conf
+install patched fonts from https://github.com/Lokaltog/powerline-fonts
+
 copy fonts/10-powerline-symbols.conf to ~/.fonts.conf.d/ and ~/.config/fontconfig/conf.d/ (if dir is not present create one)
+
 
 Check if it is installed correctly
 $ fc-list | grep Monaco

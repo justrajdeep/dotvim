@@ -77,30 +77,25 @@ endsnippet
 snippet TODO "insert boilerplate TODO" sw
 ${1:`!p snip.rv = _get_comment_format()[0]`} TODO: ${2:`whoami`}: ${3:${4:`date +%m`}.${5:`date +%d`}}.`date +%Y`
 $1 ${6:comment}
-$0
 endsnippet
 
 snippet FIXME "insert boilerplate FIXME" sw
 ${1:`!p snip.rv = _get_comment_format()[0]`} FIXME: ${2:`whoami`}: ${3:${4:`date +%m`}.${5:`date +%d`}}.`date +%Y`
 $1 ${6:comment}
-$0
 endsnippet
 
 snippet NOTE "insert boilerplate NOTE" sw
 ${1:`!p snip.rv = _get_comment_format()[0]`} NOTE: ${2:`whoami`}: ${3:${4:`date +%m`}.${5:`date +%d`}}.`date +%Y`
 $1 ${6:comment}
-$0
 endsnippet
 
 snippet INFO "insert boilerplate INFO" sw
 ${1:`!p snip.rv = _get_comment_format()[0]`} INFO: ${2:`whoami`}: ${3:${4:`date +%m`}.${5:`date +%d`}}.`date +%Y`
 $1 ${6:comment}
-$0
 endsnippet
 
 snippet modline "add the modline" sw
-${1:`!p snip.rv = _get_comment_format()[0]`} vim: filetype=${2:`!p snip.rv = snip.ft`}:sw=2:expandtab:norl:
-$0
+${1:`!p snip.rv = _get_comment_format()[0]`} vim: filetype=${2:`!p snip.rv = snip.ft`}:syntax=${3:`!p snip.rv = snip.ft`}:ts=4:sw=2:expandtab:norl:
 endsnippet
 
 snippet copyright "add copyright Information" bsw
@@ -150,6 +145,22 @@ $1      File Name : ${4:`!p snip.rv = snip.fn`}
 $1	Created	  : ${5:${6:`date +%m`}.${7:`date +%d`}}.`date +%Y`
 $1	Author	  : ${8:`whoami`}
 $1	Email	  : ${9:`whoami`}@${3/.*/\L$0\E/}.com
+$1
+$1     \$File:\$
+$1     \$Revision:\$
+$1     \$Change:\$
+$1     \$Author:\$
+$1     \$DateTime:\$
+$1----------------------------------------------------------------------
+$0
+endsnippet
+
+snippet p4fileinfo "adding fileinfo for perforce files" bsw
+${1:`!p snip.rv = _get_comment_format()[0]`}----------------------------------------------------------------------
+$1       File Name : ${2:`!p snip.rv = snip.fn`}
+$1	Created	  : ${3:${4:`date +%m`}.${5:`date +%d`}}.`date +%Y`
+$1	Author	  : ${6:`whoami`}
+$1	Email	  : ${7:`whoami`}@${8:nvidia}.com
 $1
 $1     \$File:\$
 $1     \$Revision:\$
