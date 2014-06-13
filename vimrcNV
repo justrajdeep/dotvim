@@ -102,7 +102,7 @@ call add(g:pathogen_disabled, 'bufexplorer')
 " call add(g:pathogen_disabled, 'delimitMate')
 " call add(g:pathogen_disabled, 'easy_align')
 " call add(g:pathogen_disabled, 'easymotion')
-" call add(g:pathogen_disabled, 'endwise')
+" call add(g:pathogen_disabled, 'smartinput-endwise')
 " call add(g:pathogen_disabled, 'eunuch')
 " call add(g:pathogen_disabled, 'exchange')
 " call add(g:pathogen_disabled, 'gundo')
@@ -124,7 +124,6 @@ call add(g:pathogen_disabled, 'bufexplorer')
 " call add(g:pathogen_disabled, 'rainbow_parentheses')
 " call add(g:pathogen_disabled, 'repeat')
 " call add(g:pathogen_disabled, 'scratch')
-" call add(g:pathogen_disabled, 'shell-executor')
 " call add(g:pathogen_disabled, 'solarized')
 " call add(g:pathogen_disabled, 'speeddating')
 " call add(g:pathogen_disabled, 'table-mode')
@@ -146,15 +145,36 @@ call add(g:pathogen_disabled, 'bufexplorer')
 " call add(g:pathogen_disabled, 'genutils')
 " call add(g:pathogen_disabled, 'targets')
 " call add(g:pathogen_disabled, 'vim_indent_guides')
-" call add(g:pathogen_disabled, 'sensible')
 " call add(g:pathogen_disabled, 'selective-undo')
 " call add(g:pathogen_disabled, 'commentary')
+" call add(g:pathogen_disabled, 'color_lunatic')
 " call add(g:pathogen_disabled, 'tbone')
+" call add(g:pathogen_disabled, 'snippets')
+" call add(g:pathogen_disabled, 'pyrepl')
+" call add(g:pathogen_disabled, 'crunch')
+" call add(g:pathogen_disabled, 'swap-parameters')
+" call add(g:pathogen_disabled, 'switch')
+" call add(g:pathogen_disabled, 'HelpClose')
+" call add(g:pathogen_disabled, 'join')
+call add(g:pathogen_disabled, 'colorv')
+" call add(g:pathogen_disabled, 'QFEnter')
+" call add(g:pathogen_disabled, 'color_blayden')
+" call add(g:pathogen_disabled, 'color_lavalamp')
 "
 " call add(g:pathogen_disabled, 'ultisnips')
 call add(g:pathogen_disabled, 'vim_perforce_fork')
 " call add(g:pathogen_disabled, 'ctrlp')
+call add(g:pathogen_disabled, 'ripple')
+call add(g:pathogen_disabled, 'PyScratch')
 
+call add(g:pathogen_disabled, 'tmux')
+call add(g:pathogen_disabled, 'visual-star-search')
+call add(g:pathogen_disabled, 'anzu')
+call add(g:pathogen_disabled, 'portkey')
+call add(g:pathogen_disabled, 'ag')
+call add(g:pathogen_disabled, 'togglecursor')
+call add(g:pathogen_disabled, 'ctrlp-cmatcher')
+call add(g:pathogen_disabled, 'nerdcommenter')
 call add(g:pathogen_disabled, 'colorSchemeEx')
 call add(g:pathogen_disabled, 'Command-T')
 call add(g:pathogen_disabled, 'GoldenView')
@@ -170,7 +190,6 @@ call add(g:pathogen_disabled, 'autohighlight')
 call add(g:pathogen_disabled, 'bufexplorer')
 call add(g:pathogen_disabled, 'buffergrep')
 call add(g:pathogen_disabled, 'bufkill')
-call add(g:pathogen_disabled, 'bundle')
 call add(g:pathogen_disabled, 'checkSyntax')
 call add(g:pathogen_disabled, 'chronos')
 call add(g:pathogen_disabled, 'coVim')
@@ -207,7 +226,6 @@ call add(g:pathogen_disabled, 'savevers')
 call add(g:pathogen_disabled, 'schlepp')
 call add(g:pathogen_disabled, 'sleuth')
 call add(g:pathogen_disabled, 'sneak')
-call add(g:pathogen_disabled, 'snippets')
 call add(g:pathogen_disabled, 'striptease')
 call add(g:pathogen_disabled, 'surround')
 call add(g:pathogen_disabled, 'table')
@@ -249,11 +267,30 @@ call add(g:pathogen_disabled, 'supertab')
 call add(g:pathogen_disabled, 'jedi')
 call add(g:pathogen_disabled, 'easytree')
 call add(g:pathogen_disabled, 'filebeagle')
-call add(g:pathogen_disabled, 'PyScratch')
 call add(g:pathogen_disabled, 'snipMate')
+call add(g:pathogen_disabled, 'markdown-folding')
+call add(g:pathogen_disabled, 'markdown')
+call add(g:pathogen_disabled, 'checksyntax')
+call add(g:pathogen_disabled, 'TextObjectify')
+call add(g:pathogen_disabled, 'syntastic')
+call add(g:pathogen_disabled, 'sensible')
+call add(g:pathogen_disabled, 'ultiSnips')
+call add(g:pathogen_disabled, 'slime')
+call add(g:pathogen_disabled, 'shell-executor')
+call add(g:pathogen_disabled, 'endwise')
+call add(g:pathogen_disabled, 'smartinput')
+call add(g:pathogen_disabled, 'slimux')
+call add(g:pathogen_disabled, 'vimShell')
+call add(g:pathogen_disabled, 'togglelist')
+call add(g:pathogen_disabled, 'promptline')
+call add(g:pathogen_disabled, 'ipython')
+call add(g:pathogen_disabled, 'vipy')
+call add(g:pathogen_disabled, 'cellmode')
+call add(g:pathogen_disabled, 'tmux-runner')
+call add(g:pathogen_disabled, 'tslime')
+call add(g:pathogen_disabled, 'tslime_ipython')
 "}}}1
 "diabling plugins {{{1
-" call add(g:pathogen_disabled, 'l9')
 " call add(g:pathogen_disabled, 'CSApprox')
 " call add(g:pathogen_disabled, 'Command-T')
 " call add(g:pathogen_disabled, 'FuzzyFinder')
@@ -261,9 +298,11 @@ call add(g:pathogen_disabled, 'snipMate')
 " call add(g:pathogen_disabled, 'LargeFile')
 " call add(g:pathogen_disabled, 'MultipleSearch')
 " call add(g:pathogen_disabled, 'NERD_tree')
+" call add(g:pathogen_disabled, 'PyScratch')
 " call add(g:pathogen_disabled, 'Pydiction')
 " call add(g:pathogen_disabled, 'TagmaTasks')
 " call add(g:pathogen_disabled, 'TaskList')
+" call add(g:pathogen_disabled, 'TextObjectify')
 " call add(g:pathogen_disabled, 'VisIncr')
 " call add(g:pathogen_disabled, 'YankRing')
 " call add(g:pathogen_disabled, 'YouCompleteMe')
@@ -276,9 +315,9 @@ call add(g:pathogen_disabled, 'snipMate')
 " call add(g:pathogen_disabled, 'buffergator')
 " call add(g:pathogen_disabled, 'buffergrep')
 " call add(g:pathogen_disabled, 'bufkill')
-" call add(g:pathogen_disabled, 'bundle')
 " call add(g:pathogen_disabled, 'calendar')
 " call add(g:pathogen_disabled, 'checkSyntax')
+" call add(g:pathogen_disabled, 'checksyntax')
 " call add(g:pathogen_disabled, 'chronos')
 " call add(g:pathogen_disabled, 'coVim')
 " call add(g:pathogen_disabled, 'colorSchemeDegrade')
@@ -299,6 +338,7 @@ call add(g:pathogen_disabled, 'snipMate')
 " call add(g:pathogen_disabled, 'color_laederon')
 " call add(g:pathogen_disabled, 'color_lizard')
 " call add(g:pathogen_disabled, 'color_luna')
+" call add(g:pathogen_disabled, 'color_lunatic')
 " call add(g:pathogen_disabled, 'color_noctu')
 " call add(g:pathogen_disabled, 'color_seoul256')
 " call add(g:pathogen_disabled, 'color_sol')
@@ -325,11 +365,13 @@ call add(g:pathogen_disabled, 'snipMate')
 " call add(g:pathogen_disabled, 'easymotion')
 " call add(g:pathogen_disabled, 'easymotion_2')
 " call add(g:pathogen_disabled, 'easytags')
+" call add(g:pathogen_disabled, 'easytree')
 " call add(g:pathogen_disabled, 'endwise')
 " call add(g:pathogen_disabled, 'enmasse')
 " call add(g:pathogen_disabled, 'eunuch')
 " call add(g:pathogen_disabled, 'exchange')
 " call add(g:pathogen_disabled, 'express')
+" call add(g:pathogen_disabled, 'filebeagle')
 " call add(g:pathogen_disabled, 'fireplace')
 " call add(g:pathogen_disabled, 'fontmanager')
 " call add(g:pathogen_disabled, 'fugitive')
@@ -337,10 +379,13 @@ call add(g:pathogen_disabled, 'snipMate')
 " call add(g:pathogen_disabled, 'gundo')
 " call add(g:pathogen_disabled, 'jedi')
 " call add(g:pathogen_disabled, 'kolor')
+" call add(g:pathogen_disabled, 'l9')
 " call add(g:pathogen_disabled, 'linediff')
 " call add(g:pathogen_disabled, 'lion')
 " call add(g:pathogen_disabled, 'lose')
 " call add(g:pathogen_disabled, 'maktaba')
+" call add(g:pathogen_disabled, 'markdown')
+" call add(g:pathogen_disabled, 'markdown-folding')
 " call add(g:pathogen_disabled, 'matchTagAlways')
 " call add(g:pathogen_disabled, 'matchit')
 " call add(g:pathogen_disabled, 'minibufexpl')
@@ -380,6 +425,7 @@ call add(g:pathogen_disabled, 'snipMate')
 " call add(g:pathogen_disabled, 'shell-executor')
 " call add(g:pathogen_disabled, 'sleuth')
 " call add(g:pathogen_disabled, 'sneak')
+" call add(g:pathogen_disabled, 'snipMate')
 " call add(g:pathogen_disabled, 'snippets')
 " call add(g:pathogen_disabled, 'solarized')
 " call add(g:pathogen_disabled, 'space')
@@ -389,6 +435,7 @@ call add(g:pathogen_disabled, 'snipMate')
 " call add(g:pathogen_disabled, 'striptease')
 " call add(g:pathogen_disabled, 'supertab')
 " call add(g:pathogen_disabled, 'surround')
+" call add(g:pathogen_disabled, 'syntastic')
 " call add(g:pathogen_disabled, 'table')
 " call add(g:pathogen_disabled, 'table-mode')
 " call add(g:pathogen_disabled, 'tabpagecolorscheme')
@@ -405,7 +452,6 @@ call add(g:pathogen_disabled, 'snipMate')
 " call add(g:pathogen_disabled, 'tmux_complete')
 " call add(g:pathogen_disabled, 'ultisnips')
 " call add(g:pathogen_disabled, 'undoTree')
-" call add(g:pathogen_disabled, 'vim-misc')
 " call add(g:pathogen_disabled, 'unimpaired')
 " call add(g:pathogen_disabled, 'unite')
 " call add(g:pathogen_disabled, 'unite_qfix')
@@ -415,6 +461,7 @@ call add(g:pathogen_disabled, 'snipMate')
 " call add(g:pathogen_disabled, 'vim-diffchanges')
 " call add(g:pathogen_disabled, 'vim-dispatch')
 " call add(g:pathogen_disabled, 'vim-expand-region')
+" call add(g:pathogen_disabled, 'vim-misc')
 " call add(g:pathogen_disabled, 'vim-shell')
 " call add(g:pathogen_disabled, 'vim-support')
 " call add(g:pathogen_disabled, 'vim_airline')
@@ -500,7 +547,7 @@ set switchbuf=useopen,usetab
 "settings handy ..
 " Display an incomplete command in the lower right corner of the Vim window
 set showcmd
-set cpoptions=Aq
+" set cpoptions=Aq
 " no long listing"
 set nomore          "Don't page long listings
 "
@@ -545,6 +592,7 @@ xmap <m-m> <Plug>(expand_region_shrink)
 set shell=csh
 set wildchar=<TAB>
 set incsearch
+
 "set guifont=-b&h-lucidatypewriter-medium-r-normal-*-*-140-*-*-m-*-iso8859-15
 
 " Make regex a little easier to type
@@ -757,6 +805,13 @@ set wildmode=longest,list,full
 set wildignorecase
 " tmux complete
 let g:tmux_complete_location = "~/.vim/bundle/tmux_complete"
+" disable searching of tags for autocomplete
+set complete-=t
+" path is included by default. if u want to not include it
+set complete-=i
+" set additional files
+set path+=**
+
 
 "command line suggestion
 set wildmenu
@@ -919,6 +974,11 @@ nnoremap <silent> <A-Left> :wincmd h<CR>
 nnoremap <silent> <A-Right> :wincmd l<CR>
 nnoremap <silent> <A--> <C-W>_
 nnoremap <silent> <A-=> <C-W>=
+" easy tab navigation
+nnoremap <silent> <S-Left>  :tabprevious<CR>
+nnoremap <silent> <S-Right> :tabnext<CR>
+inoremap <silent> <S-Left>  <Esc>:tabprevious<CR>i
+inoremap <silent> <S-Right> <Esc>:tabnext<CR>i
 "hide minimized splits
 set winminheight=0
 "set winheight=999
@@ -1301,7 +1361,6 @@ else
       "colorscheme default
       "colorscheme murphy "Black
       colorscheme molokai
-      "colorscheme default
       "colorscheme badwolf
       "colorscheme metacosm "Black
       "colorscheme motus "Black
@@ -1385,9 +1444,10 @@ endfunction
 " Smart mappings on the command line
 cno $c <C-U>sp <C-\>eCurrentFile("sp")<cr>
 cno $C <C-U>tabe <C-\>eCurrentFile("tabe")<cr>
-cno $p <C-U>sp <C-\>eCurrentFileDir("sp")<cr>
+" cno $p <C-U>sp <C-\>eCurrentFileDir("sp")<cr>
 "cno $P <C-U>tabe <C-\>eCurrentFileDir("tabe")<cr>
 cno $P <C-U>vs <C-\>eCurrentFileDirP4("vs")<cr>
+cno $p <C-U>vs \| enew \| setlocal bt=nofile bh=delete \| r !/home/nv/bin//p4print <C-r>=resolve(expand('%'))<CR>
 cno $b <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !`depth`/bin/p4blame <C-r>=resolve(expand('%'))<CR>:<C-R>=line(".")<CR>
 cno $E <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 edit <C-r>=resolve(expand('%'))<CR>
 cno $R <C-U>!p4 revert <C-r>=resolve(expand('%'))<CR>
@@ -1406,13 +1466,13 @@ cno $m <C-U>:set modifiable!
 cno $H <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 have <C-r>=resolve(expand('%'))<CR>
 cno $S <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 sync <C-r>=resolve(expand('%'))<CR>
 cno $T <C-U>sp <C-\>eMy_Depth("tabe")<cr>/
-cno $t <C-U>tabe <C-\>eMy_Depth("NERDTree")<cr>/
+cno $t <C-U>tabe <C-\>eMy_Depth("tabe")<cr>/
 cno $e <C-U>vs <C-\>eMy_Depth("e")<cr>/
 cno $V <C-U>vs <C-\>eMy_Depth("vs")<cr>/
 cno $v <C-U>vs <C-\>eMy_Depth("sp")<cr>/
 cno $F <C-U>set filetype=verilog_systemverilog
 cno $x <C-U>.s/\\d\\+/\\=printf("0x%04x", submatch(0))
-cno $Z <C-U>!tar cvf %.tar <C-r>=resolve(expand('%'))<CR> && mutt -s <C-r>=resolve(expand('%'))<CR> -a %.tar $USER@nvidia.com < /dev/null && \rm -f %.tar
+cno $Z <C-U>!tar cvzf <C-r>=resolve(expand('%'))<CR>.tar.gz <C-r>=resolve(expand('%'))<CR> && mutt -s <C-r>=resolve(expand('%'))<CR> -a <C-r>=resolve(expand('%'))<CR>.tar.gz $USER@nvidia.com < /dev/null && \rm -f <C-r>=resolve(expand('%'))<CR>.tar
 " map %
 "cnoremap %% <C-r>=expand('%')<CR>
 cnoremap %% <C-r>=resolve(expand('%'))<CR>
@@ -1626,6 +1686,11 @@ set foldopen-=search
 
 "so that i can move out of the terminal
 let g:ConqueTerm_ReadUnfocused = 1
+" make explore and like commands behave
+command! -nargs=* -bar -bang -count=0 -complete=dir E e. <args>
+command! -nargs=* -bar -bang -count=0 -complete=dir S sp. <args>
+command! -nargs=* -bar -bang -count=0 -complete=dir V vs. <args>
+command! -nargs=* -bar -bang -count=0 -complete=dir T tabe. <args>
 
 "Filter out the greppings
 command! -nargs=? Filter let @i='' | execute 'g/<args>/y I' | redraw | new | setlocal bt=nofile | put! I
@@ -1665,6 +1730,11 @@ noremap <F6> :UndotreeToggle<CR>
 "let g:tagbar_usearrows = 1
 noremap <F7> :TlistToggle<CR>
 "noremap <F7> :YRShow<CR>
+" settings for anzu
+" nnoremap n <Plug>(anzu-n-with-echo)
+" nnoremap N <Plug>(anzu-N-with-echo)
+" nnoremap * <Plug>(anzu-star-with-echo)
+" nnoremap # <Plug>(anzu-sharp-with-echo)
 nnoremap * *''zz
 nnoremap g* g*''zz
 nnoremap # #''zz

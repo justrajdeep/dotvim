@@ -550,3 +550,114 @@
 [submodule "bundle/filebeagle"]
 	path = bundle/filebeagle
 	url = https://github.com/jeetsukumaran/vim-filebeagle.git
+[submodule "bundle/color_lunatic"]
+	path = bundle/color_lunatic
+	url = https://github.com/chreekat/vim-colors-lunatic.git
+[submodule "bundle/markdown-folding"]
+	path = bundle/markdown-folding
+	url = https://github.com/nelstrom/vim-markdown-folding.git
+[submodule "bundle/markdown"]
+	path = bundle/markdown
+	url = https://github.com/tpope/vim-markdown.git
+[submodule "bundle/checksyntax"]
+	path = bundle/checksyntax
+	url = https://github.com/tomtom/checksyntax_vim.git
+[submodule "bundle/TextObjectify"]
+	path = bundle/TextObjectify
+	url = https://github.com/paradigm/TextObjectify.git
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule "bundle/slime"]
+	path = bundle/slime
+	url = https://github.com/jpalardy/vim-slime.git
+[submodule "bundle/smartinput"]
+	path = bundle/smartinput
+	url = https://github.com/kana/vim-smartinput.git
+[submodule "bundle/smartinput-endwise"]
+	path = bundle/smartinput-endwise
+	url = https://github.com/cohama/vim-smartinput-endwise.git
+[submodule "bundle/slimux"]
+	path = bundle/slimux
+	url = https://github.com/epeli/slimux.git
+[submodule "bundle/vimShell"]
+	path = bundle/vimShell
+	url = https://github.com/Shougo/vimshell.vim.git
+[submodule "bundle/togglelist"]
+	path = bundle/togglelist
+	url = https://github.com/kshenoy/vim-togglelist.git
+[submodule "bundle/promptline"]
+	path = bundle/promptline
+	url = https://github.com/edkolev/promptline.vim.git
+[submodule "bundle/vipy"]
+	path = bundle/vipy
+	url = https://github.com/johndgiese/vipy.git
+[submodule "bundle/ipython"]
+	path = bundle/ipython
+	url = https://github.com/ivanov/vim-ipython.git
+[submodule "bundle/cellmode"]
+	path = bundle/cellmode
+	url = https://github.com/julienr/vim-cellmode.git
+[submodule "bundle/tmux-runner"]
+	path = bundle/tmux-runner
+	url = https://github.com/christoomey/vim-tmux-runner.git
+[submodule "bundle/tslime"]
+	path = bundle/tslime
+	url = https://github.com/LnL7/vim-tslime.git
+[submodule "bundle/tslime_ipython"]
+	path = bundle/tslime_ipython
+	url = https://github.com/eldridgejm/tslime_ipython.git
+[submodule "bundle/pyrepl"]
+	path = bundle/pyrepl
+	url = https://github.com/Bogdanp/pyrepl.vim.git
+[submodule "bundle/crunch"]
+	path = bundle/crunch
+	url = https://github.com/arecarn/crunch.git
+[submodule "bundle/color_blayden"]
+	path = bundle/color_blayden
+	url = https://github.com/IntuitiveWebSolutions/vim-colors-blayden.git
+[submodule "bundle/color_lavalamp"]
+	path = bundle/color_lavalamp
+	url = https://github.com/jasonlong/lavalamp.git
+[submodule "bundle/nerdcommenter"]
+	path = bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "bundle/ctrlp-cmatcher"]
+	path = bundle/ctrlp-cmatcher
+	url = https://github.com/JazzCore/ctrlp-cmatcher.git
+[submodule "bundle/colorv"]
+	path = bundle/colorv
+	url = https://github.com/Rykka/colorv.vim.git
+[submodule "bundle/togglecursor"]
+	path = bundle/togglecursor
+	url = https://github.com/jszakmeister/vim-togglecursor.git
+[submodule "bundle/ag"]
+	path = bundle/ag
+	url = https://github.com/rking/ag.vim.git
+[submodule "bundle/swap-parameters"]
+	path = bundle/swap-parameters
+	url = https://github.com/mutewinter/swap-parameters.git
+[submodule "bundle/switch"]
+	path = bundle/switch
+	url = https://github.com/AndrewRadev/switch.vim.git
+[submodule "bundle/HelpClose"]
+	path = bundle/HelpClose
+	url = https://github.com/vim-scripts/HelpClose.git
+[submodule "bundle/visual-star-search"]
+	path = bundle/visual-star-search
+	url = https://github.com/nelstrom/vim-visual-star-search.git
+[submodule "bundle/join"]
+	path = bundle/join
+	url = https://github.com/sk1418/Join.git
+[submodule "bundle/portkey"]
+	path = bundle/portkey
+	url = https://github.com/dsawardekar/portkey.git
+[submodule "bundle/anzu"]
+	path = bundle/anzu
+	url = https://github.com/osyo-manga/vim-anzu.git
+[submodule "bundle/QFEnter"]
+	path = bundle/QFEnter
+	url = https://github.com/yssl/QFEnter.git
+[submodule "bundle/tmux"]
+	path = bundle/tmux
+	url = https://github.com/mutewinter/vim-tmux.git

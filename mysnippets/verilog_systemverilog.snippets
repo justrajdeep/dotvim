@@ -70,10 +70,77 @@ def _get_comment_format():
 endglobal
 
 ################################################################################
+snippet ifdef "add ifdef" bsw
+${1:`}ifndef `!p snip.rv = snip.fn.replace(".", "_").upper()`
+$1define `!p snip.rv = snip.fn.replace(".", "_").upper()`
+$1endif ${2:`!p snip.rv = _get_comment_format()[0]`} `!p snip.rv = snip.fn.replace(".", "_").upper()` $2
+endsnippet
+
 snippet uvm_info "add uvm_info macro" sw
 \`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_DEBUG});
 endsnippet
 
+snippet uvm_debug "add uvm_debug macro" sw
+\`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_DEBUG});
+endsnippet
+
+snippet uvm_full "add uvm_full macro" sw
+\`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_FULL});
+endsnippet
+
+snippet uvm_high "add uvm_full macro" sw
+\`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_HIGH});
+endsnippet
+
+snippet uvm_medium "add uvm_full macro" sw
+\`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_MEDIUM});
+endsnippet
+
+snippet uvm_low "add uvm_full macro" sw
+\`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_LOW});
+endsnippet
+
+snippet uvm_none "add uvm_full macro" sw
+\`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_NONE});
+endsnippet
+
 snippet uvm_fatal "add uvm_fatal macro" sw
 \`uvm_${1:fatal}(get_type_name(), $psprintf("$2"));
+endsnippet
+
+snippet uvm_error "add uvm_error macro" sw
+\`uvm_${1:error}(get_type_name(), $psprintf("$2"));
+endsnippet
+
+snippet uvm_warn "add uvm_warning macro" sw
+\`uvm_${1:warning}(get_type_name(), $psprintf("$2"));
+endsnippet
+
+snippet config_get "add cfgdb::get macro" sw
+  // get ${1:field_name} from config_db, of ${2:type} type and pass it to ${3:value}
+  if(!(uvm_config_db#($2)::get(.cntxt(${4:this}), .inst_name("$5"), .field_name("$1"), .value($3)))) begin
+    \`uvm_${6:error}(get_type_name(), $psprintf("Unable to obtain $1 from $4->$5->$1 in config DB."));
+  end
+endsnippet
+
+snippet config_set "add cfgdb::set macro" sw
+  // set ${1:field_name} from config_db, of ${2:type} type and assign value = ${3:value}
+  uvm_config_db#($2)::set(.cntxt(${4:uvm_root::get()}), .inst_name("$5"), .field_name("$1"), .value($3));
+endsnippet
+
+snippet comp_utils "add component utils macro" sw
+  \`uvm_component_utils_begin(${1:`!p snip.rv = snip.basename.lower()`})
+  \`uvm_component_utils_end
+endsnippet
+
+snippet create_clk "add nitro_clk" sw
+  clock_rst_properties_inst.create_clock(.name("$1"), .clk_period_in_ps($2), .delay_in_ps($3), .init_val(0), .index($4));
+endsnippet
+
+snippet create_dclk "add derived nitro_clk" sw
+  clock_rst_properties_inst.create_derived_clock(.name("$1"), .parent_clock_name("$2"), .init_val($3), .phase($4), .high_pulse_count($5), .low_pulse_count($6), .index($7));
+endsnippet
+
+snippet create_rst "add nitro_rst" sw
+  clock_rst_properties_inst.create_reset(.name("$1"), .active_high_lowx($2), .index($3), .init_val(1'bx), .reset_time($4), .clock_name("$5"), .clock_count($6));
 endsnippet
