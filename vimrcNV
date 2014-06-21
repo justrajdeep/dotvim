@@ -6,10 +6,14 @@
      set t_mr=[00;33;44m
      set encoding=utf-8
 
-"PATHOGEN/VUNDLE
-filetype off
+let use_pathogen = 1
+if use_pathogen
+  set rtp+=~/.vim/bundle/pathogen
+  "PATHOGEN
+  filetype off
+endif
 "disble individual pathogen
-"let g:pathogen_disabled = ['delimitMate']
+"let g:pathogen_disabled += ['delimitMate']
 " To disable a plugin, add it's bundle name to the following list
 let g:pathogen_disabled = []
 
@@ -167,26 +171,24 @@ call add(g:pathogen_disabled, 'unite_qfix')
 " call add(g:pathogen_disabled, 'QFEnter')
 call add(g:pathogen_disabled, 'IndexedSearch')
 call add(g:pathogen_disabled, 'notes')
-" call add(g:pathogen_disabled, 'cdo')
-" call add(g:pathogen_disabled, 'numbers')
-" call add(g:pathogen_disabled, 'cmdline-completion')
-" call add(g:pathogen_disabled, 'detectindent')
-" call add(g:pathogen_disabled, 'file-line')
-" call add(g:pathogen_disabled, 'grep')
-" call add(g:pathogen_disabled, 'quickfixsigns')
-" call add(g:pathogen_disabled, 'quickhl')
-" call add(g:pathogen_disabled, 'ViewOutput')
-" call add(g:pathogen_disabled, 'wildfire')
-" call add(g:pathogen_disabled, 'color_atom')
-" call add(g:pathogen_disabled, 'color_detailed')
-" call add(g:pathogen_disabled, 'color_jellybeans')
-" call add(g:pathogen_disabled, 'color_vividchalk')
-" call add(g:pathogen_disabled, 'color_ingretu')
-" call add(g:pathogen_disabled, 'color_molokai')
-" call add(g:pathogen_disabled, 'color_tir_black')
-" call add(g:pathogen_disabled, 'color_xoria256')
-" call add(g:pathogen_disabled, 'color_xterm16')
-" call add(g:pathogen_disabled, 'color_Zenburn')
+call add(g:pathogen_disabled, 'cdo')
+call add(g:pathogen_disabled, 'numbers')
+call add(g:pathogen_disabled, 'cmdline-completion')
+call add(g:pathogen_disabled, 'detectindent')
+call add(g:pathogen_disabled, 'file-line')
+call add(g:pathogen_disabled, 'grep')
+call add(g:pathogen_disabled, 'quickfixsigns')
+call add(g:pathogen_disabled, 'ViewOutput')
+call add(g:pathogen_disabled, 'color_atom')
+call add(g:pathogen_disabled, 'color_detailed')
+call add(g:pathogen_disabled, 'color_jellybeans')
+call add(g:pathogen_disabled, 'color_vividchalk')
+call add(g:pathogen_disabled, 'color_ingretu')
+call add(g:pathogen_disabled, 'color_molokai')
+call add(g:pathogen_disabled, 'color_tir_black')
+call add(g:pathogen_disabled, 'color_xoria256')
+call add(g:pathogen_disabled, 'color_xterm16')
+call add(g:pathogen_disabled, 'color_Zenburn')
 "
 " call add(g:pathogen_disabled, 'ultisnips')
 call add(g:pathogen_disabled, 'vim_perforce_fork')
@@ -194,6 +196,8 @@ call add(g:pathogen_disabled, 'ctrlp')
 call add(g:pathogen_disabled, 'ripple')
 call add(g:pathogen_disabled, 'PyScratch')
 
+call add(g:pathogen_disabled, 'quickhl')
+call add(g:pathogen_disabled, 'wildfire')
 call add(g:pathogen_disabled, 'addon-mw-utils')
 call add(g:pathogen_disabled, 'addon-manager')
 call add(g:pathogen_disabled, 'maximize')
@@ -579,24 +583,11 @@ call add(g:pathogen_disabled, 'afterimage')
 "}}}1
 
 
-call pathogen#infect()
-call pathogen#helptags()
-"VUNDLE
-"set rtp+=~/.vim/bundle/vundle/
-"call vundle#rc()
-" let Vundle manage Vundle
-" required!
-"Bundle 'gmarik/vundle'
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-" :BundleUpdate
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
-"
+if use_pathogen
+  call pathogen#infect()
+  call pathogen#helptags()
+endif
+
 "do yankstack mapping before everything
 if exists(':yankstack')
   call yankstack#setup()
