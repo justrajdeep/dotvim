@@ -1,0 +1,119 @@
+# This file contains snippets that are always defined. I personally
+# have snippets for signatures and often needed texts
+
+##############
+# NICE BOXES #
+##############
+global !p
+import string, vim
+
+""" Maps a filetype to comment format used for boxes.
+Automatically filled during usage"""
+_commentDict = { }
+
+def _parse_comments(s):
+    """ Parses vim's comments option to extract comment format """
+    i = iter(s.split(","))
+
+    rv = []
+    try:
+        while True:
+            # get the flags and text of a comment part
+            flags,text = i.next().split(':', 1)
+
+            if len(flags) == 0:
+                if len(text) == 1:
+                    rv.append((text,text,text, ""))
+            # parse 3-part comment, but ignore those with O flag
+            elif flags[0] == 's' and 'O' not in flags:
+                ctriple = []
+                indent = ""
+
+                if flags[-1] in string.digits:
+                    indent = " " * int(flags[-1])
+                ctriple.append(text)
+
+                flags,text = i.next().split(':', 1)
+                assert(flags[0] == 'm')
+                ctriple.append(text)
+
+                flags,text = i.next().split(':', 1)
+                assert(flags[0] == 'e')
+                ctriple.append(text)
+                ctriple.append(indent)
+
+                rv.append(ctriple)
+
+            elif flags[0] == 'b':
+                if len(text) == 1:
+                    rv.insert(0, (text,text,text, ""))
+
+    except StopIteration:
+       return rv
+
+def _get_comment_format():
+    """ Returns a 4-element tuple representing the comment format for
+    the current file. """
+
+    ft = vim.eval("&filetype")
+    # check if the comment dict has the format for the current file
+    if _commentDict.has_key(ft):
+        return _commentDict[ft]
+
+    # otherwise parse vim's comments and add it for later use
+    commentformat = _parse_comments(vim.eval("&comments"))[0]
+    _commentDict[ft] = commentformat
+
+    return commentformat
+
+
+endglobal
+
+################################################################################
+snippet Module "add module" bsw
+&Viva width_learning_on;
+&Viva param_preserve_on;
+
+&Viva connection_matrix_on;
+
+&Module;
+
+&Ports;
+&Wires;
+&Regs;
+&Dangles;
+
+&EndModule;
+endsnippet
+
+snippet assert "add assertion" bsw
+  ::assert always #(sim_only, name=${1:assertion_name}, clk=${2:clock}, reset_=${3:reset}) "${5:message}"   (${6:condition});
+endsnippet
+
+snippet fsm "add fsm" bsw
+    ::fsm(
+        -one_hot_states -no_testpoints -no_syn_ctrl -statetext
+        REGISTERS
+          state <0= next_state;
+        RESET
+          IDLE;
+        ADVANCE
+          <- ${1:advance_condition for state to next_state};
+        DEFAULT
+          ${2:default condition};
+
+        STATES
+
+        IDLE:
+	      ${3: assignments};
+          ${4:S1} <- ${5:advance condition};
+		  ${6:assignments};
+    )
+endsnippet
+
+snippet foreach "add foreach" bsw
+        ::foreach( \$i ::qq(${1:iterator})
+          ${2:-eval '${3:var1}=int(${4:\$i some cond})'}
+        ::qq(
+        ))
+endsnippet

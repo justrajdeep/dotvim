@@ -87,7 +87,6 @@ call add(g:pathogen_disabled, 'bufexplorer')
 " call add(g:pathogen_disabled, 'color_hemisu')
 " call add(g:pathogen_disabled, 'color_hybrid')
 " call add(g:pathogen_disabled, 'color_laederon')
-" call add(g:pathogen_disabled, 'color_lizard')
 " call add(g:pathogen_disabled, 'color_luna')
 " call add(g:pathogen_disabled, 'color_noctu')
 " call add(g:pathogen_disabled, 'color_seoul256')
@@ -124,7 +123,6 @@ call add(g:pathogen_disabled, 'bufexplorer')
 " call add(g:pathogen_disabled, 'rainbow_parentheses')
 " call add(g:pathogen_disabled, 'repeat')
 " call add(g:pathogen_disabled, 'scratch')
-" call add(g:pathogen_disabled, 'solarized')
 " call add(g:pathogen_disabled, 'speeddating')
 " call add(g:pathogen_disabled, 'table-mode')
 " call add(g:pathogen_disabled, 'tabpagecolorscheme')
@@ -157,21 +155,116 @@ call add(g:pathogen_disabled, 'bufexplorer')
 " call add(g:pathogen_disabled, 'HelpClose')
 " call add(g:pathogen_disabled, 'join')
 call add(g:pathogen_disabled, 'colorv')
-" call add(g:pathogen_disabled, 'QFEnter')
+call add(g:pathogen_disabled, 'xterm-color-table')
 " call add(g:pathogen_disabled, 'color_blayden')
 " call add(g:pathogen_disabled, 'color_lavalamp')
+" call add(g:pathogen_disabled, 'color_mochalatte')
+" call add(g:pathogen_disabled, 'ack')
+" call add(g:pathogen_disabled, 'ag')
+call add(g:pathogen_disabled, 'unite')
+call add(g:pathogen_disabled, 'unite_qfix')
+" call add(g:pathogen_disabled, 'ctrlspace')
+" call add(g:pathogen_disabled, 'QFEnter')
+call add(g:pathogen_disabled, 'IndexedSearch')
+call add(g:pathogen_disabled, 'notes')
+" call add(g:pathogen_disabled, 'cdo')
+" call add(g:pathogen_disabled, 'numbers')
+" call add(g:pathogen_disabled, 'cmdline-completion')
+" call add(g:pathogen_disabled, 'detectindent')
+" call add(g:pathogen_disabled, 'file-line')
+" call add(g:pathogen_disabled, 'grep')
+" call add(g:pathogen_disabled, 'quickfixsigns')
+" call add(g:pathogen_disabled, 'quickhl')
+" call add(g:pathogen_disabled, 'ViewOutput')
+" call add(g:pathogen_disabled, 'wildfire')
+" call add(g:pathogen_disabled, 'color_atom')
+" call add(g:pathogen_disabled, 'color_detailed')
+" call add(g:pathogen_disabled, 'color_jellybeans')
+" call add(g:pathogen_disabled, 'color_vividchalk')
+" call add(g:pathogen_disabled, 'color_ingretu')
+" call add(g:pathogen_disabled, 'color_molokai')
+" call add(g:pathogen_disabled, 'color_tir_black')
+" call add(g:pathogen_disabled, 'color_xoria256')
+" call add(g:pathogen_disabled, 'color_xterm16')
+" call add(g:pathogen_disabled, 'color_Zenburn')
 "
 " call add(g:pathogen_disabled, 'ultisnips')
 call add(g:pathogen_disabled, 'vim_perforce_fork')
-" call add(g:pathogen_disabled, 'ctrlp')
+call add(g:pathogen_disabled, 'ctrlp')
 call add(g:pathogen_disabled, 'ripple')
 call add(g:pathogen_disabled, 'PyScratch')
 
+call add(g:pathogen_disabled, 'addon-mw-utils')
+call add(g:pathogen_disabled, 'addon-manager')
+call add(g:pathogen_disabled, 'maximize')
+call add(g:pathogen_disabled, 'hilinks')
+call add(g:pathogen_disabled, 'shymenu')
+call add(g:pathogen_disabled, 'golden-ratio')
+call add(g:pathogen_disabled, 'python-mode')
+call add(g:pathogen_disabled, 'xpath')
+call add(g:pathogen_disabled, 'webapi')
+call add(g:pathogen_disabled, 'virtualenv')
+call add(g:pathogen_disabled, 'tap')
+call add(g:pathogen_disabled, 'vdebug')
+call add(g:pathogen_disabled, 'vcscommand')
+call add(g:pathogen_disabled, 'ttagecho')
+call add(g:pathogen_disabled, 'tracwiki')
+call add(g:pathogen_disabled, 'tplugin')
+call add(g:pathogen_disabled, 'tmru')
+call add(g:pathogen_disabled, 'tmarks')
+call add(g:pathogen_disabled, 'tinykeymap')
+call add(g:pathogen_disabled, 'tmux_syntax')
+call add(g:pathogen_disabled, 'SyntaxAttr')
+call add(g:pathogen_disabled, 'swap')
+call add(g:pathogen_disabled, 'SudoEdit')
+call add(g:pathogen_disabled, 'sparkup')
+call add(g:pathogen_disabled, 'smarty')
+call add(g:pathogen_disabled, 'runVimTests')
+call add(g:pathogen_disabled, 'ref')
+call add(g:pathogen_disabled, 'Rainbow-Parenthsis-Bundle')
+call add(g:pathogen_disabled, 'ragtag')
+call add(g:pathogen_disabled, 'python-pep8-indent')
+call add(g:pathogen_disabled, 'pytest-vim-compiler')
+call add(g:pathogen_disabled, 'pytest')
+call add(g:pathogen_disabled, 'pydoc')
+call add(g:pathogen_disabled, 'projectroot')
+call add(g:pathogen_disabled, 'projectionist')
+call add(g:pathogen_disabled, 'preview')
+call add(g:pathogen_disabled, 'phpcomplete')
+call add(g:pathogen_disabled, 'Parameter-Text-Objects')
+call add(g:pathogen_disabled, 'pac')
+call add(g:pathogen_disabled, 'operator-user')
+call add(g:pathogen_disabled, 'operator-replace')
+call add(g:pathogen_disabled, 'open-browser')
+call add(g:pathogen_disabled, 'neomru')
+call add(g:pathogen_disabled, 'neobundle')
+call add(g:pathogen_disabled, 'lusty')
+call add(g:pathogen_disabled, 'luarefvim')
+call add(g:pathogen_disabled, 'lua-ftplugin')
+call add(g:pathogen_disabled, 'localvimrc')
+call add(g:pathogen_disabled, 'keepcase')
+call add(g:pathogen_disabled, 'github-issues')
+call add(g:pathogen_disabled, 'gf-python')
+call add(g:pathogen_disabled, 'fontzoom')
+call add(g:pathogen_disabled, 'fatrat')
+call add(g:pathogen_disabled, 'extradite')
+call add(g:pathogen_disabled, 'CycleColor')
+call add(g:pathogen_disabled, 'Colorizer')
+call add(g:pathogen_disabled, 'colorhighlight')
+call add(g:pathogen_disabled, 'coffee-script')
+call add(g:pathogen_disabled, 'better-whitespace')
+call add(g:pathogen_disabled, 'QFixToggle')
+call add(g:pathogen_disabled, 'AnsiEsc')
+call add(g:pathogen_disabled, 'plug')
+call add(g:pathogen_disabled, 'obsession')
+call add(g:pathogen_disabled, 'tabline')
+call add(g:pathogen_disabled, 'tabber')
+call add(g:pathogen_disabled, 'bufferlist')
+call add(g:pathogen_disabled, 'smeargle')
 call add(g:pathogen_disabled, 'tmux')
 call add(g:pathogen_disabled, 'visual-star-search')
 call add(g:pathogen_disabled, 'anzu')
 call add(g:pathogen_disabled, 'portkey')
-call add(g:pathogen_disabled, 'ag')
 call add(g:pathogen_disabled, 'togglecursor')
 call add(g:pathogen_disabled, 'ctrlp-cmatcher')
 call add(g:pathogen_disabled, 'nerdcommenter')
@@ -184,18 +277,17 @@ call add(g:pathogen_disabled, 'TaskList')
 call add(g:pathogen_disabled, 'YankRing')
 call add(g:pathogen_disabled, 'YouCompleteMe')
 call add(g:pathogen_disabled, 'abolish')
-call add(g:pathogen_disabled, 'ack')
 call add(g:pathogen_disabled, 'autocomplete')
 call add(g:pathogen_disabled, 'autohighlight')
 call add(g:pathogen_disabled, 'bufexplorer')
 call add(g:pathogen_disabled, 'buffergrep')
 call add(g:pathogen_disabled, 'bufkill')
+call add(g:pathogen_disabled, 'bufkill_fork')
 call add(g:pathogen_disabled, 'checkSyntax')
 call add(g:pathogen_disabled, 'chronos')
 call add(g:pathogen_disabled, 'coVim')
 call add(g:pathogen_disabled, 'conque')
 call add(g:pathogen_disabled, 'context_filetype')
-call add(g:pathogen_disabled, 'ctrlspace')
 call add(g:pathogen_disabled, 'cursorcross')
 call add(g:pathogen_disabled, 'diffchanges')
 call add(g:pathogen_disabled, 'diminactive')
@@ -235,8 +327,6 @@ call add(g:pathogen_disabled, 'textabyss')
 call add(g:pathogen_disabled, 'tlib')
 call add(g:pathogen_disabled, 'tmux-navigator')
 call add(g:pathogen_disabled, 'tmux_complete')
-call add(g:pathogen_disabled, 'unite')
-call add(g:pathogen_disabled, 'unite_qfix')
 call add(g:pathogen_disabled, 'utl')
 call add(g:pathogen_disabled, 'vim-diffchanges')
 call add(g:pathogen_disabled, 'vim-dispatch')
@@ -262,7 +352,9 @@ call add(g:pathogen_disabled, 'tcomment')
 call add(g:pathogen_disabled, 'fireplace')
 call add(g:pathogen_disabled, 'maktaba')
 call add(g:pathogen_disabled, 'unimpaired')
-call add(g:pathogen_disabled, 'textobj')
+call add(g:pathogen_disabled, 'textobj-user')
+call add(g:pathogen_disabled, 'textobj-function')
+call add(g:pathogen_disabled, 'textobj-indent')
 call add(g:pathogen_disabled, 'supertab')
 call add(g:pathogen_disabled, 'jedi')
 call add(g:pathogen_disabled, 'easytree')
@@ -289,6 +381,7 @@ call add(g:pathogen_disabled, 'cellmode')
 call add(g:pathogen_disabled, 'tmux-runner')
 call add(g:pathogen_disabled, 'tslime')
 call add(g:pathogen_disabled, 'tslime_ipython')
+call add(g:pathogen_disabled, 'afterimage')
 "}}}1
 "diabling plugins {{{1
 " call add(g:pathogen_disabled, 'CSApprox')
@@ -508,6 +601,10 @@ call pathogen#helptags()
 if exists(':yankstack')
   call yankstack#setup()
 endif
+" if exists(':Switch')
+  source $HOME/.vim/my_switch
+  nnoremap - :Switch<CR>
+" endif
 "if exists('g:loaded_surround') && !exists('b:surround_'.char2nr(':'))
 "  let b:surround_{char2nr(':')} = ":\r"
 "endif
@@ -531,7 +628,7 @@ set fcs=vert:'|'
 "set splitright
 "set splitbelow
 "
-" Set to auto read when a file is changed from the outside
+" Set to auto read when a file is changed from the outside load automatically
 "set autoread
 "
 " Set to auto write file
@@ -834,16 +931,21 @@ endif
 " use C-k to insert
 "set showbreak=§
 " Make trailing whitespace annoyingly highlighted.
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
+let  extra_whiteSpace = 1
+if extra_whiteSpace
+  highlight ExtraWhitespace ctermbg=red guibg=red
+  match ExtraWhitespace /\s\+$/
+endif
 augroup MyAutoCmd
-  autocmd BufEnter * match ExtraWhitespace /\s\+$/
-  "autocmd VimLeavePre * bufdo Purge
-  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-  autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-  autocmd BufUnload * call clearmatches()
-  " add this so that future colorscheme changes dont overwrite it"
-  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+  if extra_whiteSpace
+    autocmd BufEnter * match ExtraWhitespace /\s\+$/
+    "autocmd VimLeavePre * bufdo Purge
+    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+    autocmd BufUnload * call clearmatches()
+    " add this so that future colorscheme changes dont overwrite it"
+    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+  endif
   " remove trailing spaces"
   "autocmd FileType c,cpp,java,php,perl,yaml,vim autocmd BufWritePre <buffer> :%s/\s\+$\|^\s\+$//e
 " Turn on cursorline only on active window
@@ -957,6 +1059,7 @@ vnoremap <Up> gk
 "inoremap <Down> <C-o>gj
 "inoremap <Up> <C-o>gk
 nnoremap gf gF
+nnoremap bf :badd <cfile><CR>
 nnoremap <C-w><C-f> <C-w><S-f>
 nnoremap <C-w>gf <C-w>gF
 :command Qa qa
@@ -969,18 +1072,33 @@ nnoremap <C-w>gf <C-w>gF
 :command Vs vs
 " easy buffer navigation
 nnoremap <silent> <A-Up> :wincmd k<CR>
+nnoremap <silent> <A-k> :wincmd k<CR>
 nnoremap <silent> <A-Down> :wincmd j<CR>
+nnoremap <silent> <A-j> :wincmd j<CR>
 nnoremap <silent> <A-Left> :wincmd h<CR>
+nnoremap <silent> <A-h> :wincmd h<CR>
 nnoremap <silent> <A-Right> :wincmd l<CR>
+nnoremap <silent> <A-l> :wincmd l<CR>
 nnoremap <silent> <A--> <C-W>_
 nnoremap <silent> <A-=> <C-W>=
+nnoremap <silent> <A-+> <C-W>+
+" insert space above and below
+nnoremap <silent><C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <silent><C-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 " easy tab navigation
 nnoremap <silent> <S-Left>  :tabprevious<CR>
+nnoremap <silent> <S-h>  :tabprevious<CR>
 nnoremap <silent> <S-Right> :tabnext<CR>
+nnoremap <silent> <S-l> :tabnext<CR>
 inoremap <silent> <S-Left>  <Esc>:tabprevious<CR>i
 inoremap <silent> <S-Right> <Esc>:tabnext<CR>i
 "hide minimized splits
 set winminheight=0
+" settings for tabber
+if exists('g:autoloaded_tabber') || &cp
+  set tabline=%!tabber#TabLine()
+  set guioptions-=e
+endif
 "set winheight=999
 "follow symlinks"
 "command! -nargs=1 -complete=file EF call EditFile(<f-args>)
@@ -1451,6 +1569,7 @@ cno $p <C-U>vs \| enew \| setlocal bt=nofile bh=delete \| r !/home/nv/bin//p4pri
 cno $b <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !`depth`/bin/p4blame <C-r>=resolve(expand('%'))<CR>:<C-R>=line(".")<CR>
 cno $E <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 edit <C-r>=resolve(expand('%'))<CR>
 cno $R <C-U>!p4 revert <C-r>=resolve(expand('%'))<CR>
+cno $r <C-U>!p4 reopen -t text+k <C-r>=resolve(expand('%'))<CR>
 cno $A <C-U>!p4 add -t text+k <C-r>=resolve(expand('%'))<CR>
 cno $a <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 annotate <C-r>=resolve(expand('%'))<CR>
 cno $L <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 filelog <C-r>=resolve(expand('%'))<CR>
@@ -1459,12 +1578,14 @@ cno $D <C-U>!p4 diff <C-r>=resolve(expand('%'))<CR> &
 cno $d <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 describe <C-r><C-w>
 cno $N <C-U>!nedit <C-r>=resolve(expand('%'))<CR>
 cno $G <C-U>!gnome-terminal &
+cno $g <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !/home/nv/toolroot/bin/nvgrep <C-r><C-w>
 cno $X <C-U>!xterm -e xx &
 cno $K <C-U>!konsole &
 cno $M <C-U>!pwd \| mutt -s <C-r>=resolve(expand('%'))<CR> -a <C-r>=resolve(expand('%'))<CR> $USER@nvidia.com
 cno $m <C-U>:set modifiable!
 cno $H <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 have <C-r>=resolve(expand('%'))<CR>
 cno $S <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 sync <C-r>=resolve(expand('%'))<CR>
+cno $s <C-U>!p4 submit <C-r>=resolve(expand('%'))<CR>
 cno $T <C-U>sp <C-\>eMy_Depth("tabe")<cr>/
 cno $t <C-U>tabe <C-\>eMy_Depth("tabe")<cr>/
 cno $e <C-U>vs <C-\>eMy_Depth("e")<cr>/
@@ -1739,6 +1860,8 @@ nnoremap * *''zz
 nnoremap g* g*''zz
 nnoremap # #''zz
 nnoremap g# g#''zz
+nnoremap <silent> n /<CR>
+nnoremap <silent> N ?<CR>
 "nnoremap <silent> n n:call HLNext(0.2)<cr>
 "nnoremap <silent> N N:call HLNext(0.2)<cr>
 " hex dec conversion
@@ -1969,22 +2092,23 @@ if exists(':Unite')
   call unite#custom#source('file_rec', 'ignore_pattern', '\.abc$')
   call unite#custom#source('file_rec', 'max_candidates', '0')
   call unite#custom#source('file', 'max_candidates', '0')
-  "nnoremap <leader>t :<C-u>Unite -buffer-name=files   file_rec:<C-\>eMy_DepthNoSpace("Unite -buffer-name=files   file_rec:")<cr>/
-  nnoremap <leader>d :<C-u>Unite -buffer-name=files   file_rec:<C-\>eMy_DepthNoSpace("Unite -buffer-name=dir   directory:")<cr>/
-  "nnoremap <leader>f :<C-u>Unite -buffer-name=files   file<cr>
-  nnoremap <leader>fr :<C-u>Unite -buffer-name=files   file_rec:../../
-  nnoremap <leader>ft :<C-u><C-\>eCurrentFileUnite("../..")<cr>
-  nnoremap <leader>o :<C-u>Unite -buffer-name=outline outline<cr>
-  nnoremap <leader>c :<C-u>Unite -buffer-name=output output<cr>
-  nnoremap <leader>y :<C-u>Unite -buffer-name=yank    history/yank<cr>
-  nnoremap <leader>h :<C-u>Unite -buffer-name=yank    history/yank<cr>
-  nnoremap <leader>r :<C-u>Unite -buffer-name=yank    register<cr>
-  nnoremap <leader>b :<C-u>Unite -buffer-name=buffer  buffer<cr>
-  nnoremap <leader>q :<C-u>Unite -buffer-name=quickfix qflist<cr>
-  nnoremap <leader>g :<C-u>Unite -buffer-name=grep  vimgrep:%<cr>
-  nnoremap <leader>gb :<C-u>Unite -buffer-name=grep  vimgrep:##<cr>
-  nnoremap <leader>l :<C-u>Unite -buffer-name=search  line<cr>
+  " " nnoremap <leader>t :<C-u>Unite -buffer-name=files   file_rec:<C-\>eMy_DepthNoSpace("Unite -buffer-name=files   file_rec:")<cr>/
+  " nnoremap <leader>d :<C-u>Unite -buffer-name=files   file_rec:<C-\>eMy_DepthNoSpace("Unite -buffer-name=dir   directory:")<cr>/
+  " "nnoremap <leader>f :<C-u>Unite -buffer-name=files   file<cr>
+  " nnoremap <leader>fr :<C-u>Unite -buffer-name=files   file_rec:../../
+  " nnoremap <leader>ft :<C-u><C-\>eCurrentFileUnite("../..")<cr>
+  " nnoremap <leader>o :<C-u>Unite -buffer-name=outline outline<cr>
+  " nnoremap <leader>c :<C-u>Unite -buffer-name=output output<cr>
+  " nnoremap <leader>y :<C-u>Unite -buffer-name=yank    history/yank<cr>
+  " nnoremap <leader>h :<C-u>Unite -buffer-name=yank    history/yank<cr>
+  " nnoremap <leader>r :<C-u>Unite -buffer-name=yank    register<cr>
+  " nnoremap <leader>b :<C-u>Unite -buffer-name=buffer  buffer<cr>
+  " nnoremap <leader>q :<C-u>Unite -buffer-name=quickfix qflist<cr>
+  " nnoremap <leader>g :<C-u>Unite -buffer-name=grep  vimgrep:%<cr>
+  " nnoremap <leader>gb :<C-u>Unite -buffer-name=grep  vimgrep:##<cr>
+  " nnoremap <leader>l :<C-u>Unite -buffer-name=search  line<cr>
   autocmd FileType unite call s:unite_my_settings()
+  nnoremap <Space>b  :Unite -buffer-name=buffer buffer<CR>
 endif
 function! s:unite_my_settings()
   "set paste
@@ -2050,6 +2174,7 @@ let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
 set iskeyword+=_
 set iskeyword-='
 set iskeyword-=:
+set iskeyword-=/
 syntax on
 filetype on
 filetype plugin on

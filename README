@@ -14,6 +14,7 @@ Symbolic Links
 ln -fs ~/.vim/vimrcNV ~/.vimrc
 make sure you have cloned pathogen first
 ln -fs ~/.vim/bundle/pathogen/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim
+ln -fs ~/.vim/bundle/plug/plug.vim ~/.vim/autoload/plug.vim
 
 ====================
 Plugins Install
