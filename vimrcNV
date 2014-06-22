@@ -929,6 +929,7 @@ if use_neobundle
     NeoBundle 'yssl/QFEnter.git',                              { 'directory' : 'QFEnter'}
     NeoBundle 'zeis/vim-kolor.git',                            { 'directory' : 'kolor'}
 
+    NeoBundleCheck
     NeoBundleSaveCache
   endif
   call neobundle#end()
