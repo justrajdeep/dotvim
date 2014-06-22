@@ -595,7 +595,9 @@ endif
 
 " Neobundle {{{1
 if use_neobundle
-  set runtimepath+=~/.vim/bundle/neobundle
+  if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle
+  endif
   call neobundle#begin(expand('~/.vim/bundle'))
   if neobundle#has_cache()
     NeoBundleLoadCache
@@ -608,7 +610,7 @@ if use_neobundle
     NeoBundle 'bluespec',                                      { 'type' : 'nosync'}
     NeoBundle 'my_colors',                                     { 'type' : 'nosync'}
     " NeoBundle 'nvbug',                                         { 'type' : 'nosync'}
-    NeoBundle 'nvidia',                                        { 'type' : 'nosync'}
+    " NeoBundle 'nvidia',                                        { 'type' : 'nosync'}
     " NeoBundle 'p4python',                                      { 'type' : 'nosync'}
     " NeoBundle 'visualGuide',                                   { 'type' : 'nosync'}
 
@@ -629,7 +631,7 @@ if use_neobundle
     " NeoBundle 'Shougo/neomru.vim.git',                         { 'directory' : 'neomru'}
     " NeoBundle 'Shougo/neosnippet.vim.git',                     { 'directory' : 'neosnippet'}
     " NeoBundle 'Shougo/unite-outline.git',                      { 'directory' : 'outline'}
-    NeoBundle 'Shougo/unite.vim.git',                          { 'directory' : 'unite'}
+    " NeoBundle 'Shougo/unite.vim.git',                          { 'directory' : 'unite'}
     " NeoBundle 'Shougo/vimshell.vim.git',                       { 'directory' : 'vimShell'}
     " NeoBundle 'Valloric/YouCompleteMe.git',                    { 'directory' : 'YouCompleteMe'}
     " NeoBundle 'Wolfy87/vim-enmasse.git',                       { 'directory' : 'enmasse'}
