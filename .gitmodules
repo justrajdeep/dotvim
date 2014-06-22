@@ -943,3 +943,6 @@
 [submodule "bundle/dragvisuals"]
 	path = bundle/dragvisuals
 	url = https://github.com/atweiden/vim-dragvisuals.git
+[submodule "bundle/restart"]
+	path = bundle/restart
+	url = https://github.com/tyru/restart.vim.git
