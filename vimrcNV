@@ -6,7 +6,8 @@
      set t_mr=[00;33;44m
      set encoding=utf-8
 
-let use_pathogen = 1
+let use_pathogen = 0
+let use_neobundle = 1
 if use_pathogen
   set rtp+=~/.vim/bundle/pathogen
   "PATHOGEN
@@ -189,6 +190,7 @@ call add(g:pathogen_disabled, 'notes')
 " call add(g:pathogen_disabled, 'color_xterm16')
 " call add(g:pathogen_disabled, 'color_Zenburn')
 " call add(g:pathogen_disabled, 'color_greyhouse')
+" call add(g:pathogen_disabled, 'neobundle')
 "
 " call add(g:pathogen_disabled, 'ultisnips')
 call add(g:pathogen_disabled, 'vim_perforce_fork')
@@ -244,8 +246,8 @@ call add(g:pathogen_disabled, 'operator-user')
 call add(g:pathogen_disabled, 'operator-replace')
 call add(g:pathogen_disabled, 'open-browser')
 call add(g:pathogen_disabled, 'neomru')
-call add(g:pathogen_disabled, 'neobundle')
 call add(g:pathogen_disabled, 'lusty')
+call add(g:pathogen_disabled, 'gitv')
 call add(g:pathogen_disabled, 'luarefvim')
 call add(g:pathogen_disabled, 'lua-ftplugin')
 call add(g:pathogen_disabled, 'localvimrc')
@@ -590,6 +592,346 @@ if use_pathogen
   call pathogen#infect()
   call pathogen#helptags()
 endif
+
+" Neobundle {{{1
+if use_neobundle
+  set runtimepath+=~/.vim/bundle/neobundle
+  call neobundle#begin(expand('~/.vim/bundle'))
+  if neobundle#has_cache()
+    NeoBundleLoadCache
+  else
+    " Let NeoBundle manage NeoBundle
+    " Required:
+    NeoBundleFetch 'Shougo/neobundle.vim.git',                 { 'directory' : 'neobundle'}
+    " My Bundles here:
+    " NeoBundle 'autohighlight',                                 { 'type' : 'nosync'}
+    NeoBundle 'bluespec',                                      { 'type' : 'nosync'}
+    NeoBundle 'my_colors',                                     { 'type' : 'nosync'}
+    " NeoBundle 'nvbug',                                         { 'type' : 'nosync'}
+    NeoBundle 'nvidia',                                        { 'type' : 'nosync'}
+    " NeoBundle 'p4python',                                      { 'type' : 'nosync'}
+    " NeoBundle 'visualGuide',                                   { 'type' : 'nosync'}
+
+    " NeoBundle '5long/pytest-vim-compiler.git',                 { 'directory' : 'pytest-vim-compiler'}
+    " NeoBundle 'AndrewRadev/splitjoin.vim',                     { 'directory' : 'splitjoin'}
+    " NeoBundle 'FredKSchott/CoVim.git',                         { 'directory' : 'coVim'}
+    " NeoBundle 'FriedSock/smeargle.git',                        { 'directory' : 'smeargle'}
+    " NeoBundle 'JarrodCTaylor/vim-shell-executor.git',          { 'directory' : 'shell-executor'}
+    " NeoBundle 'JazzCore/ctrlp-cmatcher.git',                   { 'directory' : 'ctrlp-cmatcher'}
+    " NeoBundle 'JazzCore/neocomplcache-ultisnips.git',          { 'directory' : 'neocomplcache-ultisnips'}
+    " NeoBundle 'LnL7/vim-tslime.git',                           { 'directory' : 'tslime'}
+    " NeoBundle 'MarcWeber/vim-addon-manager.git',               { 'directory' : 'addon-manager'}
+    " NeoBundle 'MarcWeber/vim-addon-mw-utils',                  { 'directory' : 'mw_utils'}
+    " NeoBundle 'MarcWeber/vim-addon-mw-utils.git',              { 'directory' : 'addon-mw-utils'}
+    " NeoBundle 'Rykka/colorv.vim.git',                          { 'directory' : 'colorv'}
+    " NeoBundle 'Shougo/context_filetype.vim.git',               { 'directory' : 'context_filetype'}
+    " NeoBundle 'Shougo/neocomplcache.vim.git',                  { 'directory' : 'neocomplcache'}
+    " NeoBundle 'Shougo/neomru.vim.git',                         { 'directory' : 'neomru'}
+    " NeoBundle 'Shougo/neosnippet.vim.git',                     { 'directory' : 'neosnippet'}
+    " NeoBundle 'Shougo/unite-outline.git',                      { 'directory' : 'outline'}
+    NeoBundle 'Shougo/unite.vim.git',                          { 'directory' : 'unite'}
+    " NeoBundle 'Shougo/vimshell.vim.git',                       { 'directory' : 'vimShell'}
+    " NeoBundle 'Valloric/YouCompleteMe.git',                    { 'directory' : 'YouCompleteMe'}
+    " NeoBundle 'Wolfy87/vim-enmasse.git',                       { 'directory' : 'enmasse'}
+    " NeoBundle 'aaronbieber/quicktask.git',                     { 'directory' : 'quicktask'}
+    " NeoBundle 'actionshrimp/vim-xpath.git',                    { 'directory' : 'xpath'}
+    " NeoBundle 'alfredodeza/pytest.vim.git',                    { 'directory' : 'pytest'}
+    " NeoBundle 'amiorin/vim-project.git',                       { 'directory' : 'project'}
+    " NeoBundle 'atweiden/vim-dragvisuals.git',                  { 'directory' : 'dragvisuals'}
+    " NeoBundle 'atweiden/vim-vmath.git',                        { 'directory' : 'vmath'}
+    " NeoBundle 'basepi/vim-conque.git',                         { 'directory' : 'conque'}
+    " NeoBundle 'benmills/vimux.git',                            { 'directory' : 'vimux'}
+    " NeoBundle 'bling/vim-airline.git',                         { 'directory' : 'vim_airline'}
+    " NeoBundle 'blueyed/CycleColor.git',                        { 'directory' : 'CycleColor'}
+    " NeoBundle 'blueyed/bufkill.vim',                           { 'directory' : 'bufkill_fork'}
+    " NeoBundle 'blueyed/colorhighlight.vim.git',                { 'directory' : 'colorhighlight'}
+    " NeoBundle 'blueyed/smarty.vim.git',                        { 'directory' : 'smarty'}
+    " NeoBundle 'blueyed/vim-diminactive.git',                   { 'directory' : 'diminactive'}
+    " NeoBundle 'blueyed/vim-quickhl',                           { 'directory' : 'quickhl'}
+    " NeoBundle 'chrisbra/Colorizer.git',                        { 'directory' : 'Colorizer'}
+    " NeoBundle 'chrisbra/SudoEdit.vim.git',                     { 'directory' : 'SudoEdit'}
+    " NeoBundle 'christoomey/vim-tmux-navigator.git',            { 'directory' : 'tmux-navigator'}
+    " NeoBundle 'christoomey/vim-tmux-runner.git',               { 'directory' : 'tmux-runner'}
+    " NeoBundle 'coreyoconnor/vim-perforce.git',                 { 'directory' : 'vim_perforce_fork'}
+    " NeoBundle 'davidhalter/jedi-vim.git',                      { 'directory' : 'jedi'}
+    " NeoBundle 'dbakker/vim-projectroot.git',                   { 'directory' : 'projectroot'}
+    " NeoBundle 'dsawardekar/portkey.git',                       { 'directory' : 'portkey'}
+    " NeoBundle 'edkolev/promptline.vim.git',                    { 'directory' : 'promptline'}
+    " NeoBundle 'eldridgejm/tslime_ipython.git',                 { 'directory' : 'tslime_ipython'}
+    " NeoBundle 'embear/vim-localvimrc.git',                     { 'directory' : 'localvimrc'}
+    " NeoBundle 'epeli/slimux.git',                              { 'directory' : 'slimux'}
+    " NeoBundle 'ervandew/maximize.git',                         { 'directory' : 'maximize'}
+    " NeoBundle 'ervandew/supertab.git',                         { 'directory' : 'supertab'}
+    " NeoBundle 'ferranpm/vim-colorcode.git',                    { 'directory' : 'colorcode'}
+    " NeoBundle 'fholgado/minibufexpl.vim.git',                  { 'directory' : 'minibufexpl'}
+    " NeoBundle 'fs111/pydoc.vim',                               { 'directory' : 'pydoc'}
+    " NeoBundle 'fweep/vim-tabber.git',                          { 'directory' : 'tabber'}
+    " NeoBundle 'garbas/vim-snipmate.git',                       { 'directory' : 'snipMate'}
+    " NeoBundle 'gcmt/wildfire.vim.git',                         { 'directory' : 'wildfire'}
+    " NeoBundle 'gmarik/vundle.git',                             { 'directory' : 'vundle'}
+    " NeoBundle 'godlygeek/tabular.git',                         { 'directory' : 'tabular'}
+    " NeoBundle 'google/maktaba.git',                            { 'directory' : 'maktaba'}
+    " NeoBundle 'greyblake/vim-preview.git',                     { 'directory' : 'preview'}
+    " NeoBundle 'guns/vim-sexp.git',                             { 'directory' : 'sexp'}
+    " NeoBundle 'guns/xterm-color-table.vim.git',                { 'directory' : 'xterm-color-table'}
+    " NeoBundle 'hsitz/PyScratch.git',                           { 'directory' : 'PyScratch'}
+    " NeoBundle 'hynek/vim-python-pep8-indent.git',              { 'directory' : 'python-pep8-indent'}
+    " NeoBundle 'inkarkat/VimTAP.git',                           { 'directory' : 'tap'}
+    " NeoBundle 'inkarkat/runVimTests',                          { 'directory' : 'runVimTests'}
+    " NeoBundle 'int3/vim-extradite.git',                        { 'directory' : 'extradite'}
+    " NeoBundle 'ivanov/vim-ipython.git',                        { 'directory' : 'ipython'}
+    " NeoBundle 'ivyl/vim-bling.git',                            { 'directory' : 'bling'}
+    " NeoBundle 'jaxbot/github-issues.vim.git',                  { 'directory' : 'github-issues'}
+    " NeoBundle 'jceb/vim-orgmode.git',                          { 'directory' : 'orgmode'}
+    " NeoBundle 'jeetsukumaran/vim-filebeagle.git',              { 'directory' : 'filebeagle'}
+    " NeoBundle 'jmcantrell/vim-diffchanges.git',                { 'directory' : 'vim-diffchanges'}
+    " NeoBundle 'jmcantrell/vim-fatrat.git',                     { 'directory' : 'fatrat'}
+    " NeoBundle 'jmcantrell/vim-virtualenv',                     { 'directory' : 'virtualenv'}
+    " NeoBundle 'johndgiese/vipy.git',                           { 'directory' : 'vipy'}
+    " NeoBundle 'joonty/vdebug.git',                             { 'directory' : 'vdebug'}
+    " NeoBundle 'jpalardy/vim-slime.git',                        { 'directory' : 'slime'}
+    " NeoBundle 'jszakmeister/vim-togglecursor.git',             { 'directory' : 'togglecursor'}
+    " NeoBundle 'julienr/vim-cellmode.git',                      { 'directory' : 'cellmode'}
+    " NeoBundle 'junegunn/vim-plug.git',                         { 'directory' : 'plug'}
+    " NeoBundle 'justinmk/vim-sneak.git',                        { 'directory' : 'sneak'}
+    " NeoBundle 'kana/vim-operator-replace',                     { 'directory' : 'operator-replace'}
+    " NeoBundle 'kana/vim-operator-user',                        { 'directory' : 'operator-user'}
+    " NeoBundle 'kana/vim-smartinput.git',                       { 'directory' : 'smartinput'}
+    " NeoBundle 'kana/vim-textobj-function.git',                 { 'directory' : 'textobj-function'}
+    " NeoBundle 'kana/vim-textobj-indent.git',                   { 'directory' : 'textobj-indent'}
+    " NeoBundle 'kana/vim-textobj-user.git',                     { 'directory' : 'textobj-user'}
+    " NeoBundle 'kchmck/vim-coffee-script.git',                  { 'directory' : 'coffee-script'}
+    " NeoBundle 'kergoth/vim-hilinks.git',                       { 'directory' : 'hilinks'}
+    " NeoBundle 'kien/ctrlp.vim.git',                            { 'directory' : 'ctrlp'}
+    " NeoBundle 'klen/python-mode.git',                          { 'directory' : 'python-mode'}
+    " NeoBundle 'kshenoy/vim-signature.git',                     { 'directory' : 'signature'}
+    " NeoBundle 'kshenoy/vim-togglelist.git',                    { 'directory' : 'togglelist'}
+    " NeoBundle 'kurkale6ka/vim-swap.git',                       { 'directory' : 'swap'}
+    " NeoBundle 'liujoey/vim-easymotion.git',                    { 'directory' : 'easymotion_2'}
+    " NeoBundle 'marczych/vim-lose.git',                         { 'directory' : 'lose'}
+    " NeoBundle 'mattdbridges/bufkill.vim.git',                  { 'directory' : 'bufkill'}
+    " NeoBundle 'mattn/webapi-vim.git',                          { 'directory' : 'webapi'}
+    " NeoBundle 'mhinz/vim-startify.git',                        { 'directory' : 'startify'}
+    " NeoBundle 'mihaifm/vimpanel.git',                          { 'directory' : 'vimpanel'}
+    " NeoBundle 'mkitt/tabline.vim.git',                         { 'directory' : 'tabline'}
+    " NeoBundle 'mkomitee/vim-gf-python.git',                    { 'directory' : 'gf-python'}
+    " NeoBundle 'mtth/cursorcross.vim.git',                      { 'directory' : 'cursorcross'}
+    " NeoBundle 'mutewinter/vim-tmux.git',                       { 'directory' : 'tmux'}
+    " NeoBundle 'nelstrom/vim-markdown-folding.git',             { 'directory' : 'markdown-folding'}
+    " NeoBundle 'nelstrom/vim-visual-star-search.git',           { 'directory' : 'visual-star-search'}
+    " NeoBundle 'ntpeters/vim-better-whitespace.git',            { 'directory' : 'better-whitespace'}
+    " NeoBundle 'nvie/vim-rst-tables.git',                       { 'directory' : 'table'}
+    " NeoBundle 'osyo-manga/vim-anzu.git',                       { 'directory' : 'anzu'}
+    " NeoBundle 'paradigm/TextObjectify.git',                    { 'directory' : 'TextObjectify'}
+    " NeoBundle 'pydave/vim-perforce.git',                       { 'directory' : 'vim_perforce'}
+    " NeoBundle 'pydave/vim-ripple.git',                         { 'directory' : 'ripple'}
+    " NeoBundle 'q335r49/textabyss.git',                         { 'directory' : 'textabyss'}
+    " NeoBundle 'roblillack/vim-bufferlist.git',                 { 'directory' : 'bufferlist'}
+    " NeoBundle 'roman/golden-ratio.git',                        { 'directory' : 'golden-ratio'}
+    " NeoBundle 'rstacruz/sparkup',                              { 'directory' : 'sparkup'}
+    " NeoBundle 'saevarb/chronos.git',                           { 'directory' : 'chronos'}
+    " NeoBundle 'scrooloose/nerdcommenter.git',                  { 'directory' : 'nerdcommenter'}
+    " NeoBundle 'scrooloose/nerdtree.git',                       { 'directory' : 'NERD_tree'}
+    " NeoBundle 'scrooloose/syntastic.git',                      { 'directory' : 'syntastic'}
+    " NeoBundle 'shawncplus/phpcomplete.vim.git',                { 'directory' : 'phpcomplete'}
+    " NeoBundle 'sjbach/lusty',                                  { 'directory' : 'lusty'}
+    " NeoBundle 'soh335/unite-qflist.git',                       { 'directory' : 'unite_qfix'}
+    " NeoBundle 'spiiph/vim-space.git',                          { 'directory' : 'space'}
+    " NeoBundle 'takac/vim-fontmanager',                         { 'directory' : 'fontmanager'}
+    " NeoBundle 'thinca/vim-fontzoom.git',                       { 'directory' : 'fontzoom'}
+    " NeoBundle 'thinca/vim-ref.git',                            { 'directory' : 'ref'}
+    " NeoBundle 'thisivan/vim-bufexplorer.git',                  { 'directory' : 'bufexplorer'}
+    " NeoBundle 'tommcdo/vim-express.git',                       { 'directory' : 'express'}
+    " NeoBundle 'tommcdo/vim-lion.git',                          { 'directory' : 'lion'}
+    " NeoBundle 'tomtom/checksyntax_vim.git',                    { 'directory' : 'checkSyntax'}
+    " NeoBundle 'tomtom/checksyntax_vim.git',                    { 'directory' : 'checksyntax'}
+    " NeoBundle 'tomtom/quickfixsigns_vim.git',                  { 'directory' : 'quickfixsigns'}
+    " NeoBundle 'tomtom/shymenu_vim.git',                        { 'directory' : 'shymenu'}
+    " NeoBundle 'tomtom/tcomment_vim.git',                       { 'directory' : 'tcomment'}
+    " NeoBundle 'tomtom/tinykeymap_vim.git',                     { 'directory' : 'tinykeymap'}
+    " NeoBundle 'tomtom/tlib_vim.git',                           { 'directory' : 'tlib'}
+    " NeoBundle 'tomtom/tmarks_vim.git',                         { 'directory' : 'tmarks'}
+    " NeoBundle 'tomtom/tmru_vim.git',                           { 'directory' : 'tmru'}
+    " NeoBundle 'tomtom/tplugin_vim.git',                        { 'directory' : 'tplugin'}
+    " NeoBundle 'tomtom/ttagecho_vim.git',                       { 'directory' : 'ttagecho'}
+    " NeoBundle 'tpope/vim-abolish.git',                         { 'directory' : 'abolish'}
+    " NeoBundle 'tpope/vim-afterimage.git',                      { 'directory' : 'afterimage'}
+    " NeoBundle 'tpope/vim-dispatch.git',                        { 'directory' : 'vim-dispatch'}
+    " NeoBundle 'tpope/vim-endwise.git',                         { 'directory' : 'endwise'}
+    " NeoBundle 'tpope/vim-fireplace.git',                       { 'directory' : 'fireplace'}
+    " NeoBundle 'tpope/vim-fugitive.git',                        { 'directory' : 'fugitive'}
+    " NeoBundle 'tpope/vim-markdown.git',                        { 'directory' : 'markdown'}
+    " NeoBundle 'tpope/vim-obsession.git',                       { 'directory' : 'obsession'}
+    " NeoBundle 'tpope/vim-pathogen.git',                        { 'directory' : 'pathogen'}
+    " NeoBundle 'tpope/vim-projectionist.git',                   { 'directory' : 'projectionist'}
+    " NeoBundle 'tpope/vim-ragtag.git',                          { 'directory' : 'ragtag'}
+    " NeoBundle 'tpope/vim-rsi.git',                             { 'directory' : 'rsi'}
+    " NeoBundle 'tpope/vim-scriptease.git',                      { 'directory' : 'striptease'}
+    " NeoBundle 'tpope/vim-sensible.git',                        { 'directory' : 'sensible'}
+    " NeoBundle 'tpope/vim-sleuth.git',                          { 'directory' : 'sleuth'}
+    " NeoBundle 'tpope/vim-surround.git',                        { 'directory' : 'surround'}
+    " NeoBundle 'tpope/vim-unimpaired.git',                      { 'directory' : 'unimpaired'}
+    " NeoBundle 'tpope/vim-vinegar.git',                         { 'directory' : 'vinegar'}
+    " NeoBundle 'tupton/vim-support.git',                        { 'directory' : 'vim-support'}
+    " NeoBundle 'tyru/open-browser.vim',                         { 'directory' : 'open-browser'}
+    " NeoBundle 'vim-scripts/AnsiEsc.vim.git',                   { 'directory' : 'AnsiEsc'}
+    " NeoBundle 'vim-scripts/AutoComplPop.git',                  { 'directory' : 'autocomplete'}
+    " NeoBundle 'vim-scripts/Color-Scheme-Explorer.git',         { 'directory' : 'colorSchemeEx'}
+    " NeoBundle 'vim-scripts/DirDiff.vim.git',                   { 'directory' : 'dirdiff'}
+    " NeoBundle 'vim-scripts/IndexedSearch.git',                 { 'directory' : 'IndexedSearch'}
+    " NeoBundle 'vim-scripts/LargeFile.git',                     { 'directory' : 'LargeFile'}
+    " NeoBundle 'vim-scripts/Parameter-Text-Objects.git',        { 'directory' : 'Parameter-Text-Objects'}
+    " NeoBundle 'vim-scripts/QFixToggle.git',                    { 'directory' : 'QFixToggle'}
+    " NeoBundle 'vim-scripts/Rainbow-Parenthsis-Bundle',         { 'directory' : 'Rainbow-Parenthsis-Bundle'}
+    " NeoBundle 'vim-scripts/SyntaxAttr.vim.git',                { 'directory' : 'SyntaxAttr'}
+    " NeoBundle 'vim-scripts/TaskList.vim.git',                  { 'directory' : 'TaskList'}
+    " NeoBundle 'vim-scripts/UltiSnips.git',                     { 'directory' : 'ultiSnips'}
+    " NeoBundle 'vim-scripts/YankRing.vim.git',                  { 'directory' : 'YankRing'}
+    " NeoBundle 'vim-scripts/ZoomWin.git',                       { 'directory' : 'zoomwin'}
+    " NeoBundle 'vim-scripts/buffergrep.git',                    { 'directory' : 'buffergrep'}
+    " NeoBundle 'vim-scripts/diffchanges.vim.git',               { 'directory' : 'diffchanges'}
+    " NeoBundle 'vim-scripts/easytree.vim.git',                  { 'directory' : 'easytree'}
+    " NeoBundle 'vim-scripts/keepcase.vim',                      { 'directory' : 'keepcase'}
+    " NeoBundle 'vim-scripts/luarefvim.git',                     { 'directory' : 'luarefvim'}
+    " NeoBundle 'vim-scripts/mru.vim.git',                       { 'directory' : 'mru'}
+    " NeoBundle 'vim-scripts/pac.vim',                           { 'directory' : 'pac'}
+    " NeoBundle 'vim-scripts/perforce.vim.git',                  { 'directory' : 'perforce'}
+    " NeoBundle 'vim-scripts/savevers.vim.git',                  { 'directory' : 'savevers'}
+    " NeoBundle 'vim-scripts/taglist.vim.git',                   { 'directory' : 'taglist'}
+    " NeoBundle 'vim-scripts/tracwiki.git',                      { 'directory' : 'tracwiki'}
+    " NeoBundle 'vim-scripts/utl.vim.git',                       { 'directory' : 'utl'}
+    " NeoBundle 'vim-scripts/vcscommand.vim.git',                { 'directory' : 'vcscommand'}
+    " NeoBundle 'wellle/tmux-complete.vim.git',                  { 'directory' : 'tmux_complete'}
+    " NeoBundle 'wincent/Command-T.git',                         { 'directory' : 'Command-T'}
+    " NeoBundle 'xolox/vim-easytags.git',                        { 'directory' : 'easytags'}
+    " NeoBundle 'xolox/vim-lua-ftplugin.git',                    { 'directory' : 'lua-ftplugin'}
+    " NeoBundle 'xolox/vim-notes.git',                           { 'directory' : 'notes'}
+    " NeoBundle 'xolox/vim-shell.git',                           { 'directory' : 'vim-shell'}
+    " NeoBundle 'zaiste/tmux.vim',                               { 'directory' : 'tmux_syntax'}
+    " NeoBundle 'zhaocai/GoldenView.Vim.git',                    { 'directory' : 'GoldenView'}
+    " NeoBundle 'zirrostig/vim-schlepp.git',                     { 'directory' : 'schlepp'}
+    NeoBundle 'AndrewRadev/linediff.vim.git',                  { 'directory' : 'linediff'}
+    NeoBundle 'AndrewRadev/switch.vim.git',                    { 'directory' : 'switch'}
+    NeoBundle 'Bogdanp/pyrepl.vim.git',                        { 'directory' : 'pyrepl'}
+    NeoBundle 'ChasingLogic/ChasingLogic-colorscheme-vim.git', { 'directory' : 'color_ChasingLogic'}
+    NeoBundle 'Donearm/Laederon.git',                          { 'directory' : 'color_laederon'}
+    NeoBundle 'IntuitiveWebSolutions/vim-colors-blayden.git',  { 'directory' : 'color_blayden'}
+    NeoBundle 'JessicaKMcIntosh/TagmaTasks.git',               { 'directory' : 'TagmaTasks'}
+    NeoBundle 'Lokaltog/vim-distinguished.git',                { 'directory' : 'color_distinguished'}
+    NeoBundle 'Lokaltog/vim-easymotion.git',                   { 'directory' : 'easymotion'}
+    NeoBundle 'MaxSt/FlatColor.git',                           { 'directory' : 'color_FlatColor'}
+    NeoBundle 'Peeja/vim-cdo.git',                             { 'directory' : 'cdo'}
+    NeoBundle 'Pychimp/vim-luna.git',                          { 'directory' : 'color_luna'}
+    NeoBundle 'Pychimp/vim-sol.git',                           { 'directory' : 'color_sol'}
+    NeoBundle 'Raimondi/delimitMate.git',                      { 'directory' : 'delimitMate'}
+    NeoBundle 'Shougo/neocomplete.vim.git',                    { 'directory' : 'neocomplete'}
+    " NeoBundle 'Shougo/vimfiler.vim.git',                       { 'directory' : 'vimfiler'}
+    NeoBundle 'Shougo/vimproc.vim.git',                        { 'directory' : 'vimproc'}
+    NeoBundle 'SirVer/ultisnips.git',                          { 'directory' : 'ultisnips'}
+    NeoBundle 'Valloric/MatchTagAlways.git',                   { 'directory' : 'matchTagAlways'}
+    NeoBundle 'altercation/vim-colors-solarized.git',          { 'directory' : 'color_solarized'}
+    NeoBundle 'arecarn/crunch.git',                            { 'directory' : 'crunch'}
+    NeoBundle 'baskerville/bubblegum.git',                     { 'directory' : 'color_bubblegum'}
+    NeoBundle 'baverman/vim-babymate256.git',                  { 'directory' : 'vim_colors_babymate256'}
+    NeoBundle 'blueyed/file-line.git',                         { 'directory' : 'file-line'}
+    NeoBundle 'blueyed/grep.vim.git',                          { 'directory' : 'grep'}
+    NeoBundle 'blueyed/xoria256.vim.git',                      { 'directory' : 'color_xoria256'}
+    NeoBundle 'c9s/perlomni.vim.git',                          { 'directory' : 'perlOmni'}
+    NeoBundle 'carlobaldassi/vim-colorschemedegrade.git',      { 'directory' : 'colorSchemeDegrade'}
+    NeoBundle 'chreekat/vim-colors-lunatic.git',               { 'directory' : 'color_lunatic'}
+    NeoBundle 'chrisbra/NrrwRgn.git',                          { 'directory' : 'narrow'}
+    NeoBundle 'chrisbra/csv.vim.git',                          { 'directory' : 'csv'}
+    NeoBundle 'chriskempson/base16-vim.git',                   { 'directory' : 'color_base16'}
+    NeoBundle 'chriskempson/vim-tomorrow-theme.git',           { 'directory' : 'color_tomorrow_theme'}
+    NeoBundle 'cohama/vim-smartinput-endwise.git',             { 'directory' : 'smartinput-endwise'}
+    NeoBundle 'csexton/tomorrow-theme.vim.git',                { 'directory' : 'color_tomorrow'}
+    NeoBundle 'dhruvasagar/vim-table-mode.git',                { 'directory' : 'table-mode'}
+    NeoBundle 'euclio/vim-nocturne.git',                       { 'directory' : 'vim_nocturne'}
+    NeoBundle 'flazz/vim-colorschemes.git',                    { 'directory' : 'color_colorschemes'}
+    NeoBundle 'gmarik/ingretu.git',                            { 'directory' : 'color_ingretu'}
+    NeoBundle 'gregsexton/gitv',                               { 'directory' : 'gitv'}
+    NeoBundle 'gregstallings/vim-greyhouse.git',               { 'directory' : 'color_greyhouse'}
+    " NeoBundle 'honza/vim-snippets.git',                        { 'directory' : 'snippets'}
+    NeoBundle 'itchyny/calendar.vim.git',                      { 'directory' : 'calendar'}
+    NeoBundle 'jasonlong/lavalamp.git',                        { 'directory' : 'color_lavalamp'}
+    NeoBundle 'jaxbot/selective-undo.vim.git',                 { 'directory' : 'selective-undo'}
+    NeoBundle 'jeetsukumaran/vim-buffergator.git',             { 'directory' : 'buffergator'}
+    NeoBundle 'jeetsukumaran/vim-mochalatte.git',              { 'directory' : 'color_mochalatte'}
+    NeoBundle 'john2x/flatui.vim.git',                         { 'directory' : 'color_flatui'}
+    NeoBundle 'junegunn/seoul256.vim.git',                     { 'directory' : 'color_seoul256'}
+    NeoBundle 'junegunn/vim-easy-align.git',                   { 'directory' : 'easy_align'}
+    NeoBundle 'kien/rainbow_parentheses.vim.git',              { 'directory' : 'rainbow_parentheses'}
+    NeoBundle 'majutsushi/tagbar.git',                         { 'directory' : 'tagbar'}
+    " NeoBundle 'maxbrunsfeld/vim-yankstack.git',                { 'directory' : 'yankstack'}
+    NeoBundle 'mbbill/undotree.git',                           { 'directory' : 'undoTree'}
+    NeoBundle 'mileszs/ack.vim.git',                           { 'directory' : 'ack'}
+    NeoBundle 'morhetz/gruvbox.git',                           { 'directory' : 'color_gruvbox'}
+    NeoBundle 'mutewinter/swap-parameters.git',                { 'directory' : 'swap-parameters'}
+    NeoBundle 'myusuf3/numbers.vim',                           { 'directory' : 'numbers'}
+    NeoBundle 'nanotech/jellybeans.vim.git',                   { 'directory' : 'color_jellybeans'}
+    NeoBundle 'nathanaelkane/vim-indent-guides.git',           { 'directory' : 'vim_indent_guides'}
+    NeoBundle 'nielsmadan/harlequin.git',                      { 'directory' : 'color_harlequin'}
+    NeoBundle 'noahfrederick/vim-hemisu.git',                  { 'directory' : 'color_hemisu'}
+    NeoBundle 'noahfrederick/vim-noctu.git',                   { 'directory' : 'color_noctu'}
+    NeoBundle 'osyo-manga/vim-over.git',                       { 'directory' : 'over'}
+    NeoBundle 'quanganhdo/grb256.git',                         { 'directory' : 'color_grb256'}
+    NeoBundle 'raymond-w-ko/detectindent.git',                 { 'directory' : 'detectindent'}
+    NeoBundle 'rking/ag.vim.git',                              { 'directory' : 'ag'}
+    NeoBundle 'rking/vim-detailed.git',                        { 'directory' : 'color_detailed'}
+    NeoBundle 'sickill/vim-monokai.git',                       { 'directory' : 'vim_monokai'}
+    NeoBundle 'sjl/badwolf.git',                               { 'directory' : 'color_badwolf'}
+    NeoBundle 'sjl/gundo.vim.git',                             { 'directory' : 'gundo'}
+    NeoBundle 'sk1418/Join.git',                               { 'directory' : 'join'}
+    NeoBundle 'sukima/xmledit.git',                            { 'directory' : 'xml'}
+    NeoBundle 'szw/vim-ctrlspace.git',                         { 'directory' : 'ctrlspace'}
+    NeoBundle 'terryma/vim-expand-region.git',                 { 'directory' : 'vim-expand-region'}
+    NeoBundle 'terryma/vim-multiple-cursors.git',              { 'directory' : 'multiple_cursor'}
+    NeoBundle 'tmhedberg/matchit.git',                         { 'directory' : 'matchit'}
+    NeoBundle 'tommcdo/vim-exchange.git',                      { 'directory' : 'exchange'}
+    NeoBundle 'tpope/vim-commentary.git',                      { 'directory' : 'commentary'}
+    NeoBundle 'tpope/vim-eunuch.git',                          { 'directory' : 'eunuch'}
+    NeoBundle 'tpope/vim-repeat.git',                          { 'directory' : 'repeat'}
+    NeoBundle 'tpope/vim-speeddating.git',                     { 'directory' : 'speeddating'}
+    NeoBundle 'tpope/vim-tbone.git',                           { 'directory' : 'tbone'}
+    NeoBundle 'tpope/vim-vividchalk.git',                      { 'directory' : 'color_vividchalk'}
+    NeoBundle 'ujihisa/tabpagecolorscheme.git',                { 'directory' : 'tabpagecolorscheme'}
+    NeoBundle 'vim-scripts/Atom.git',                          { 'directory' : 'color_atom'}
+    NeoBundle 'vim-scripts/CSApprox.git',                      { 'directory' : 'CSApprox'}
+    NeoBundle 'vim-scripts/Colour-Sampler-Pack.git',           { 'directory' : 'colour_sampler_pack'}
+    NeoBundle 'vim-scripts/FuzzyFinder.git',                   { 'directory' : 'FuzzyFinder'}
+    NeoBundle 'vim-scripts/HelpClose.git',                     { 'directory' : 'HelpClose'}
+    NeoBundle 'vim-scripts/L9.git',                            { 'directory' : 'l9'}
+    " NeoBundle 'vim-scripts/Mark--Karkat.git',                  { 'directory' : 'multipleHilight'}
+    NeoBundle 'vim-scripts/MultipleSearch.git',                { 'directory' : 'MultipleSearch'}
+    NeoBundle 'vim-scripts/Perldoc.vim.git',                   { 'directory' : 'perldoc'}
+    NeoBundle 'vim-scripts/Pydiction.git',                     { 'directory' : 'Pydiction'}
+    NeoBundle 'vim-scripts/ViewOutput.git',                    { 'directory' : 'ViewOutput'}
+    NeoBundle 'vim-scripts/VisIncr.git',                       { 'directory' : 'VisIncr'}
+    NeoBundle 'vim-scripts/Zenburn.git',                       { 'directory' : 'color_Zenburn'}
+    NeoBundle 'vim-scripts/cmdline-completion.git',            { 'directory' : 'cmdline-completion'}
+    NeoBundle 'vim-scripts/compview.git',                      { 'directory' : 'compview'}
+    NeoBundle 'vim-scripts/cscope.vim.git',                    { 'directory' : 'cscope'}
+    NeoBundle 'vim-scripts/genutils.git',                      { 'directory' : 'genutils'}
+    NeoBundle 'vim-scripts/molokai.git',                       { 'directory' : 'color_molokai'}
+    NeoBundle 'vim-scripts/perl-support.vim.git',              { 'directory' : 'perl-support'}
+    NeoBundle 'vim-scripts/python.vim--Vasiliev.git',          { 'directory' : 'python'}
+    NeoBundle 'vim-scripts/scratch.vim.git',                   { 'directory' : 'scratch'}
+    NeoBundle 'vim-scripts/tir_black.git',                     { 'directory' : 'color_tir_black'}
+    NeoBundle 'vim-scripts/verilog.vim.git',                   { 'directory' : 'verilog'}
+    NeoBundle 'vim-scripts/verilog_systemverilog.vim.git',     { 'directory' : 'verilog_systemverilog'}
+    NeoBundle 'vim-scripts/xterm16.vim.git',                   { 'directory' : 'color_xterm16'}
+    NeoBundle 'w0ng/vim-hybrid.git',                           { 'directory' : 'color_hybrid'}
+    NeoBundle 'wellle/targets.vim.git',                        { 'directory' : 'targets'}
+    NeoBundle 'xolox/vim-misc.git',                            { 'directory' : 'vim-misc'}
+    NeoBundle 'xolox/vim-session.git',                         { 'directory' : 'vim_session'}
+    NeoBundle 'yssl/QFEnter.git',                              { 'directory' : 'QFEnter'}
+    NeoBundle 'zeis/vim-kolor.git',                            { 'directory' : 'kolor'}
+
+    NeoBundleSaveCache
+  endif
+  call neobundle#end()
+endif
+" }}}1
 
 "do yankstack mapping before everything
 if exists(':yankstack')
