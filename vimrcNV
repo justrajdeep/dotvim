@@ -606,13 +606,13 @@ if use_neobundle
     " Required:
     NeoBundleFetch 'Shougo/neobundle.vim.git',                 { 'directory' : 'neobundle'}
     " My Bundles here:
-    " NeoBundle 'autohighlight',                                 { 'type' : 'nosync'}
     NeoBundle 'bluespec',                                      { 'type' : 'nosync'}
     NeoBundle 'my_colors',                                     { 'type' : 'nosync'}
-    " NeoBundle 'nvbug',                                         { 'type' : 'nosync'}
-    " NeoBundle 'nvidia',                                        { 'type' : 'nosync'}
-    " NeoBundle 'p4python',                                      { 'type' : 'nosync'}
-    " NeoBundle 'visualGuide',                                   { 'type' : 'nosync'}
+    NeoBundle 'autohighlight',                                 { 'type' : 'nosync', 'disabled' : 1}
+    NeoBundle 'nvbug',                                         { 'type' : 'nosync', 'disabled' : 1}
+    NeoBundle 'nvidia',                                        { 'type' : 'nosync', 'disabled' : 1}
+    NeoBundle 'p4python',                                      { 'type' : 'nosync', 'disabled' : 1}
+    NeoBundle 'visualGuide',                                   { 'type' : 'nosync', 'disabled' : 1}
     "
     execute "NeoBundle 'Shougo/vimproc.vim.git', " . string({
       \ 'directory' : 'vimproc',
