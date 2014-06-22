@@ -599,9 +599,9 @@ if use_neobundle
     set runtimepath+=~/.vim/bundle/neobundle
   endif
   call neobundle#begin(expand('~/.vim/bundle'))
-  if neobundle#has_cache()
-    NeoBundleLoadCache
-  else
+  " if neobundle#has_cache()
+    " NeoBundleLoadCache
+  " else
     " Let NeoBundle manage NeoBundle
     " Required:
     NeoBundleFetch 'Shougo/neobundle.vim.git',                 { 'directory' : 'neobundle'}
@@ -615,13 +615,11 @@ if use_neobundle
     " NeoBundle 'visualGuide',                                   { 'type' : 'nosync'}
     "
     execute "NeoBundle 'Shougo/vimproc.vim.git', " . string({
-      \ 'directory' :
-            'vimproc',
+      \ 'directory' : 'vimproc',
       \ 'build' : {
       \     'unix' : '\\make -f make_unix.mak ARCHS=x86_64',
       \    },
       \ })
-
     " NeoBundle '5long/pytest-vim-compiler.git',                 { 'directory' : 'pytest-vim-compiler'}
     " NeoBundle 'AndrewRadev/splitjoin.vim',                     { 'directory' : 'splitjoin'}
     " NeoBundle 'FredKSchott/CoVim.git',                         { 'directory' : 'coVim'}
@@ -937,7 +935,7 @@ if use_neobundle
 
     NeoBundleCheck
     NeoBundleSaveCache
-  endif
+  " endif
   call neobundle#end()
 endif
 " }}}1
