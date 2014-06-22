@@ -940,3 +940,9 @@
 [submodule "bundle/color_Zenburn"]
 	path = bundle/color_Zenburn
 	url = https://github.com/vim-scripts/Zenburn.git
+[submodule "bundle/conque"]
+	path = bundle/conque
+	url = https://github.com/basepi/vim-conque.git
+[submodule "bundle/cscope"]
+	path = bundle/cscope
+	url = https://github.com/vim-scripts/cscope.vim.git

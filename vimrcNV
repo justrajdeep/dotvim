@@ -196,6 +196,8 @@ call add(g:pathogen_disabled, 'ctrlp')
 call add(g:pathogen_disabled, 'ripple')
 call add(g:pathogen_disabled, 'PyScratch')
 
+call add(g:pathogen_disabled, 'signature')
+call add(g:pathogen_disabled, 'bling')
 call add(g:pathogen_disabled, 'quickfixsigns')
 call add(g:pathogen_disabled, 'quickhl')
 call add(g:pathogen_disabled, 'wildfire')
