@@ -617,7 +617,7 @@ if use_neobundle
     execute "NeoBundle 'Shougo/vimproc.vim.git', " . string({
       \ 'directory' : 'vimproc',
       \ 'build' : {
-      \     'unix' : '\\make -f make_unix.mak ARCHS=x86_64',
+      \     'unix' : '/home/utils/make-4.0/bin//make -f make_unix.mak ARCHS=x86_64',
       \    },
       \ })
     " NeoBundle '5long/pytest-vim-compiler.git',                 { 'directory' : 'pytest-vim-compiler'}
