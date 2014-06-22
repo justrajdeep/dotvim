@@ -188,6 +188,7 @@ call add(g:pathogen_disabled, 'notes')
 " call add(g:pathogen_disabled, 'color_xoria256')
 " call add(g:pathogen_disabled, 'color_xterm16')
 " call add(g:pathogen_disabled, 'color_Zenburn')
+" call add(g:pathogen_disabled, 'color_greyhouse')
 "
 " call add(g:pathogen_disabled, 'ultisnips')
 call add(g:pathogen_disabled, 'vim_perforce_fork')
