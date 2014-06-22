@@ -190,9 +190,6 @@
 [submodule "bundle/color_colorschemes"]
 	path = bundle/color_colorschemes
 	url = https://github.com/flazz/vim-colorschemes.git
-[submodule "bundle/color_greyhouse"]
-	path = bundle/color_greyhouse
-	url = https://github.com/gregstallings/vim-greyhouse.git
 [submodule "bundle/color_hemisu"]
 	path = bundle/color_hemisu
 	url = https://github.com/noahfrederick/vim-hemisu.git

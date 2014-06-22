@@ -828,7 +828,10 @@ if use_neobundle
     NeoBundle 'Raimondi/delimitMate.git',                      { 'directory' : 'delimitMate'}
     NeoBundle 'Shougo/neocomplete.vim.git',                    { 'directory' : 'neocomplete'}
     " NeoBundle 'Shougo/vimfiler.vim.git',                       { 'directory' : 'vimfiler'}
-    NeoBundle 'Shougo/vimproc.vim.git',                        { 'directory' : 'vimproc'}
+    NeoBundle 'Shougo/vimproc.vim.git',                        { 'directory' : 'vimproc',
+                                                                                \ 'build' : {
+                                                                                \ 'unix' : '\\make ARCHS=\'i386 x86_64\''
+                                                                                \ }}
     NeoBundle 'SirVer/ultisnips.git',                          { 'directory' : 'ultisnips'}
     NeoBundle 'Valloric/MatchTagAlways.git',                   { 'directory' : 'matchTagAlways'}
     NeoBundle 'altercation/vim-colors-solarized.git',          { 'directory' : 'color_solarized'}

@@ -114,6 +114,12 @@ Adding viva support
 ---------------------------
 ln -fs /home/vim-nv/plugins/viva ~/.vim/bundle/viva
 
+USING NEOBUNDLE
+git clone https://github.com/Shougo/neobundle.vim bundle/neobundle
+cd bundle
+\ls -l -d * | awk '{print $9}' | grep -v -e "neobundle" -e "bluespec" -e "my_colors" | xargs rm -rf
+Then install
+
 ===========
 Help on Git
 ===========
