@@ -613,6 +613,14 @@ if use_neobundle
     " NeoBundle 'nvidia',                                        { 'type' : 'nosync'}
     " NeoBundle 'p4python',                                      { 'type' : 'nosync'}
     " NeoBundle 'visualGuide',                                   { 'type' : 'nosync'}
+    "
+    execute "NeoBundle 'Shougo/vimproc.vim.git', " . string({
+      \ 'directory' :
+            'vimproc',
+      \ 'build' : {
+      \     'unix' : '\\make -f make_unix.mak ARCHS=x86_64',
+      \    },
+      \ })
 
     " NeoBundle '5long/pytest-vim-compiler.git',                 { 'directory' : 'pytest-vim-compiler'}
     " NeoBundle 'AndrewRadev/splitjoin.vim',                     { 'directory' : 'splitjoin'}
@@ -828,10 +836,6 @@ if use_neobundle
     NeoBundle 'Raimondi/delimitMate.git',                      { 'directory' : 'delimitMate'}
     NeoBundle 'Shougo/neocomplete.vim.git',                    { 'directory' : 'neocomplete'}
     " NeoBundle 'Shougo/vimfiler.vim.git',                       { 'directory' : 'vimfiler'}
-    NeoBundle 'Shougo/vimproc.vim.git',                        { 'directory' : 'vimproc',
-                                                                                \ 'build' : {
-                                                                                \ 'unix' : '\\make ARCHS=\'i386 x86_64\''
-                                                                                \ }}
     NeoBundle 'SirVer/ultisnips.git',                          { 'directory' : 'ultisnips'}
     NeoBundle 'Valloric/MatchTagAlways.git',                   { 'directory' : 'matchTagAlways'}
     NeoBundle 'altercation/vim-colors-solarized.git',          { 'directory' : 'color_solarized'}
@@ -855,7 +859,6 @@ if use_neobundle
     NeoBundle 'flazz/vim-colorschemes.git',                    { 'directory' : 'color_colorschemes'}
     NeoBundle 'gmarik/ingretu.git',                            { 'directory' : 'color_ingretu'}
     NeoBundle 'gregsexton/gitv',                               { 'directory' : 'gitv'}
-    NeoBundle 'gregstallings/vim-greyhouse.git',               { 'directory' : 'color_greyhouse'}
     " NeoBundle 'honza/vim-snippets.git',                        { 'directory' : 'snippets'}
     NeoBundle 'itchyny/calendar.vim.git',                      { 'directory' : 'calendar'}
     NeoBundle 'jasonlong/lavalamp.git',                        { 'directory' : 'color_lavalamp'}
