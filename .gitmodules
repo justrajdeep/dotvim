@@ -265,9 +265,6 @@
 [submodule "bundle/vmath"]
 	path = bundle/vmath
 	url = https://github.com/atweiden/vim-vmath.git
-[submodule "bundle/dragvisuals/plugin"]
-	path = bundle/dragvisuals/plugin
-	url = https://github.com/atweiden/vim-dragvisuals.git
 [submodule "bundle/tabpagecolorscheme"]
 	path = bundle/tabpagecolorscheme
 	url = https://github.com/ujihisa/tabpagecolorscheme.git
