@@ -943,3 +943,6 @@
 [submodule "bundle/cscope"]
 	path = bundle/cscope
 	url = https://github.com/vim-scripts/cscope.vim.git
+[submodule "bundle/dragvisuals"]
+	path = bundle/dragvisuals
+	url = https://github.com/atweiden/vim-dragvisuals.git
