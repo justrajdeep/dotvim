@@ -946,3 +946,6 @@
 [submodule "bundle/restart"]
 	path = bundle/restart
 	url = https://github.com/tyru/restart.vim.git
+[submodule "bundle/color_nefertiti"]
+	path = bundle/color_nefertiti
+	url = https://github.com/jeetsukumaran/vim-nefertiti.git
