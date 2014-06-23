@@ -115,11 +115,10 @@ Adding viva support
 ln -fs /home/vim-nv/plugins/viva ~/.vim/bundle/viva
 
 USING NEOBUNDLE
-git clone https://github.com/Shougo/neobundle.vim bundle/neobundle
+git clone https://github.com/Shougo/neobundle.vim neobundle_bundle/neobundle
 cd bundle
 ln -fs /home/vim-nv nvidia
 ln -fs /home/vim-nv/plugins/nvbug nvbug
-\ls -l -d * | awk '{print $9}' | grep -v -e "neobundle" -e "bluespec" -e "my_colors" -e "nvidia" -e "autohighlight" -e "nvbug" -e "p4python" -e "visualGuide" | xargs rm -rf
 Then install
 
 ===========

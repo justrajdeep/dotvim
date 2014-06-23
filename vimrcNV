@@ -940,7 +940,7 @@ if use_neobundle
     NeoBundleLazy 'xolox/vim-session.git',                         { 'directory' : 'vim_session', 'autoload' : {'commands' : ['SaveSession', 'OpenSession', 'RestartVim', 'CloseSession', 'DeleteSession', 'ViewSession', 'OpenTabSession', 'SaveTabSession', 'AppendTabSession', 'CloseTabSession']}}
     NeoBundle 'yssl/QFEnter.git',                              { 'directory' : 'QFEnter'}
     NeoBundle 'zeis/vim-kolor.git',                            { 'directory' : 'color_kolor'}
-    NeoBundle 'eetsukumaran/vim-nefertiti.git'                 { 'directory' : 'color_nefertiti'}
+    NeoBundle 'eetsukumaran/vim-nefertiti.git',                { 'directory' : 'color_nefertiti'}
 
     NeoBundleCheck
     NeoBundleSaveCache
