@@ -832,7 +832,9 @@ if use_neobundle
     NeoBundleLazy 'Peeja/vim-cdo.git',                             { 'directory' : 'cdo', 'autoload' : {'commands' : ['Cdo', 'Ldo']}}
     NeoBundle 'Pychimp/vim-luna.git',                          { 'directory' : 'color_luna'}
     NeoBundle 'Pychimp/vim-sol.git',                           { 'directory' : 'color_sol'}
-    NeoBundle 'Raimondi/delimitMate.git',                      { 'directory' : 'delimitMate'}
+    " NeoBundle 'Raimondi/delimitMate.git',                      { 'directory' : 'delimitMate'}
+    " NeoBundle 'jiangmiao/auto-pairs',                          { 'directory' : 'auto-pairs'}
+    " NeoBundle 'kana/vim-smartinput',                           { 'directory' : 'smartinput'}
     NeoBundle 'Shougo/neocomplete.vim.git',                    { 'directory' : 'neocomplete'}
     " NeoBundle 'Shougo/vimfiler.vim.git',                       { 'directory' : 'vimfiler'}
     NeoBundle 'SirVer/ultisnips.git',                          { 'directory' : 'ultisnips'}
