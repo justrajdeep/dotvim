@@ -596,9 +596,9 @@ endif
 " Neobundle {{{1
 if use_neobundle
   if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle
+    set runtimepath+=~/.vim/neobundle_bundle/neobundle
   endif
-  call neobundle#begin(expand('~/.vim/bundle'))
+  call neobundle#begin(expand('~/.vim/neobundle_bundle'))
   if neobundle#has_cache()
     NeoBundleLoadCache
   else
@@ -606,13 +606,13 @@ if use_neobundle
     " Required:
     NeoBundleFetch 'Shougo/neobundle.vim.git',                 { 'directory' : 'neobundle'}
     " My Bundles here:
-    NeoBundle 'bluespec',                                      { 'type' : 'nosync'}
-    NeoBundle 'my_colors',                                     { 'type' : 'nosync'}
-    NeoBundle 'nvidia',                                        { 'type' : 'nosync'}
-    NeoBundle 'autohighlight',                                 { 'type' : 'nosync', 'disabled' : 1}
-    NeoBundle 'nvbug',                                         { 'type' : 'nosync', 'disabled' : 1}
-    NeoBundle 'p4python',                                      { 'type' : 'nosync', 'disabled' : 1}
-    NeoBundle 'visualGuide',                                   { 'type' : 'nosync', 'disabled' : 1}
+    NeoBundle 'bluespec',                                      { 'type' : 'nosync', 'base' : '~/.vim/bundle'}
+    NeoBundle 'my_colors',                                     { 'type' : 'nosync', 'base' : '~/.vim/bundle'}
+    NeoBundle 'nvidia',                                        { 'type' : 'nosync', 'base' : '~/.vim/bundle'}
+    NeoBundle 'autohighlight',                                 { 'type' : 'nosync', 'disabled' : 1, 'base' : '~/.vim/bundle'}
+    NeoBundle 'nvbug',                                         { 'type' : 'nosync', 'disabled' : 1, 'base' : '~/.vim/bundle'}
+    NeoBundle 'p4python',                                      { 'type' : 'nosync', 'disabled' : 1, 'base' : '~/.vim/bundle'}
+    NeoBundle 'visualGuide',                                   { 'type' : 'nosync', 'disabled' : 1, 'base' : '~/.vim/bundle'}
     "
     execute "NeoBundle 'Shougo/vimproc.vim.git', " . string({
       \ 'directory' : 'vimproc',
@@ -940,6 +940,7 @@ if use_neobundle
     NeoBundleLazy 'xolox/vim-session.git',                         { 'directory' : 'vim_session', 'autoload' : {'commands' : ['SaveSession', 'OpenSession', 'RestartVim', 'CloseSession', 'DeleteSession', 'ViewSession', 'OpenTabSession', 'SaveTabSession', 'AppendTabSession', 'CloseTabSession']}}
     NeoBundle 'yssl/QFEnter.git',                              { 'directory' : 'QFEnter'}
     NeoBundle 'zeis/vim-kolor.git',                            { 'directory' : 'color_kolor'}
+    NeoBundle 'eetsukumaran/vim-nefertiti.git'                 { 'directory' : 'color_nefertiti'}
 
     NeoBundleCheck
     NeoBundleSaveCache
