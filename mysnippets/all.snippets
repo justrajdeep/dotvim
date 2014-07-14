@@ -108,7 +108,7 @@ $1 ${6:comment}
 endsnippet
 
 snippet modline "add the modline" sw
-${1:`!p snip.rv = _get_comment_format()[0]`} vim: filetype=${2:`!p snip.rv = snip.ft`}:syntax=${3:`!p snip.rv = snip.ft`}:ts=4:sw=2:expandtab:norl:
+${1:`!p snip.rv = _get_comment_format()[0]`} vim: filetype=${2:`!p snip.rv = snip.ft`}:syntax=${3:`!p snip.rv = snip.ft`}:ts=4:tw=0:sw=2:expandtab:norl:
 endsnippet
 
 snippet copyright "add copyright Information" bsw
