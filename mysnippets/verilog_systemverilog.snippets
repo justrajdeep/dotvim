@@ -133,6 +133,18 @@ snippet comp_utils "add component utils macro" sw
   \`uvm_component_utils_end
 endsnippet
 
+snippet new "add new function" sw
+  function new(string name="${1:`!p snip.rv = snip.basename.lower()`}", uvm_component parent=${2:null});
+    super.new(name, parent);
+  endfunction:new
+endsnippet
+
+snippet phase "add * phase" sw
+  virtual function void ${1:build}_phase(uvm_phase phase);
+    super.$1_phase(phase);
+  endfunction:$1_phase
+endsnippet
+
 snippet create_clk "add nitro_clk" sw
   clock_rst_properties_inst.create_clock(.name("$1"), .clk_period_in_ps($2), .delay_in_ps($3), .init_val(0), .index($4));
 endsnippet

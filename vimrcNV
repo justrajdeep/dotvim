@@ -7,7 +7,11 @@
      set encoding=utf-8
 
 let use_pathogen = 0
-let use_neobundle = 1
+if has('gui_running')
+  let use_neobundle = 1
+else
+  let use_neobundle = 1
+endif
 if use_pathogen
   set rtp+=~/.vim/bundle/pathogen
   "PATHOGEN
@@ -705,9 +709,6 @@ if use_neobundle
     " NeoBundle 'kana/vim-operator-replace',                     { 'directory' : 'operator-replace'}
     " NeoBundle 'kana/vim-operator-user',                        { 'directory' : 'operator-user'}
     " NeoBundle 'kana/vim-smartinput',                           { 'directory' : 'smartinput'}
-    " NeoBundle 'kana/vim-textobj-function',                     { 'directory' : 'textobj-function'}
-    " NeoBundle 'kana/vim-textobj-indent',                       { 'directory' : 'textobj-indent'}
-    " NeoBundle 'kana/vim-textobj-user',                         { 'directory' : 'textobj-user'}
     " NeoBundle 'kchmck/vim-coffee-script',                      { 'directory' : 'coffee-script'}
     " NeoBundle 'kergoth/vim-hilinks',                           { 'directory' : 'hilinks'}
     " NeoBundle 'kien/ctrlp.vim',                                { 'directory' : 'ctrlp'}
@@ -827,7 +828,6 @@ if use_neobundle
     " NeoBundle 'honza/vim-snippets',                            { 'directory' : 'snippets'}
     " NeoBundle 'maxbrunsfeld/vim-yankstack',                    { 'directory' : 'yankstack'}
     " NeoBundle 'tpope/vim-tbone',                               { 'directory' : 'tbone'}
-    " NeoBundle 'vim-scripts/Mark--Karkat',                      { 'directory' : 'multipleHilight'}
     " NeoBundle 'vim-scripts/genutils',                          { 'directory' : 'genutils'}
     " NeoBundle 'uxcn/vim-x2x',                                  { 'directory' : 'x2x'}
     " NeoBundle 'emilsoman/test-runner.vim',                     { 'directory' : 'test-runner'}
@@ -881,6 +881,10 @@ if use_neobundle
     NeoBundle 'jeetsukumaran/vim-nefertiti',                   { 'directory' : 'color_nefertiti'}
     NeoBundle 'itchyny/landscape.vim',                         { 'directory' : 'color_landscape'}
     NeoBundle 'vim-scripts/Colour-Sampler-Pack',               { 'directory' : 'colour_sampler_pack'}
+    NeoBundleLazy 'jaxbot/semantic-highlight.vim',                 { 'directory' : 'color_semantic-highligh', 'autoload' : {'commands' : ['SemanticHighlight']}}
+    NeoBundle 'reedes/vim-thematic',                           { 'directory' : 'thematic'}
+    " NeoBundle 'jonstoler/werewolf.vim',                        { 'directory' : 'color_warewolf'}
+    " NeoBundle 'amdt/sunset',                                   { 'directory' : 'color_sunset'}
     "
     NeoBundleLazy 'AndrewRadev/linediff.vim',                      { 'directory' : 'linediff', 'autoload' : {'commands' : ['Linediff', 'LinediffReset']}}
     NeoBundle 'AndrewRadev/switch.vim',                        { 'directory' : 'switch'}
@@ -898,8 +902,8 @@ if use_neobundle
     NeoBundleLazy 'c9s/perlomni.vim',                          { 'directory' : 'perlOmni'}
     autocmd FileType perl,viva,verilog_systemverilog NeoBundleSource 'perlomni.vim'
     NeoBundleLazy 'chrisbra/NrrwRgn',                              { 'directory' : 'narrow', 'autoload' : {'commands' : ['NarrowRegion', 'WidenRegion']}}
-    NeoBundleLazy 'chrisbra/csv.vim',                              { 'directory' : 'csv'}
-    autocmd FileType csv NeoBundleSource 'csv.vim'
+    NeoBundle 'chrisbra/csv.vim',                              { 'directory' : 'csv'}
+    " autocmd FileType csv NeoBundleSource 'csv.vim'
     " NeoBundle 'cohama/vim-smartinput-endwise',                 { 'directory' : 'smartinput-endwise'}
     NeoBundleLazy 'dhruvasagar/vim-table-mode',                    { 'directory' : 'table-mode', 'autoload' : {'commands' : ['TableModeToggle', 'TableModeEnable', 'TableModeDisable', 'Tableize', 'TableModeRealign', 'TableAddFormula', 'TableEvalFormulaLine']}}
     " NeoBundleLazy 'itchyny/calendar.vim',                          { 'directory' : 'calendar', 'autoload' : {'commands' : ['Calendar']}}
@@ -926,7 +930,7 @@ if use_neobundle
     NeoBundle 'tmhedberg/matchit',                             { 'directory' : 'matchit'}
     NeoBundle 'tommcdo/vim-exchange',                          { 'directory' : 'exchange'}
     NeoBundle 'tpope/vim-commentary',                          { 'directory' : 'commentary'}
-    NeoBundleLazy 'tpope/vim-eunuch',                              { 'directory' : 'eunuch', 'autoload' : {'commands' : ['Unlink', 'Remove', 'Move', 'Rename', 'Chmod', 'Mkdir', 'Find', 'Locate', 'SudoEdit', 'SudoWrite', 'Wall']}}
+    NeoBundle 'tpope/vim-eunuch',                              { 'directory' : 'eunuch'}
     NeoBundle 'tpope/vim-repeat',                              { 'directory' : 'repeat'}
     NeoBundle 'tpope/vim-speeddating',                         { 'directory' : 'speeddating'}
     " NeoBundleLazy 'ujihisa/tabpagecolorscheme',                    { 'directory' : 'tabpagecolorscheme', 'autoload' : {'commands' : ['Tcolorscheme']}}
@@ -962,6 +966,13 @@ if use_neobundle
     NeoBundle 'vim-scripts/L9',                                { 'directory' : 'l9'}
     NeoBundle 'xolox/vim-misc',                                { 'directory' : 'vim-misc'}
     NeoBundleLazy 'xolox/vim-session',                             { 'directory' : 'vim_session', 'autoload' : {'commands' : ['SaveSession', 'OpenSession', 'RestartVim', 'CloseSession', 'DeleteSession', 'ViewSession', 'OpenTabSession', 'SaveTabSession', 'AppendTabSession', 'CloseTabSession']}}
+    " NeoBundle 'vim-scripts/Mark--Karkat',                      { 'directory' : 'mark_hilight'}
+    NeoBundle 'kana/vim-textobj-function',                     { 'directory' : 'textobj-function'}
+    NeoBundle 'kana/vim-textobj-indent',                       { 'directory' : 'textobj-indent'}
+    NeoBundle 'kana/vim-textobj-user',                         { 'directory' : 'textobj-user'}
+    " NeoBundle 'severin-lemaignan/vim-minimap',                 { 'directory' : 'minimap'}
+    " NeoBundle 'dhruvasagar/vim-dotoo',                         { 'directory' : 'doto'}
+    NeoBundle 'wellle/tmux-complete.vim',                          { 'directory' : 'tmux-complete'}
 
     NeoBundleCheck
     NeoBundleSaveCache
@@ -970,7 +981,7 @@ if use_neobundle
 endif
 " }}}1
 
-"do yankstack mapping before everything
+" do yankstack mapping before everything
 if exists(':yankstack')
   call yankstack#setup()
 endif
@@ -1005,7 +1016,8 @@ set fcs=vert:'|'
 "set autoread
 "
 " Set to auto write file
-"set autowriteall
+" set autowriteall
+" set autoread
 "
 " Give one virtual space at end of line
 "set virtualedit=onemore
@@ -1046,11 +1058,13 @@ set tabstop=8
 "dont show statusline messages
 "hide the insert mode displays
 set noshowmode
+set ttyfast
 "set modeline parsing
 set modeline
 " rt clk pops up a menu"
 " set mousemodel=popup
-set laststatus=2 ruler 
+set laststatus=2
+set ruler
 "dont refresh screen when executing macros
 set lazyredraw
 set expandtab
@@ -1072,8 +1086,13 @@ set magic
 highlight ColorColumn ctermbg=magenta
 " FIXME this is slowing vim down
 " call matchadd('ColorColumn', '\%81v', 100)
-"set colorcolumn=+1
-
+set colorcolumn=+1
+set fillchars=diff:⣿,vert:│
+set fillchars=diff:⣿,vert:\|
+" terminal behaviour
+" set notimeout
+" set ttimeout
+" set ttimeoutlen=10
 "set rel num and current line number"
 set relativenumber
 set number
@@ -1081,10 +1100,13 @@ set nowrapscan
 set nowrap
 " now i am trying to have backup files
 set nobackup
+" Make Vim able to edit crontab files again.
+set backupskip=/tmp/*,/private/tmp/*"
 set nowritebackup
 "set patchmode=.clean
 "set backupskip+=*
-set backupdir=./backup,~/backup,~/.vim/backup,.
+set backupdir=./backup//,~/backup//,~/.vim/backup//,.//
+set directory=./backup//,~/backup//,~/.vim/backup//,.
 " save backups in some dir
 let savevers_max = 99
 let savevers_dirs = &backupdir
@@ -1113,14 +1135,21 @@ if exists("+undofile")
   set undodir+=~/.vim/undo//
 endif
 if has("persistent_undo")
-  set undodir+=~/.vim/undo/
+  set undodir+=~/.vim/undo//
 endif
 set undofile
+set undoreload=10000
 "Show matching bracets when text indicator is over them
 set showmatch
+set matchtime=3
 set hlsearch
+set gdefault
 set diffopt+=iwhite
 set diffopt+=context:3
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+	 	\ | wincmd p | diffthis
 set linebreak
 set autoindent
 set smartindent
@@ -1150,6 +1179,11 @@ set smartcase
 "   noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 " endif
 " " }}}1 " smooth scroll
+" " sunset {{{1 "
+let g:sunset_latitude = 12.97
+let g:sunset_longitude = 77.57
+let g:sunset_utc_offset = 5.5
+" " }}}1 " sunset
 set scrolloff=2 "skip 2 lines when scrolling
 set sidescrolloff=2
 ""confirm action using a dialog box
@@ -1190,6 +1224,7 @@ map! <C-S-Insert> <MiddleMouse>
 "set clipboard+=unnamed " share windows clipboard
 "set clipboard^=unnamed " share windows clipboard
 set clipboard=autoselect
+set clipboard=exclude:.*
 vnoremap p "_dP
 "automatically go to the last of the paste
 "nnoremap p p`]
@@ -1202,7 +1237,7 @@ noremap gV `[v`]
 " xnoremap p "_dP
 " xnoremap P "_dP
 
-"home moves cursor to the first non-blank char
+" home moves cursor to the first non-blank char
 noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 imap <silent> <Home> <C-O><Home>
 nnoremap 0 ^
@@ -1251,7 +1286,7 @@ set foldtext=NeatFoldText()
 set wrapmargin=0
 set textwidth=0
 let g:leave_my_textwidth_alone=1
-set formatoptions=crqwnl1
+set formatoptions=crqwnl1j
 set formatoptions-=t
 
 "Change buffer - without saving
@@ -1280,9 +1315,32 @@ map <C-^> <C-]>
 :source $VIMRUNTIME/menu.vim
 
 "filelist Completion options
-set completeopt=longest,menuone
-set wildmode=longest,list,full
+" Better Completion
+set complete=.,w,b,u,t
+set completeopt=longest,menuone,preview
+" command line suggestion
+set wildmenu
+set wildmode=list:longest:full
 set wildignorecase
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
+
+set wildignore+=*.luac                           " Lua byte code
+
+set wildignore+=migrations                       " Django migrations
+set wildignore+=*.pyc                            " Python byte code
+
+set wildignore+=*.orig                           " Merge resolution files
+
+" Clojure/Leiningen
+set wildignore+=classes
+set wildignore+=lib
+
 " tmux complete
 let g:tmux_complete_location = "~/.vim/bundle/tmux_complete"
 " disable searching of tags for autocomplete
@@ -1292,18 +1350,22 @@ set complete-=i
 " set additional files
 set path+=**
 
-
-"command line suggestion
-set wildmenu
-:set cpo-=<
-:set wcm=<C-Z>
-"":map <F4> :emenu <C-Z>
-"visual special charaters
-"" Highlight problematic whitespace
+set cpo-=<
+set wcm=<C-Z>
+" :map <F4> :emenu <C-Z>
+" visual special charaters
+" Highlight problematic whitespace
 if  has("gui_running")
-  "set list
+  set list
   "highlight NonText ctermfg=8 guifg=gray
-  "set listchars=tab:��,extends:�,eol:�
+  set listchars=tab:§»,trail:¶,eol:¬,extends:❯,precedes:❮
+" Only shown when not in insert mode so I don't go insane.
+augroup trailing
+    au!
+    au InsertEnter * :set listchars-=trail:¶
+    au InsertLeave * :set listchars+=trail:¶
+augroup END
+  set showbreak=↪
   "if &encoding == "utf-8"
   "   set listchars=nbsp:\u2422,conceal:\u22ef,tab:\u2595\u2014,trail:\u02d1,precedes:\u2026,extends:\u2026"
   "else
@@ -1312,7 +1374,6 @@ if  has("gui_running")
 endif
 "get new chanracters from dig
 " use C-k to insert
-"set showbreak=�
 " Make trailing whitespace annoyingly highlighted.
 let  extra_whiteSpace = 1
 if extra_whiteSpace
@@ -1344,7 +1405,7 @@ if exists(':RainbowParentheses')
 endif
   autocmd BufNewFile,BufRead,BufWritePre *.log setf log|setlocal wrap|setlocal nobackup|setlocal noundofile
   autocmd BufNewFile,BufRead,BufWritePre *.log.retry setf log|setlocal nobackup|setlocal noundofile
-  autocmd BufNewFile,BufRead,BufWritePre *testout* setf log|setlocal nobackup|setlocal noundofile
+  autocmd BufNewFile,BufRead,BufWritePre *testout* setf log|setl fileencoding=unix|setlocal nobackup|setlocal noundofile
   autocmd BufNewFile,BufRead,BufWritePre /tmp/* setf log|setlocal nobackup|setlocal noundofile
   autocmd BufNewFile,BufRead */t186/* setlocal nomodifiable
   autocmd BufNewFile,BufRead */tlit4/* setlocal nomodifiable
@@ -1385,7 +1446,10 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
+inoremap <c-a> <esc>I
+inoremap <c-e> <esc>A
 cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
 cnoremap <C-F> <Right>
 cnoremap <C-B> <Left>
 cnoremap <M-b>  <S-Left>
@@ -1837,6 +1901,8 @@ if  has("gui_running")
   endtry
   set cursorline
   set cursorcolumn
+  " Don't try to highlight lines longer than 800 characters.
+  set synmaxcol=800
   """"""""""""""""""""""""""""""
   " => Statusline
   """"""""""""""""""""""""""""""
@@ -1858,10 +1924,10 @@ else
       "colorscheme candy
       "colorscheme default
       "colorscheme torte
-      "colorscheme earendel "Black Good
-      "colorscheme default
+      colorscheme earendel "Black Good
+      " colorscheme default
       "colorscheme murphy "Black
-      colorscheme molokai
+      " colorscheme molokai
       "colorscheme badwolf
       "colorscheme metacosm "Black
       "colorscheme motus "Black
@@ -2203,6 +2269,8 @@ command! -nargs=* -bar -bang -count=0 -complete=dir T tabe. <args>
 
 "Filter out the greppings
 command! -nargs=? Filter let @i='' | execute 'g/<args>/y I' | redraw | new | setlocal bt=nofile | put! I
+nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+command! -nargs=* -complete=shellcmd R new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>
 " bind K to grep word under cursor
 nnoremap K :execute "vimgrep /" . expand("<cword>") . "/j " . expand("%")
 function! GrepQuickFix(pat)
@@ -2244,12 +2312,24 @@ noremap <F7> :TlistToggle<CR>
 " nnoremap N <Plug>(anzu-N-with-echo)
 " nnoremap * <Plug>(anzu-star-with-echo)
 " nnoremap # <Plug>(anzu-sharp-with-echo)
-nnoremap * *''zz
-nnoremap g* g*''zz
-nnoremap # #''zz
-nnoremap g# g#''zz
-nnoremap <silent> n /<CR>
-nnoremap <silent> N ?<CR>
+" nnoremap * *''zzzv
+" nnoremap g* g*''zzzv
+" nnoremap # #''zzzv
+" nnoremap g# g#''zzzv
+nnoremap * *<C-o>
+nnoremap g* g*<C-o>
+nnoremap # #<C-o>
+nnoremap g# g#<C-o>
+nnoremap <silent> n /<CR>zzzv
+nnoremap <silent> N ?<CR>zzzv
+nnoremap g; g;zz
+nnoremap g, g,zz
+nnoremap <c-o> <c-o>zz
+nnoremap <c-i> <c-i>zz
+" Easier to type, and I never use the default behavior.
+noremap H ^
+noremap L $
+vnoremap L g_
 "nnoremap <silent> n n:call HLNext(0.2)<cr>
 "nnoremap <silent> N N:call HLNext(0.2)<cr>
 " hex dec conversion
@@ -2550,7 +2630,7 @@ let g:matchparen_insert_timeout=5
 " underline matches line length and indendation)
 nnoremap <Leader>= yypv$r=
 nnoremap <Leader>- yypv$r-
-nnoremap <Leader># yypv$r#
+" nnoremap <Leader># yypv$r#
 nnoremap <Leader>" yypv$r"
 " A fancy unicode underline
 nnoremap <Leader>U yypv$r-
