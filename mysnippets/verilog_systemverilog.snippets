@@ -129,8 +129,8 @@ snippet config_set "add cfgdb::set macro" sw
 endsnippet
 
 snippet comp_utils "add component utils macro" sw
-  \`uvm_component_utils_begin(${1:`!p snip.rv = snip.basename.lower()`})
-  \`uvm_component_utils_end
+  \`uvm_${1:component}_utils_begin(${2:`!p snip.rv = snip.basename.lower()`})
+  \`uvm_$1_utils_end
 endsnippet
 
 snippet new "add new function" sw

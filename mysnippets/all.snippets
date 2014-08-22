@@ -175,6 +175,10 @@ ${1:`!p snip.rv = _get_comment_format()[0]`} ${2:a text} $1
 $1=${2/./=/g}=$1
 endsnippet
 
+snippet filename "filename" sw
+${1:`!p snip.rv = snip.fn`}
+endsnippet
+
 snippet p4header "adding a header for perforce files" bsw
 ${1:`!p snip.rv = _get_comment_format()[0]`}----------------------------------------------------------------------
 $1
