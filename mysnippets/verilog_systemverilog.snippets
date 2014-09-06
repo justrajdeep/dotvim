@@ -88,6 +88,14 @@ snippet uvm_full "add uvm_full macro" sw
 \`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_FULL});
 endsnippet
 
+snippet assert "add uvm assertion macro" sw
+  property ${1:assertion_name};
+    @(posedge clk) disable iff(!reset || assertion_disable)
+      (${2:assertion condition});
+  endproperty: $1
+  assert_$1: assert property($1);
+endsnippet
+
 snippet uvm_high "add uvm_full macro" sw
 \`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_HIGH});
 endsnippet

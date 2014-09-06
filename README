@@ -96,6 +96,7 @@ $ mkfontdir
 $ ttmkfdir -o fonts.dir
 $ fc-cache -f -v ~/.fonts
 $ fc-cache -f -v
+$ fc-match NonExistingFont
 
 Install Powerline
 pip -v install --user git+https://github.com/Lokaltog/powerline

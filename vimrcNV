@@ -5,6 +5,8 @@
      set t_Sb=[4%dm
      set t_mr=[00;33;44m
      set encoding=utf-8
+     set fileencoding=utf-8
+     set fileencodings=utf-8
 
 let use_pathogen = 0
 if has('gui_running')
@@ -811,7 +813,6 @@ if use_neobundle
     " NeoBundle 'wellle/tmux-complete.vim',                      { 'directory' : 'tmux_complete'}
     " NeoBundle 'wincent/Command-T',                             { 'directory' : 'Command-T'}
     " NeoBundle 'xolox/vim-easytags',                            { 'directory' : 'easytags'}
-    " NeoBundle 'xolox/vim-lua-ftplugin',                        { 'directory' : 'lua-ftplugin'}
     " NeoBundle 'xolox/vim-notes',                               { 'directory' : 'notes'}
     " NeoBundle 'xolox/vim-shell',                               { 'directory' : 'vim-shell'}
     " NeoBundle 'Shougo/vimshell.vim',                           { 'directory' : 'vimshell'}
@@ -837,55 +838,60 @@ if use_neobundle
     " NeoBundle 'tpope/vim-endwise',                         { 'directory' : 'endwise'}
     " NeoBundle 'scrooloose/syntastic',                          { 'directory' : 'syntastic'}
     " NeoBundle 'Shougo/unite.vim',                              { 'directory' : 'unite'}
+    " NeoBundle 'bruno-/vim-all',                                { 'directory' : 'all'}
     "
-    " NeoBundle 'ChasingLogic/ChasingLogic-colorscheme-vim',     { 'directory' : 'color_ChasingLogic'}
-    " NeoBundle 'Donearm/Laederon',                              { 'directory' : 'color_laederon'}
-    " NeoBundle 'IntuitiveWebSolutions/vim-colors-blayden',      { 'directory' : 'color_blayden'}
-    " NeoBundle 'Lokaltog/vim-distinguished',                    { 'directory' : 'color_distinguished'}
-    " NeoBundle 'MaxSt/FlatColor',                               { 'directory' : 'color_FlatColor'}
-    " NeoBundle 'Pychimp/vim-luna',                              { 'directory' : 'color_luna'}
-    " NeoBundle 'Pychimp/vim-sol',                               { 'directory' : 'color_sol'}
-    " NeoBundle 'altercation/vim-colors-solarized',              { 'directory' : 'color_solarized'}
-    " NeoBundle 'baskerville/bubblegum',                         { 'directory' : 'color_bubblegum'}
-    " NeoBundle 'baverman/vim-babymate256',                      { 'directory' : 'color_babymate256'}
-    " NeoBundle 'blueyed/xoria256.vim',                          { 'directory' : 'color_xoria256'}
-    " NeoBundle 'carlobaldassi/vim-colorschemedegrade',          { 'directory' : 'colorSchemeDegrade'}
-    " NeoBundle 'chreekat/vim-colors-lunatic',                   { 'directory' : 'color_lunatic'}
-    " NeoBundle 'chriskempson/base16-vim',                       { 'directory' : 'color_base16'}
-    " NeoBundle 'chriskempson/vim-tomorrow-theme',               { 'directory' : 'color_tomorrow_theme'}
-    " NeoBundle 'csexton/tomorrow-theme.vim',                    { 'directory' : 'color_tomorrow'}
-    " NeoBundle 'euclio/vim-nocturne',                           { 'directory' : 'color_nocturne'}
-    " NeoBundle 'flazz/vim-colorschemes',                        { 'directory' : 'color_colorschemes'}
-    " NeoBundle 'gmarik/ingretu',                                { 'directory' : 'color_ingretu'}
-    " NeoBundle 'jasonlong/lavalamp',                            { 'directory' : 'color_lavalamp'}
-    " NeoBundle 'jeetsukumaran/vim-mochalatte',                  { 'directory' : 'color_mochalatte'}
-    " NeoBundle 'john2x/flatui.vim',                             { 'directory' : 'color_flatui'}
-    " NeoBundle 'junegunn/seoul256.vim',                         { 'directory' : 'color_seoul256'}
-    " NeoBundle 'morhetz/gruvbox',                               { 'directory' : 'color_gruvbox'}
-    " NeoBundle 'nanotech/jellybeans.vim',                       { 'directory' : 'color_jellybeans'}
-    " NeoBundle 'nielsmadan/harlequin',                          { 'directory' : 'color_harlequin'}
-    " NeoBundle 'noahfrederick/vim-hemisu',                      { 'directory' : 'color_hemisu'}
-    " NeoBundle 'noahfrederick/vim-noctu',                       { 'directory' : 'color_noctu'}
-    " NeoBundle 'quanganhdo/grb256',                             { 'directory' : 'color_grb256'}
-    " NeoBundle 'rking/vim-detailed',                            { 'directory' : 'color_detailed'}
-    " NeoBundle 'sickill/vim-monokai',                           { 'directory' : 'color_monokai'}
-    " NeoBundle 'sjl/badwolf',                                   { 'directory' : 'color_badwolf'}
-    " NeoBundle 'tpope/vim-vividchalk',                          { 'directory' : 'color_vividchalk'}
-    " NeoBundle 'vim-scripts/Atom',                              { 'directory' : 'color_atom'}
-    " NeoBundle 'vim-scripts/Zenburn',                           { 'directory' : 'color_Zenburn'}
-    " NeoBundle 'vim-scripts/molokai',                           { 'directory' : 'color_molokai'}
-    " NeoBundle 'vim-scripts/tir_black',                         { 'directory' : 'color_tir_black'}
-    " NeoBundle 'vim-scripts/xterm16.vim',                       { 'directory' : 'color_xterm16'}
-    " NeoBundle 'w0ng/vim-hybrid',                               { 'directory' : 'color_hybrid'}
-    " NeoBundle 'zeis/vim-kolor',                                { 'directory' : 'color_kolor'}
-    " NeoBundle 'jeetsukumaran/vim-nefertiti',                   { 'directory' : 'color_nefertiti'}
-    " NeoBundle 'itchyny/landscape.vim',                         { 'directory' : 'color_landscape'}
+    " color {{{2 "
+    NeoBundle 'ChasingLogic/ChasingLogic-colorscheme-vim',     { 'directory' : 'color_ChasingLogic'}
+    NeoBundle 'Donearm/Laederon',                              { 'directory' : 'color_laederon'}
+    NeoBundle 'IntuitiveWebSolutions/vim-colors-blayden',      { 'directory' : 'color_blayden'}
+    NeoBundle 'Lokaltog/vim-distinguished',                    { 'directory' : 'color_distinguished'}
+    NeoBundle 'MaxSt/FlatColor',                               { 'directory' : 'color_FlatColor'}
+    NeoBundle 'Pychimp/vim-luna',                              { 'directory' : 'color_luna'}
+    NeoBundle 'Pychimp/vim-sol',                               { 'directory' : 'color_sol'}
+    NeoBundle 'altercation/vim-colors-solarized',              { 'directory' : 'color_solarized'}
+    NeoBundle 'baskerville/bubblegum',                         { 'directory' : 'color_bubblegum'}
+    NeoBundle 'baverman/vim-babymate256',                      { 'directory' : 'color_babymate256'}
+    NeoBundle 'blueyed/xoria256.vim',                          { 'directory' : 'color_xoria256'}
+    NeoBundle 'carlobaldassi/vim-colorschemedegrade',          { 'directory' : 'colorSchemeDegrade'}
+    NeoBundle 'chreekat/vim-colors-lunatic',                   { 'directory' : 'color_lunatic'}
+    NeoBundle 'chriskempson/base16-vim',                       { 'directory' : 'color_base16'}
+    NeoBundle 'chriskempson/vim-tomorrow-theme',               { 'directory' : 'color_tomorrow_theme'}
+    NeoBundle 'csexton/tomorrow-theme.vim',                    { 'directory' : 'color_tomorrow'}
+    NeoBundle 'euclio/vim-nocturne',                           { 'directory' : 'color_nocturne'}
+    NeoBundle 'flazz/vim-colorschemes',                        { 'directory' : 'color_colorschemes'}
+    NeoBundle 'gmarik/ingretu',                                { 'directory' : 'color_ingretu'}
+    NeoBundle 'jasonlong/lavalamp',                            { 'directory' : 'color_lavalamp'}
+    NeoBundle 'jeetsukumaran/vim-mochalatte',                  { 'directory' : 'color_mochalatte'}
+    NeoBundle 'john2x/flatui.vim',                             { 'directory' : 'color_flatui'}
+    NeoBundle 'junegunn/seoul256.vim',                         { 'directory' : 'color_seoul256'}
+    NeoBundle 'morhetz/gruvbox',                               { 'directory' : 'color_gruvbox'}
+    NeoBundle 'nanotech/jellybeans.vim',                       { 'directory' : 'color_jellybeans'}
+    NeoBundle 'nielsmadan/harlequin',                          { 'directory' : 'color_harlequin'}
+    NeoBundle 'noahfrederick/vim-hemisu',                      { 'directory' : 'color_hemisu'}
+    NeoBundle 'noahfrederick/vim-noctu',                       { 'directory' : 'color_noctu'}
+    NeoBundle 'quanganhdo/grb256',                             { 'directory' : 'color_grb256'}
+    NeoBundle 'rking/vim-detailed',                            { 'directory' : 'color_detailed'}
+    NeoBundle 'sickill/vim-monokai',                           { 'directory' : 'color_monokai'}
+    NeoBundle 'sjl/badwolf',                                   { 'directory' : 'color_badwolf'}
+    NeoBundle 'tpope/vim-vividchalk',                          { 'directory' : 'color_vividchalk'}
+    NeoBundle 'vim-scripts/Atom',                              { 'directory' : 'color_atom'}
+    NeoBundle 'vim-scripts/Zenburn',                           { 'directory' : 'color_Zenburn'}
+    NeoBundle 'vim-scripts/molokai',                           { 'directory' : 'color_molokai'}
+    NeoBundle 'vim-scripts/tir_black',                         { 'directory' : 'color_tir_black'}
+    NeoBundle 'vim-scripts/xterm16.vim',                       { 'directory' : 'color_xterm16'}
+    NeoBundle 'w0ng/vim-hybrid',                               { 'directory' : 'color_hybrid'}
+    NeoBundle 'zeis/vim-kolor',                                { 'directory' : 'color_kolor'}
+    NeoBundle 'jeetsukumaran/vim-nefertiti',                   { 'directory' : 'color_nefertiti'}
+    NeoBundle 'itchyny/landscape.vim',                         { 'directory' : 'color_landscape'}
     NeoBundle 'vim-scripts/Colour-Sampler-Pack',               { 'directory' : 'colour_sampler_pack'}
-    " NeoBundleLazy 'jaxbot/semantic-highlight.vim',                 { 'directory' : 'color_semantic-highligh', 'autoload' : {'commands' : ['SemanticHighlight']}}
-    " NeoBundle 'reedes/vim-thematic',                           { 'directory' : 'thematic'}
-    " NeoBundle 'jonstoler/werewolf.vim',                        { 'directory' : 'color_warewolf'}
+    NeoBundleLazy 'jaxbot/semantic-highlight.vim',                 { 'directory' : 'color_semantic-highligh', 'autoload' : {'commands' : ['SemanticHighlight']}}
+    NeoBundle 'reedes/vim-thematic',                           { 'directory' : 'color_thematic'}
+    NeoBundle 'jonstoler/werewolf.vim',                        { 'directory' : 'color_warewolf'}
     " NeoBundle 'amdt/sunset',                                   { 'directory' : 'color_sunset'}
-    " NeoBundle 'luckydev/150colors',                                { 'directory' : '150colors'}
+    NeoBundle 'luckydev/150colors',                            { 'directory' : 'color_150colors'}
+    NeoBundle 'ujihisa/tabpagecolorscheme',                    { 'directory' : 'tabpagecolorscheme'}
+    NeoBundle 'zefei/cake16',                                  { 'directory' : 'color_cake16'}
+    " }}}2 " color
     "
     NeoBundleLazy 'AndrewRadev/linediff.vim',                      { 'directory' : 'linediff', 'autoload' : {'commands' : ['Linediff', 'LinediffReset']}}
     NeoBundle 'AndrewRadev/switch.vim',                        { 'directory' : 'switch'}
@@ -934,7 +940,6 @@ if use_neobundle
     NeoBundle 'tpope/vim-eunuch',                              { 'directory' : 'eunuch'}
     NeoBundle 'tpope/vim-repeat',                              { 'directory' : 'repeat'}
     NeoBundle 'tpope/vim-speeddating',                         { 'directory' : 'speeddating'}
-    " NeoBundleLazy 'ujihisa/tabpagecolorscheme',                    { 'directory' : 'tabpagecolorscheme', 'autoload' : {'commands' : ['Tcolorscheme']}}
     " NeoBundle 'vim-scripts/CSApprox',                          { 'directory' : 'CSApprox'}
     NeoBundleLazy 'vim-scripts/FuzzyFinder',                       { 'directory' : 'FuzzyFinder', 'autoload' : {'commands' : ['FufBuffer', 'FufFile', 'FufCoverageFile', 'FufDir', 'FufMruFile', 'FufMruCmd', 'FufBookmarkFile', 'FufBookmarkDir', 'FufTag', 'FufBufferTag', 'FufTaggedFile', 'FufJumpList', 'FufChangeList', 'FufQuickfix', 'FufLine', 'FufHelp']}}
     " NeoBundleLazy 'vim-scripts/HelpClose',                         { 'directory' : 'HelpClose', 'autoload' : {'commands' : ['HelpAllClose']}}
@@ -962,7 +967,7 @@ if use_neobundle
     " NeoBundle 'talek/obvious-resize',                          { 'directory' : 'obvious-resize'}
     " NeoBundle 'junegunn/vim-oblique',                          { 'directory' : 'oblique'}
     NeoBundle 'chreekat/vim-paren-crosshairs',                   { 'directory' : 'paren-crosshairs'}
-    " NeoBundle 'wesQ3/vim-windowswap',                          { 'directory' : 'windowswap'}
+    NeoBundle 'wesQ3/vim-windowswap',                          { 'directory' : 'windowswap'}
     NeoBundle 'vim-scripts/L9',                                { 'directory' : 'l9'}
     NeoBundle 'xolox/vim-misc',                                { 'directory' : 'vim-misc'}
     NeoBundleLazy 'xolox/vim-session',                             { 'directory' : 'vim_session', 'autoload' : {'commands' : ['SaveSession', 'OpenSession', 'RestartVim', 'CloseSession', 'DeleteSession', 'ViewSession', 'OpenTabSession', 'SaveTabSession', 'AppendTabSession', 'CloseTabSession']}}
@@ -977,7 +982,14 @@ if use_neobundle
     " NeoBundle 'takac/vim-hardtime',                                { 'directory' : 'hardtime'}
     NeoBundle 'ironhouzi/vim-stim',                                { 'directory' : 'stim'}
     NeoBundle 'idbrii/vim-searchsavvy',                            { 'directory' : 'searchsavvy'}
-    NeoBundle 'wellle/targets.vim'                                 { 'directory' : 'targets'}
+    NeoBundle 'wellle/targets.vim',                                { 'directory' : 'targets'}
+    " NeoBundle 'vasconcelloslf/vim-foldfocus',                      { 'directory' : 'foldfocus'}
+    " NeoBundle 'zefei/vim-wintabs',                                 { 'directory' : 'wintabs'}
+    NeoBundle 'xolox/vim-lua-ftplugin',                            { 'directory' : 'lua_fileType'}
+    " NeoBundle 'chrisbra/changesPlugin',                            { 'directory' : 'changesPlugin'}
+    " NeoBundle 'jalanb/viack',                                      { 'directory' : 'viack'}
+    NeoBundle 'paradigm/skybison',                                 { 'directory' : 'skybison'}
+    " NeoBundle 'justinmk/vim-gtfo',                                 { 'directory' : 'gtfo'}
 
     NeoBundleCheck
     NeoBundleSaveCache
@@ -1066,6 +1078,9 @@ set tabstop=8
 "dont show statusline messages
 "hide the insert mode displays
 set noshowmode
+"" Encoding
+set bomb
+set binary
 set ttyfast
 "set modeline parsing
 set modeline
@@ -1130,6 +1145,16 @@ let g:session_directory='~/vim_session/'
 let g:session_extension='.ses'
 let g:session_autosave_periodic=60
 let g:session_autosave='no'
+" skybison {{{2 "
+nnoremap <leader>b 2:<c-u>call SkyBison("b ")<cr>
+nnoremap <leader>t 2:<c-u>call SkyBison("tabe ")<cr>
+nnoremap <leader>h 2:<c-u>call SkyBison("h ")<cr>
+nnoremap <leader>e :<c-u>call SkyBison("e ")<cr>
+nnoremap <leader>i :<c-u>call SkyBison("vs ")<cr>
+nnoremap <leader>s :<c-u>call SkyBison("sp ")<cr>
+" nnoremap :: :<c-u>call SkyBison("")<cr>
+cnoremap <C-l> <c-r>=SkyBison("")<cr><cr>
+" }}}2 " skybison
 set viminfo+=n~/.vim/viminfo
 if exists("+undofile")
   " undofile - This allows you to use undos after exiting and restarting
@@ -1415,10 +1440,10 @@ endif
   autocmd BufNewFile,BufRead,BufWritePre *.log.retry setf log|setlocal nobackup|setlocal noundofile|set complete=.
   autocmd BufNewFile,BufRead,BufWritePre *testout* setf log|setl fileencoding=unix|setlocal nobackup|setlocal noundofile|set complete=.
   autocmd BufNewFile,BufRead,BufWritePre /tmp/* setf log|setlocal nobackup|setlocal noundofile
-  autocmd BufNewFile,BufRead */t186/* setlocal nomodifiable
-  autocmd BufNewFile,BufRead */tlit4/* setlocal nomodifiable
-  autocmd BufNewFile,BufRead */t210/* setlocal nomodifiable
-  autocmd BufNewFile,BufRead */tlit2/* setlocal nomodifiable
+  autocmd BufNewFile,BufRead */t186/* setlocal readonly
+  autocmd BufNewFile,BufRead */tlit4/* setlocal readonly
+  autocmd BufNewFile,BufRead */t210/* setlocal readonly
+  autocmd BufNewFile,BufRead */tlit2/* setlocal readonly
 augroup END
 "Rainbow paren
 let g:rbpt_colorpairs = [
@@ -1521,6 +1546,8 @@ nnoremap <C-w>gf <C-w>gF
 :command QA qa
 :command WQ wq
 :command Wq wq
+cab Wa wa
+cab WA wa
 :command W w
 :command Q q
 :command Sp sp
@@ -1849,7 +1876,7 @@ if  has("gui_running")
   "remove toolbar
   "set lines=40
   set guioptions-=T
-  set guioptions+=ebLh
+  set guioptions+=ebLhgmrti
   "set guioptions+=c "console dialog instead of popup"
   "--------------preferred--------------------------------------------------------
   try
@@ -2044,12 +2071,12 @@ cno $m <C-U>:setl modifiable!
 cno $H <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 have <C-r>=resolve(expand('%'))<CR>
 cno $S <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 sync <C-r>=resolve(expand('%'))<CR>
 cno $s <C-U>!p4 submit <C-r>=resolve(expand('%'))<CR>
-cno $T <C-U>sp <C-\>eMy_Depth("tabe")<cr>/
-cno $t <C-U>tabe <C-\>eMy_Depth("tabe")<cr>/
-cno $e <C-U>vs <C-\>eMy_Depth("e")<cr>/
-cno $V <C-U>vs <C-\>eMy_Depth("vs")<cr>/
-cno $v <C-U>vs <C-\>eMy_Depth("sp")<cr>/
-cno $F <C-U>set filetype=verilog_systemverilog
+cno $T <C-U>sp <C-\>eMy_Depth("tabe")<cr><CR>
+cno $t <C-U>tabe <C-\>eMy_Depth("tabe")<cr><CR>
+cno $e <C-U>vs <C-\>eMy_Depth("e")<cr><CR>
+cno $V <C-U>vs <C-\>eMy_Depth("vs")<cr><CR>
+cno $v <C-U>vs <C-\>eMy_Depth("sp")<cr><CR>
+cno $F <C-U>setl filetype=verilog_systemverilog
 cno $x <C-U>.s/\\d\\+/\\=printf("0x%04x", submatch(0))
 cno $Z <C-U>!tar cvzf <C-r>=resolve(expand('%'))<CR>.tar.gz <C-r>=resolve(expand('%'))<CR> && mutt -s <C-r>=resolve(expand('%'))<CR> -a <C-r>=resolve(expand('%'))<CR>.tar.gz $USER@nvidia.com < /dev/null && \rm -f <C-r>=resolve(expand('%'))<CR>.tar
 " map %
@@ -2091,13 +2118,9 @@ endfunc
 func! CurrentFileDirP4(cmd)
   return a:cmd . " | enew | setlocal bt=nofile |  r !p4 print -q " . resolve(expand("%:p")) . ""
 endfunc
-function! My_DepthNoSpace(cmd)
-  let output=system("/home/rmondal/bin/scripts/my_depth")
-  return a:cmd . output . ""
-endfunction
 function! My_Depth(cmd)
   let output=system("/home/rmondal/bin/scripts/my_depth")
-  return a:cmd . " " . output . ""
+  return "call SkyBison(\"" . a:cmd . " " . output . "/\")"
 endfunction
 function! My_DepthNoSpace(cmd)
   let output=system("/home/rmondal/bin/scripts/my_depth")
@@ -2276,9 +2299,9 @@ command! -nargs=* -bar -bang -count=0 -complete=dir V vs. <args>
 command! -nargs=* -bar -bang -count=0 -complete=dir T tabe. <args>
 
 "Filter out the greppings
-command! -nargs=? Filter let @i='' | execute 'g/<args>/y I' | redraw | new | setlocal bt=nofile | put! I
+command! -nargs=? Filter let @i='' | execute 'g/<args>/y I' | redraw | new | setlocal bt=nofile bh=delete | put! I
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
-command! -nargs=* -complete=shellcmd R new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>
+command! -nargs=* -complete=shellcmd R new | setlocal buftype=nofile bufhidden=delete noswapfile | r !<args>
 " bind K to grep word under cursor
 nnoremap K :execute "vimgrep /" . expand("<cword>") . "/j " . expand("%")
 function! GrepQuickFix(pat)
@@ -2310,8 +2333,11 @@ let MRU_Max_Entries = 100
 noremap <F4> :FufFile<CR>
 noremap <F3> :FufBuffer<CR>
 "noremap <F5> :BufExplorerVerticalSplit<CR>
-noremap <F5> :<C-u>GundoToggle<CR>:colorscheme vimhut<CR>
-noremap <F6> :UndotreeToggle<CR>
+" redir => current_colorscheme
+" silent colorscheme
+" redir END
+noremap <F5> :<C-u>GundoToggle<CR>:set background&<CR>
+noremap <F6> :<C-u>UndotreeToggle<CR>:set background&<CR>
 "let g:tagbar_usearrows = 1
 noremap <F7> :TlistToggle<CR>
 "noremap <F7> :YRShow<CR>
@@ -2504,9 +2530,11 @@ else
   "set guifont=Century\ Schoolbook\ L\ 12
   "set guifont=DejaVu\ Sans\ Mono\ 12
   "
-  set guifont=Monaco\ 10 "favourite
+  " set guifont=Monaco\ 10 "favourite
   "set guifont=Ubuntu\ Mono\ 14 "beautiful
-  "set guifont=Menlo\ 12 "favourite
+  " set guifont=Menlo\ 11 "favourite
+  set guifont=CamingoCode\ 11
+  " set guifont=cousine\ 11
   "set guifont=Fira\ Mono\ 12 "beautiful
   "set guifont=Consolas\ for\ Powerline\ 13
   "set guifont=BPmono\ 14
@@ -2603,6 +2631,7 @@ endfunction
 
 "NarrowRegion Writeback"
 let g:nrrw_rgn_protect = 'n'
+" map <Leader>ff :call FoldFocus('vnew')<CR>
 
 "UltiSnips"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
