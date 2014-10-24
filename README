@@ -138,8 +138,11 @@ Git initialization
  git push -u origin master
 
 
+ Debugging VIM
+ -V9myVimLog
 
  GOOD vim sources
+ https://github.com/svermeulen/VimDriver
  https://github.com/terryma/dotfiles
  https://github.com/venkatapraveenr/dotvim2
  https://github.com/joedicastro/dotfiles
@@ -160,6 +163,13 @@ Git initialization
  https://github.com/mutewinter/dot_vim
  https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
  https://github.com/carlhuda/janus
+ https://bitbucket.org/sjl/dotfiles/src/e6f6389e598f33a32e75069d7b3cfafb597a4d82/vim/vimrc#cl-2291
+ https://github.com/xavierartot/code-useful/blob/master/dot/.vimrc
+ https://github.com/inkarkat/vimrc
+ ======
+ colors
+ ======
+ http://vimcolors.com/
 
  NVIDIA specific installs
 =========================
