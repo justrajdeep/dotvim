@@ -1,8 +1,8 @@
 " vim: sw=4
 " Vim color file
-" Maintainer:	Leonid Shvechikov (aka tGL) <shvechikov@gmail.com>
+" Maintainer:   Leonid Shvechikov (aka tGL) <shvechikov@gmail.com>
 " Vesion:       0.7
-" Last Change:	2008/07/30
+" Last Change:  2008/07/30
 
 " tGL - the Good Luck
 " My personal light colorscheme for gvim.
