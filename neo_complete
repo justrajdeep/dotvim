@@ -4,7 +4,7 @@ let g:acp_enableAtStartup = 0
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 
-let g:neocomplete#disable_auto_complete = 0
+let g:neocomplete#disable_auto_complete = 1
 
 "let g:neocomplete#enable_auto_close_preview=1
 " Use smartcase.
@@ -68,7 +68,7 @@ inoremap <expr><Up> pumvisible() ? "\<C-p>" : "\<Up>"
 "inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
 
 " For cursor moving in insert mode(Not recommended)
-inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+" inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
 inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
 "inoremap <expr><Up>    neocomplcache#close_popup() . "\<Up>"
 "inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"

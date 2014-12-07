@@ -166,10 +166,13 @@ Git initialization
  https://bitbucket.org/sjl/dotfiles/src/e6f6389e598f33a32e75069d7b3cfafb597a4d82/vim/vimrc#cl-2291
  https://github.com/xavierartot/code-useful/blob/master/dot/.vimrc
  https://github.com/inkarkat/vimrc
+ http://vimconf.vim-jp.org/2014/reports/
+ https://github.com/rdlugosz/dotfiles/blob/master/vimrc
  ======
  colors
  ======
  http://vimcolors.com/
+ http://cocopon.me/app/vim-color-gallery/
 
  NVIDIA specific installs
 =========================

@@ -66,6 +66,9 @@ def _get_comment_format():
 
     return commentformat
 
+def foldmarker():
+	"Return a tuple of (open fold marker, close fold marker)"
+	return vim.eval("&foldmarker").split(",")
 
 endglobal
 
@@ -77,15 +80,15 @@ $1endif ${2:`!p snip.rv = _get_comment_format()[0]`} `!p snip.rv = snip.fn.repla
 endsnippet
 
 snippet uvm_info "add uvm_info macro" sw
-\`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_DEBUG});
+\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_DEBUG});
 endsnippet
 
 snippet uvm_debug "add uvm_debug macro" sw
-\`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_DEBUG});
+\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_DEBUG});
 endsnippet
 
 snippet uvm_full "add uvm_full macro" sw
-\`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_FULL});
+\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_FULL});
 endsnippet
 
 snippet assert "add uvm assertion macro" sw
@@ -97,37 +100,37 @@ snippet assert "add uvm assertion macro" sw
 endsnippet
 
 snippet uvm_high "add uvm_full macro" sw
-\`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_HIGH});
+\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_HIGH});
 endsnippet
 
 snippet uvm_medium "add uvm_full macro" sw
-\`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_MEDIUM});
+\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_MEDIUM});
 endsnippet
 
 snippet uvm_low "add uvm_full macro" sw
-\`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_LOW});
+\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_LOW});
 endsnippet
 
 snippet uvm_none "add uvm_full macro" sw
-\`uvm_info(get_type_name(), $psprintf("$1"), ${2:UVM_NONE});
+\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_NONE});
 endsnippet
 
 snippet uvm_fatal "add uvm_fatal macro" sw
-\`uvm_${1:fatal}(get_type_name(), $psprintf("$2"));
+\`uvm_${1:fatal}(get_type_name(), $sformatf("$2"));
 endsnippet
 
 snippet uvm_error "add uvm_error macro" sw
-\`uvm_${1:error}(get_type_name(), $psprintf("$2"));
+\`uvm_${1:error}(get_type_name(), $sformatf("$2"));
 endsnippet
 
 snippet uvm_warn "add uvm_warning macro" sw
-\`uvm_${1:warning}(get_type_name(), $psprintf("$2"));
+\`uvm_${1:warning}(get_type_name(), $sformatf("$2"));
 endsnippet
 
 snippet config_get "add cfgdb::get macro" sw
   // get ${1:field_name} from config_db, of ${2:type} type and pass it to ${3:value}
   if(!(uvm_config_db#($2)::get(.cntxt(${4:this}), .inst_name("$5"), .field_name("$1"), .value($3)))) begin
-    \`uvm_${6:error}(get_type_name(), $psprintf("Unable to obtain $1 from $4->$5->$1 in config DB."));
+    \`uvm_${6:error}(get_type_name(), $sformatf("Unable to obtain $1 from $4->$5->$1 in config DB."));
   end
 endsnippet
 
@@ -147,10 +150,18 @@ snippet new "add new function" sw
   endfunction:new
 endsnippet
 
+snippet function "add * function" sw
+${1:`!p snip.rv = _get_comment_format()[0]`} virtual function ${2:void} ${3:name}_f($4) `!p snip.rv = foldmarker()[0]`${5:1} $1
+virtual function $2 $3_f($4);
+  \`uvm_info(get_type_name(), $sformatf("in $3_f"), UVM_DEBUG);
+endfunction:$3_f
+$1 `!p snip.rv = foldmarker()[1]`$5 $1 virtual function $2 $3_f
+endsnippet
+
 snippet phase "add * phase" sw
-  virtual function void ${1:build}_phase(uvm_phase phase);
-    super.$1_phase(phase);
-  endfunction:$1_phase
+  virtual ${1:function} void ${2:build}_phase(uvm_phase phase);
+    super.$2_phase(phase);
+  endfunction:$2_phase
 endsnippet
 
 snippet create_clk "add nitro_clk" sw
