@@ -647,6 +647,9 @@ if use_neobundle
     " NeoBundle 'Shougo/vimshell.vim',                           { 'directory' : 'vimShell'}
     " NeoBundle 'Valloric/YouCompleteMe',                        { 'directory' : 'YouCompleteMe'}
     " NeoBundle 'Wolfy87/vim-enmasse',                           { 'directory' : 'enmasse'}
+    " NeoBundle 'vim-scripts/EnhancedJumps',                     { 'directory' : 'EnhancedJumps'}
+    " NeoBundle 'dahu/Vimple',                                   { 'directory' : 'vimple'}
+    " NeoBundle 'Raimondi/vim-buffalo',                          { 'directory' : 'buffalo'}
     " NeoBundle 'aaronbieber/quicktask',                         { 'directory' : 'quicktask'}
     " NeoBundle 'actionshrimp/vim-xpath',                        { 'directory' : 'xpath'}
     " NeoBundle 'alfredodeza/pytest.vim',                        { 'directory' : 'pytest'}
@@ -747,10 +750,14 @@ if use_neobundle
     " NeoBundle 'shawncplus/phpcomplete.vim',                    { 'directory' : 'phpcomplete'}
     " NeoBundle 'sjbach/lusty',                                  { 'directory' : 'lusty'}
     NeoBundle 'soh335/unite-qflist',                           { 'directory' : 'unite_qfix'}
+    NeoBundle 'sk1418/QFGrep',                                 { 'directory' : 'QFGrep'}
+    " NeoBundle 'yssl/twcmd.vim',                                { 'directory' : 'twcmd'}
     " NeoBundle 'spiiph/vim-space',                              { 'directory' : 'space'}
     " NeoBundle 'takac/vim-fontmanager',                         { 'directory' : 'fontmanager'}
     " NeoBundle 'thinca/vim-fontzoom',                           { 'directory' : 'fontzoom'}
     " NeoBundle 'thinca/vim-ref',                                { 'directory' : 'ref'}
+    " NeoBundle 'thinca/vim-qfreplace',                          { 'directory' : 'qfreplace'}
+    NeoBundle 'stefandtw/quickfix-reflector.vim',              { 'directory' : 'reflector'}
     " NeoBundle 'thisivan/vim-bufexplorer',                      { 'directory' : 'bufexplorer'}
     " NeoBundle 'tommcdo/vim-express',                           { 'directory' : 'express'}
     " NeoBundle 'tommcdo/vim-lion',                              { 'directory' : 'lion'}
@@ -767,7 +774,8 @@ if use_neobundle
     " NeoBundle 'tomtom/ttagecho_vim',                           { 'directory' : 'ttagecho'}
     " NeoBundle 'tpope/vim-abolish',                             { 'directory' : 'abolish'}
     " NeoBundle 'tpope/vim-afterimage',                          { 'directory' : 'afterimage'}
-    " NeoBundle 'tpope/vim-dispatch',                            { 'directory' : 'vim-dispatch'}
+    NeoBundle 'tpope/vim-dispatch',                            { 'directory' : 'vim-dispatch'}
+    NeoBundle 'idbrii/AsyncCommand',                           { 'directory' : 'asyncCommand'}
     " NeoBundle 'tpope/vim-fireplace',                           { 'directory' : 'fireplace'}
     " NeoBundle 'tpope/vim-fugitive',                            { 'directory' : 'fugitive'}
     " NeoBundle 'tpope/vim-markdown',                            { 'directory' : 'markdown'}
@@ -841,10 +849,13 @@ if use_neobundle
     " NeoBundle 'bruno-/vim-all',                                { 'directory' : 'all'}
     "
     " color {{{2 "
+    NeoBundle 'fmoralesc/molokayo',                            { 'directory' : 'color_molokaya'}
+    NeoBundle 'ajh17/Spacegray.vim',                           { 'directory' : 'color_Spacegray'}
     NeoBundle 'jonathanfilip/vim-lucius',                      { 'directory' : 'color_lucius'}
     NeoBundle 'vim-scripts/wintersday.vim',                    { 'directory' : 'color_wintersday'}
     NeoBundle 'zenorocha/dracula-theme',                       { 'directory' : 'color_dracula'}
     NeoBundle 'goirijo/vim-jgg-colorscheme',                   { 'directory' : 'color_jgg'}
+    NeoBundle 'CruizeMissile/Revolution.vim',                  { 'directory' : 'color_Revolution'}
     NeoBundle 'nice/sweater',                                  { 'directory' : 'color_sweater'}
     NeoBundle 'whatyouhide/vim-gotham',                        { 'directory' : 'color_gotham'}
     NeoBundle 'ChasingLogic/ChasingLogic-colorscheme-vim',     { 'directory' : 'color_ChasingLogic'}
@@ -914,6 +925,10 @@ if use_neobundle
     NeoBundle 'vim-scripts/earendel',                          { 'directory' : 'color_earendel'}
     NeoBundle 'vim-scripts/neutron.vim',                       { 'directory' : 'color_neutron'}
     NeoBundle 'vim-scripts/sonoma.vim',                        { 'directory' : 'color_sonoma'}
+    NeoBundle 'Junza/Spink',                                   { 'directory' : 'color_spink'}
+    NeoBundle 'vim-scripts/oh-l-l',                            { 'directory' : 'color_oh_la_la'}
+    NeoBundle 'vim-scripts/unkiwii-color-scheme',              { 'directory' : 'color_unkiwii'}
+    NeoBundle 'nowk/genericdc',                                { 'directory' : 'color_genericdc'}
     " }}}2 " color
     "
     NeoBundle 'dbakker/vim-adjustscroll',                      { 'directory' : 'adjustscroll'}
@@ -949,8 +964,10 @@ if use_neobundle
     autocmd FileType xml NeoBundleSource 'xmledit'
     NeoBundle 'szw/vim-ctrlspace',                             { 'directory' : 'ctrlspace'}
     NeoBundle 'terryma/vim-expand-region',                     { 'directory' : 'expand-region'}
+    " NeoBundle 'gorkunov/smartpairs.vim',                       { 'directory' : 'smartpairs'}
     NeoBundle 'terryma/vim-multiple-cursors',                  { 'directory' : 'multiple_cursor'}
     NeoBundle 'tmhedberg/matchit',                             { 'directory' : 'matchit'}
+    NeoBundle 'vim-scripts/PatternsOnText',                    { 'directory' : 'PatternsOnText'}
     NeoBundle 'tommcdo/vim-exchange',                          { 'directory' : 'exchange'}
     NeoBundle 'tpope/vim-commentary',                          { 'directory' : 'commentary'}
     NeoBundle 'tpope/vim-eunuch',                              { 'directory' : 'eunuch'}
@@ -999,6 +1016,7 @@ if use_neobundle
     NeoBundle 'haya14busa/incsearch.vim',                          { 'directory' : 'incsearch'}
     NeoBundle 'Konfekt/FastFold',                                  { 'directory' : 'fastfold'}
     NeoBundle 'gelguy/snapshot.vim',                               { 'directory' : 'snapshot'}
+    " NeoBundle 'gcavallanti/vim-noscrollbar',                       { 'directory' : 'noscrollbar'}
     " NeoBundle 'Yggdroot/indentLine',                               { 'directory' : 'indentLine'}
     " {{{2
     " NeoBundleLazy 'JessicaKMcIntosh/TagmaTasks',                   { 'directory' : 'TagmaTasks', 'autoload' : {'commands' : ['TagmaTaskClear', 'TagmaTaskMarks', 'TagmaTaskToggle', 'TagmaTasks']}}
@@ -1035,6 +1053,7 @@ if use_neobundle
     " NeoBundle 'richsoni/vim-ecliptic',                             { 'directory' : 'ecliptic'}
     " NeoBundle 'justinmk/vim-gtfo',                                 { 'directory' : 'gtfo'}
     " NeoBundle 'vasconcelloslf/vim-interestingwords',               { 'directory' : 'interestingwords'}
+    " NeoBundle 'osyo-manga/vim-brightest',                          { 'directory' : 'brightest'}
     " NeoBundle 'gbgar/pandoc-sections',                             { 'directory' : 'pandoc-sections'}
     " NeoBundle 'tommcdo/vim-kangaroo',                              { 'directory' : 'kangaroo'}
     " }}}2
@@ -1078,7 +1097,7 @@ let g:ycm_filetype_specific_completion_to_disable = {}
 set fcs=vert:'|'
 "
 " Always splits to the right and below
-" set splitright
+set splitright
 " set splitbelow
 "
 " Set to auto read when a file is changed from the outside load automatically
@@ -1257,6 +1276,7 @@ set copyindent
 set cinkeys-=0#
 "inoremap # X#
 inoremap jk <ESC>
+set esckeys
 set smarttab
 set cindent
 set cinoptions=:s,ps,ts,cs
@@ -1289,6 +1309,7 @@ set scrolloff=2 "skip 2 lines when scrolling
 set sidescrolloff=10
 ""confirm action using a dialog box
 set confirm
+" prevent cursor to change position when changing line
 set nostartofline
 " always show something in statusline
 set report=0 " tell us when anything is changed via :...
@@ -1455,6 +1476,7 @@ set wcm=<C-Z>
 " :map <F4> :emenu <C-Z>
 " visual special charaters
 " Highlight problematic whitespace
+" set digraph
 if  has("gui_running")
   set list
   "highlight NonText ctermfg=8 guifg=gray
@@ -1841,6 +1863,9 @@ augroup filetype_make
 augroup END
 "local make
 set makeprg=`depth`/bin/nvmk\ -c\ .\ -d\ NV_BUILD_PLATFORM=Linux_x86_64\ $*
+function! SetmakePrg()
+  return "cd" . resolve(expand('%:p:h')) . "&& `depth`/bin/nvmk\ -c\ .\ -d\ NV_BUILD_PLATFORM=Linux_x86_64\ $*"
+endfunction
 
 augroup filetype_verilog
 :autocmd!
@@ -1880,7 +1905,7 @@ augroup filetype_verilog
   \   exe "normal g'\"" |
   \ endif
  :au BufReadPost,BufNewFile *
-  \ let b:match_words = '\<begin\>:\<end\>,\<fork\>:\<join\>,\<module\>:\<endmodule\>,\<task\>:\<endtask\>,\<function\>:\<endfunction\>,\<class\>:\<endclass\>,\<program\>:\<endprogram\>,\<case\>:^[ |<C-I>]*[^"]\+ *\::\<endcase\>,`ifdef:`else:`elsif:`endif,'
+  \ let b:match_words = '\<\&Always\>:\<\&End\>,\<case\>:\<endcase\>,\<begin\>:\<end\>,\<fork\>:\<join\>,\<module\>:\<endmodule\>,\<task\>:\<endtask\>,\<function\>:\<endfunction\>,\<class\>:\<endclass\>,\<program\>:\<endprogram\>,\<case\>:^[ |<C-I>]*[^"]\+ *\::\<endcase\>,`ifdef:`else:`elsif:`endif,'
   " \ runtime macros/matchit.vim |
 augroup END
 
@@ -2008,7 +2033,7 @@ if  has("gui_running")
     "colorscheme nocturne
     "colorscheme molokai
     "colorscheme emacs
-    " colorscheme vimhut
+    colorscheme vimhut
     " colorscheme sweater
     " colorscheme gravity
     " colorscheme seashell
@@ -2016,7 +2041,7 @@ if  has("gui_running")
     " colorscheme bensday " Dark
     " colorscheme donbass
     " colorscheme kalisi
-    colorscheme pyte " Light
+    " colorscheme pyte " Light
     " colorscheme simpleandfriendly " Light
     "colorscheme greyhouse
     "colorscheme solarized
@@ -2474,6 +2499,8 @@ nnoremap # #<C-o>
 nnoremap g# g#<C-o>
 nnoremap <silent> n /<CR>zzzv
 nnoremap <silent> N ?<CR>zzzv
+vnoremap <silent> n /<CR>zzzv
+vnoremap <silent> N ?<CR>zzzv
 nnoremap g; g;zz
 nnoremap g, g,zz
 nnoremap <c-o> <c-o>zz
