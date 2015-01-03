@@ -755,6 +755,7 @@ if use_neobundle
     " NeoBundle 'spiiph/vim-space',                              { 'directory' : 'space'}
     " NeoBundle 'takac/vim-fontmanager',                         { 'directory' : 'fontmanager'}
     " NeoBundle 'thinca/vim-fontzoom',                           { 'directory' : 'fontzoom'}
+    NeoBundle 'ryanoasis/vim-webdevicons',                     { 'directory' : 'webdevicons'}
     " NeoBundle 'thinca/vim-ref',                                { 'directory' : 'ref'}
     " NeoBundle 'thinca/vim-qfreplace',                          { 'directory' : 'qfreplace'}
     NeoBundle 'stefandtw/quickfix-reflector.vim',              { 'directory' : 'reflector'}
@@ -840,8 +841,9 @@ if use_neobundle
     " NeoBundle 'vim-scripts/genutils',                          { 'directory' : 'genutils'}
     " NeoBundle 'uxcn/vim-x2x',                                  { 'directory' : 'x2x'}
     " NeoBundle 'emilsoman/test-runner.vim',                     { 'directory' : 'test-runner'}
-    " NeoBundle 'q335r49/microviche',                          { 'directory' : 'microviche'}
+    " NeoBundle 'q335r49/microviche',                            { 'directory' : 'microviche'}
     " NeoBundle 'wellle/targets.vim',                            { 'directory' : 'targets'}
+    NeoBundle 'kurkale6ka/vim-pairs',                          { 'directory' : 'pairs'}
     NeoBundle 'thinca/vim-quickrun',                           { 'directory' : 'quickrun'}
     " NeoBundle 'tpope/vim-endwise',                         { 'directory' : 'endwise'}
     " NeoBundle 'scrooloose/syntastic',                          { 'directory' : 'syntastic'}
@@ -849,7 +851,9 @@ if use_neobundle
     " NeoBundle 'bruno-/vim-all',                                { 'directory' : 'all'}
     "
     " color {{{2 "
+    " NeoBundle '
     NeoBundle 'fmoralesc/molokayo',                            { 'directory' : 'color_molokaya'}
+    NeoBundle 'penicolas/simplon.vim',                         { 'directory' : 'color_simplon'}
     NeoBundle 'ajh17/Spacegray.vim',                           { 'directory' : 'color_Spacegray'}
     NeoBundle 'jonathanfilip/vim-lucius',                      { 'directory' : 'color_lucius'}
     NeoBundle 'vim-scripts/wintersday.vim',                    { 'directory' : 'color_wintersday'}
@@ -906,6 +910,7 @@ if use_neobundle
     NeoBundleLazy 'jaxbot/semantic-highlight.vim',                 { 'directory' : 'color_semantic-highligh', 'autoload' : {'commands' : ['SemanticHighlight']}}
     NeoBundle 'reedes/vim-thematic',                           { 'directory' : 'color_thematic'}
     NeoBundle 'jonstoler/werewolf.vim',                        { 'directory' : 'color_warewolf'}
+    NeoBundle 'carlson-erik/wolfpack',                         { 'directory' : 'color_wolfpack'}
     " NeoBundle 'amdt/sunset',                                   { 'directory' : 'color_sunset'}
     NeoBundle 'luckydev/150colors',                            { 'directory' : 'color_150colors'}
     NeoBundle 'ujihisa/tabpagecolorscheme',                    { 'directory' : 'tabpagecolorscheme'}
@@ -1203,6 +1208,17 @@ set relativenumber
 set number
 set nowrapscan
 set nowrap
+set ls=2
+" backup settings copied from somewhere {{{1
+" backup/persistance settings
+" set undodir=~/.vim/tmp/undo//
+" set backupdir=~/.vim/tmp/backup//
+" set directory=~/.vim/tmp/swap//
+" set backupskip=/tmp/*,/private/tmp/*"
+" set backup
+" set writebackup
+" set noswapfile
+" }}}1
 " now i am trying to have backup files
 set nobackup
 " Make Vim able to edit crontab files again.
@@ -1287,8 +1303,9 @@ endif
 set ignorecase
 set infercase " case inferred by default
 set smartcase
-let g:clever_f_across_no_line=1
-let g:clever_f_smart_case = 1
+let g:clever_f_show_prompt    = 1
+let g:clever_f_across_no_line = 1
+let g:clever_f_smart_case     = 1
 " change word to upper case in insert mode
 inoremap <c-u> <esc>viwUea
 "scroll offset"
@@ -1322,7 +1339,21 @@ set browsedir=buffer
 let g:netrw_liststyle=1
 "change the cmd window
 "set cmdheight=2
+" dont make all windows same size
 set noequalalways
+" make C-a and C-x work properly
+set nrformats=
+
+" Disable encryption (:X)
+" set key=
+
+" When completing by tag, show the whole tag, not just the function name
+" set showfulltag
+" Various characters are "wider" than normal fixed width characters, but the
+" default setting of ambiwidth (single) squeezes them into "normal" width, which
+" sucks. Setting it to double makes it awesome.
+" set ambiwidth=double
+
 "small status msg for vim
 set shortmess=atToOI
 "set shortmess=aOstT " shortens messages to avoid 'press a key' prompt
@@ -2024,16 +2055,24 @@ if  has("gui_running")
     "colorscheme darkblue
     "colorscheme desertEx
     "colorscheme desertedocean
-    "colorscheme koehler
-    "colorscheme mayansmoke "Good light
-    "colorscheme mickeysoft "Good light
-    "colorscheme mophiaSmoke "Good light
+    " colorscheme koehler
+    " colorscheme mayansmoke "Good light
+    " colorscheme mickeysoft "Good light
+    colorscheme mophiaSmoke "Good light
+    " colorscheme chela_light
+    "colorscheme active4d
     "colorscheme gruvbox "Good
     "colorscheme badwolf
     "colorscheme nocturne
     "colorscheme molokai
-    "colorscheme emacs
-    colorscheme vimhut
+    " colorscheme emacs
+    " colorscheme vimhut
+    " colorscheme greyhouse
+    " colorscheme paradox
+    " colorscheme anokha
+    " colorscheme simplon
+    " colorscheme nuvola
+    " colorscheme louver
     " colorscheme sweater
     " colorscheme gravity
     " colorscheme seashell
@@ -2044,7 +2083,7 @@ if  has("gui_running")
     " colorscheme pyte " Light
     " colorscheme simpleandfriendly " Light
     "colorscheme greyhouse
-    "colorscheme solarized
+    " colorscheme solarized
     "colorscheme peaksea
     "colorscheme grape
     "colorscheme bclear
@@ -2191,27 +2230,27 @@ endfunction
 cnoremap $c <C-U>vs <C-\>eMy_Depth("cscope add")<cr>/cscope.out<CR>
 cnoremap $C <C-U>tabe <C-\>eMy_DepthNoSpace("set tags\+=")<cr>/tags
 cnoremap $P <C-U>vs <C-\>eCurrentFileDirP4("vs")<cr>
-cnoremap $p <C-U>vs \| enew \| setlocal bt=nofile bh=delete \| r !/home/nv/bin//p4print <C-r>=resolve(expand('%'))<CR>
-cnoremap $b <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !`depth`/bin/p4blame <C-r>=resolve(expand('%'))<CR>:<C-R>=line(".")<CR>
-cnoremap $E <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 edit <C-r>=resolve(expand('%'))<CR>
+cnoremap $p <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete \| r !/home/nv/bin//p4print <C-r>=resolve(expand('%'))<CR>
+cnoremap $b <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !`depth`/bin/p4blame <C-r>=resolve(expand('%'))<CR>:<C-R>=line(".")<CR>
+cnoremap $E <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !p4 edit <C-r>=resolve(expand('%'))<CR>
 cnoremap $R <C-U>!p4 revert <C-r>=resolve(expand('%'))<CR>
 cnoremap $r <C-U>!p4 reopen -t text+k <C-r>=resolve(expand('%'))<CR>
 cnoremap $A <C-U>!p4 add -t text+k <C-r>=resolve(expand('%'))<CR>
-cnoremap $a <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 annotate <C-r>=resolve(expand('%'))<CR>
-cnoremap $L <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 filelog <C-r>=resolve(expand('%'))<CR>
-cnoremap $l <C-U>vs \| enew \| setlocal bt=nofile bh=delete \| r !/home/nv/bin//p4print <C-r>=resolve(expand('%'))<CR>
+cnoremap $a <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !p4 annotate <C-r>=resolve(expand('%'))<CR>
+cnoremap $L <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !p4 filelog <C-r>=resolve(expand('%'))<CR>
+cnoremap $l <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete \| r !/home/nv/bin//p4print <C-r>=resolve(expand('%'))<CR>
 cnoremap $D <C-U>!p4 diff <C-r>=resolve(expand('%'))<CR> &
 cnoremap $d <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 describe <C-r><C-w>
 cnoremap $N <C-U>!nedit <C-r>=resolve(expand('%'))<CR>
 cnoremap $G <C-U>!gnome-terminal &
-cnoremap $g <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !/home/nv/toolroot/bin/nvgrep <C-r><C-w>
-cnoremap $f <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !/home/nv/toolroot/bin/nvfind <C-r><C-w>
+cnoremap $g <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !/home/nv/toolroot/bin/nvgrep <C-r><C-w>
+cnoremap $f <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !/home/nv/toolroot/bin/nvfind <C-r><C-w>
 cnoremap $X <C-U>!xterm -e xx &
 cnoremap $K <C-U>!konsole &
 cnoremap $M <C-U>!pwd \| mutt -s <C-r>=resolve(expand('%'))<CR> -a <C-r>=resolve(expand('%'))<CR> $USER@nvidia.com
 cnoremap $m <C-U>:setl modifiable!
-cnoremap $H <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 have <C-r>=resolve(expand('%'))<CR>
-cnoremap $S <C-U>sp \| enew \| setlocal bt=nofile bh=delete \| r !p4 sync <C-r>=resolve(expand('%'))<CR>
+cnoremap $H <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !p4 have <C-r>=resolve(expand('%'))<CR>
+cnoremap $S <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !p4 sync <C-r>=resolve(expand('%'))<CR>
 cnoremap $s <C-U>!p4 submit <C-r>=resolve(expand('%'))<CR>
 cnoremap $T <C-U>sp <C-\>eMy_Depth("tabe")<cr>
 cnoremap $t <C-U>tabe <C-\>eMy_Depth("tabe")<cr>
@@ -2283,6 +2322,7 @@ let g:Powerline_mode_n = 'N'
 let g:Powerline_mode_i = 'I'
 let g:Powerline_mode_R = 'R'
 let g:Powerline_mode_v = 'V'
+let g:webdevicons_enable_airline_statusline = 0
 if has('gui_running')
   "call Pl#Theme#RemoveSegment('fileencoding')
   "call Pl#Theme#RemoveSegment('fileformat')
