@@ -5,3 +5,5 @@
 /fonts.scale
 /tmp*
 /*.clean
+/viminfo
+/files
