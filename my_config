@@ -1,15 +1,20 @@
 #!/bin/env tcsh
+# LDFLAGS=-L$HOME/usr/local/lib
 \rm -fv src/auto/config.cache
 ./configure --prefix=$HOME/local --enable-fail-if-missing --with-features=huge \
   --enable-luainterp=yes --with-lua-prefix=/home/utils/lua-5.2.2 \
   --enable-perlinterp=yes \
+  --with-python-config-dir=/home/utils/Python-2.7.5/lib/python2.7/config \
   --enable-pythoninterp=yes \
   --enable-python3interp=no \
   --enable-cscope \
+  --enable-xim \
+  --enable-netbeans \
   --enable-rubyinterp=yes \
   --enable-multibyte \
   --enable-fontset \
   --with-tlib=ncurses \
+  --with-x=yes \
   --enable-sniff \
   --enable-mzschemeinterp=yes \
   --enable-gtk2-check \
@@ -19,4 +24,8 @@
   --enable-nextaw-check \
   --enable-carbon-check \
   --disable-smack \
-  --enable-gui=auto
+  --enable-gui=gnome2
+
+# --enable-gui=auto
+# git fetch --all
+# git reset --hard origin/master

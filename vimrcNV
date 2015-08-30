@@ -8,12 +8,8 @@
      set fileencoding=utf-8
      set fileencodings=utf-8
 
-let use_pathogen = 0
-if has('gui_running')
-  let use_neobundle = 1
-else
-  let use_neobundle = 1
-endif
+let use_pathogen  = 0
+let use_neobundle = 1
 if use_pathogen
   set rtp+=~/.vim/bundle/pathogen
   "PATHOGEN
@@ -789,7 +785,7 @@ if use_neobundle
     " NeoBundle 'tpope/vim-rsi',                                 { 'directory' : 'rsi'}
     " NeoBundle 'tpope/vim-sensible',                            { 'directory' : 'sensible'}
     " NeoBundle 'tpope/vim-sleuth',                              { 'directory' : 'sleuth'}
-    " NeoBundle 'tpope/vim-surround',                            { 'directory' : 'surround'}
+    NeoBundle 'tpope/vim-surround',                            { 'directory' : 'surround'}
     " NeoBundle 'tpope/vim-unimpaired',                          { 'directory' : 'unimpaired'}
     " NeoBundle 'tpope/vim-vinegar',                             { 'directory' : 'vinegar'}
     " NeoBundle 'tupton/vim-support',                            { 'directory' : 'vim-support'}
@@ -855,11 +851,12 @@ if use_neobundle
     " color {{{2 "
     NeoBundle 'vim-scripts/BackgroundColor.vim',               { 'directory' : 'BackgroundColor'}
     NeoBundle 'Wutzara/vim-materialtheme',                     { 'directory' : 'color_materialtheme'}
+    NeoBundle 'jscappini/material.vim',                        { 'directory' : 'color_material'}
+    NeoBundle 'dylanaraps/crayon',                             { 'directory' : 'color_crayon'}
     NeoBundle 'queyenth/oxeded.vim',                           { 'directory' : 'color_oxeded'}
     NeoBundle 'fabi1cazenave/kalahari.vim',                    { 'directory' : 'color_kalahari'}
     NeoBundle 'wimstefan/Lightning',                           { 'directory' : 'color_Lightning'}
     NeoBundle 'effkay/argonaut.vim',                           { 'directory' : 'color_argonaut'}
-    NeoBundle 'Wutzara/vim-materialtheme',                     { 'directory' : 'color_materialtheme'}
     NeoBundle 'znake/znake-vim',                               { 'directory' : 'color_termcolor'}
     NeoBundle 'trusktr/seti.vim',                              { 'directory' : 'color_seti'}
     NeoBundle 'severb/monoacc',                                { 'directory' : 'color_monacc'}
@@ -868,9 +865,12 @@ if use_neobundle
     NeoBundle 'scheakur/vim-scheakur',                         { 'directory' : 'color_scheakur'}
     NeoBundle 'gryftir/gryffin',                               { 'directory' : 'color_gryffin'}
     NeoBundle 'toupeira/vim-desertink',                        { 'directory' : 'color_desertink'}
+    NeoBundle 'theWildSushii/SweetCandy.vim',                  { 'directory' : 'color_sweetCandy'}
+    NeoBundle 'hachy/eva01.vim',                               { 'directory' : 'color_eva01'}
     NeoBundle 'binarypie/vim-termcolor',                       { 'directory' : 'color_termcolor'}
     NeoBundle 'andrwb/vim-lapis256',                           { 'directory' : 'color_lapis256'}
     NeoBundle 'yantze/pt_black',                               { 'directory' : 'color_pt_black'}
+    NeoBundle 'ratazzi/blackboard.vim',                        { 'directory' : 'color_blackboard'}
     NeoBundle 'cdmedia/itg_flat_vim',                          { 'directory' : 'color_itg_flat'}
     NeoBundle 'stulzer/heroku-colorscheme',                    { 'directory' : 'color_heroku'}
     NeoBundle 'romainl/Apprentice',                            { 'directory' : 'color_apprentice'}
@@ -901,9 +901,11 @@ if use_neobundle
     NeoBundle 'altercation/vim-colors-solarized',              { 'directory' : 'color_solarized'}
     NeoBundle 'baskerville/bubblegum',                         { 'directory' : 'color_bubblegum'}
     NeoBundle 'baverman/vim-babymate256',                      { 'directory' : 'color_babymate256'}
+    NeoBundle 'cabin/cabin-colorscheme',                       { 'directory' : 'color_cabin'}
     NeoBundle 'blueyed/xoria256.vim',                          { 'directory' : 'color_xoria256'}
     NeoBundle 'vim-scripts/xoria256.vim',                      { 'directory' : 'color_xoria256_2'}
     " NeoBundle 'jlund3/colorschemer',                           { 'directory' : 'color_colorschemer'}
+    NeoBundle 'elmindreda/vimcolors',                          { 'directory' : 'color_elmindreda'}
     NeoBundle 'vim-scripts/vibrantink',                        { 'directory' : 'color_vibrantink'}
     NeoBundle 'orthecreedence/void.vim',                       { 'directory' : 'color_void'}
     NeoBundle 'thewatts/wattslandia',                          { 'directory' : 'color_wattslandia'}
@@ -981,6 +983,8 @@ if use_neobundle
     NeoBundle 'nowk/genericdc',                                { 'directory' : 'color_genericdc'}
     NeoBundle 'idbrii/vim-sandydune',                          { 'directory' : 'color_sandydune'}
     NeoBundle 'wesQ3/wombat.vim',                              { 'directory' : 'color_wombat'}
+    NeoBundle 'MPiccinato/wombat256',                          { 'directory' : 'color_wombat256'}
+    NeoBundle 'rking/vim-detailed',                            { 'directory' : 'color_detailed'}
     NeoBundle 'wellsjo/wells-colorscheme.vim',                 { 'directory' : 'color_wells'}
     NeoBundle 'mtglsk/mushroom',                               { 'directory' : 'color_mushroom'}
     NeoBundle 'duythinht/inori',                               { 'directory' : 'color_inori'}
@@ -1000,10 +1004,23 @@ if use_neobundle
     NeoBundle 'queyenth/oxeded.vim',                           { 'directory' : 'color_oxeded'}
     NeoBundle '0ax1/lxvc',                                     { 'directory' : 'color_lxvc'}
     NeoBundle 'fabi1cazenave/kalahari.vim',                    { 'directory' : 'color_kalahari'}
+    NeoBundle 'lyxell/pride.vim',                              { 'directory' : 'color_pride'}
+    NeoBundle 'thomd/vim-wasabi-colorscheme',                  { 'directory' : 'color_wasabi'}
+    NeoBundle 'woju/vim-colors-woju',                          { 'directory' : 'color_woju'}
+    NeoBundle 'zsoltf/vim-maui',                               { 'directory' : 'color_maui'}
+    NeoBundle 'mhumeSF/one-dark.vim',                          { 'directory' : 'color_one_dark'}
+    NeoBundle 'dfxyz/CandyPaper.vim',                          { 'directory' : 'color_CandyPaper'}
+    NeoBundle 'xero/sourcerer.vim',                            { 'directory' : 'color_sourcerer'}
+    NeoBundle 'KKPMW/moonshine-vim',                           { 'directory' : 'color_moonshine'}
+    NeoBundle 'xiaody/thornbird.vim',                          { 'directory' : 'color_thornbird'}
+    NeoBundle 'ronny/birds-of-paradise.vim',                   { 'directory' : 'color_birdsOfParadise'}
+    NeoBundle 'atweiden/vim-colors-behelit',                   { 'directory' : 'color_behelit'}
     " NeoBundle 'zefei/vim-colortuner',                          { 'directory' : 'colortuner'}
     " }}}2 " color
-    "
+    " "
     " NeoBundle 'gelguy/Cmd2.vim',                               { 'directory' : 'cmd2'}
+    NeoBundle 'vim-jp/vital.vim',                              { 'directory' : 'vital'}
+    NeoBundle 'beloglazov/vim-online-thesaurus',               { 'directory' : 'thesaurus'}
     NeoBundle 'gangleri/vim-diffsaved',                        { 'directory' : 'diffsaved'}
     NeoBundle 'bruno-/vim-vertical-move',                      { 'directory' : 'vertical_move'}
     NeoBundle 'justinmk/vim-syntax-extra',                     { 'directory' : 'syntax-extra'}
@@ -1018,7 +1035,7 @@ if use_neobundle
     NeoBundle 'Shougo/neocomplete.vim',                        { 'directory' : 'neocomplete'}
     NeoBundle 'ajh17/VimCompletesMe',                          { 'directory' : 'vimCompleteMe'}
     NeoBundle 'Raimondi/delimitMate',                          { 'directory' : 'delimitMate'}
-    NeoBundle 'SirVer/ultisnips',                              { 'directory' : 'ultisnips'}
+    " NeoBundle 'SirVer/ultisnips',                              { 'directory' : 'ultisnips'}
     NeoBundle 'Valloric/MatchTagAlways',                       { 'directory' : 'matchTagAlways'}
     " NeoBundle 'blueyed/file-line',                             { 'directory' : 'file-line'}
     NeoBundle 'kopischke/vim-fetch',                           { 'directory' : 'fetch'}
@@ -1032,7 +1049,8 @@ if use_neobundle
     NeoBundleLazy 'jeetsukumaran/vim-buffergator',                 { 'directory' : 'buffergator', 'autoload' : {'commands' : ['BuffergatorOpen', 'BuffergatorClose', 'BuffergatorToggle', 'BuffergatorTabsOpen', 'BuffergatorTabsClose', 'BuffergatorTabsToggle']}}
     NeoBundle 'junegunn/vim-easy-align',                       { 'directory' : 'easy_align'}
     " NeoBundle 'kien/rainbow_parentheses.vim',                  { 'directory' : 'rainbow_parentheses'}
-    NeoBundle 'luochen1990/rainbow',                           { 'directory' : 'rainbow'}
+    " NeoBundle 'luochen1990/rainbow',                           { 'directory' : 'rainbow'}
+    NeoBundle 'junegunn/rainbow_parentheses.vim',              { 'directory' : 'rainbow_paren'}
     NeoBundle 'mbbill/undotree',                               { 'directory' : 'undoTree'}
     NeoBundleLazy 'mileszs/ack.vim',                               { 'directory' : 'ack', 'autoload' : {'commands' : ['Ack', 'AckAdd', 'AckFromSearch', 'LAck', 'LAckAdd', 'AckFile', 'AckHelp', 'LAckHelp', 'AckWindow', 'LAckWindow']}}
     NeoBundleLazy 'rking/ag.vim',                                  { 'directory' : 'ag', 'autoload' : {'commands' : ['Ag', 'AgAdd', 'AgFromSearch', 'LAg', 'LAgAdd', 'AgFile', 'AgHelp', 'LAgHelp']}}
@@ -1060,7 +1078,7 @@ if use_neobundle
     NeoBundle 'tpope/vim-speeddating',                         { 'directory' : 'speeddating'}
     NeoBundleLazy 'vim-scripts/FuzzyFinder',                       { 'directory' : 'FuzzyFinder', 'autoload' : {'commands' : ['FufBuffer', 'FufFile', 'FufCoverageFile', 'FufDir', 'FufMruFile', 'FufMruCmd', 'FufBookmarkFile', 'FufBookmarkDir', 'FufTag', 'FufBufferTag', 'FufTaggedFile', 'FufJumpList', 'FufChangeList', 'FufQuickfix', 'FufLine', 'FufHelp']}}
     NeoBundle 'vim-scripts/MultipleSearch',                    { 'directory' : 'MultipleSearch'}
-    NeoBundle 'vim-scripts/backup.vim',                        { 'directory' : 'backup'}
+    " NeoBundle 'vim-scripts/backup.vim',                        { 'directory' : 'backup'}
     " NeoBundleLazy 'vim-scripts/Perldoc.vim',                       { 'directory' : 'perldoc'}
     " autocmd FileType perl,pod NeoBundleSource 'Perldoc.vim'
     " NeoBundle 'vim-scripts/Pydiction',                         { 'directory' : 'Pydiction'}
@@ -1084,7 +1102,7 @@ if use_neobundle
     NeoBundle 'kana/vim-textobj-function',                     { 'directory' : 'textobj-function'}
     NeoBundle 'kana/vim-textobj-indent',                       { 'directory' : 'textobj-indent'}
     NeoBundle 'kana/vim-textobj-user',                         { 'directory' : 'textobj-user'}
-    NeoBundle 'rhysd/clever-f.vim',                                { 'directory' : 'clever-f'}
+    " NeoBundle 'rhysd/clever-f.vim',                                { 'directory' : 'clever-f'}
     NeoBundle 'ironhouzi/vim-stim',                                { 'directory' : 'stim'}
     NeoBundle 'wellle/targets.vim',                                { 'directory' : 'targets'}
     NeoBundle 'xolox/vim-lua-ftplugin',                            { 'directory' : 'lua_fileType'}
@@ -1097,7 +1115,7 @@ if use_neobundle
     NeoBundle 'mhinz/vim-randomtag',                               { 'directory' : 'randomtag'}
     NeoBundle 'gilligan/vim-textobj-haskell',                      { 'directory' : 'textobj-haskell'}
     " NeoBundle 'justinmk/vim-matchparenalways',                     { 'directory' : 'matchparenalways'}
-    NeoBundle 'yakiang/excel.vim',                                 { 'directory' : 'excel'}
+    " NeoBundle 'yakiang/excel.vim',                                 { 'directory' : 'excel'}
     NeoBundle 'osyo-manga/vim-watchdogs',                          { 'directory' : 'watchdogs'}
     NeoBundle 'haya14busa/incsearch.vim',                          { 'directory' : 'incsearch'}
     NeoBundle 'Konfekt/FastFold',                                  { 'directory' : 'fastfold'}
@@ -1111,7 +1129,7 @@ if use_neobundle
     " NeoBundleLazy 'blueyed/grep.vim',                              { 'directory' : 'grep', 'autoload' : {'commands' : ['Grep', 'GrepAdd', 'Rgrep', 'RgrepAdd', 'GrepBuffer', 'GrepBufferAdd']}}
     " NeoBundle 'cohama/vim-smartinput-endwise',                 { 'directory' : 'smartinput-endwise'}
     " NeoBundleLazy 'itchyny/calendar.vim',                          { 'directory' : 'calendar', 'autoload' : {'commands' : ['Calendar']}}
-    " NeoBundleLazy 'majutsushi/tagbar',                             { 'directory' : 'tagbar', 'autoload' : {'commands' : ['TagbarOpen', 'TagbarToggle', 'TagbarClose']}}
+    NeoBundle 'majutsushi/tagbar',                             { 'directory' : 'tagbar'}
     " NeoBundle 'mutewinter/swap-parameters',                    { 'directory' : 'swap-parameters'}
     " NeoBundle 'nathanaelkane/vim-indent-guides',               { 'directory' : 'indent_guides'}
     " NeoBundleLazy 'raymond-w-ko/detectindent',                     { 'directory' : 'detectindent', 'autoload' : {'commands' : ['DetectIndent']}}
@@ -1162,6 +1180,14 @@ let g:Signs_IndentationLevel = 1
 " indent-lines {{{1 "
 let g:indentLine_faster = 1
 " }}}1 " indent-lines
+
+
+" Activation based on file type
+augroup rainbow_lisp
+  autocmd!
+  " autocmd FileType lisp,clojure,scheme RainbowParentheses
+  autocmd FileType * RainbowParentheses
+augroup END
 
 " do yankstack mapping before everything
 if exists(':yankstack')
@@ -1625,7 +1651,7 @@ map <C-^> <C-]>
 
 "filelist Completion options
 " Better Completion
-set complete=.,b,w,u
+set complete=.,b,w,u,i,kspell
 " disable searching of tags for autocomplete
 set complete-=t
 " path is included by default. if u want to not include it
@@ -1722,6 +1748,7 @@ augroup MyAutoCmd
   autocmd BufNewFile,BufRead */tlit4/* setlocal readonly
   autocmd BufNewFile,BufRead */t210/* setlocal readonly
   autocmd BufNewFile,BufRead */tlit2/* setlocal readonly
+  autocmd BufNewFile,BufRead */gplit3/* setlocal readonly
   " set foldmethod=marker
 augroup END
 " Highlight TODO and FIXME.
@@ -1764,6 +1791,7 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 inoremap <c-a> <esc>I
+inoremap <C-c> <ESC>
 inoremap <A-a> <esc>A
 " inoremap <c-e> <esc>A
 cnoremap <C-A> <Home>
@@ -2036,7 +2064,7 @@ augroup END
 
 augroup PatchDiffHighlight
   autocmd!
-  autocmd FileType  diff   syntax enable
+  autocmd FileType diff syntax enable | setlocal nocursorline
 augroup END
 
 augroup filetype_make
@@ -2051,7 +2079,7 @@ augroup filetype_make
 ":autocmd BufLeave,FocusLost  Makefile* silent! wall
 augroup END
 "local make
-set makeprg=`depth`/bin/nvmk\ -c\ .\ -d\ NV_BUILD_PLATFORM=Linux_x86_64\ $*
+set makeprg=/home/nv/bin//qsub\ -Is\ -q\ o_submit\ --projectMode\ direct\ -P\ mobile_t186_hw_mmplex_nvcsi\ /home/nv/bin//nvrun\ `depth`/bin/nvmk\ -c\ .\ -d\ NV_BUILD_PLATFORM=Linux_x86_64\ $*
 function! SetmakePrg()
   return "cd" . resolve(expand('%:p:h')) . "&& `depth`/bin/nvmk\ -c\ .\ -d\ NV_BUILD_PLATFORM=Linux_x86_64\ $*"
 endfunction
@@ -2217,7 +2245,8 @@ if  has("gui_running")
     " colorscheme mayansmoke "Good light
     " colorscheme mickeysoft "Good light
     " colorscheme mophiaSmoke "Good light
-    " colorscheme Dev_Delight
+    colorscheme Dev_Delight
+    set bg=light
     " colorscheme DevC++
     " colorscheme developer
     " colorscheme chela_light
@@ -2227,7 +2256,8 @@ if  has("gui_running")
     "colorscheme nocturne
     "colorscheme molokai
     " colorscheme emacs
-    colorscheme vimhut
+    " colorscheme vimhut
+    " colorscheme scheakur
     " colorscheme summerfruit
     " colorscheme flattened_light
     " colorscheme flattened_dark
@@ -2235,6 +2265,7 @@ if  has("gui_running")
     " colorscheme paradox
     " colorscheme anokha
     " colorscheme simplon
+    " colorscheme hemisu
     " colorscheme nuvola
     " colorscheme louver
     " colorscheme sweater
@@ -2272,8 +2303,13 @@ if  has("gui_running")
   catch
     colorscheme default
   endtry
-  set cursorline
-  set cursorcolumn
+  if &diff
+    set nocursorline
+    set nocursorcolumn
+  else
+    set cursorline
+    set cursorcolumn
+  endif
   " Don't try to highlight lines longer than 800 characters.
   set synmaxcol=800
   """"""""""""""""""""""""""""""
@@ -2318,12 +2354,12 @@ else
     imap <ESC>oD <ESC>hi
     "Setting light background
 endif
-"
- " Uncomment the following to have Vim jump to the last position when
- " reopening a file
-  if has("autocmd")
-    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-  endif
+
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 nnoremap <F1> :BuffergatorToggle<CR>
 let g:buffergator_suppress_keymaps=1
@@ -2391,7 +2427,7 @@ endfunction
 " cno $c  <C-U>sp <C-\>eCurrentFile("sp")<cr>
 " cno $p <C-U>sp <C-\>eCurrentFileDir("sp")<cr>
 " cno $P <C-U>tabe <C-\>eCurrentFileDir("tabe")<cr>
-cnoremap $c <C-U>vs <C-\>eMy_Depth("cscope add")<cr>/cscope.out<CR>
+cnoremap $c <C-U>vs <C-\>eMy_Depth("cscope add")<cr>/cscope.out
 cnoremap $C <C-U>tabe <C-\>eMy_DepthNoSpace("set tags\+=")<cr>/tags
 cnoremap $P <C-U>vs <C-\>eCurrentFileDirP4("vs")<cr>
 cnoremap $p <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete \| r !/home/nv/bin//p4print <C-r>=resolve(expand('%'))<CR>
@@ -2412,7 +2448,7 @@ cnoremap $g <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !/hom
 cnoremap $f <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !/home/nv/toolroot/bin/nvfind <C-r><C-w>
 cnoremap $X <C-U>!xterm -e xx &
 cnoremap $K <C-U>!konsole &
-cnoremap $M <C-U>!pwd \| mutt -s <C-r>=resolve(expand('%'))<CR> -a <C-r>=resolve(expand('%'))<CR> $USER@nvidia.com
+cnoremap $M <C-U>!pwd \| mutt -s <C-r>=resolve(expand('%'))<CR> -a <C-r>=resolve(expand('%'))<CR> -- $USER@nvidia.com
 cnoremap $m <C-U>:setl modifiable!
 cnoremap $H <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !p4 have <C-r>=resolve(expand('%'))<CR>
 cnoremap $S <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !p4 sync <C-r>=resolve(expand('%'))<CR>
@@ -2553,16 +2589,16 @@ endif
 
 " Format the statusline
 " %= is to right align
-if !has('gui_running')
+" if !has('gui_running')
   "    "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
       set statusline=%{HasPaste()}%F%m%r%h\ %w
       set statusline+=%=Line:\ %l/%L(%p%%):%c
       "set statusline+=\
       set statusline+=\ Ftype:
       set statusline+=%y
-else
-  set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
-endif
+" else
+  " set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+" endif
 
 "======[ Magically build interim directories if necessary ]===================
 function! AskQuit (msg, options, quit_option)
@@ -2892,7 +2928,7 @@ else
   " set guifont=cousine\ 11
   " set guifont=Fira\ Mono\ 11 "beautiful
   " set guifont=Menlo\ 10 "beautiful
-  set guifont=Fantasque\ Sans\ Mono\ 11
+  set guifont=Fantasque\ Sans\ Mono\ 10
   "set guifont=Consolas\ for\ Powerline\ 11
   "set guifont=BPmono\ 14
   "set guifont=PT\ Mono\ 13
@@ -3044,4 +3080,13 @@ filetype plugin on
 filetype indent on
 "set omnifunc=syntaxcomplete#Complete
 "
+" DO NOT DELETE BELLOW "
+if ($TAGS != "")
+    set tags=${TAGS}
+endif
+
+if ($INCPATH != "")
+    set path=${INCPATH}
+endif
+" DO NOT DELETE ABOVE "
 " vim: filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
