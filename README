@@ -176,6 +176,13 @@ Git initialization
  https://vim.zeef.com/andrew.krawchyk
  http://got-ravings.blogspot.in/2008/08/vim-pr0n-making-statuslines-that-own.html
  https://sunaku.github.io/switching-from-jedit-to-vim.html
+ http://paulherron.com/blog/vim_cheatsheet/
+
+ Windows
+ https://bintray.com/veegee/generic/vim_x64/view
+ ftp://ftp.vim.org/pub/vim/pc/
+ http://cream.sourceforge.net/
+ https://tuxproject.de/projects/vim/
  ======
  colors
  ======
@@ -245,5 +252,12 @@ $ git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch <di
 git how to get a list of submodules
 ===================================
 git config -f .gitmodules --list
+
+==========
+| neovim |
+==========
+\make distclean
+env CC=/home/utils/gcc-4.8.2/bin/gcc CXX=/home/utils/gcc-4.8.2/bin/g++ \make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH=$HOME"
+\make install
 
 # vim: set filetype=README syntax=git:
