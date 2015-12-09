@@ -141,7 +141,9 @@ Git initialization
  Debugging VIM
  -V9myVimLog
 
+ ================
  GOOD vim sources
+ ================
  https://github.com/svermeulen/VimDriver
  https://github.com/terryma/dotfiles
  https://github.com/venkatapraveenr/dotvim2
@@ -177,8 +179,11 @@ Git initialization
  http://got-ravings.blogspot.in/2008/08/vim-pr0n-making-statuslines-that-own.html
  https://sunaku.github.io/switching-from-jedit-to-vim.html
  http://paulherron.com/blog/vim_cheatsheet/
+ https://github.com/martin-svk/dot-files
 
+ =======
  Windows
+ =======
  https://bintray.com/veegee/generic/vim_x64/view
  ftp://ftp.vim.org/pub/vim/pc/
  http://cream.sourceforge.net/

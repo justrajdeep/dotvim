@@ -621,7 +621,12 @@ if use_neobundle
       \    },
       \ })
     " color {{{2 "
+    NeoBundle 'wellsjo/wellsokai.vim',                         { 'directory' : 'color_wellsokai'}
+    NeoBundle 'petelewis/vim-evolution',                       { 'directory' : 'color_evolution'}
+    NeoBundle 'endel/vim-github-colorscheme',                  { 'directory' : 'color_github'}
     NeoBundle 'jyota/vimColors',                               { 'directory' : 'color_vimColors'}
+    NeoBundle 'pojo/magicwb.vim',                              { 'directory' : 'color_magicwb'}
+    NeoBundle 'ikaros/smpl-vim',                               { 'directory' : 'color_smpl'}
     NeoBundle 'fcevado/molokai_dark',                          { 'directory' : 'color_molokaiDark'}
     NeoBundle 'mkarmona/materialbox',                          { 'directory' : 'color_materialbox'}
     NeoBundle 'Donearm/Ubaryd',                                { 'directory' : 'color_Ubaryd'}
@@ -825,7 +830,7 @@ if use_neobundle
     " NeoBundle 'vim-jp/vital.vim',                              { 'directory' : 'vital'}
     " NeoBundle 'beloglazov/vim-online-thesaurus',               { 'directory' : 'thesaurus'}
     NeoBundle 'gangleri/vim-diffsaved',                        { 'directory' : 'diffsaved'}
-    NeoBundle 'bruno-/vim-vertical-move',                      { 'directory' : 'vertical_move'}
+    NeoBundle 'vim-utils/vim-vertical-move',                      { 'directory' : 'vertical_move'}
     NeoBundle 'justinmk/vim-syntax-extra',                     { 'directory' : 'syntax-extra'}
     NeoBundle 'dbakker/vim-adjustscroll',                      { 'directory' : 'adjustscroll'}
     " NeoBundle 'AndrewRadev/switch.vim',                        { 'directory' : 'switch'}
@@ -878,7 +883,7 @@ if use_neobundle
     autocmd FileType perl NeoBundleSource 'perl-support.vim'
     NeoBundleLazy 'vim-scripts/scratch.vim',                       { 'directory' : 'scratch', 'autoload' : {'commands' : ['Scratch', 'Sscratch']}}
     NeoBundle 'vim-scripts/verilog.vim',                       { 'directory' : 'verilog'}
-    NeoBundle 'vim-scripts/verilog_systemverilog.vim',         { 'directory' : 'verilog_systemverilog'}
+    NeoBundle 'vhda/verilog_systemverilog.vim',         { 'directory' : 'verilog_systemverilog'}
     NeoBundle 'chreekat/vim-paren-crosshairs',                   { 'directory' : 'paren-crosshairs'}
     NeoBundle 'wesQ3/vim-windowswap',                          { 'directory' : 'windowswap'}
     NeoBundle 'vim-scripts/L9',                                { 'directory' : 'l9'}
@@ -904,6 +909,13 @@ if use_neobundle
     NeoBundle 'vim-scripts/xemacs-mouse-drag-copy',            { 'directory' : 'xemacs-mouse-drag-copy'}
     NeoBundle 'majutsushi/tagbar',                             { 'directory' : 'tagbar'}
     NeoBundle 'gelguy/Cmd2.vim',                               { 'directory' : 'cmd2'}
+    " NeoBundle 'Shougo/neosnippet',                             { 'directory' : 'neosnippet'}
+    " NeoBundle 'Shougo/neosnippet-snippets',                    { 'directory' : 'neosnippet-snippets'}
+    " NeoBundle 'honza/vim-snippets',                            { 'directory' : 'snippets'}
+    NeoBundle 'SirVer/ultisnips',                              { 'directory' : 'ultisnips'}
+    NeoBundle 'tpope/vim-fugitive',                            { 'directory' : 'fugitive'}
+    NeoBundle 'idanarye/vim-merginal',                         { 'directory' : 'merginal'}
+    NeoBundle 'gregsexton/gitv',                               { 'directory' : 'gitv'}
     " NeoBundle 'tpope/vim-projectionist',                       { 'directory' : 'projectionist'}
     " {{{2
     " NeoBundle '5long/pytest-vim-compiler',                     { 'directory' : 'pytest-vim-compiler'}
@@ -921,7 +933,6 @@ if use_neobundle
     " NeoBundle 'Shougo/context_filetype.vim',                   { 'directory' : 'context_filetype'}
     " NeoBundle 'Shougo/neocomplcache.vim',                      { 'directory' : 'neocomplcache'}
     " NeoBundle 'Shougo/neomru.vim',                             { 'directory' : 'neomru'}
-    " NeoBundle 'Shougo/neosnippet.vim',                         { 'directory' : 'neosnippet'}
     " NeoBundle 'Shougo/unite-outline',                          { 'directory' : 'unite_outline'}
     " NeoBundle 'kannokanno/unite-todo',                         { 'directory' : 'unite_todo'}
     " NeoBundle 'Shougo/vimshell.vim',                           { 'directory' : 'vimShell'}
@@ -1054,7 +1065,6 @@ if use_neobundle
     " NeoBundle 'tpope/vim-afterimage',                          { 'directory' : 'afterimage'}
     " NeoBundle 'bling/vim-bufferline',                          { 'directory' : 'bufferline'}
     " NeoBundle 'tpope/vim-fireplace',                           { 'directory' : 'fireplace'}
-    " NeoBundle 'tpope/vim-fugitive',                            { 'directory' : 'fugitive'}
     " NeoBundle 'tpope/vim-markdown',                            { 'directory' : 'markdown'}
     " NeoBundle 'tpope/vim-obsession',                           { 'directory' : 'obsession'}
     " NeoBundle 'tpope/vim-pathogen',                            { 'directory' : 'pathogen'}
@@ -1077,7 +1087,6 @@ if use_neobundle
     " NeoBundle 'vim-scripts/Rainbow-Parenthsis-Bundle',         { 'directory' : 'Rainbow-Parenthsis-Bundle'}
     " NeoBundle 'vim-scripts/SyntaxAttr.vim',                    { 'directory' : 'SyntaxAttr'}
     " NeoBundle 'vim-scripts/TaskList.vim',                      { 'directory' : 'TaskList'}
-    " NeoBundle 'vim-scripts/UltiSnips',                         { 'directory' : 'ultiSnips'}
     " NeoBundle 'vim-scripts/YankRing.vim',                      { 'directory' : 'YankRing'}
     " NeoBundle 'vim-scripts/ZoomWin',                           { 'directory' : 'zoomwin'}
     " NeoBundle 'vim-scripts/buffergrep',                        { 'directory' : 'buffergrep'}
@@ -1109,7 +1118,6 @@ if use_neobundle
     " NeoBundle 'kana/vim-smartinput',                           { 'directory' : 'smartinput'}
     " NeoBundle 'Shougo/vimfiler.vim',                           { 'directory' : 'vimfiler'}
     " NeoBundle 'gregsexton/gitv',                               { 'directory' : 'gitv'}
-    " NeoBundle 'honza/vim-snippets',                            { 'directory' : 'snippets'}
     " NeoBundle 'maxbrunsfeld/vim-yankstack',                    { 'directory' : 'yankstack'}
     " NeoBundle 'tpope/vim-tbone',                               { 'directory' : 'tbone'}
     " NeoBundle 'vim-scripts/genutils',                          { 'directory' : 'genutils'}
@@ -1129,7 +1137,6 @@ if use_neobundle
     " NeoBundle 'tpope/vim-dotenv',                                  { 'directory' : 'dotenv'}
     " NeoBundleLazy 'Bogdanp/pyrepl.vim',                            { 'directory' : 'pyrepl', 'autoload' : {'commands' : ['PyREPLToggle', 'PyREPLEvalFile']}}
     " NeoBundleLazy 'Peeja/vim-cdo',                                 { 'directory' : 'cdo', 'autoload' : {'commands' : ['Cdo', 'Ldo']}}
-    " NeoBundle 'SirVer/ultisnips',                              { 'directory' : 'ultisnips'}
     " NeoBundle 'blueyed/file-line',                             { 'directory' : 'file-line'}
     " NeoBundle 'jaxbot/selective-undo.vim',                     { 'directory' : 'selective-undo'}
     " NeoBundle 'kien/rainbow_parentheses.vim',                  { 'directory' : 'rainbow_parentheses'}
@@ -1208,9 +1215,132 @@ let g:indentLine_faster = 1
 
 " call singleton#enable()
 
+" lightline {{{2 "
 let g:lightline = {
       \ 'colorscheme': 'solarized_dark',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
+      \   'right': [ ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'LightLineFugitive',
+      \   'filename': 'LightLineFilename',
+      \   'fileformat': 'LightLineFileformat',
+      \   'filetype': 'LightLineFiletype',
+      \   'fileencoding': 'LightLineFileencoding',
+      \   'mode': 'LightLineMode',
+      \ },
+      \ 'subseparator': { 'left': '|', 'right': '|' }
       \ }
+
+function! LightLineModified()
+  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightLineReadonly()
+  return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+
+function! LightLineFilename()
+  let fname = expand('%:t')
+  return fname == 'ControlP' ? g:lightline.ctrlp_item :
+        \ fname == '__Tagbar__' ? g:lightline.fname :
+        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \ &ft == 'unite' ? unite#get_status_string() :
+        \ &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]') .
+        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+function! LightLineFugitive()
+  try
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+      let mark = ''  " edit here for cool mark
+      let _ = fugitive#head()
+      return strlen(_) ? mark._ : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! LightLineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightLineFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightLineFileencoding()
+  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! LightLineMode()
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? 'Tagbar' :
+        \ fname == 'ControlP' ? 'CtrlP' :
+        \ fname == '__Gundo__' ? 'Gundo' :
+        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! CtrlPMark()
+  if expand('%:t') =~ 'ControlP'
+    call lightline#link('iR'[g:lightline.ctrlp_regex])
+    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+          \ , g:lightline.ctrlp_next], 0)
+  else
+    return ''
+  endif
+endfunction
+
+let g:ctrlp_status_func = {
+      \ 'main': 'CtrlPStatusFunc_1',
+      \ 'prog': 'CtrlPStatusFunc_2',
+      \ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+  let g:lightline.ctrlp_regex = a:regex
+  let g:lightline.ctrlp_prev = a:prev
+  let g:lightline.ctrlp_item = a:item
+  let g:lightline.ctrlp_next = a:next
+  return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+  return lightline#statusline(0)
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+  let g:lightline.fname = a:fname
+  return lightline#statusline(0)
+endfunction
+
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+augroup END
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
+endfunction
+
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
+" let g:lightline = {
+"       \ 'colorscheme': 'solarized_dark',
+"       \ }
+" }}}2 " lightline
 
 " Activation based on file type
 augroup rainbow_lisp
@@ -1245,7 +1375,7 @@ set synmaxcol=1000
 " source neocomplete
 " neocomplcache is older one
 " if exists(':NeoComplete')
-  source $HOME/.vim/neo_complete
+" source $HOME/.vim/neo_complete
 " endif
 " youcompleteme disable on certain filetypes
 let g:ycm_filetype_specific_completion_to_disable = {}
@@ -1768,6 +1898,11 @@ augroup MyAutoCmd
   " remove trailing spaces"
   " autocmd FileType c,cpp,java,php,perl,yaml,vim autocmd BufWritePre <buffer> :%s/\s\+$\|^\s\+$//e
 " Turn on cursorline only on active window
+  autocmd User fugitive 
+  \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+  \   nnoremap <buffer> .. :edit %:h<CR> |
+  \ endif
+  autocmd BufReadPost fugitive://* set bufhidden=delete
   autocmd WinLeave * setlocal nocursorline
   autocmd WinEnter,BufRead * setlocal cursorline
   " rainbow parenthesis
@@ -2136,6 +2271,8 @@ augroup filetype_make
 :au BufNewFile,BufRead vplmakefile.inc setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
 :au BufNewFile,BufRead vcsmakefile.inc setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
 :au BufNewFile,BufRead *.config setf make |setlocal ts=4 sts=4 sw=4 expandtab
+" autocmd FileType make NeoCompleteLock
+" autocmd FileType gitcommit NeoCompleteLock
 " :autocmd BufLeave,FocusLost  Makefile* silent! wall
 augroup END
 " local make
@@ -2700,6 +2837,7 @@ endif
       " set statusline+=\
       set statusline+=\ Ftype:
       set statusline+=%y
+      set statusline=%F%m%r%h%w\ [%l/%L,\ %v]\ [%p%%]\ %=[TYPE=%Y]\ [FMT=%{&ff}]\ %{\"[ENC=\".(&fenc==\"\"?&enc:&fenc).\"]\"}
 " else
   " set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 " endif
@@ -3140,26 +3278,39 @@ let g:UltiSnipsExpandTrigger="<C-Space>"
 let g:UltiSnipsJumpForwardTrigger="<C-Space>"
 let g:UltiSnipsListSnippets="<C-S-Space>"
 let g:UltiSnipsJumpBackwardTrigger="<C-S-Space>"
-
-" neosnippet"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" , ~/.vim/bundle/snippets/UltiSnips, ~/.vim/mysnippets/'
+" let enter select the selction
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" " neosnippet {{{2 "
+" " neosnippet"
 " imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 " smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 " xmap <C-k>     <Plug>(neosnippet_expand_target)
-" SuperTab like snippets behavior.
-" imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-" \ "\<Plug>(neosnippet_expand_or_jump)"
-" \: pumvisible() ? "\<C-n>" : "\<TAB>"
+" " SuperTab like snippets behavior.
+" " imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+" " \ "\<Plug>(neosnippet_expand_or_jump)"
+" " \: pumvisible() ? "\<C-n>" : "\<TAB>"
 " smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 " \ "\<Plug>(neosnippet_expand_or_jump)"
-" \: "\<TAB>"
-" let g:neosnippet#snippets_directory='~/.vim/bundle/snippets/snippets, ~/.vim/mysnippets/'
-" let g:neosnippet#enable_preview=1
+" \ : "\<TAB>"
+" " For conceal markers.
+" if has('conceal')
+"   set conceallevel=2 concealcursor=niv
+" endif
+" " Enable snipMate compatibility feature.
 " let g:neosnippet#enable_snipmate_compatibility = 1
 
-" , ~/.vim/bundle/snippets/UltiSnips, ~/.vim/mysnippets/'
+" " Tell Neosnippet about the other snippets
+" let g:neosnippet#snippets_directory='~/.vim/bundle/snippets/snippets'
 
-" let g:UltiSnipsJumpForwardTrigger="<c-j>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" " let g:neosnippet#snippets_directory='~/.vim/bundle/snippets/snippets, ~/.vim/mysnippets/'
+" " let g:neosnippet#enable_preview=1
+" " let g:neosnippet#enable_snipmate_compatibility = 1
+" " }}}2 " neosnippet
 
 let g:matchparen_insert_timeout=5
 " Underline the current line with various symbols (such that the number of

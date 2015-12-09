@@ -1,0 +1,42 @@
+[gui]
+[gui]
+[user]
+	name = Rajdeep
+	email = rmondal@nvidia.com
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+  ui = auto
+	interactive = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow 
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[http]
+	sslVerify = false
+[push]
+	default = simple
+[mergetool "fugitive"]
+	cmd = gvim -f -c \"Gvdiff\" \"$MERGED\"
+[merge]
+	tool = fugitive
+	ff = true
+[branch]
+	autosetuprebase = always
+[log]
+	decorate = true
+	color = auto
+[alias]
+	logtree = log --graph --oneline --decorate --all
+	stash-unapply = git status stash show -p | git apply -R
