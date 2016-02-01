@@ -621,6 +621,22 @@ if use_neobundle
       \    },
       \ })
     " color {{{2 "
+    NeoBundle 'Elle518/Duna',                                           { 'directory' : 'color_duna'}
+    NeoBundle 'AlessandroYorba/Alduin',                                 { 'directory' : 'color_alduin'}
+    NeoBundle 'GGalizzi/cake-vim',                                      { 'directory' : 'color_cake'}
+    NeoBundle 'Konstruktionist/vim',                                    { 'directory' : 'color_kafka'}
+    NeoBundle 'AlessandroYorba/Alduin',                                 { 'directory' : 'color_alduin'}
+    NeoBundle 'marcopaganini/mojave-vim-theme',                         { 'directory' : 'color_mojave'}
+    NeoBundle 'mswift42/vim-themes',                                    { 'directory' : 'color_vim_themes'}
+    NeoBundle 'emacsfodder/emacs-theme-darktooth',                      { 'directory' : 'color_darktooth'}
+    NeoBundle 'Valloric/vim-valloric-colorscheme',                      { 'directory' : 'color_valloric'}
+    NeoBundle 'trevorrjohn/vim-obsidian',                               { 'directory' : 'color_obsidian'}
+    NeoBundle 'vim-scripts/obsidian2.vim',                              { 'directory' : 'color_obsidian2'}
+    NeoBundle 'changyuheng/color-scheme-holokai-for-vim',               { 'dictctory' : 'color_holokai'}
+    NeoBundle 'atelierbram/vim-colors_duotones',                        { 'dictctory' : 'color_duotones'}
+    NeoBundle 'rakr/vim-rakr-light',                           { 'directory' : 'color_rakr_light'}
+    NeoBundle 'adampasz/vim-stonewashed',                      { 'directory' : 'color_stonewashed'}
+    NeoBundle 'andreasvc/vim-256noir',                         { 'directory' : 'color_256noir'}
     NeoBundle 'wellsjo/wellsokai.vim',                         { 'directory' : 'color_wellsokai'}
     NeoBundle 'petelewis/vim-evolution',                       { 'directory' : 'color_evolution'}
     NeoBundle 'endel/vim-github-colorscheme',                  { 'directory' : 'color_github'}
@@ -632,7 +648,7 @@ if use_neobundle
     NeoBundle 'Donearm/Ubaryd',                                { 'directory' : 'color_Ubaryd'}
     NeoBundle 'Donearm/Laederon',                                { 'directory' : 'color_Laederon'}
     NeoBundle 'Haron-Prime/Antares',                           { 'directory' : 'color_Antares'}
-    NeoBundle 'loogica/vim_themes',                            { 'directory' : 'color_vim_themes'}
+    NeoBundle 'loogica/vim_themes',                            { 'directory' : 'color_loogica'}
     NeoBundle 'MaxSt/FlatColor',                               { 'directory' : 'color_FlatColor'}
     NeoBundle 'DrSpatula/vim-buddy',                           { 'directory' : 'color_buddy'}
     NeoBundle 'vim-scripts/BackgroundColor.vim',               { 'directory' : 'BackgroundColor'}
@@ -641,7 +657,7 @@ if use_neobundle
     NeoBundle 'christophermca/meta5',                          { 'directory' : 'color_meta5'}
     NeoBundle 'Wutzara/vim-materialtheme',                     { 'directory' : 'color_materialtheme'}
     NeoBundle 'jscappini/material.vim',                        { 'directory' : 'color_material'}
-    NeoBundle 'dylanaraps/crayon',                             { 'directory' : 'color_crayon'}
+    " NeoBundle 'dylanaraps/crayon',                             { 'directory' : 'color_crayon'}
     NeoBundle 'queyenth/oxeded.vim',                           { 'directory' : 'color_oxeded'}
     NeoBundle 'fabi1cazenave/kalahari.vim',                    { 'directory' : 'color_kalahari'}
     NeoBundle 'wimstefan/Lightning',                           { 'directory' : 'color_Lightning'}
@@ -657,6 +673,12 @@ if use_neobundle
     NeoBundle 'theWildSushii/SweetCandy.vim',                  { 'directory' : 'color_sweetCandy'}
     NeoBundle 'hachy/eva01.vim',                               { 'directory' : 'color_eva01'}
     NeoBundle 'binarypie/vim-termcolor',                       { 'directory' : 'color_termcolor'}
+    NeoBundle 'marcopaganini/termschool-vim-theme',            { 'directory' : 'color_termschool'}
+    NeoBundle 'mhartington/oceanic-next',                      { 'directory' : 'color_oceanic'} 
+    NeoBundle 'aperezdc/vim-elrond',                           { 'directory' : 'color_elrond'}
+    NeoBundle 'geetarista/ego.vim',                            { 'directory' : 'color_ego'}
+    NeoBundle 'ewilazarus/preto',                              { 'directory' : 'color_preto'}
+    NeoBundle 'kocakosm/hilal',                                { 'directory' : 'color_hilal'}
     NeoBundle 'andrwb/vim-lapis256',                           { 'directory' : 'color_lapis256'}
     NeoBundle 'yantze/pt_black',                               { 'directory' : 'color_pt_black'}
     NeoBundle 'ratazzi/blackboard.vim',                        { 'directory' : 'color_blackboard'}
@@ -680,7 +702,7 @@ if use_neobundle
     NeoBundle 'whatyouhide/vim-gotham',                        { 'directory' : 'color_gotham'}
     NeoBundle 'ChasingLogic/ChasingLogic-colorscheme-vim',     { 'directory' : 'color_ChasingLogic'}
     NeoBundle 'Donearm/Laederon',                              { 'directory' : 'color_laederon'}
-    NeoBundle 'IntuitiveWebSolutions/vim-colors-blayden',      { 'directory' : 'color_blayden'}
+    " NeoBundle 'IntuitiveWebSolutions/vim-colors-blayden',      { 'directory' : 'color_blayden'}
     NeoBundle 'Lokaltog/vim-distinguished',                    { 'directory' : 'color_distinguished'}
     NeoBundle 'MaxSt/FlatColor',                               { 'directory' : 'color_FlatColor'}
     NeoBundle 'Pychimp/vim-luna',                              { 'directory' : 'color_luna'}
@@ -810,80 +832,73 @@ if use_neobundle
     NeoBundle 'DrowsySaturn/VIvid.vim',                        { 'directory' : 'color_VIvid'}
     " NeoBundle 'zefei/vim-colortuner',                          { 'directory' : 'colortuner'}
     " }}}2 " color
-    NeoBundle 'sjl/clam.vim',                                  { 'directory' : 'clam'}
-    " NeoBundle 'thinca/vim-singleton',                          { 'directory' : 'singleton'}
-    NeoBundle 'matze/vim-move',                                { 'directory' : 'move'}
-    " NeoBundle 'ggVGc/vim-fuzzysearch',                         { 'directory' : 'fuzzysearch'}
-    NeoBundle 'vim-nyan-cat/vim-nyan-cat',                     { 'directory' : 'nyan_cat'}
-    " NeoBundle 'calebsmith/vim-lambdify',                       { 'directory' : 'lambify'}
+    NeoBundleLazy 'sjl/clam.vim',                                  { 'directory' : 'clam', 'autoload' : {'commands' : ['ClamVisual', 'SClam']}}
+    " NeoBundle 'vim-scripts/TT2-syntax',                        { 'directory' : 'tt2_syntax'}
+    " NeoBundle 'tybenz/vimdeck',                                { 'directory' : 'vimdeck'}
+    NeoBundleLazy 'wellle/visual-split.vim',                       { 'dictctory' : 'VSplit', 'autoload' : {'commands' : ['VSResize', 'VSSplit', 'VSSplitAbove', 'VSSplitBelow']}}
+    " NeoBundle 'matze/vim-move',                                { 'directory' : 'move'}
+    NeoBundleLazy 'vim-nyan-cat/vim-nyan-cat',                     { 'directory' : 'nyan_cat', 'autoload' : {'commands' : ['NyanCat']}}
     NeoBundle 'itchyny/lightline.vim',                         { 'directory' : 'lightline'}
-    " NeoBundle 'sk1418/QFGrep',                                 { 'directory' : 'QFGrep'}
-    " NeoBundle 'ryanoasis/vim-webdevicons',                     { 'directory' : 'webdevicons'}
     NeoBundle 'stefandtw/quickfix-reflector.vim',              { 'directory' : 'reflector'}
-    " NeoBundle 'chrisbra/histwin.vim',                          { 'directory' : 'histwin'}
-    " NeoBundle 'tpope/vim-haystack',                            { 'directory' : 'haystack'}
-    " NeoBundle 'tpope/vim-dispatch',                            { 'directory' : 'vim-dispatch'}
-    NeoBundle 'idbrii/AsyncCommand',                           { 'directory' : 'asyncCommand'}
+    " NeoBundle 'troydm/shellasync.vim',                         { 'directory' : 'shellasync'}
+    NeoBundleLazy 'idbrii/AsyncCommand',                           { 'directory' : 'asyncCommand', 'autoload' : {'commands' : ['AsyncGrep', 'AsyncShell', 'AsyncCscopeFindSymbol', 'AsyncCscopeFindCalls', 'AsyncCscopeFindX', 'AsyncMake']}}
     NeoBundle 'tpope/vim-surround',                            { 'directory' : 'surround'}
     NeoBundle 'kurkale6ka/vim-pairs',                          { 'directory' : 'pairs'}
-    NeoBundle 'thinca/vim-quickrun',                           { 'directory' : 'quickrun'}
-    " NeoBundle 'vim-jp/vital.vim',                              { 'directory' : 'vital'}
-    " NeoBundle 'beloglazov/vim-online-thesaurus',               { 'directory' : 'thesaurus'}
-    NeoBundle 'gangleri/vim-diffsaved',                        { 'directory' : 'diffsaved'}
+    NeoBundleLazy 'thinca/vim-quickrun',                           { 'directory' : 'quickrun', 'autoload' : {'commands' : ['QuickRun']}}
+    " NeoBundleLazy 'gangleri/vim-diffsaved',                        { 'directory' : 'diffsaved'}
     NeoBundle 'vim-utils/vim-vertical-move',                      { 'directory' : 'vertical_move'}
     NeoBundle 'justinmk/vim-syntax-extra',                     { 'directory' : 'syntax-extra'}
     NeoBundle 'dbakker/vim-adjustscroll',                      { 'directory' : 'adjustscroll'}
-    " NeoBundle 'AndrewRadev/switch.vim',                        { 'directory' : 'switch'}
     NeoBundleLazy 'AndrewRadev/linediff.vim',                      { 'directory' : 'linediff', 'autoload' : {'commands' : ['Linediff', 'LinediffReset']}}
     NeoBundle 'Lokaltog/vim-easymotion',                       { 'directory' : 'easymotion'}
-    NeoBundle 'ajh17/VimCompletesMe',                          { 'directory' : 'vimCompleteMe'}
     NeoBundle 'Raimondi/delimitMate',                          { 'directory' : 'delimitMate'}
-    NeoBundle 'Shougo/neocomplete.vim',                        { 'directory' : 'neocomplete'}
     NeoBundle 'Valloric/MatchTagAlways',                       { 'directory' : 'matchTagAlways'}
     NeoBundle 'kopischke/vim-fetch',                           { 'directory' : 'fetch'}
-    NeoBundleLazy 'c9s/perlomni.vim',                          { 'directory' : 'perlOmni'}
-    autocmd FileType perl,viva,verilog_systemverilog NeoBundleSource 'perlomni.vim'
+    NeoBundle 'c9s/perlomni.vim',                          { 'directory' : 'perlOmni'}
+    " autocmd FileType perl,viva,verilog_systemverilog NeoBundleSource perlomni.vim
+    NeoBundle 'vim-perl/vim-perl',                          { 'directory' : 'VimPerl'}
+    " autocmd FileType perl,viva,tt2 NeoBundleSource vim-perl
     NeoBundleLazy 'chrisbra/NrrwRgn',                              { 'directory' : 'narrow', 'autoload' : {'commands' : ['NarrowRegion', 'WidenRegion']}}
     NeoBundle 'chrisbra/csv.vim',                              { 'directory' : 'csv'}
-    autocmd FileType csv NeoBundleSource 'csv.vim'
+    " autocmd FileType csv NeoBundleSource csv.vim
     NeoBundleLazy 'dhruvasagar/vim-table-mode',                    { 'directory' : 'table-mode', 'autoload' : {'commands' : ['TableModeToggle', 'TableModeEnable', 'TableModeDisable', 'Tableize', 'TableModeRealign', 'TableAddFormula', 'TableEvalFormulaLine']}}
     NeoBundleLazy 'jeetsukumaran/vim-buffergator',                 { 'directory' : 'buffergator', 'autoload' : {'commands' : ['BuffergatorOpen', 'BuffergatorClose', 'BuffergatorToggle', 'BuffergatorTabsOpen', 'BuffergatorTabsClose', 'BuffergatorTabsToggle']}}
-    NeoBundle 'junegunn/vim-easy-align',                       { 'directory' : 'easy_align'}
+    NeoBundleLazy 'junegunn/vim-easy-align',                       { 'directory' : 'easy_align', 'autoload' : {'commands' : ['EasyAlign']}}
     NeoBundle 'junegunn/rainbow_parentheses.vim',              { 'directory' : 'rainbow_paren'}
-    NeoBundle 'mbbill/undotree',                               { 'directory' : 'undoTree'}
+    NeoBundleLazy 'mbbill/undotree',                               { 'directory' : 'undoTree', 'autoload' : {'commands' : ['UndotreeFocus', 'UndotreeHide', 'UndotreeShow', 'UndotreeToggle']}}
     NeoBundleLazy 'mileszs/ack.vim',                               { 'directory' : 'ack', 'autoload' : {'commands' : ['Ack', 'AckAdd', 'AckFromSearch', 'LAck', 'LAckAdd', 'AckFile', 'AckHelp', 'LAckHelp', 'AckWindow', 'LAckWindow']}}
     NeoBundleLazy 'rking/ag.vim',                                  { 'directory' : 'ag', 'autoload' : {'commands' : ['Ag', 'AgAdd', 'AgFromSearch', 'LAg', 'LAgAdd', 'AgFile', 'AgHelp', 'LAgHelp']}}
     NeoBundle 'gabesoft/vim-ags',                              { 'directory' : 'ags'}
-    NeoBundle 'dyng/ctrlsf.vim',                               { 'directory' : 'ctrlsf'}
+    " NeoBundle 'dyng/ctrlsf.vim',                               { 'directory' : 'ctrlsf'}
     NeoBundle 'myusuf3/numbers.vim',                           { 'directory' : 'numbers'}
-    NeoBundle 'AndrewRadev/undoquit.vim',                      { 'directory' : 'undoQuit'}
+    NeoBundle 'AndrewRadev/undoquit.vim',                      { 'directory' : 'undoQuit', 'autoload' : {'commands' : ['Undoquit']}}
     NeoBundleLazy 'osyo-manga/vim-over',                           { 'directory' : 'over', 'autoload' : {'commands' : ['OverCommandLine', 'OverCommandLineNoremap']}}
     NeoBundleLazy 'sjl/gundo.vim',                                 { 'directory' : 'gundo', 'autoload' : {'commands' : ['GundoToggle']}}
-    NeoBundleLazy 'sk1418/Join',                                   { 'directory' : 'join', 'autoload' : {'commands' : ['Join']}}
-    NeoBundleLazy 'sukima/xmledit',                                { 'directory' : 'xml'}
-    autocmd FileType xml NeoBundleSource 'xmledit'
-    NeoBundle 'szw/vim-ctrlspace',                             { 'directory' : 'ctrlspace'}
+    " NeoBundleLazy 'sk1418/Join',                                   { 'directory' : 'join', 'autoload' : {'commands' : ['Join']}}
+    NeoBundle 'sukima/xmledit',                                { 'directory' : 'xml'}
+    " autocmd FileType xml NeoBundleSource xmledit
     NeoBundle 'terryma/vim-expand-region',                     { 'directory' : 'expand-region'}
     NeoBundle 'terryma/vim-multiple-cursors',                  { 'directory' : 'multiple_cursor'}
     NeoBundle 'tmhedberg/matchit',                             { 'directory' : 'matchit'}
     NeoBundle 'vimtaku/hl_matchit.vim',                        { 'directory' : 'hl_matchit'}
-    " NeoBundle 'thinca/lexima.vim',                             { 'directory' : 'lexima'}
-    NeoBundle 'vim-scripts/PatternsOnText',                    { 'directory' : 'PatternsOnText'}
+    NeoBundleLazy 'vim-scripts/PatternsOnText',                    { 'directory' : 'PatternsOnText', 'autoload' : {'commands' : ['DeleteExcept', 'SubstituteInSearch', 'DeleteDuplicateLinesOf', 'DeleteDuplicateLinesIgnoring', 'DeleteAllDuplicateLinesIgnoring', 'SubstituteNotInSearch', 'DeleteUniqueLinesIgnoring']}}
     NeoBundle 'tommcdo/vim-exchange',                          { 'directory' : 'exchange'}
     NeoBundle 'tpope/vim-commentary',                          { 'directory' : 'commentary'}
     NeoBundle 'tpope/vim-eunuch',                              { 'directory' : 'eunuch'}
     NeoBundle 'tpope/vim-repeat',                              { 'directory' : 'repeat'}
     NeoBundle 'tpope/vim-speeddating',                         { 'directory' : 'speeddating'}
     NeoBundleLazy 'vim-scripts/FuzzyFinder',                       { 'directory' : 'FuzzyFinder', 'autoload' : {'commands' : ['FufBuffer', 'FufFile', 'FufCoverageFile', 'FufDir', 'FufMruFile', 'FufMruCmd', 'FufBookmarkFile', 'FufBookmarkDir', 'FufTag', 'FufBufferTag', 'FufTaggedFile', 'FufJumpList', 'FufChangeList', 'FufQuickfix', 'FufLine', 'FufHelp']}}
-    NeoBundle 'vim-scripts/MultipleSearch',                    { 'directory' : 'MultipleSearch'}
-    NeoBundle 'vim-scripts/VisIncr',                           { 'directory' : 'VisIncr'}
+    NeoBundleLazy 'vim-scripts/MultipleSearch',                    { 'directory' : 'MultipleSearch', 'autoload' : {'commands' : ['Search', 'SearchBuffers', 'SearchReset', 'SearchBuffersReset']}}
+    NeoBundleLazy 'vim-scripts/VisIncr',                           { 'directory' : 'VisIncr', 'autoload' : {'commands' : ['I', 'II', 'IYMD', 'IMDY', 'IDMY', 'ID', 'IO', 'IIO', 'IR', 'IIR', 'IX', 'IIX']}}
     NeoBundle 'vim-scripts/cmdline-completion',                { 'directory' : 'cmdline-completion'}
     NeoBundle 'vim-scripts/cscope.vim',                        { 'directory' : 'cscope'}
-    NeoBundleLazy 'vim-scripts/perl-support.vim',                  { 'directory' : 'perl-support'}
-    autocmd FileType perl NeoBundleSource 'perl-support.vim'
+    " NeoBundleLazy 'vim-scripts/perl-support.vim',                  { 'directory' : 'perl-support'}
+    " autocmd FileType perl NeoBundleSource 'perl-support.vim'
     NeoBundleLazy 'vim-scripts/scratch.vim',                       { 'directory' : 'scratch', 'autoload' : {'commands' : ['Scratch', 'Sscratch']}}
     NeoBundle 'vim-scripts/verilog.vim',                       { 'directory' : 'verilog'}
+    " autocmd FileType verilog NeoBundleSource verilog.vim
     NeoBundle 'vhda/verilog_systemverilog.vim',         { 'directory' : 'verilog_systemverilog'}
+    " autocmd FileType verilog_systemverilog NeoBundleSource verilog_systemverilog.vim
     NeoBundle 'chreekat/vim-paren-crosshairs',                   { 'directory' : 'paren-crosshairs'}
     NeoBundle 'wesQ3/vim-windowswap',                          { 'directory' : 'windowswap'}
     NeoBundle 'vim-scripts/L9',                                { 'directory' : 'l9'}
@@ -893,31 +908,49 @@ if use_neobundle
     NeoBundle 'kana/vim-textobj-indent',                       { 'directory' : 'textobj-indent'}
     NeoBundle 'kana/vim-textobj-user',                         { 'directory' : 'textobj-user'}
     NeoBundle 'ironhouzi/vim-stim',                                { 'directory' : 'stim'}
+    NeoBundle 'kopischke/vim-stay',                                { 'directory' : 'stay'}
     NeoBundle 'wellle/targets.vim',                                { 'directory' : 'targets'}
     NeoBundle 'xolox/vim-lua-ftplugin',                            { 'directory' : 'lua_fileType'}
-    NeoBundle 'mtth/locate.vim',                                       { 'directory' : 'locate'}
+    " autocmd FileType lua NeoBundleSource vim-lua-ftplugin
+    NeoBundleLazy 'mtth/locate.vim',                                       { 'directory' : 'locate', 'autoload' : {'commands' : ['L', 'Lpurge']}}
     NeoBundle 'vim-scripts/UnconditionalPaste',                    { 'directory' : 'UnconditionalPaste'}
     NeoBundle 'tpope/vim-scriptease',                          { 'directory' : 'striptease'}
     NeoBundle 'mhinz/vim-randomtag',                               { 'directory' : 'randomtag'}
     NeoBundle 'gilligan/vim-textobj-haskell',                      { 'directory' : 'textobj-haskell'}
-    NeoBundle 'osyo-manga/vim-watchdogs',                          { 'directory' : 'watchdogs'}
-    " NeoBundle 'haya14busa/incsearch.vim',                          { 'directory' : 'incsearch'}
+    " NeoBundle 'osyo-manga/vim-watchdogs',                          { 'directory' : 'watchdogs'}
     NeoBundle 'Konfekt/FastFold',                                  { 'directory' : 'fastfold'}
-    " NeoBundle 'gelguy/snapshot.vim',                               { 'directory' : 'snapshot'}
     NeoBundle 'Yggdroot/indentLine',                               { 'directory' : 'indentLine'}
     NeoBundle 'yssl/QFEnter',                                  { 'directory' : 'QFEnter'}
     NeoBundle 'vim-scripts/xemacs-mouse-drag-copy',            { 'directory' : 'xemacs-mouse-drag-copy'}
-    NeoBundle 'majutsushi/tagbar',                             { 'directory' : 'tagbar'}
+    NeoBundleLazy 'majutsushi/tagbar',                             { 'directory' : 'tagbar', 'autoload' : {'commands' : ['TagbarToggle']}}
     NeoBundle 'gelguy/Cmd2.vim',                               { 'directory' : 'cmd2'}
-    " NeoBundle 'Shougo/neosnippet',                             { 'directory' : 'neosnippet'}
-    " NeoBundle 'Shougo/neosnippet-snippets',                    { 'directory' : 'neosnippet-snippets'}
-    " NeoBundle 'honza/vim-snippets',                            { 'directory' : 'snippets'}
     NeoBundle 'SirVer/ultisnips',                              { 'directory' : 'ultisnips'}
     NeoBundle 'tpope/vim-fugitive',                            { 'directory' : 'fugitive'}
     NeoBundle 'idanarye/vim-merginal',                         { 'directory' : 'merginal'}
-    NeoBundle 'gregsexton/gitv',                               { 'directory' : 'gitv'}
-    " NeoBundle 'tpope/vim-projectionist',                       { 'directory' : 'projectionist'}
+    NeoBundleLazy 'gregsexton/gitv',                               { 'directory' : 'gitv', 'depends' : 'tpope/vim-fugitive', 'autoload' : {'commands' : ['Gitv']}}
+    NeoBundleLazy 'scrooloose/syntastic',                          { 'directory' : 'syntastic', 'autoload' : {'commands' : ['SyntasticCheck']}}
     " {{{2
+    " NeoBundle 'thinca/vim-singleton',                          { 'directory' : 'singleton'}
+    " NeoBundle 'ggVGc/vim-fuzzysearch',                         { 'directory' : 'fuzzysearch'}
+    " NeoBundle 'calebsmith/vim-lambdify',                       { 'directory' : 'lambify'}
+    " NeoBundle 'sk1418/QFGrep',                                 { 'directory' : 'QFGrep'}
+    " NeoBundle 'ryanoasis/vim-webdevicons',                     { 'directory' : 'webdevicons'}
+    " NeoBundle 'chrisbra/histwin.vim',                          { 'directory' : 'histwin'}
+    " NeoBundle 'tpope/vim-haystack',                            { 'directory' : 'haystack'}
+    " NeoBundle 'tpope/vim-dispatch',                            { 'directory' : 'vim-dispatch'}
+    " NeoBundle 'vim-jp/vital.vim',                              { 'directory' : 'vital'}
+    " NeoBundle 'beloglazov/vim-online-thesaurus',               { 'directory' : 'thesaurus'}
+    " NeoBundle 'AndrewRadev/switch.vim',                        { 'directory' : 'switch'}
+    " NeoBundle 'ajh17/VimCompletesMe',                          { 'directory' : 'vimCompleteMe'}
+    " NeoBundle 'Shougo/neocomplete.vim',                        { 'directory' : 'neocomplete'}
+    " NeoBundle 'szw/vim-ctrlspace',                             { 'directory' : 'ctrlspace'}
+    " NeoBundle 'thinca/lexima.vim',                             { 'directory' : 'lexima'}
+    " NeoBundle 'haya14busa/incsearch.vim',                          { 'directory' : 'incsearch'}
+    " NeoBundle 'gelguy/snapshot.vim',                               { 'directory' : 'snapshot'}
+    " NeoBundle 'Shougo/neosnippet',                             { 'directory' : 'neosnippet'}
+    " NeoBundle 'Shougo/neosnippet-snippets',                    { 'directory' : 'neosnippet-snippets'}
+    " NeoBundle 'honza/vim-snippets',                            { 'directory' : 'snippets'}
+    " NeoBundle 'tpope/vim-projectionist',                       { 'directory' : 'projectionist'}
     " NeoBundle '5long/pytest-vim-compiler',                     { 'directory' : 'pytest-vim-compiler'}
     " NeoBundle 'AndrewRadev/splitjoin.vim',                     { 'directory' : 'splitjoin'}
     " NeoBundle 'FredKSchott/CoVim',                             { 'directory' : 'coVim'}
@@ -1126,7 +1159,6 @@ if use_neobundle
     " NeoBundle 'q335r49/microviche',                            { 'directory' : 'microviche'}
     " NeoBundle 'wellle/targets.vim',                            { 'directory' : 'targets'}
     " NeoBundle 'tpope/vim-endwise',                         { 'directory' : 'endwise'}
-    " NeoBundle 'scrooloose/syntastic',                          { 'directory' : 'syntastic'}
     " NeoBundle 'bruno-/vim-all',                                { 'directory' : 'all'}
     " NeoBundle 'ardagnir/united-front',                         { 'directory' : 'united_front'}
     " NeoBundle 'Shougo/unite.vim',                              { 'directory' : 'unite'}
@@ -1430,7 +1462,7 @@ set shiftround
 set grepprg=/home/utils/grep-2.18/bin/grep\ -rnH\ --exclude='.*.swp'\ --exclude='*~'\ --exclude=tags
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ag_prg="ag --nogroup --nocolor --column --depth=0 --smart-case"
-let g:agprg='ag --nogroup --nocolor --column --depth=0'
+" let g:agprg='ag --nogroup --nocolor --column --depth=0'
 let g:ctrlsf_ackprg = 'ag'
 cnoreabbrev ag Ag
 nmap     <C-F>f <Plug>CtrlSFPrompt
@@ -2289,12 +2321,13 @@ augroup filetype_verilog
 :au BufNewFile,BufRead *.ness setf verilog_systemverilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4
 :au BufNewFile,BufRead *.spp setf verilog
 :au BufNewFile,BufRead *.vx setf viva
-:au BufNewFile,BufRead *.v setf viva
+:au BufNewFile,BufRead *.v setf verilog
 :au BufNewFile,BufRead *.vcp setf viva
 :au BufNewFile,BufRead *.vcp.err setf viva
 :au BufNewFile,BufRead *.vhx setf viva
 :au BufNewFile,BufRead *.vxh setf viva
 :au BufNewFile,BufRead *.vhxcp.err setf viva
+:au BufNewFile,BufRead *.v.exp setf verilog
 :au BufNewFile,BufRead *.vtx setf verilog
 :au BufNewFile,BufRead *.svx setf verilog_systemverilog
 :au BufNewFile,BufRead *.svix setf verilog_systemverilog

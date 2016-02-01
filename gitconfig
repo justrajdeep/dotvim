@@ -40,3 +40,5 @@
 [alias]
 	logtree = log --graph --oneline --decorate --all
 	stash-unapply = git status stash show -p | git apply -R
+[core]
+	editor = gvim -f
