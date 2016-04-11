@@ -855,6 +855,8 @@ if use_neobundle
     " NeoBundle 'mkarmona/colorsbox',                            { 'directory' : 'color_colorsbox'}
     " NeoBundle 'DrowsySaturn/VIvid.vim',                        { 'directory' : 'color_VIvid'}
     " NeoBundle 'cesardeazevedo/Fx-ColorScheme',                 { 'directory' : 'color_FxColorScheme'}
+    " NeoBundle 'RussellBradley/vim-warriors-away',              { 'directory' : 'color_warriors_away'}
+    " NeoBundle 'visi-pivi-sivi/leerkan-vim-colors',             { 'directory' : 'color_leerkan'}
     " " NeoBundle 'zefei/vim-colortuner',                          { 'directory' : 'colortuner'}
     " " }}}2 " color
     NeoBundleLazy 'sjl/clam.vim',                                  { 'directory' : 'clam', 'autoload' : {'commands' : ['ClamVisual', 'SClam']}}
@@ -2732,7 +2734,7 @@ cnoremap $C <C-U>tabe <C-\>eMy_DepthNoSpace("set tags\+=")<cr>/tags
 cnoremap $P <C-U>vs <C-\>eCurrentFileDirP4("vs")<cr>
 cnoremap $p <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete \| r !/home/nv/bin//p4print <C-r>=resolve(expand('%'))<CR>
 cnoremap $b <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !`depth`/bin/p4blame <C-r>=resolve(expand('%'))<CR>:<C-R>=line(".")<CR>
-cnoremap $E <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !p4 edit <C-r>=resolve(expand('%'))<CR>
+cnoremap $E <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete \| r !p4 edit <C-r>=resolve(expand('%:p'))<CR>
 " cnoremap $E <C-U>AsyncShell p4 edit <C-r>=resolve(expand('%'))<CR>
 cnoremap $R <C-U>!p4 revert <C-r>=resolve(expand('%'))<CR>
 cnoremap $r <C-U>!p4 reopen -t text+k <C-r>=resolve(expand('%'))<CR>
