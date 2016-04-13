@@ -42,3 +42,4 @@
 	stash-unapply = git status stash show -p | git apply -R
 [core]
 	editor = gvim -f
+	autocrlf = true

@@ -857,6 +857,8 @@ if use_neobundle
     " NeoBundle 'cesardeazevedo/Fx-ColorScheme',                 { 'directory' : 'color_FxColorScheme'}
     " NeoBundle 'RussellBradley/vim-warriors-away',              { 'directory' : 'color_warriors_away'}
     " NeoBundle 'visi-pivi-sivi/leerkan-vim-colors',             { 'directory' : 'color_leerkan'}
+    " NeoBundle 'mtglsk/wikipedia.vim',                          { 'directory' : 'color_wikipedia'}
+    " NeoBundle 'ipsod/nes.vim',                                 { 'directory' : 'color_nes'}
     " " NeoBundle 'zefei/vim-colortuner',                          { 'directory' : 'colortuner'}
     " " }}}2 " color
     NeoBundleLazy 'sjl/clam.vim',                                  { 'directory' : 'clam', 'autoload' : {'commands' : ['ClamVisual', 'SClam']}}
