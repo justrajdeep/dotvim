@@ -2,7 +2,7 @@
 [gui]
 [user]
 	name = Rajdeep
-	email = rmondal@nvidia.com
+	email = ramondal@amd.com
 [color]
   branch = auto
   diff = auto
@@ -42,4 +42,4 @@
 	stash-unapply = git status stash show -p | git apply -R
 [core]
 	editor = gvim -f
-	autocrlf = true
+	autocrlf = input

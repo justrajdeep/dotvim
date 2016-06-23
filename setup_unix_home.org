@@ -1,0 +1,1474 @@
+#+TITLE: setup_unix_home
+#+DATE: <2016-06-09 Thu>
+#+AUTHOR: Rajdeep
+#+EMAIL: rajdeep.mondal@amd.com
+#+LANGUAGE: en
+#+CREATOR: Emacs 25.0.94.2 (Org mode 8.3.4)
+#+STARTUP: inlineimages
+
+:PROPERTIES: 
+:var: user=ramondal
+:var: host=ltipc979
+:session: mysession
+:tangle:  yes
+:END: 
+
+* Initial emacs setup (you need to do this manually)
+** make the emacs directory
+   #+BEGIN_SRC sh dir:~/ :session mysession :results silent
+   mkdir -p .emacs.d tangled_files
+   #+END_SRC
+
+** clone [[https://github.com/syl20bnr/spacemacs][Spacemacs]] into it
+#+BEGIN_SRC sh :dir ~/
+git -v clone https://github.com/syl20bnr/spacemacs .emacs.d
+#+END_SRC
+** Need to clear up elpa
+
+#+BEGIN_SRC sh :dir ~/
+rm -rf .emacs.d/elpa/
+#+END_SRC
+** update spacemacs
+#+BEGIN_SRC sh :dir ~/.emacs.d
+git pull --rebase
+#+END_SRC
+
+#+RESULTS:
+: Current branch master is up to date.
+
+** restart your emacs in --insecure mode
+#+BEGIN_SRC sh
+emacs --insecure
+#+END_SRC
+
+** diff with the following code into with .spacemacs
+#+BEGIN_SRC emacs-lisp :tangle ~/tangled_files/spacemacs_original :eval never
+;; -*- mode: emacs-lisp -*-
+;; This file is loaded by Spacemacs at startup.
+;; It must be stored in your home directory.
+
+(defun dotspacemacs/layers ()
+  "Configuration Layers declaration.
+You should not put any user code in this function besides modifying the variable
+values."
+  (setq-default
+   ;; Base distribution to use. This is a layer contained in the directory
+   ;; `+distribution'. For now available distributions are `spacemacs-base'
+   ;; or `spacemacs'. (default 'spacemacs)
+   dotspacemacs-distribution 'spacemacs
+   ;; List of additional paths where to look for configuration layers.
+   ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
+   dotspacemacs-configuration-layer-path '()
+   ;; List of configuration layers to load. If it is the symbol `all' instead
+   ;; of a list then all discovered layers will be installed.
+   dotspacemacs-configuration-layers
+   '(
+     ;; ----------------------------------------------------------------
+     ;; Example of useful layers you may want to use right away.
+     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
+     ;; <M-m f e R> (Emacs style) to install them.
+     ;; ----------------------------------------------------------------
+     auto-completion
+     better-defaults
+     emacs-lisp
+     git
+     ;; markdown
+     org
+     pdf-tools
+     (org :variables
+          org-enable-github-support t)
+     ;; (shell :variables
+     ;;        shell-default-height 30
+     ;;        shell-default-position 'bottom)
+     ;; spell-checking
+     ;; syntax-checking
+     ;; version-control
+     )
+   ;; List of additional packages that will be installed without being
+   ;; wrapped in a layer. If you need some configuration for these
+   ;; packages, then consider creating a layer. You can also put the
+   ;; configuration in `dotspacemacs/user-config'.
+   dotspacemacs-additional-packages '(tramp dash s f ob-ipython org-bullets meacupla-theme)
+   ;; A list of packages and/or extensions that will not be install and loaded.
+   dotspacemacs-excluded-packages '()
+   ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
+   ;; are declared in a layer which is not a member of
+   ;; the list `dotspacemacs-configuration-layers'. (default t)
+   dotspacemacs-delete-orphan-packages t))
+
+(defun dotspacemacs/init ()
+  "Initialization function.
+This function is called at the very startup of Spacemacs initialization
+before layers configuration.
+You should not put any user code in there besides modifying the variable
+values."
+  ;; This setq-default sexp is an exhaustive list of all the supported
+  ;; spacemacs settings.
+  (setq-default
+   ;; If non nil ELPA repositories are contacted via HTTPS whenever it's
+   ;; possible. Set it to nil if you have no way to use HTTPS in your
+   ;; environment, otherwise it is strongly recommended to let it set to t.
+   ;; This variable has no effect if Emacs is launched with the parameter
+   ;; `--insecure' which forces the value of this variable to nil.
+   ;; (default t)
+   dotspacemacs-elpa-https t
+   dotspacemacs-melpa-https t
+   ;; Maximum allowed time in seconds to contact an ELPA repository.
+   dotspacemacs-elpa-timeout 5
+   ;; If non nil then spacemacs will check for updates at startup
+   ;; when the current branch is not `develop'. (default t)
+   dotspacemacs-check-for-update t
+   ;; One of `vim', `emacs' or `hybrid'. Evil is always enabled but if the
+   ;; variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
+   ;; uses emacs key bindings for vim's insert mode, but otherwise leaves evil
+   ;; unchanged. (default 'vim)
+   dotspacemacs-editing-style 'vim
+   ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
+   dotspacemacs-verbose-loading nil
+   ;; Specify the startup banner. Default value is `official', it displays
+   ;; the official spacemacs logo. An integer value is the index of text
+   ;; banner, `random' chooses a random text banner in `core/banners'
+   ;; directory. A string value must be a path to an image format supported
+   ;; by your Emacs build.
+   ;; If the value is nil then no banner is displayed. (default 'official)
+   dotspacemacs-startup-banner 'official
+   ;; List of items to show in the startup buffer. If nil it is disabled.
+   ;; Possible values are: `recents' `bookmarks' `projects'.
+   ;; (default '(recents projects))
+   dotspacemacs-startup-lists '(recents projects)
+   ;; Number of recent files to show in the startup buffer. Ignored if
+   ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
+   dotspacemacs-startup-recent-list-size 5
+   ;; Default major mode of the scratch buffer (default `text-mode')
+   dotspacemacs-scratch-mode 'text-mode
+   ;; List of themes, the first of the list is loaded when spacemacs starts.
+   ;; Press <SPC> T n to cycle to the next theme in the list (works great
+   ;; with 2 themes variants, one dark and one light)
+   dotspacemacs-themes '(spacemacs-dark
+                         meacupla
+                         spacemacs-light
+                         solarized-light
+                         solarized-dark
+                         leuven
+                         monokai
+                         zenburn)
+   ;; If non nil the cursor color matches the state color in GUI Emacs.
+   dotspacemacs-colorize-cursor-according-to-state t
+   ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
+   ;; size to make separators look not too crappy.
+   dotspacemacs-default-font '("Source Code Pro"
+                               :size 13
+                               :weight normal
+                               :width normal
+                               :powerline-scale 1.1)
+   ;; The leader key
+   dotspacemacs-leader-key "SPC"
+   ;; The leader key accessible in `emacs state' and `insert state'
+   ;; (default "M-m")
+   dotspacemacs-emacs-leader-key "M-m"
+   ;; Major mode leader key is a shortcut key which is the equivalent of
+   ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
+   dotspacemacs-major-mode-leader-key ","
+   ;; Major mode leader key accessible in `emacs state' and `insert state'.
+   ;; (default "C-M-m)
+   dotspacemacs-major-mode-emacs-leader-key "C-M-m"
+   ;; These variables control whether separate commands are bound in the GUI to
+   ;; the key pairs C-i, TAB and C-m, RET.
+   ;; Setting it to a non-nil value, allows for separate commands under <C-i>
+   ;; and TAB or <C-m> and RET.
+   ;; In the terminal, these pairs are generally indistinguishable, so this only
+   ;; works in the GUI. (default nil)
+   dotspacemacs-distinguish-gui-tab nil
+   ;; (Not implemented) dotspacemacs-distinguish-gui-ret nil
+   ;; The command key used for Evil commands (ex-commands) and
+   ;; Emacs commands (M-x).
+   ;; By default the command key is `:' so ex-commands are executed like in Vim
+   ;; with `:' and Emacs commands are executed with `<leader> :'.
+   dotspacemacs-command-key ":"
+   ;; If non nil `Y' is remapped to `y$'. (default t)
+   dotspacemacs-remap-Y-to-y$ t
+   ;; Name of the default layout (default "Default")
+   dotspacemacs-default-layout-name "Default"
+   ;; If non nil the default layout name is displayed in the mode-line.
+   ;; (default nil)
+   dotspacemacs-display-default-layout nil
+   ;; If non nil then the last auto saved layouts are resume automatically upon
+   ;; start. (default nil)
+   dotspacemacs-auto-resume-layouts nil
+   ;; Location where to auto-save files. Possible values are `original' to
+   ;; auto-save the file in-place, `cache' to auto-save the file to another
+   ;; file stored in the cache directory and `nil' to disable auto-saving.
+   ;; (default 'cache)
+   dotspacemacs-auto-save-file-location 'cache
+   ;; Maximum number of rollback slots to keep in the cache. (default 5)
+   dotspacemacs-max-rollback-slots 5
+   ;; If non nil then `ido' replaces `helm' for some commands. For now only
+   ;; `find-files' (SPC f f), `find-spacemacs-file' (SPC f e s), and
+   ;; `find-contrib-file' (SPC f e c) are replaced. (default nil)
+   dotspacemacs-use-ido nil
+   ;; If non nil, `helm' will try to minimize the space it uses. (default nil)
+   dotspacemacs-helm-resize nil
+   ;; if non nil, the helm header is hidden when there is only one source.
+   ;; (default nil)
+   dotspacemacs-helm-no-header nil
+   ;; define the position to display `helm', options are `bottom', `top',
+   ;; `left', or `right'. (default 'bottom)
+   dotspacemacs-helm-position 'bottom
+   ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
+   ;; several times cycle between the kill ring content. (default nil)
+   dotspacemacs-enable-paste-micro-state nil
+   ;; Which-key delay in seconds. The which-key buffer is the popup listing
+   ;; the commands bound to the current keystroke sequence. (default 0.4)
+   dotspacemacs-which-key-delay 0.4
+   ;; Which-key frame position. Possible values are `right', `bottom' and
+   ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
+   ;; right; if there is insufficient space it displays it at the bottom.
+   ;; (default 'bottom)
+   dotspacemacs-which-key-position 'bottom
+   ;; If non nil a progress bar is displayed when spacemacs is loading. This
+   ;; may increase the boot time on some systems and emacs builds, set it to
+   ;; nil to boost the loading time. (default t)
+   dotspacemacs-loading-progress-bar t
+   ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
+   ;; (Emacs 24.4+ only)
+   dotspacemacs-fullscreen-at-startup nil
+   ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
+   ;; Use to disable fullscreen animations in OSX. (default nil)
+   dotspacemacs-fullscreen-use-non-native nil
+   ;; If non nil the frame is maximized when Emacs starts up.
+   ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
+   ;; (default nil) (Emacs 24.4+ only)
+   dotspacemacs-maximized-at-startup nil
+   ;; A value from the range (0..100), in increasing opacity, which describes
+   ;; the transparency level of a frame when it's active or selected.
+   ;; Transparency can be toggled through `toggle-transparency'. (default 90)
+   dotspacemacs-active-transparency 90
+   ;; A value from the range (0..100), in increasing opacity, which describes
+   ;; the transparency level of a frame when it's inactive or deselected.
+   ;; Transparency can be toggled through `toggle-transparency'. (default 90)
+   dotspacemacs-inactive-transparency 90
+   ;; If non nil unicode symbols are displayed in the mode line. (default t)
+   dotspacemacs-mode-line-unicode-symbols t
+   ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
+   ;; scrolling overrides the default behavior of Emacs which recenters the
+   ;; point when it reaches the top or bottom of the screen. (default t)
+   dotspacemacs-smooth-scrolling t
+   ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
+   ;; derivatives. If set to `relative', also turns on relative line numbers.
+   ;; (default nil)
+   dotspacemacs-line-numbers t
+   ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
+   ;; (default nil)
+   dotspacemacs-smartparens-strict-mode t
+   ;; Select a scope to highlight delimiters. Possible values are `any',
+   ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
+   ;; emphasis the current one). (default 'all)
+   dotspacemacs-highlight-delimiters 'all
+   ;; If non nil advises quit functions to keep server open when quitting.
+   ;; (default nil)
+   dotspacemacs-persistent-server nil
+   ;; List of search tool executable names. Spacemacs uses the first installed
+   ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
+   ;; (default '("ag" "pt" "ack" "grep"))
+   dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
+   ;; The default package repository used if no explicit repository has been
+   ;; specified with an installed package.
+   ;; Not used for now. (default nil)
+   dotspacemacs-default-package-repository nil
+   ;; Delete whitespace while saving buffer. Possible values are `all'
+   ;; to aggressively delete empty line and long sequences of whitespace,
+   ;; `trailing' to delete only the whitespace at end of lines, `changed'to
+   ;; delete only whitespace for changed lines or `nil' to disable cleanup.
+   ;; (default nil)
+   dotspacemacs-whitespace-cleanup nil
+   ))
+
+(defun dotspacemacs/user-init ()
+  "Initialization function for user code.
+It is called immediately after `dotspacemacs/init', before layer configuration
+executes.
+ This function is mostly useful for variables that need to be set
+before packages are loaded. If you are unsure, you should try in setting them in
+`dotspacemacs/user-config' first."
+  )
+
+(defun dotspacemacs/user-config ()
+  "Configuration function for user code.
+This function is called at the very end of Spacemacs initialization after
+layers configuration.
+This is the place where most of your configurations should be done. Unless it is
+explicitly specified that a variable should be set before a package is loaded,
+you should place your code here."
+  (with-eval-after-load 'org
+    'org-bullets
+    'org-beautify-theme
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((python . t)
+         (sh . t)
+         (emacs-lisp . t)
+         (latex . t)
+         (gnuplot . t)
+         (perl . t)
+       (ipython . t)))
+    )
+  )
+
+(setq org-confirm-babel-evaluate nil)   ;don't prompt me to confirm everytime I want to evaluate a block
+
+;;; display/update images in the buffer after I evaluate
+(add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+
+(setq org-startup-with-inline-images t)
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.
+#+END_SRC
+** once you have the emacs up and running you should be able to execute code from inside it :)
+
+* create directories
+#+BEGIN_SRC sh :dir ~/
+mkdir -vp ~/scripts/usr ~/scripts/downloaded ~/scripts/bin
+#+END_SRC
+
+#+RESULTS:
+
+* set up cshrc
+** need to add the following lines into your ~/.cshrc
+#+BEGIN_SRC csh :tangle ~/tangled_files/cshrc_source :eval never
+if (-r "$HOME/tangled_files/bindKeys") then
+    source "$HOME/tangled_files/bindKeys"
+endif
+if (-r "$HOME/tangled_files/complete") then
+    source "$HOME/tangled_files/complete"
+endif
+if (-r "$HOME/tangled_files/history") then
+    source "$HOME/tangled_files/history"
+endif
+if (-r "$HOME/tangled_files/my_alias") then
+    source "$HOME/tangled_files/my_alias"
+endif
+if (-r "$HOME/tangled_files/my_path") then
+    source "$HOME/tangled_files/my_path"
+endif
+if (-r "$HOME/tangled_files/notification") then
+    source "$HOME/tangled_files/notification"
+endif
+if (-r "$HOME/tangled_files/push_pop") then
+    source "$HOME/tangled_files/push_pop"
+endif
+if (-r "$HOME/tangled_files/prompt") then
+    source "$HOME/tangled_files/prompt"
+endif
+if (-r "$HOME/tangled_files/system") then
+    source "$HOME/tangled_files/system"
+endif
+if (-r "$HOME/.git-completion.tcsh") then
+    source "$HOME/.git-completion.tcsh"
+endif
+#+END_SRC
+** append it to the end of your ~/.cshrc
+#+BEGIN_SRC sh :results silent
+cat ~/tangled_files/cshrc_source >> ~/.cshrc
+#+END_SRC
+** put the following commands into your ~/.cshrc
+*** History
+#+BEGIN_SRC tcsh :tangle ~/tangled_files/history :eval never
+# history {{{1
+set history=5000 
+set savehist=(5000 merge)
+set histfile = "$HOME/.tcsh_history"
+# the following will save the history prior to writing the prompt
+alias precmd 'history -S; history -M'
+# expand history
+set autoexpand
+# do not keep repeated commands
+set histdup=erase
+# }}}1
+
+# vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
+*** History merge at logout
+#+BEGIN_SRC tcsh :tangle ~/.logout :eval never
+# history {{{1
+history -S
+# }}}1
+
+# vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
+*** pushd/popd
+#+BEGIN_SRC tcsh :tangle ~/tangled_files/pop_push :eval never
+# pushd/popd {{{1
+# extract rather than rotate on pushd
+set dextract
+# pushd with no args does a cd ~
+set pushdtohome	        
+# don't print the stack
+set pushdsilent	        
+# removes any instances of name from the stack before pushing it onto the stack.
+unset dunique
+# }}}1
+
+# vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
+*** Completion
+#+BEGIN_SRC tcsh :tangle ~/tangled_files/complete :eval never
+# completion/directory {{{1
+# show hidden files in list and completion
+set showdots		
+set implicitcd
+set listjobs=long	# list all jobs on suspension
+# resolve links with correct file type
+set listlinks		
+# max items to list without clarification
+# set listmax		
+# [nomatch|ambiguous|notunique|never]
+
+# add cd search path
+# set cdpath=(/usr/jenny /usr/jenny/mail ../)
+# file completion
+set filec
+# automatic tab completion
+set autolist=ambiguous
+# add directory symbol
+set addsuffix
+# do not autolist certain files
+# set fignore=(.c .cpp .h)
+set correct=cmd
+set complete=enhance
+complete cd 'p/1/d/'
+# returns back to the actual directory
+set symlinks=ignore
+# no ambiguous file name
+# set noglob # caused an issue with ~/.vim
+# }}}1
+
+# vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
+*** notification
+#+BEGIN_SRC tcsh :tangle ~/tangled_files/notification :eval never
+# notification/monitor/display {{{1
+set nobeep
+set matchbeep=never	
+# notify when background job finishes
+set notify
+set MESSAGES on
+# ding in the clock
+unset noding
+# monitor for login activity
+set watch=(5 any any)
+set who='%n has %a %l from %m at %t'
+# monitor time taken to run a commadn
+set time=300
+# print exit status
+set printexitvalue
+# fixing a bug in tcsh
+set anyerror
+# see time in am/pm
+set ampm
+# }}}1
+
+# vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
+*** system
+#+BEGIN_SRC tcsh :tangle ~/tangled_files/system :eval never
+# system {{{1
+set norebind
+unset autologout
+# permissions when creating new directories
+umask 0027 # umask -s -> u=rwx,g=rx,o=x
+# no accidentally closing my C-D
+set ignoreeof
+# no overwriting files
+set noclobber
+set rmstar
+set color
+set colorcat
+setenv VISUAL 'gvim -f'
+setenv EDITOR 'gvim -f'
+setenv PAGER less
+if (${?MANPATH}) then
+    setenv MANPATH ${MANPATH}:/tool/pandora/man:/tool/pandora64/man:/home/${USER}/scripts/share/man
+else
+    setenv MANPATH /tool/pandora/man:/tool/pandora64/man:/home/${USER}/scripts/share/man
+endif
+# }}} 1
+
+# vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
+*** bindkeys
+#+BEGIN_SRC tcsh :tangle ~/tangled_files/bindKeys :eval never
+# bindkey {{{1
+  ### delete words:
+  bindkey ^W	backward-delete-word
+  bindkey ^D	delete-word
+  bindkey -b M-k backward-kill-line
+  
+  ### cursor movement in word::
+  #bindkey ^[^F	forward-word
+  #bindkey ^[^B	backward-word
+  bindkey ^F  forward-word
+  bindkey ^B  backward-word
+  
+  # search
+  bindkey ' '	magic-space
+  bindkey ^_	i-search-back		#cntrl-/ : locate the next line w/ a pattern
+
+  # completion
+  bindkey "^n" "complete-word-fwd"
+  bindkey "^p" "complete-word-back"
+# }}}1
+
+# vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
+*** prompt
+#+BEGIN_SRC tcsh :tangle ~/tangled_files/prompt :eval never
+# prompt {{{1
+# colors {{{2
+# Colors!
+set     red="%{\033[1;31m%}"
+set   green="%{\033[0;32m%}"
+set  yellow="%{\033[1;33m%}"
+set    blue="%{\033[1;34m%}"
+set magenta="%{\033[1;35m%}"
+set    cyan="%{\033[1;36m%}"
+set   white="%{\033[0;37m%}"
+set     end="%{\033[0m%}" # This is needed at the end... :(
+# }}}2
+set system=`hostname`
+unalias setprompt; alias setprompt 'set prompt="${green}%n${end}@${magenta}${system}${end}: ${red}%B%c03%b${end} :${cyan}%t${end}:[ \! ][%?]\n${end}%#"'
+unalias cd; alias cd 'chdir \!* && setprompt'	# reset prompt after change dir
+setprompt				# to set the initial prompt
+# unset red green yellow blue magenta cyan white end
+# }}}1
+
+# vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
+*** path variables
+#+BEGIN_SRC tcsh :tangle ~/tangled_files/my_path :eval never
+# path variables {{{1
+########################################
+# CUSTOM PATHS
+########################################
+# the ":q" suffix in $path quotes the previous path names, so we can handle
+# path directories that contain spaces.
+
+set path = ( \
+  ~/scripts/bin/ \
+  ~/scripts/downloaded/ \
+  ~/scripts/usr/ \
+  /tool/pandora64/.package/vim-7.4-a/bin \
+  /tool/pandora64/.package/ctags-5.8/bin \
+  /tool/pandora64/.package/emacs-24.5-b/bin \
+  /tool/pandora64/.package/cmake-3.3.2/bin \
+  /tool/pandora64/.package/docbook2X-0.8.8/bin \
+  /tool/pandora64/.package/tkdiff-4.2/bin \
+  /tool/pandora64/.package/glib-2.23.6/bin \
+  /tool/pandora64/.package/gtk+-2.20.1/bin \
+  /tool/pandora64/.package/cairo-1.12.16-b/bin \
+  /tool/pandora64/.package/pango-1.27.1/bin \
+  /tool/pandora64/.package/gcc-4.9.3/bin \
+  /tool/pandora64/.package/findutils-4.4.2/bin \
+  /tool/pandora64/.package/grep-2.22/bin \
+  /tool/pandora64/.package/less-451/bin/ \
+  /tool/pandora64/.package/openssh-5.0p1-hpn13v3/bin \
+  /tool/pandora64/.package/nomachine-4.1.29_5/bin \
+  /tool/pandora64/.package/git-2.4.6/bin \
+  /tool/pandora64/.package/lua-5.1.4/bin \
+  /tool/pandora64/.package/python-2.7/bin \
+  /tool/pandora/.package/vnc-4.1.2/bin \
+  $path:q \
+  )
+
+######################################################
+# Clean up the path
+######################################################
+set newPath = ""
+foreach d ( $path )
+    set alreadyExists = 0
+    if ( "$newPath" != "" ) then
+        foreach newPathDir ( "$newPath" )
+            if ( "$d" == "$newPath" ) then
+                set alreadyExists = 1
+            endif
+        end
+    endif
+    if ( $alreadyExists == 0 ) then
+        set newPath = ( $newPath $d )
+    endif
+end
+set path = ( $newPath )
+# }}}1
+
+# vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
+*** alias
+#+BEGIN_SRC tcsh :tangle ~/tangled_files/my_alias :eval never
+#  some default alias {{{1
+unalias xterm; alias xterm uxterm
+unalias ls; alias ls "ls-F --color=auto -h" #enable thousands grouping and colour
+unalias ll; alias ll 'ls-F -ltr'
+unalias lla; alias lla 'ls-F -l -A'
+unalias flist; alias flist 'find \!:1 -type f >! files'
+# Some alias to force the user to acknowledge when deleting or copying
+unalias rm; alias rm "\rm -i -v"
+unalias cp; alias cp "\cp -i -v"
+unalias mv; alias mv "\mv -i -v"
+unalias grep; alias grep "\grep --color=auto"
+unalias df; alias df "\df -h"
+unalias g; alias g gvim
+unalias e; alias e 'emacs \!:* &'
+unalias lg; alias lg 'ls | grep -i '
+unalias xx; alias xx '\uxterm -fg white -bg #262626 &'
+unalias ssh; alias ssh 'ssh -X'
+unalias ss; alias ss 'source ~/tangled_files/my_proj_path'
+unalias v; alias v 'vim'
+unalias init; alias init 'source /proj/verif_release_ro/cbwa_initscript/current/cbwa_init.csh'
+# unalias module; alias module 'eval `$TCLSH $MODULESHOME/modulecmd.tcl tcsh !*`'
+# }}} 1
+
+# vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
+*** TODO (need to make it generic) project path and source 
+#+BEGIN_SRC tcsh :tangle ~/tangled_files/my_proj_path :eval never
+#  some default paths {{{1
+setenv P4PORT mkdcvp4p01.amd.com:1677
+source /proj/verif_release_ro/cbwa_initscript/current/cbwa_init.csh
+sleep 5
+bootenv -v greenland
+# }}} 1
+
+# vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
+* get your .vim
+** get the .vim repository
+#+BEGIN_SRC sh :dir ~/ :cache yes :results output silent
+git -v clone https://github.com/justrajdeep/dotvim.git .vim 
+#+END_SRC
+** softlink the .vimrc
+#+BEGIN_SRC sh :dir ~/ :results silent
+ln -fs ~/.vim/vimrcNV ~/.vimrc
+#+END_SRC
+** clone neobundle
+#+BEGIN_SRC sh :dir ~/.vim/neobundle_bundle :results output silent
+git clone -v https://github.com/Shougo/neobundle.vim neobundle
+#+END_SRC
+** launch vim and let neobundle do it's magic by installing the packages
+
+** TODO install https://valloric.github.io/YouCompleteMe
+*** install the submodules
+#+BEGIN_SRC sh :results output :dir ~/.vim/neobundle_bundle/YouCompleteMe
+git submodule update --init --recursive
+#+END_SRC
+*** install ycm_build
+**** create the directory
+#+BEGIN_SRC sh :results output :dir ~/
+mkdir -p ycm_build
+#+END_SRC
+
+#+RESULTS:
+
+**** install using cmake
+#+BEGIN_SRC sh :results output :dir ~/ycm_build
+cmake -G "Unix Makefiles" . ~/.vim/neobundle_bundle/YouCompleteMe/third_party/ycmd/cpp
+cmake --build . --target ycm_core --config Release
+#+END_SRC
+** cleanup vim plugins
+#+BEGIN_SRC sh :results output :dir ~/.vim
+rm -rfv neobundle_bundle
+mkdir -vp neobundle_bundle
+#+END_SRC
+
+#+RESULTS:
+
+* set up vim fonts
+*** get the fonts
+#+BEGIN_SRC sh :results output silent :dir ~/
+git -v clone https://github.com/justrajdeep/fonts.git
+#+END_SRC
+*** copy fonts to .fonts directory
+#+BEGIN_SRC sh :dir ~/
+mkdir -vp .fonts
+cp -vrf ~/fonts/* .fonts/.
+#+END_SRC
+*** run the following commands
+#+BEGIN_SRC sh :dir ~/.fonts :results output
+mkfontscale
+mkfontdir
+ttmkfdir -o fonts.dir
+fc-cache -f -v ~/.fonts
+fc-cache -f -v
+fc-match NonExistingFont
+#+END_SRC
+
+*** remove the git directory
+#+BEGIN_SRC sh
+rm -rfv ~/fonts
+#+END_SRC
+
+** updating vim
+#+BEGIN_SRC sh :results output silent
+vim -c ':NeoBundleUpdate neobundle.vim' -c ":q" 
+vim -c ':NeoBundleUpdate' -c ":q"
+#+END_SRC
+
+* set up your tmux
+** tmux configuration
+#+BEGIN_SRC sh :results silent :dir ~/
+ln -fs ~/.vim/tmux.conf ~/.tmux.conf
+#+END_SRC
+** TODO install tmux scripts
+*** https://github.com/tmuxinator/tmuxinator
+* password less [[http://www.linuxproblem.org/art_9.html][ssh]]
+** generate public/pricate keys
+#+BEGIN_SRC sh :results output silent :dir ~/ :var ID=(read-string "Enter file in which to save the key") :eval no
+echo ${ID} | ssh-keygen -t rsa
+#+END_SRC
+** mkdir in the remote box
+#+BEGIN_SRC sh :results output silent :var REMOTE=(read-string "remote-hostname: ") :dir ~/ :eval yes
+ssh ${REMOTE} mkdir -p ~/.ssh
+#+END_SRC
+** check directory permissions in the remote box
+#+BEGIN_SRC sh :eval yes
+ls -l -d ~/ # should be drwxr-xr-x
+ls -l -d ~/.ssh # should be drwx------
+ls -l ~/.ssh # should be -rw-------
+#+END_SRC
+** copy the public key into authorized keys
+#+BEGIN_SRC sh :eval yes :var REMOTE=(read-string "remote-hostname: ")
+cat ~/.ssh/id_rsa.pub | ssh ${REMOTE} 'mkdir -p ~/.ssh && cat >> .ssh/authorized_keys'
+#+END_SRC
+
+#+RESULTS:
+
+* TODO set up local vim (not working)
+
+** get vim 
+#+BEGIN_SRC sh :dir ~/ :results output silent
+git clone -v https://github.com/vim/vim.git vim_latest
+#+END_SRC
+
+** create the config file
+#+BEGIN_SRC sh :tangle ~/vim_latest/my_config :shebang "#!/tool/pandora64/bin/tcsh" :eval no
+
+./configure --prefix=$HOME/scripts --enable-fail-if-missing --with-features=huge \
+  --enable-luainterp=yes --with-lua-prefix=/tool/pandora64/.package/lua-5.1.4 \
+  --enable-perlinterp=yes \
+  --with-python-config-dir=/tool/pandora64/.package/python-2.7.3-a/lib/python2.7/config \
+  --enable-pythoninterp=yes \
+  --enable-python3interp=no \
+  --enable-cscope \
+  --enable-xim \
+  --enable-netbeans \
+  --enable-rubyinterp=yes \
+  --enable-multibyte \
+  --enable-fontset \
+  --with-x=yes \
+  --enable-mzschemeinterp=yes \
+  --enable-gtk2-check \
+  --enable-gui=gtk2 \
+  --enable-gnome-check \
+  --enable-motif-check \
+  --enable-athena-check \
+  --enable-nextaw-check \
+  --enable-carbon-check \
+  --disable-smack \
+  --enable-gui=gnome2
+#+END_SRC
+** compile vim
+*** clean up directory
+#+BEGIN_SRC sh :dir ~/vim_latest :results output silent
+make distclean
+make clean
+rm -rfv src/auto/config.cache
+#+END_SRC
+*** configure
+#+BEGIN_SRC sh :dir ~/vim_latest :results output silent
+./my_config
+#+END_SRC
+*** make
+#+BEGIN_SRC sh :dir ~/vim_latest :results output silent
+make
+#+END_SRC
+
+* install git command line completions
+** clone it to some temp dir
+#+BEGIN_SRC sh :results output :dir ~/
+git clone -v https://github.com/git/git.git /tmp/temp_git
+#+END_SRC
+
+#+RESULTS:
+: Exit 1
+
+** get the completion script
+#+BEGIN_SRC sh :results output :dir /tmp/temp_git
+cp -vf contrib/completion/* ~/scripts/downloaded/.
+#+END_SRC
+
+#+RESULTS:
+: Exit 1
+: `contrib/completion/git-completion.bash' -> `/home/ramondal/scripts/downloaded/./git-completion.bash'
+: `contrib/completion/git-completion.tcsh' -> `/home/ramondal/scripts/downloaded/./git-completion.tcsh'
+: `contrib/completion/git-completion.zsh' -> `/home/ramondal/scripts/downloaded/./git-completion.zsh'
+: `contrib/completion/git-prompt.sh' -> `/home/ramondal/scripts/downloaded/./git-prompt.sh'
+
+** create symbolic completion script
+#+BEGIN_SRC sh :results output :dir ~/scripts/downloaded
+ln -fs ~/scripts/downloaded/git-completion.bash ~/.git-completion.bash
+ln -fs ~/scripts/downloaded/git-completion.tcsh ~/.git-completion.tcsh
+#+END_SRC
+
+#+RESULTS:
+
+** make sure of adding to the end of ~/.cshrc
+** delete the temp directory
+#+BEGIN_SRC sh :results output :dir ~/
+rm -rvf /tmp/temp_git
+#+END_SRC
+
+#+RESULTS:
+
+* create git config
+** git configuration
+#+BEGIN_SRC sh :results silent :dir ~/
+ln -fs ~/.vim/gitconfig ~/.gitconfig
+#+END_SRC
+* install [[https://github.com/susam/vimer][vimer]]
+** git clone it into a temp dir
+#+BEGIN_SRC sh :results output :dir ~/
+git clone -v https://github.com/susam/vimer /tmp/temp_vimer
+#+END_SRC
+
+#+RESULTS:
+
+** get vimer into the path
+#+BEGIN_SRC sh :results output :dir /tmp/temp_vimer
+chmod u+x vimer
+cp -vf vimer ~/scripts/downloaded
+#+END_SRC
+
+#+RESULTS:
+: `vimer' -> `/home/ramondal/scripts/downloaded/vimer'
+
+** remove the git directory
+#+BEGIN_SRC sh :results output :dir ~/
+rm -rvf /tmp/temp_vimer
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+removed `/tmp/temp_vimer/vimer'
+removed `/tmp/temp_vimer/test/test_vimer'
+removed `/tmp/temp_vimer/test/test'
+removed `/tmp/temp_vimer/test/mockvim'
+removed `/tmp/temp_vimer/test/mockcat'
+removed `/tmp/temp_vimer/test/setup'
+removed directory: `/tmp/temp_vimer/test'
+removed `/tmp/temp_vimer/vimer.cmd'
+removed `/tmp/temp_vimer/.travis.yml'
+removed `/tmp/temp_vimer/.git/info/exclude'
+removed directory: `/tmp/temp_vimer/.git/info'
+removed `/tmp/temp_vimer/.git/hooks/commit-msg.sample'
+removed `/tmp/temp_vimer/.git/hooks/pre-push.sample'
+removed `/tmp/temp_vimer/.git/hooks/update.sample'
+removed `/tmp/temp_vimer/.git/hooks/post-update.sample'
+removed `/tmp/temp_vimer/.git/hooks/applypatch-msg.sample'
+removed `/tmp/temp_vimer/.git/hooks/pre-commit.sample'
+removed `/tmp/temp_vimer/.git/hooks/pre-applypatch.sample'
+removed `/tmp/temp_vimer/.git/hooks/pre-rebase.sample'
+removed `/tmp/temp_vimer/.git/hooks/prepare-commit-msg.sample'
+removed directory: `/tmp/temp_vimer/.git/hooks'
+removed `/tmp/temp_vimer/.git/HEAD'
+removed `/tmp/temp_vimer/.git/objects/c0/59bcddbdfc7cffc17be37b8d0ae3d09a38ac3b'
+removed directory: `/tmp/temp_vimer/.git/objects/c0'
+removed `/tmp/temp_vimer/.git/objects/7c/a525aefd5348e06378b5bff1c784e18a382671'
+removed directory: `/tmp/temp_vimer/.git/objects/7c'
+removed `/tmp/temp_vimer/.git/objects/b9/c0cffa152d94c5244b5e717983975d8766b78e'
+removed `/tmp/temp_vimer/.git/objects/b9/f27378ef1243ac11608fb29db4923efdf080f5'
+removed directory: `/tmp/temp_vimer/.git/objects/b9'
+removed `/tmp/temp_vimer/.git/objects/e6/1a3140735a4449f08ec621d33770ee97891028'
+removed `/tmp/temp_vimer/.git/objects/e6/76feacf5a75ee76b7f7eadc9064dc0ac64d9df'
+removed directory: `/tmp/temp_vimer/.git/objects/e6'
+removed `/tmp/temp_vimer/.git/objects/c9/d2dc5e6c7b89f5eaba17998337457e6a85b59b'
+removed directory: `/tmp/temp_vimer/.git/objects/c9'
+removed `/tmp/temp_vimer/.git/objects/00/9b281132ae5820598c43e9f6592fb041883c4b'
+removed directory: `/tmp/temp_vimer/.git/objects/00'
+removed `/tmp/temp_vimer/.git/objects/b0/0f07a6499df033b92d868c06ea43b216f95397'
+removed directory: `/tmp/temp_vimer/.git/objects/b0'
+removed `/tmp/temp_vimer/.git/objects/18/786cd9a1c8c4a19eb4a33d6582957fa92065b9'
+removed directory: `/tmp/temp_vimer/.git/objects/18'
+removed `/tmp/temp_vimer/.git/objects/54/1157cf64e4e7bf88476d28fad4d8dbca1efeab'
+removed `/tmp/temp_vimer/.git/objects/54/bd6031dba8725fee7986efa5b9320f17972ca2'
+removed directory: `/tmp/temp_vimer/.git/objects/54'
+removed `/tmp/temp_vimer/.git/objects/ed/33951d681bad85f990492351f4ba8b9d6617f3'
+removed directory: `/tmp/temp_vimer/.git/objects/ed'
+removed `/tmp/temp_vimer/.git/objects/1c/b975de29d211cdac09cb622b7a431054081e8a'
+removed directory: `/tmp/temp_vimer/.git/objects/1c'
+removed `/tmp/temp_vimer/.git/objects/76/e8af2a2e8fdc8f570bb0d70d099fb55b082cfa'
+removed directory: `/tmp/temp_vimer/.git/objects/76'
+removed `/tmp/temp_vimer/.git/objects/5e/75e4d83d3ad5a80d9b1826898023dfdb0fb883'
+removed directory: `/tmp/temp_vimer/.git/objects/5e'
+removed `/tmp/temp_vimer/.git/objects/dd/c0fd1065aeb3ab3bb115b44a5f5821fb4dd385'
+removed directory: `/tmp/temp_vimer/.git/objects/dd'
+removed `/tmp/temp_vimer/.git/objects/2b/1eef6c49bd0af8984d57c834c209a92da0b5e4'
+removed directory: `/tmp/temp_vimer/.git/objects/2b'
+removed `/tmp/temp_vimer/.git/objects/8a/b8c546a83857e5eb997272c288780008de8ab7'
+removed directory: `/tmp/temp_vimer/.git/objects/8a'
+removed `/tmp/temp_vimer/.git/objects/35/f9d19505ec82e052d7c5b04ba8bdc1be8d8813'
+removed directory: `/tmp/temp_vimer/.git/objects/35'
+removed `/tmp/temp_vimer/.git/objects/6c/957ad8779da24199a534632511d7c1f0813364'
+removed directory: `/tmp/temp_vimer/.git/objects/6c'
+removed `/tmp/temp_vimer/.git/objects/69/08ce44c700b2235d972ee35af21bff86555afc'
+removed directory: `/tmp/temp_vimer/.git/objects/69'
+removed `/tmp/temp_vimer/.git/objects/24/aa0f0b918215a5204587810f5ed1c1b3b5a460'
+removed directory: `/tmp/temp_vimer/.git/objects/24'
+removed `/tmp/temp_vimer/.git/objects/ad/9682908f97f06278a0344749828a9d6b3659e1'
+removed directory: `/tmp/temp_vimer/.git/objects/ad'
+removed `/tmp/temp_vimer/.git/objects/12/9bb020b19fe52acf3a6734dbc03fed716d1d79'
+removed directory: `/tmp/temp_vimer/.git/objects/12'
+removed `/tmp/temp_vimer/.git/objects/47/dae336620e0ea994fcd881ea153349bed0aa88'
+removed directory: `/tmp/temp_vimer/.git/objects/47'
+removed `/tmp/temp_vimer/.git/objects/8f/16a23a345249d2505a58852d75be95b3afa132'
+removed directory: `/tmp/temp_vimer/.git/objects/8f'
+removed directory: `/tmp/temp_vimer/.git/objects/pack'
+removed `/tmp/temp_vimer/.git/objects/8c/845abe8f2eab9b1904c1f02adcb900328768d4'
+removed directory: `/tmp/temp_vimer/.git/objects/8c'
+removed directory: `/tmp/temp_vimer/.git/objects/info'
+removed `/tmp/temp_vimer/.git/objects/f1/21cc41b844c03767c6e7d4ce89be4374d9f7ee'
+removed directory: `/tmp/temp_vimer/.git/objects/f1'
+removed `/tmp/temp_vimer/.git/objects/f5/8a21ba54568e0771855266e849a16c21287adb'
+removed directory: `/tmp/temp_vimer/.git/objects/f5'
+removed `/tmp/temp_vimer/.git/objects/78/157628483bb66747e2780058bea7cee3b34d4c'
+removed directory: `/tmp/temp_vimer/.git/objects/78'
+removed `/tmp/temp_vimer/.git/objects/ee/cc8f0c6b282b15dde47fa6c0d23ff4bc6b7701'
+removed directory: `/tmp/temp_vimer/.git/objects/ee'
+removed `/tmp/temp_vimer/.git/objects/c3/1b4cbc10974eda3a2a0f0fc75b82c432be0a77'
+removed directory: `/tmp/temp_vimer/.git/objects/c3'
+removed `/tmp/temp_vimer/.git/objects/ca/508fde516f19d5c84302441afbfcf53b47e10e'
+removed directory: `/tmp/temp_vimer/.git/objects/ca'
+removed `/tmp/temp_vimer/.git/objects/e8/b232565ff2bfab2a1b709e613f1d1b05490cd6'
+removed `/tmp/temp_vimer/.git/objects/e8/172eaccd5c8f436f868890a923edcfeec80549'
+removed directory: `/tmp/temp_vimer/.git/objects/e8'
+removed `/tmp/temp_vimer/.git/objects/3c/7cb69c90003cb86d09b6901149098ffac5a833'
+removed directory: `/tmp/temp_vimer/.git/objects/3c'
+removed `/tmp/temp_vimer/.git/objects/b5/fc7d8dfdfc67eb477da61a7c3d02cd974ae21b'
+removed directory: `/tmp/temp_vimer/.git/objects/b5'
+removed `/tmp/temp_vimer/.git/objects/7b/827268f123f40f5bb4b14ca96d93a5142c73cf'
+removed `/tmp/temp_vimer/.git/objects/7b/b62ff4cd0b2c2da65e8641898da57cc7d4f4b2'
+removed directory: `/tmp/temp_vimer/.git/objects/7b'
+removed `/tmp/temp_vimer/.git/objects/44/c6bdea3740428896bfd5975c10947a0bc76915'
+removed directory: `/tmp/temp_vimer/.git/objects/44'
+removed `/tmp/temp_vimer/.git/objects/0c/bb8e70c82873eee8c493d76419f36cf319e288'
+removed directory: `/tmp/temp_vimer/.git/objects/0c'
+removed `/tmp/temp_vimer/.git/objects/d9/980322416e08a09af575f97f0b96eef2fb0b91'
+removed directory: `/tmp/temp_vimer/.git/objects/d9'
+removed `/tmp/temp_vimer/.git/objects/d6/b387598b9e3fbaf420011b3a6f97693b7d29d6'
+removed directory: `/tmp/temp_vimer/.git/objects/d6'
+removed `/tmp/temp_vimer/.git/objects/d1/a6d2fecaa5117cc0dcc78fe8142bab272d3160'
+removed directory: `/tmp/temp_vimer/.git/objects/d1'
+removed `/tmp/temp_vimer/.git/objects/6f/8da9d6da51bd8386debeb98058e64dc74e487f'
+removed directory: `/tmp/temp_vimer/.git/objects/6f'
+removed `/tmp/temp_vimer/.git/objects/b1/7f159b3f3791d39f54593e2c5dbb1a642334bb'
+removed directory: `/tmp/temp_vimer/.git/objects/b1'
+removed `/tmp/temp_vimer/.git/objects/53/04b9900ec561fd5335a0195f7066412165d996'
+removed directory: `/tmp/temp_vimer/.git/objects/53'
+removed `/tmp/temp_vimer/.git/objects/7f/2b9695b11b4a8a2e57f0e9c7c52a98e0d07777'
+removed directory: `/tmp/temp_vimer/.git/objects/7f'
+removed `/tmp/temp_vimer/.git/objects/9f/3f43ac875a8f5cafcf3db0c274567072a19248'
+removed directory: `/tmp/temp_vimer/.git/objects/9f'
+removed `/tmp/temp_vimer/.git/objects/eb/a02149ce26923445a8a6a8ff620c6a870179f5'
+removed directory: `/tmp/temp_vimer/.git/objects/eb'
+removed `/tmp/temp_vimer/.git/objects/d3/7b3977e06c149f59162e56e9bfdb8a625f20fa'
+removed directory: `/tmp/temp_vimer/.git/objects/d3'
+removed `/tmp/temp_vimer/.git/objects/aa/7c713076dc990cf6f91b5fd1b4cd092109350d'
+removed `/tmp/temp_vimer/.git/objects/aa/ae809949a39e6cfc42e441d3b021c129235412'
+removed directory: `/tmp/temp_vimer/.git/objects/aa'
+removed `/tmp/temp_vimer/.git/objects/af/2ee3a96a4154c836f8a5828e1e2dc5fd3627f4'
+removed directory: `/tmp/temp_vimer/.git/objects/af'
+removed `/tmp/temp_vimer/.git/objects/a3/ccb5ff1dd61815fb28e5d0c6efd7c813ce360d'
+removed directory: `/tmp/temp_vimer/.git/objects/a3'
+removed `/tmp/temp_vimer/.git/objects/98/4cf72ed615b407a248423272afd760542f0aa9'
+removed directory: `/tmp/temp_vimer/.git/objects/98'
+removed `/tmp/temp_vimer/.git/objects/31/18df58d98396e2516a43e51fc08382a48bc97f'
+removed directory: `/tmp/temp_vimer/.git/objects/31'
+removed `/tmp/temp_vimer/.git/objects/9a/990c9ac25147e5b0a3c540eccbbb5fed030efb'
+removed directory: `/tmp/temp_vimer/.git/objects/9a'
+removed `/tmp/temp_vimer/.git/objects/f9/7e20b0fb27ff662c0830a0b787afd795c6b6ef'
+removed directory: `/tmp/temp_vimer/.git/objects/f9'
+removed `/tmp/temp_vimer/.git/objects/64/24d4b8cc1eb18ccacf8ce28978d8421ad70ed3'
+removed `/tmp/temp_vimer/.git/objects/64/1f31178e0760f4f79f808135c6ba6a89f10a86'
+removed directory: `/tmp/temp_vimer/.git/objects/64'
+removed `/tmp/temp_vimer/.git/objects/38/53f13fbac11c987c80d0cb4e3a0256833a162c'
+removed directory: `/tmp/temp_vimer/.git/objects/38'
+removed `/tmp/temp_vimer/.git/objects/27/67def31da4cdda8005b7bcbe7bf15ed288d30d'
+removed `/tmp/temp_vimer/.git/objects/27/66aedc04ed1666e1ba762d77079e86051d0adb'
+removed directory: `/tmp/temp_vimer/.git/objects/27'
+removed `/tmp/temp_vimer/.git/objects/48/6e2b71910c137f24abda027e8c63d6ad784a9b'
+removed directory: `/tmp/temp_vimer/.git/objects/48'
+removed `/tmp/temp_vimer/.git/objects/4c/4c8f0b5fa973576ead3afda1afa30cd21c311c'
+removed directory: `/tmp/temp_vimer/.git/objects/4c'
+removed `/tmp/temp_vimer/.git/objects/f4/e3ad7c944788d26fa8ce3853c702b99c7f224f'
+removed directory: `/tmp/temp_vimer/.git/objects/f4'
+removed `/tmp/temp_vimer/.git/objects/c7/0e404c96379235571d18b5c010a7539e8e7e27'
+removed `/tmp/temp_vimer/.git/objects/c7/d0c70fe065c23548ee11141fcf5773ce50fff8'
+removed directory: `/tmp/temp_vimer/.git/objects/c7'
+removed `/tmp/temp_vimer/.git/objects/be/0d8cdcd5b0e03241bebc9f98ae4e77e3b6a3e1'
+removed directory: `/tmp/temp_vimer/.git/objects/be'
+removed `/tmp/temp_vimer/.git/objects/03/7a5f19a29cb81e78d6cebce06ca7897a098f7a'
+removed directory: `/tmp/temp_vimer/.git/objects/03'
+removed `/tmp/temp_vimer/.git/objects/0b/20b40e142e95e1e0bd497acd4b35a332df80de'
+removed directory: `/tmp/temp_vimer/.git/objects/0b'
+removed `/tmp/temp_vimer/.git/objects/d2/03e1be5ff4635ff55002504a0b84b224b7863c'
+removed directory: `/tmp/temp_vimer/.git/objects/d2'
+removed `/tmp/temp_vimer/.git/objects/4e/d89e06d15a42195c54cf192531ea567e446b0d'
+removed directory: `/tmp/temp_vimer/.git/objects/4e'
+removed `/tmp/temp_vimer/.git/objects/f3/881bd3898c740fdfcf16656089b64d0924023c'
+removed directory: `/tmp/temp_vimer/.git/objects/f3'
+removed `/tmp/temp_vimer/.git/objects/79/35f647b42bdb044ac0fcb2c0e87fa64082f0ee'
+removed directory: `/tmp/temp_vimer/.git/objects/79'
+removed `/tmp/temp_vimer/.git/objects/21/5c2358d7ac0f5db6468178bf52ff367cb0e81c'
+removed directory: `/tmp/temp_vimer/.git/objects/21'
+removed directory: `/tmp/temp_vimer/.git/objects'
+removed directory: `/tmp/temp_vimer/.git/branches'
+removed `/tmp/temp_vimer/.git/index'
+removed `/tmp/temp_vimer/.git/refs/remotes/origin/HEAD'
+removed directory: `/tmp/temp_vimer/.git/refs/remotes/origin'
+removed directory: `/tmp/temp_vimer/.git/refs/remotes'
+removed `/tmp/temp_vimer/.git/refs/heads/master'
+removed directory: `/tmp/temp_vimer/.git/refs/heads'
+removed directory: `/tmp/temp_vimer/.git/refs/tags'
+removed directory: `/tmp/temp_vimer/.git/refs'
+removed `/tmp/temp_vimer/.git/config'
+removed `/tmp/temp_vimer/.git/packed-refs'
+removed `/tmp/temp_vimer/.git/description'
+removed `/tmp/temp_vimer/.git/logs/HEAD'
+removed `/tmp/temp_vimer/.git/logs/refs/remotes/origin/HEAD'
+removed directory: `/tmp/temp_vimer/.git/logs/refs/remotes/origin'
+removed directory: `/tmp/temp_vimer/.git/logs/refs/remotes'
+removed `/tmp/temp_vimer/.git/logs/refs/heads/master'
+removed directory: `/tmp/temp_vimer/.git/logs/refs/heads'
+removed directory: `/tmp/temp_vimer/.git/logs/refs'
+removed directory: `/tmp/temp_vimer/.git/logs'
+removed directory: `/tmp/temp_vimer/.git'
+removed `/tmp/temp_vimer/Makefile'
+removed `/tmp/temp_vimer/CHANGES.md'
+removed `/tmp/temp_vimer/LICENSE.md'
+removed `/tmp/temp_vimer/.gitignore'
+removed `/tmp/temp_vimer/dev/README.md'
+removed directory: `/tmp/temp_vimer/dev'
+removed `/tmp/temp_vimer/README.md'
+removed directory: `/tmp/temp_vimer'
+#+end_example
+
+* install [[http://joeyh.name/code/moreutils/][vipe]]
+** clone it to some temp dir
+#+BEGIN_SRC sh :results output :dir ~/
+git clone -v https://github.com/madx/moreutils /tmp/more_utils
+#+END_SRC
+
+#+RESULTS:
+
+** do a make
+#+BEGIN_SRC sh :results output :dir /tmp/more_utils
+env DOCBOOK2XMAN=docbook2man DESTDIR=/home/ramondal/scripts make
+#+END_SRC
+
+#+RESULTS:
+
+** get only the executables
+#+NAME: executables
+#+BEGIN_SRC sh :results scalar :dir /tmp/more_utils
+find . -executable -type f
+#+END_SRC
+
+#+RESULTS: executables
+#+begin_example
+./check-isutf8
+./lckdo
+./ifne
+./vidir
+./ifdata
+./debian/rules
+./pee
+./chronic
+./mispipe
+./vipe
+./.git/hooks/commit-msg.sample
+./.git/hooks/pre-push.sample
+./.git/hooks/update.sample
+./.git/hooks/post-update.sample
+./.git/hooks/applypatch-msg.sample
+./.git/hooks/pre-commit.sample
+./.git/hooks/pre-applypatch.sample
+./.git/hooks/pre-rebase.sample
+./.git/hooks/prepare-commit-msg.sample
+./isutf8
+./ts
+./zrun
+./parallel
+./combine
+./sponge
+#+end_example
+
+#+RESULTS:
+#+begin_example
+./check-isutf8
+./lckdo
+./ifne
+./vidir
+./ifdata
+./debian/rules
+./pee
+./chronic
+./mispipe
+./vipe
+./.git/hooks/commit-msg.sample
+./.git/hooks/pre-push.sample
+./.git/hooks/update.sample
+./.git/hooks/post-update.sample
+./.git/hooks/applypatch-msg.sample
+./.git/hooks/pre-commit.sample
+./.git/hooks/pre-applypatch.sample
+./.git/hooks/pre-rebase.sample
+./.git/hooks/prepare-commit-msg.sample
+./isutf8
+./ts
+./zrun
+./parallel
+./combine
+./sponge
+#+end_example
+
+** Copy the executables
+#+BEGIN_SRC sh :dir /tmp/more_utils :var EXECUTE=executables
+cp -vf $EXECUTE /home/ramondal/scripts/bin/.
+#+END_SRC
+
+#+RESULTS:
+| `./check-isutf8'                         | -> | `/home/ramondal/scripts/bin/./check-isutf8'              |
+| `./lckdo'                                | -> | `/home/ramondal/scripts/bin/./lckdo'                     |
+| `./ifne'                                 | -> | `/home/ramondal/scripts/bin/./ifne'                      |
+| `./vidir'                                | -> | `/home/ramondal/scripts/bin/./vidir'                     |
+| `./ifdata'                               | -> | `/home/ramondal/scripts/bin/./ifdata'                    |
+| `./debian/rules'                         | -> | `/home/ramondal/scripts/bin/./rules'                     |
+| `./pee'                                  | -> | `/home/ramondal/scripts/bin/./pee'                       |
+| `./chronic'                              | -> | `/home/ramondal/scripts/bin/./chronic'                   |
+| `./mispipe'                              | -> | `/home/ramondal/scripts/bin/./mispipe'                   |
+| `./vipe'                                 | -> | `/home/ramondal/scripts/bin/./vipe'                      |
+| `./.git/hooks/commit-msg.sample'         | -> | `/home/ramondal/scripts/bin/./commit-msg.sample'         |
+| `./.git/hooks/pre-push.sample'           | -> | `/home/ramondal/scripts/bin/./pre-push.sample'           |
+| `./.git/hooks/update.sample'             | -> | `/home/ramondal/scripts/bin/./update.sample'             |
+| `./.git/hooks/post-update.sample'        | -> | `/home/ramondal/scripts/bin/./post-update.sample'        |
+| `./.git/hooks/applypatch-msg.sample'     | -> | `/home/ramondal/scripts/bin/./applypatch-msg.sample'     |
+| `./.git/hooks/pre-commit.sample'         | -> | `/home/ramondal/scripts/bin/./pre-commit.sample'         |
+| `./.git/hooks/pre-applypatch.sample'     | -> | `/home/ramondal/scripts/bin/./pre-applypatch.sample'     |
+| `./.git/hooks/pre-rebase.sample'         | -> | `/home/ramondal/scripts/bin/./pre-rebase.sample'         |
+| `./.git/hooks/prepare-commit-msg.sample' | -> | `/home/ramondal/scripts/bin/./prepare-commit-msg.sample' |
+| `./isutf8'                               | -> | `/home/ramondal/scripts/bin/./isutf8'                    |
+| `./ts'                                   | -> | `/home/ramondal/scripts/bin/./ts'                        |
+| `./zrun'                                 | -> | `/home/ramondal/scripts/bin/./zrun'                      |
+| `./parallel'                             | -> | `/home/ramondal/scripts/bin/./parallel'                  |
+| `./combine'                              | -> | `/home/ramondal/scripts/bin/./combine'                   |
+| `./sponge'                               | -> | `/home/ramondal/scripts/bin/./sponge'                    |
+
+
+** remove the clone directory
+#+BEGIN_SRC sh :results output :dir ~/
+rm -rvf /tmp/more_utils
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+removed `/tmp/more_utils/check-isutf8'
+removed `/tmp/more_utils/lckdo.docbook'
+removed `/tmp/more_utils/lckdo'
+removed `/tmp/more_utils/sponge.c'
+removed `/tmp/more_utils/ifne.c'
+removed `/tmp/more_utils/ifne'
+removed `/tmp/more_utils/vidir'
+removed `/tmp/more_utils/parallel.c'
+removed `/tmp/more_utils/ifdata.docbook'
+removed `/tmp/more_utils/.gitattributes'
+removed `/tmp/more_utils/ifdata'
+removed `/tmp/more_utils/debian/changelog'
+removed `/tmp/more_utils/debian/docs'
+removed `/tmp/more_utils/debian/compat'
+removed `/tmp/more_utils/debian/rules'
+removed `/tmp/more_utils/debian/control'
+removed `/tmp/more_utils/debian/copyright'
+removed directory: `/tmp/more_utils/debian'
+removed `/tmp/more_utils/mispipe.docbook'
+removed `/tmp/more_utils/isutf8.c'
+removed `/tmp/more_utils/pee'
+removed `/tmp/more_utils/chronic'
+removed `/tmp/more_utils/physmem.c'
+removed `/tmp/more_utils/mispipe'
+removed `/tmp/more_utils/vipe'
+removed `/tmp/more_utils/.git/info/exclude'
+removed directory: `/tmp/more_utils/.git/info'
+removed `/tmp/more_utils/.git/hooks/commit-msg.sample'
+removed `/tmp/more_utils/.git/hooks/pre-push.sample'
+removed `/tmp/more_utils/.git/hooks/update.sample'
+removed `/tmp/more_utils/.git/hooks/post-update.sample'
+removed `/tmp/more_utils/.git/hooks/applypatch-msg.sample'
+removed `/tmp/more_utils/.git/hooks/pre-commit.sample'
+removed `/tmp/more_utils/.git/hooks/pre-applypatch.sample'
+removed `/tmp/more_utils/.git/hooks/pre-rebase.sample'
+removed `/tmp/more_utils/.git/hooks/prepare-commit-msg.sample'
+removed directory: `/tmp/more_utils/.git/hooks'
+removed `/tmp/more_utils/.git/HEAD'
+removed `/tmp/more_utils/.git/objects/pack/pack-04ad3db4fe2058dad56519f7c508911b35b29c63.idx'
+removed `/tmp/more_utils/.git/objects/pack/pack-04ad3db4fe2058dad56519f7c508911b35b29c63.pack'
+removed directory: `/tmp/more_utils/.git/objects/pack'
+removed directory: `/tmp/more_utils/.git/objects/info'
+removed directory: `/tmp/more_utils/.git/objects'
+removed directory: `/tmp/more_utils/.git/branches'
+removed `/tmp/more_utils/.git/index'
+removed `/tmp/more_utils/.git/refs/remotes/origin/HEAD'
+removed directory: `/tmp/more_utils/.git/refs/remotes/origin'
+removed directory: `/tmp/more_utils/.git/refs/remotes'
+removed `/tmp/more_utils/.git/refs/heads/master'
+removed directory: `/tmp/more_utils/.git/refs/heads'
+removed directory: `/tmp/more_utils/.git/refs/tags'
+removed directory: `/tmp/more_utils/.git/refs'
+removed `/tmp/more_utils/.git/config'
+removed `/tmp/more_utils/.git/packed-refs'
+removed `/tmp/more_utils/.git/description'
+removed `/tmp/more_utils/.git/logs/HEAD'
+removed `/tmp/more_utils/.git/logs/refs/remotes/origin/HEAD'
+removed directory: `/tmp/more_utils/.git/logs/refs/remotes/origin'
+removed directory: `/tmp/more_utils/.git/logs/refs/remotes'
+removed `/tmp/more_utils/.git/logs/refs/heads/master'
+removed directory: `/tmp/more_utils/.git/logs/refs/heads'
+removed directory: `/tmp/more_utils/.git/logs/refs'
+removed directory: `/tmp/more_utils/.git/logs'
+removed directory: `/tmp/more_utils/.git'
+removed `/tmp/more_utils/isutf8.docbook'
+removed `/tmp/more_utils/sponge.docbook'
+removed `/tmp/more_utils/pee.c'
+removed `/tmp/more_utils/README'
+removed `/tmp/more_utils/Makefile'
+removed `/tmp/more_utils/mispipe.c'
+removed `/tmp/more_utils/lckdo.c'
+removed `/tmp/more_utils/ifdata.c'
+removed `/tmp/more_utils/isutf8'
+removed `/tmp/more_utils/COPYING'
+removed `/tmp/more_utils/ts'
+removed `/tmp/more_utils/zrun'
+removed `/tmp/more_utils/pee.docbook'
+removed `/tmp/more_utils/parallel'
+removed `/tmp/more_utils/combine'
+removed `/tmp/more_utils/sponge'
+removed `/tmp/more_utils/ifne.docbook'
+removed `/tmp/more_utils/parallel.docbook'
+removed directory: `/tmp/more_utils'
+#+end_example
+
+* TODO see if [[http://eclim.org/][eclim]] can be used
+* TODO see [[https://github.com/thoughtbot/pick][pick]]
+** clone it to some temp dir
+#+BEGIN_SRC sh :results output :dir ~/
+git clone -v https://github.com/thoughtbot/pick /tmp/temp_pick
+#+END_SRC
+
+#+RESULTS:
+
+** do a make and install
+#+BEGIN_SRC sh :results output :dir /tmp/more_utils
+env DESTDIR=/home/ramondal make ; make install
+#+END_SRC
+
+#+RESULTS:
+
+** remove the clone directory
+#+BEGIN_SRC sh :results output :dir ~/
+rm -rvf /tmp/temp_pick
+#+END_SRC
+
+* checkout [[https://github.com/jhawthorn/fzy][fzy]]
+** clone it to some temp dir
+#+BEGIN_SRC sh :results output :dir ~/
+git clone -v https://github.com/jhawthorn/fzy /tmp/temp_fzy
+#+END_SRC
+
+#+RESULTS:
+
+** do a make and install
+#+BEGIN_SRC sh :results output :dir /tmp/temp_fzy
+make PREFIX=/home/ramondal/scripts && make PREFIX=/home/ramondal/scripts install
+#+END_SRC
+
+** remove the clone directory
+#+BEGIN_SRC sh :results output :dir ~/
+rm -rvf /tmp/temp_fzy
+#+END_SRC
+
+* checkout [[https://github.com/junegunn/fzf][FZF]]
+** clone it to some temp dir
+#+BEGIN_SRC sh :results output :dir ~/
+git clone -v https://github.com/junegunn/fzf /tmp/temp_fzf
+#+END_SRC
+
+** do an install
+#+BEGIN_SRC sh :results output :dir /tmp/temp_fzf :eval no
+./install
+#+END_SRC
+
+** copy the man and the binary
+#+BEGIN_SRC sh :results output :dir /tmp/temp_fzf :eval yes
+mkdir -p ~/scripts/share ~/scripts/bin
+cp -vfr man ~/scripts/share
+cp -vrf bin ~/scripts
+#+END_SRC
+
+** remove the clone directory
+#+BEGIN_SRC sh :results output :dir ~/
+rm -rvf /tmp/temp_fzf
+#+END_SRC
+
+* TODO install vnc
+** extract the package
+#+BEGIN_SRC sh :results value :dir ~/test
+tar xvzf VNC-5.3.1-Linux-x64-RPM.tar.gz
+#+END_SRC
+
+#+RESULTS:
+| VNC-Server-5.3.1-Linux-x64.rpm |
+| VNC-Viewer-5.3.1-Linux-x64.rpm  |
+
+** install the rpm packages
+#+BEGIN_SRC sh :results output :dir ~/test
+rpm install --prefix=/home/ramondal/scripts VNC-Viewer-5.3.1-Linux-x64.rpm
+#+END_SRC
+
+#+RESULTS:
+
+* change xterm color
+** clone it to some temp dir
+#+BEGIN_SRC sh :results output :dir ~/
+git clone -v https://github.com/solarized/xresources /tmp/temp_xresources
+#+END_SRC
+
+#+RESULTS:
+** do a install
+#+BEGIN_SRC sh :results output :dir /tmp/temp_xresources :tangle no
+cp -fv  Xresources.dark ~/.Xresources
+#+END_SRC
+
+#+RESULTS:
+: `Xresources.dark' -> `/home/ramondal/.Xresources'
+
+** add custom settings
+
+#+BEGIN_SRC sh :results output :dir ~/ :eval no :tangle ~/tangled_files/xresources_append
+! I like a LOT of scrollback...
+xterm*savelines: 16384
+! right hand side scrollbar...
+xterm*rightScrollBar: true
+xterm*ScrollBar: true
+
+! stop output to terminal from jumping down to bottom of scroll again
+xterm*scrollTtyOutput: true
+#+END_SRC
+
+*append it to xresources file*
+
+#+BEGIN_SRC sh :results output :dir ~/tangled_files :tangle no
+cat xresources_append >> ~/.Xresources
+#+END_SRC
+
+#+RESULTS:
+** run the merge command
+#+BEGIN_SRC sh :results output :dir ~/ :tangle no
+xrdb -merge ~/.Xresources
+#+END_SRC
+
+#+RESULTS:
+
+** remove the clone directory
+#+BEGIN_SRC sh :results output :dir ~/
+rm -rvf /tmp/temp_xresources
+#+END_SRC
+
+#+RESULTS:
+
+* create perpetual ssh
+** create multiplexing
+#+BEGIN_SRC sh :results output :dir ~/
+mkdir -vp ~/.ssh/connections
+chmod 700 ~/.ssh/connections
+#+END_SRC
+
+#+RESULTS:
+** create your host file
+#+BEGIN_SRC csh :tangle ~/.ssh/config :eval never
+Host *
+ControlMaster auto
+ControlPath ~/.ssh/connections/%r_%h_%p
+#+END_SRC
+
+** change permissions
+#+BEGIN_SRC sh :results output :dir ~/.ssh
+chmod 600 config
+#+END_SRC
+
+#+RESULTS:
+
+* Project related
+** bootenv
+#+BEGIN_SRC tcsh :tangle ~/.bootenv.modulefile :eval never
+
+# add some output so I remember that this file is being loaded{{{1
+puts stderr "Loading ~/.bootenv.modulefile"
+
+# path variables that i need even after bootenv
+# setup emacs and vim
+module load emacs/24.5-b
+module load vim/7.4-a
+
+# put my own bin dir on the path - use append-path here, so no danger of overriding standard tools
+append-path PATH /home/ramondal/scripts/usr 
+append-path PATH /home/ramondal/scripts/downloaded
+
+######################################################
+# bootenv related
+######################################################
+# ORL
+# Set common arguments for verbose, color, local mode, and max number of jobs (number of cores)
+setenv DJ_INIT "-v -c -J local -m4"
+# ATL
+# setenv DJ_INIT -v -c -J lsf -m4"
+
+# Use -DUSE_ALE by default for gcB. Specify -DUSE_RGB on command line to override.
+if { [string equal $env(SCMROOT) //gfxip/gcB] } {
+    setenv DJ_INIT "$env(DJ_INIT) -DUSE_ALE"
+}
+
+# Use -DAUTOMGR_OPTS=-nostrict by default for gfx9.
+if { [string equal $env(SCMROOT) //gfxip/gfx9] } {
+   setenv DJ_INIT "$env(DJ_INIT) --save_cmd_logs -DAUTOMGR_OPTS=-nostrict"
+}
+
+# }}}1
+
+# vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
+** building the tree
+#+BEGIN_SRC sh :results output
+go
+cd src/verif/vgt/tb/tb_vgt
+build_tb_vgt no_mem all
+#+END_SRC
+** cleaning the tree
+#+BEGIN_SRC sh :results output
+go
+clobber all
+#+END_SRC
+** Running a test
+_-DRUN_DV=ONLY_ is  for only running the test without building.
+_-DDEBUG_ is for dumping waves
+
+#+BEGIN_SRC sh :results output
+go
+dj -e 'run_test "vgt vgtdir_simple_dx9"' -DDEBUG -DRUN_DV=ONLY -l some.log 
+#+END_SRC
+
