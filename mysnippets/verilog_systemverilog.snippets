@@ -74,9 +74,10 @@ endglobal
 
 ################################################################################
 snippet ifdef "add ifdef" bsw
-${1:`}ifndef `!p snip.rv = snip.fn.replace(".", "_").upper()`
-$1define `!p snip.rv = snip.fn.replace(".", "_").upper()`
-$1endif ${2:`!p snip.rv = _get_comment_format()[0]`} `!p snip.rv = snip.fn.replace(".", "_").upper()` $2
+${1:`}ifdef ${2:`!p snip.rv = snip.basename.upper()`}__${3:__}${4:`!p snip.rv = snip.fn.replace(snip.basename, "").replace(".", "").upper()`}
+$1else
+$1define $2__$3$4
+$1endif ${5:`!p snip.rv = _get_comment_format()[0]`} $2__$3$4 $5
 endsnippet
 
 snippet uvm_info "add uvm_info macro" sw
@@ -153,6 +154,14 @@ endsnippet
 snippet function "add * function" sw
 ${1:`!p snip.rv = _get_comment_format()[0]`} virtual function ${2:void} ${3:name}_f($4) `!p snip.rv = foldmarker()[0]`${5:1} $1
 virtual function $2 $3_f($4);
+  \`uvm_info(get_type_name(), $sformatf("in $3_f"), UVM_DEBUG);
+endfunction:$3_f
+$1 `!p snip.rv = foldmarker()[1]`$5 $1 virtual function $2 $3_f
+endsnippet
+
+snippet task "add * function" sw
+${1:`!p snip.rv = _get_comment_format()[0]`} virtual task ${2:void} ${3:name}_f($4) `!p snip.rv = foldmarker()[0]`${5:1} $1
+virtual task $2 $3_f($4);
   \`uvm_info(get_type_name(), $sformatf("in $3_f"), UVM_DEBUG);
 endfunction:$3_f
 $1 `!p snip.rv = foldmarker()[1]`$5 $1 virtual function $2 $3_f

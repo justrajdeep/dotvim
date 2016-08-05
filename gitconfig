@@ -7,7 +7,7 @@
   branch = auto
   diff = auto
   status = auto
-  ui = auto
+	ui = true
 	interactive = auto
 [color "branch"]
   current = yellow reverse
@@ -43,3 +43,7 @@
 [core]
 	editor = gvim -f
 	autocrlf = input
+[gc]
+	auto = 1
+[git-p4]
+	useClientSpec = 1

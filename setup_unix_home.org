@@ -71,7 +71,9 @@ values."
      auto-completion
      better-defaults
      emacs-lisp
+     themes-megapack
      git
+     perforce
      ;; markdown
      org
      pdf-tools
@@ -88,7 +90,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(tramp dash s f ob-ipython org-bullets meacupla-theme)
+   dotspacemacs-additional-packages '(tramp dash s f verilog-mode ob-ipython org-bullets meacupla-theme)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -376,11 +378,13 @@ cat ~/tangled_files/cshrc_source >> ~/.cshrc
 # history {{{1
 set history=5000 
 set savehist=(5000 merge)
-set histfile = "$HOME/.tcsh_history"
+set histfile = "/home/ramondal/.tcsh_history"
 # the following will save the history prior to writing the prompt
+# history -L
 alias precmd 'history -S; history -M'
 # expand history
 set autoexpand
+set autorehash
 # do not keep repeated commands
 set histdup=erase
 # }}}1
@@ -410,7 +414,7 @@ unset dunique
 
 # vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
 #+END_SRC
-*** Completion
+*** TODO Completion
 #+BEGIN_SRC tcsh :tangle ~/tangled_files/complete :eval never
 # completion/directory {{{1
 # show hidden files in list and completion
@@ -435,11 +439,180 @@ set addsuffix
 # set fignore=(.c .cpp .h)
 set correct=cmd
 set complete=enhance
-complete cd 'p/1/d/'
 # returns back to the actual directory
 set symlinks=ignore
 # no ambiguous file name
 # set noglob # caused an issue with ~/.vim
+
+# directories
+complete cd 'C/*/d/'
+complete rmdir 'C/*/d/'
+complete chdir 	p/1/d/
+complete pushd 	p/1/d/
+complete popd 	p/1/d/
+complete pu 	p/1/d/
+complete po 	p/1/d/
+
+# signal names
+# also note that the initial - can be created with the first completion
+# but without appending a space (note the extra slash with no
+# append character specified)
+complete kill 'c/-/S/' 'p/1/(-)//'
+complete skill 	p/1/c/
+
+# use available commands as arguments for which, where, and man
+complete which 'p/1/c/'
+complete users	c/--/"(help version)"/ p/1/x:'<accounting_file>'/
+complete who	c/--/"(heading idle count mesg message writable help \
+    			version)"/ c/-/"(H i m q s T w u -)"/ \
+			p/1/x:'<accounting_file>'/ n/am/"(i)"/ n/are/"(you)"/
+
+complete df		c/--/"(all block-size human-readable si inodes \
+			kilobytes local megabytes no-sync portability sync \
+			type print-type exclude-type help version)"/ \
+			c/-/"(a H h i k l m P T t v x)"/
+complete du		c/--/"(all block-size bytes total dereference-args \
+    			human-readable si kilobytes count-links dereference \
+			megabytes separate-dirs summarize one-file-system \
+			exclude-from exclude max-depth help version"/ \
+			c/-/"(a b c D H h k L l m S s X x)"/
+
+complete exec 	p/1/c/		# Commands only
+complete trace 	p/1/c/
+complete strace 	p/1/c/
+complete where 'p/1/c/'
+complete man 'p/1/c/'
+complete crontab	'n/-u/u/'
+complete ifconfig	'p@1@`ifconfig -l`@' 'n/*/(range phase link netmask \
+			mtu vlandev vlan metric mediaopt down delete \
+			broadcast arp debug)/'
+
+complete wget 	c/--/"(accept= append-output= background cache= \
+		continue convert-links cut-dirs= debug \
+		delete-after directory-prefix= domains= \
+		dont-remove-listing dot-style= exclude-directories= \
+		exclude-domains= execute= follow-ftp \
+		force-directories force-html glob= header= help \
+		http-passwd= http-user= ignore-length \
+		include-directories= input-file= level= mirror \
+		no-clobber no-directories no-host-directories \
+		no-host-lookup no-parent non-verbose \
+		output-document= output-file= passive-ftp \
+		proxy-passwd= proxy-user= proxy= quiet quota= \
+		recursive reject= relative retr-symlinks save-headers \
+		server-response span-hosts spider timeout= \
+		timestamping tries= user-agent= verbose version wait=)"/
+
+# aliases
+complete alias 'p/1/a/'
+complete unalias 'p/1/a/'
+
+# variables
+complete unset 'p/1/s/'
+complete set 'p/1/s/'
+
+# environment variables
+complete unsetenv 'p/1/e/'
+complete setenv 'p/1/e/'
+#(kinda cool: complete first arg with an env variable, and add an =,
+# continue completion of first arg with a filename.  complete 2nd arg
+# with a command)
+complete env 'c/*=/f/' 'p/1/e/=/' 'p/2/c/'
+
+# key bindings
+complete bindkey 'C/*/b/'
+
+# groups
+complete chgrp 'p/1/g/'
+complete chmod	c/--/"(changes silent quiet verbose reference \
+    			recursive help version)"/ c/-/"(c f R v)"/
+
+# users
+complete chown 'p/1/u/'
+
+# You can use complete to provide extensive help for complex commands
+# like find.  
+# Please check your version before using these completions, as some
+# differences may exist.
+complete find 'n/-name/f/' 'n/-newer/f/' 'n/-{,n}cpio/f/' \
+'n/-exec/c/' 'n/-ok/c/' 'n/-user/u/' 'n/-group/g/' \
+'n/-fstype/(nfs 4.2)/' 'n/-type/(b c d f l p s)/' \
+'c/-/(name newer cpio ncpio exec ok user group fstype type atime \
+ctime depth inum ls mtime nogroup nouser perm print prune \
+size xdev)/' \
+'p/*/d/'
+
+complete -%*	c/%/j/			# fill in the jobs builtin
+complete {fg,bg,stop}	c/%/j/ p/1/"(%)"//
+
+# set up cc to complete only with files ending in .c, .a, and .o
+complete cc 'p/*/f:*.[cao]/'
+
+# of course, this completes with all current completions
+complete uncomplete 'p/*/X/'
+
+# complex completion for ln
+# In all cases, if you start typing, it completes with a filename
+# But if you complete without typing anything you get this:
+#   first argument:           adds "-s"
+#   arguments that follow -s: reminds you of which argument is expected
+# complete ln 'C/?/f/' 'p/1/(-s)/' 'n/-s/x:[first arg is path to original file]/' 'N/-s/x:[second arg is new link]/'
+complete ln		c/--/"(backup directory force no-dereference \
+    			interactive symbolic suffix verbose version-control \
+			help version)"/ \
+			c/-/"(b d F f i n S s V v -)"/ \
+			n/{-S,--suffix}/x:'<suffix>'/ \
+			n/{-V,--version-control}/"(t numbered nil existing \
+			never simple)"/ n/-/f/ N/-/x:'<link_name>'/ \
+			p/1/f/ p/2/x:'<link_name>'/
+
+# set a list of hosts, for use with rlogin
+foreach f ($HOME/.hosts /usr/local/etc/csh.hosts $HOME/.rhosts /etc/hosts /etc/hosts.equiv)
+if ( -r $f ) then
+if (! $?hosts ) then
+set hosts = (`grep -v -e "+" -e "^\#" $f | tr -s "[:blank:]" | awk '{print $3}'`)
+else
+set hosts = ($hosts `grep -v -e "+" -e "^\#" $f | tr -s "[:blank:]" | awk '{print $3}'`)
+endif # if (! $?hosts ) then 
+endif
+end
+# if ( -r $HOME/.netrc ) then
+# set f=`awk '/machine/ { print $2 }' < $HOME/.netrc` >& /dev/null
+# set hosts=($hosts $f)
+# endif
+if ( -r $HOME/.ssh/known_hosts ) then
+if (! $?hosts ) then
+set hosts = (`cat $HOME/.ssh/known_hosts | tr -s "[:blank:]" | awk -F, '{print $1}'`)
+else
+set hosts = ($hosts `cat $HOME/.ssh/known_hosts | tr -s "[:blank:]" | awk -F, '{print $1}'`)
+endif # if (! $?hosts ) then 
+endif
+
+complete rlogin 'p/1/$hosts/'
+complete rsh 'p/1/$hosts/' 'p/2/c/'
+complete ssh 'p/1/$hosts/' 'p/2/c/'
+# complete telnet p/1/\$hosts/ p/2/x:'<port>'/ n/*/n/
+
+
+# complete finger	c/*@/\$hosts/ n/*/u/@ 
+complete ping	p/1/\$hosts/
+complete traceroute	p/1/\$hosts/
+complete nslookup   p/1/x:'<host>'/ p/2/\$hosts/
+
+# rcp and scp allow arguments to be references to either local or remote
+# files.  It's impossible to complete remote files, but its useful to assume
+# that the remote file structure is similar to the local one.
+#
+# when you first start typing, it could be any of a username, hostname,
+# or filename.  But filename is probably the most useful case, so:
+#
+# complete arguments as regular filenames, with following exceptions
+# if "@" has been typed, complete with a hostname, and append a colon (:)
+# if ":" has been typed, complete with a filename relative to home directory
+# if ":/" has been typed, complete with a filename relative to root directory
+# 
+complete rcp "c,*:/,F:/," "c,*:,F:$HOME," 'c/*@/$hostlist/:/'
+complete scp "c,*:/,F:/," "c,*:,F:$HOME," 'c/*@/$hostlist/:/'
 # }}}1
 
 # vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
@@ -458,7 +631,7 @@ unset noding
 set watch=(5 any any)
 set who='%n has %a %l from %m at %t'
 # monitor time taken to run a commadn
-set time=300
+set time=(300 Elapsed:%E,User=%U,System=%S,CPU=%P.)
 # print exit status
 set printexitvalue
 # fixing a bug in tcsh
@@ -486,10 +659,16 @@ set colorcat
 setenv VISUAL 'gvim -f'
 setenv EDITOR 'gvim -f'
 setenv PAGER less
+setenv TERM 'xterm-256color'
 if (${?MANPATH}) then
-    setenv MANPATH ${MANPATH}:/tool/pandora/man:/tool/pandora64/man:/home/${USER}/scripts/share/man
+    setenv MANPATH ${MANPATH}:/tool/pandora/man:/tool/pandora64/man:/home/${USER}/scripts/share/man:/home/${USER}/scripts/.linuxbrew/share/man
 else
-    setenv MANPATH /tool/pandora/man:/tool/pandora64/man:/home/${USER}/scripts/share/man
+setenv MANPATH /tool/pandora/man:/tool/pandora64/man:/home/${USER}/scripts/share/man:/home/${USER}/scripts/.linuxbrew/share/man
+endif
+if (${?INFOPATH}) then
+    setenv INFOPATH ${INFOPATH}:/tool/pandora/info:/tool/pandora64/info:/home/${USER}/scripts/share/info:/home/${USER}/scripts/.linuxbrew/share/info
+else
+    setenv INFOPATH /tool/pandora/info:/tool/pandora64/info:/home/${USER}/scripts/share/info:/home/${USER}/scripts/.linuxbrew/share/info
 endif
 # }}} 1
 
@@ -521,6 +700,42 @@ endif
 # vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
 #+END_SRC
 *** prompt
+#+BEGIN_SRC sh :tangle ~/scripts/bin/cgb :shebang "#!/tool/pandora64/hdk-4.8.1/19/bin/perl" :eval no
+
+# git branch --no-color 2> /dev/null' | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /
+#git branch 2> /dev/null | grep '^*' | awk '{ print $2; }'
+# Bit if a hack to get the git status into the tcsh prompt.
+# Put this script in $HOME/bin/gitprompt.pl and add these lines to your .tcshrc
+#   if ( $?prompt && -x /usr/bin/git && -x $HOME/bin/gitprompt.pl ) then
+#       alias precmd $HOME/bin/gitprompt.pl
+#   endif
+
+my $prompt="";
+my $GITBR="";
+
+open IF, "git branch 2>/dev/null|" or exit;
+while(<IF>) {
+  if (/^\* (.*)/) {
+    $GITBR=$1;
+    last;
+  }
+}
+close IF;
+
+my $GITST=0;
+if ( $GITBR ne "" ) {
+  open IF, "git status --porcelain 2>/dev/null|" or exit;
+  while(<IF>) { $GITST++; }  # Count number of files to check in
+
+  $prompt .= "[git:${GITBR}";
+  $prompt .= "*" if ( ${GITST} > 0 );
+  $prompt .= "]\n";
+}
+
+print $prompt;
+
+#+END_SRC
+
 #+BEGIN_SRC tcsh :tangle ~/tangled_files/prompt :eval never
 # prompt {{{1
 # colors {{{2
@@ -535,8 +750,11 @@ set   white="%{\033[0;37m%}"
 set     end="%{\033[0m%}" # This is needed at the end... :(
 # }}}2
 set system=`hostname`
-unalias setprompt; alias setprompt 'set prompt="${green}%n${end}@${magenta}${system}${end}: ${red}%B%c03%b${end} :${cyan}%t${end}:[ \! ][%?]\n${end}%#"'
+unalias setprompt; alias setprompt 'set prompt="${green}%n${end}@${magenta}${system}${end}: ${red}%B%c03%b${end} :${cyan}%t${end}:[ \! ][%?] ${blue} ${end} \n${end}%#"'
 unalias cd; alias cd 'chdir \!* && setprompt'	# reset prompt after change dir
+if ( $?prompt && -x  /tool/pandora64/.package/git-2.4.6/bin/git && -x $HOME/scripts/bin/cgb ) then
+   alias precmd $HOME/scripts/bin/cgb
+ endif
 setprompt				# to set the initial prompt
 # unset red green yellow blue magenta cyan white end
 # }}}1
@@ -551,31 +769,29 @@ setprompt				# to set the initial prompt
 ########################################
 # the ":q" suffix in $path quotes the previous path names, so we can handle
 # path directories that contain spaces.
+setenv MODULESHOME /tool/pandora/.package/modulecmd-tcl-amd-1.06
+source $MODULESHOME/init/tcsh
+if (${?MODULEPATH}) then
+setenv MODULEPATH ${MODULEPATH}:/tool/amd-env/modules:/proj/verif_release_ro:/tool/pandora64/etc/modules:/tool/pandora/etc/modules:/tool/cbar/etc/`sitename`/modules:/proj/verif_release_ro/modules/current:/proj/verif/lib/modules:/proj/verif_release_ro/rubix/68/lib/cdl/bin/module
+else
+setenv MODULEPATH /tool/amd-env/modules:/proj/verif_release_ro:/tool/pandora64/etc/modules:/tool/pandora/etc/modules:/tool/cbar/etc/`sitename`/modules:/proj/verif_release_ro/modules/current:/proj/verif/lib/modules:/proj/verif_release_ro/rubix/68/lib/cdl/bin/module
+endif
+source ~/tangled_files/my_modules_load
 
 set path = ( \
   ~/scripts/bin/ \
   ~/scripts/downloaded/ \
   ~/scripts/usr/ \
-  /tool/pandora64/.package/vim-7.4-a/bin \
-  /tool/pandora64/.package/ctags-5.8/bin \
-  /tool/pandora64/.package/emacs-24.5-b/bin \
   /tool/pandora64/.package/cmake-3.3.2/bin \
   /tool/pandora64/.package/docbook2X-0.8.8/bin \
-  /tool/pandora64/.package/tkdiff-4.2/bin \
   /tool/pandora64/.package/glib-2.23.6/bin \
   /tool/pandora64/.package/gtk+-2.20.1/bin \
   /tool/pandora64/.package/cairo-1.12.16-b/bin \
   /tool/pandora64/.package/pango-1.27.1/bin \
   /tool/pandora64/.package/gcc-4.9.3/bin \
-  /tool/pandora64/.package/findutils-4.4.2/bin \
-  /tool/pandora64/.package/grep-2.22/bin \
-  /tool/pandora64/.package/less-451/bin/ \
-  /tool/pandora64/.package/openssh-5.0p1-hpn13v3/bin \
-  /tool/pandora64/.package/nomachine-4.1.29_5/bin \
-  /tool/pandora64/.package/git-2.4.6/bin \
   /tool/pandora64/.package/lua-5.1.4/bin \
   /tool/pandora64/.package/python-2.7/bin \
-  /tool/pandora/.package/vnc-4.1.2/bin \
+  /tool/pandora64/.package/perl-5.24.0/bin \
   $path:q \
   )
 
@@ -597,6 +813,27 @@ foreach d ( $path )
     endif
 end
 set path = ( $newPath )
+
+if ( ! $?MAGIC_SITENAME ) then
+  setenv MAGIC_SITENAME `/tool/pandora/bin/sitename`
+endif
+switch ( $MAGIC_SITENAME )
+case "MKDC":
+setenv P4PORT mkdcvp4p01.amd.com:1677; breaksw
+case "ATL":
+setenv P4PORT atlvp4p01.amd.com:1677; breaksw
+case "ORL":
+setenv P4PORT orlvp4p01.amd.com:1677; breaksw
+case "BDC":
+setenv P4PORT bdcp4p01.amd.com:1677; breaksw
+default: 
+echo "P4PORT not set"
+exit 2
+endsw
+
+setenv P4DIFF tkdiff
+
+
 # }}}1
 
 # vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
@@ -604,8 +841,8 @@ set path = ( $newPath )
 *** alias
 #+BEGIN_SRC tcsh :tangle ~/tangled_files/my_alias :eval never
 #  some default alias {{{1
-unalias xterm; alias xterm uxterm
-unalias ls; alias ls "ls-F --color=auto -h" #enable thousands grouping and colour
+unalias xterm; alias xterm 'uxterm'
+unalias ls; alias ls "ls-F --color=always -h" #enable thousands grouping and colour
 unalias ll; alias ll 'ls-F -ltr'
 unalias lla; alias lla 'ls-F -l -A'
 unalias flist; alias flist 'find \!:1 -type f >! files'
@@ -613,16 +850,44 @@ unalias flist; alias flist 'find \!:1 -type f >! files'
 unalias rm; alias rm "\rm -i -v"
 unalias cp; alias cp "\cp -i -v"
 unalias mv; alias mv "\mv -i -v"
-unalias grep; alias grep "\grep --color=auto"
+unalias grep; alias grep "\grep --color=always"
+unalias tree; alias tree "\tree -C"
+unalias less; alias less "\less -R"
 unalias df; alias df "\df -h"
-unalias g; alias g gvim
-unalias e; alias e 'emacs \!:* &'
-unalias lg; alias lg 'ls | grep -i '
+unalias lg; alias lg 'ls -1 | grep -i '
+
+# xterm related
+unalias kk; alias kk '\konsole &'
 unalias xx; alias xx '\uxterm -fg white -bg #262626 &'
+unalias xtg; alias xtg '\uxterm -fg green -bg black &'
+unalias xtgr; alias xtgr '\uxterm -fg gray  -bg black' 
+unalias xty; alias xty '\uxterm -fg yellow -bg black' 
+unalias xto; alias xto '\uxterm -fg orange -bg black' 
+unalias xtw; alias xtw '\uxterm -fg white -bg black' 
+unalias xtwh; alias xtwh '\uxterm -fg wheat -bg black' 
+unalias xtv; alias xtv '\uxterm -fg violet -bg black' 
+unalias xtb; alias xtb '\uxterm -fg black -bg gray' 
+
 unalias ssh; alias ssh 'ssh -X'
 unalias ss; alias ss 'source ~/tangled_files/my_proj_path'
 unalias v; alias v 'vim'
+unalias vi; alias vi 'vim'
+unalias g; alias g gvim
+unalias e; alias e 'emacs \!:* &'
+unalias p4o; alias p4o 'p4 opened'
+unalias p4d; alias p4d 'p4 diff \!:* &'
+unalias p4r; alias p4r 'p4 resolve'
+unalias p4e; alias p4e 'p4 edit'
+unalias p4shelved; alias p4shelved 'p4 changes -u $USER -s shelved'
+unalias p4have; alias p4have 'p4 changes -m1 -s submitted #have'
+unalias p4not; alias p4not "( find . -maxdepth 1 -type f -print0 | xargs -0 p4 fstat > /dev/null ) | & awk '{print "\$"1}'"
 unalias init; alias init 'source /proj/verif_release_ro/cbwa_initscript/current/cbwa_init.csh'
+
+unalias diskspace; alias diskspace 'cd /local_vol1_nobackup/user/ramondal/'
+unalias decoderb; alias decoderb '$STEM/src/test/tools/scripts/decode_registers.pl rbbm.dmp> ! decode_rbbm; vi decode_rbbm'
+set backslash_quote
+unalias hbo; alias hbo 'dj -c -v -e \'here_in_design.build_self("\!:*")\''
+
 # unalias module; alias module 'eval `$TCLSH $MODULESHOME/modulecmd.tcl tcsh !*`'
 # }}} 1
 
@@ -631,14 +896,140 @@ unalias init; alias init 'source /proj/verif_release_ro/cbwa_initscript/current/
 *** TODO (need to make it generic) project path and source 
 #+BEGIN_SRC tcsh :tangle ~/tangled_files/my_proj_path :eval never
 #  some default paths {{{1
-setenv P4PORT mkdcvp4p01.amd.com:1677
 source /proj/verif_release_ro/cbwa_initscript/current/cbwa_init.csh
 sleep 5
-bootenv -v greenland
+# source ~/tangled_files/my_modules_load
+# bootenv -v greenland
 # }}} 1
 
 # vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
 #+END_SRC
+
+*need to modify this section*
+
+#+BEGIN_SRC tcsh :tangle ~/tangled_files/project_selector :eval never
+#################################################################
+# ATI "project.tcshrc" file for SUN workstations.
+# This tcsh script is to be sourced by a user's .cshrc at the
+# time of login. This script executes three tasks:
+# 1. Read in the working project name.
+# 2. Set up Modules and load the appropriave env. file for the
+#    working project given.
+# 3. Set default settings for the user's environment.
+#
+# Revision by Tyrone Hallums August 8, 2001
+#################################################################
+
+
+#################################################################
+# Section for the user to specify project name. If the user's 
+# .cshrc source command doesn't have a project name specified
+# as an argument, then the user will be prompted to specify a
+# project name, stored in variable "AtiProjectName". If the 
+# project name is passed as an argument, then "AtiProjectName"
+# is set to that project name. From there, the correct
+# environment Modulefile is loaded.
+#
+
+# setenv BOOTENV_NOCLEAN 1	# mznoj this is dangerous!
+# setenv DJ_INIT '-v -c -m2 --save_cmd_logs'
+# echo -n "in gl_terminal.tcshrc"
+
+if (! $?ProjectName ) then
+  if ( $?prompt ) then
+    if ( ${#argv} == 0 ) then # no project selected. obtain one!
+      echo "Choose workspace 9a 9b 9c"
+      echo -n "Enter Workspace Name: "
+      setenv ProjectName $<   # read input
+      echo $ProjectName
+    else # argument supplied upon calling this script
+      setenv ProjectName $argv[1] # take the name supplied via argument
+      shift
+    endif
+
+    # ensure the correct project name was passed
+    set correctProjectName = 0
+    while ($correctProjectName == 0)
+      switch ("$ProjectName")
+        case "9a":
+        case "9b":
+        case "9c":
+	  set correctProjectName = 1
+	breaksw
+	
+	default: # incorrect project name. Enter a correct one!
+	  set correctProjectName = 0
+	  echo "*** Error! Incorrect workspace name supplied!"
+	  echo ""
+	  echo -n "Enter Workspace Name: "
+	  setenv ProjectName $<   # read input
+	breaksw
+      endsw
+    end # while loop
+  else
+    exit
+  endif
+endif
+
+######################################################
+# Set variables to know where to find project files
+######################################################
+setenv PLATFORM `uname -s`
+if ($?PLATFORM_TYPE == 0) then
+  if ($PLATFORM == SunOS) then
+    setenv PLATFORM_TYPE   unix
+    setenv PLATFORM_FLAVOR sun
+    setenv WTYPE SOL
+  else if ($PLATFORM == Linux) then
+    setenv PLATFORM_TYPE   unix
+    setenv PLATFORM_FLAVOR linux
+    setenv WTYPE LINUX
+  else
+    setenv PLATFORM_TYPE   win
+    setenv PLATFORM_FLAVOR win
+  endif
+endif
+#unsetenv PLATFORM
+
+if($ProjectName == 9a) then
+  chdir /local_vol1_nobackup/amakana/main
+  bootenv -v greenland
+  chdir /local_vol1_nobackup/amakana/main/src/verif/vgt/tb/tb_vgt
+endif
+
+if($ProjectName == 9b) then
+  chdir /local_vol1_nobackup/amakana/9tc
+  bootenv -v greenland
+  chdir /local_vol1_nobackup/amakana/9tc/src/verif/vgt/tb/tb_vgt
+
+endif
+
+if($ProjectName == 9c) then
+  chdir /local_vol1_nobackup/amakana/9c
+  bootenv
+  chdir /local_vol1_nobackup/amakana/9c/src/verif/vgt/tb/tb_vgt
+endif
+
+#alias make 'make "DV=dv -job rush"'
+alias dv 'dv -job rush'
+alias bdvi 'dv'
+limit descriptors unlimited
+
+setenv P4PORT 'lfperproxy.amd.com:1672'
+
+######################################################
+# special setup for no project
+######################################################
+if ($ProjectName == none ) then 
+        set history=400
+        set savehist=400
+        #set prompt="[%c2]%B$HOST%b\% "
+	unsetenv ProjectName
+
+endif
+
+#+END_SRC
+
 * get your .vim
 ** get the .vim repository
 #+BEGIN_SRC sh :dir ~/ :cache yes :results output silent
@@ -718,6 +1109,92 @@ ln -fs ~/.vim/tmux.conf ~/.tmux.conf
 #+END_SRC
 ** TODO install tmux scripts
 *** https://github.com/tmuxinator/tmuxinator
+* setup vnc xstartup
+** check the modline
+#+BEGIN_SRC sh :results output :dir ~/
+cvt 3820 1025 60
+#+END_SRC
+
+#+RESULTS:
+: # 3824x1025 59.94 Hz (CVT) hsync: 63.77 kHz; pclk: 325.50 MHz
+: Modeline "3824x1025_60.00"  325.50  3824 4064 4464 5104  1025 1028 1038 1064 -hsync +vsync
+
+**  set the defatult xstartup
+#+BEGIN_SRC tcsh :shebang "#!/bin/sh" :tangle ~/.vnc/xstartup_IT :eval never
+xrandr --rate 60 --newmode "3824x1025_60.00" 325.50  3824 4064 4464 5104  1025 1028 1038 1064 -hsync +vsync
+xrandr --addmode default "3824x1025_60.00"
+OS=`/tool/pandora/bin/whatos`
+
+#enabling copy-paste between VNC session and outside world
+vncconfig -nowin 2>&1 > /dev/null &
+
+# Uncomment these if we are trying to use Gnome on Solaris
+# LC_CTYPE="C"
+# export LC_CTYPE
+
+# Lets get our resources if they exist.
+if [ -f $HOME/.Xdefaults ]; then
+        xrdb -merge $HOME/.Xdefaults
+fi
+if [ -f $HOME/.Xresources ]; then
+        xrdb -merge $HOME/.Xresources
+fi
+if [ -f $HOME/.dt/sessions/home/dt.resources ]; then
+        xrdb -merge $HOME/.dt/sessions/home/dt.resources
+fi
+
+# Now let's make some decisions about what we want to run
+
+# Choose "gnome", "kde", "fluxbox", or "fvwm2"
+# WM="gnome"
+WM="kde"
+
+# Are we running Solaris 2.x?
+if echo $OS | grep -q "^so"; then
+        /usr/dt/bin/dtsession &
+else
+        # Are we running Linux?
+        if echo $OS | grep -q "^k2[46]_g2[12345]"; then
+            if [ "$WM" = "gnome" ]; then
+               /usr/bin/gnome-session &
+               if [ -x /usr/bin/sawfish ]; then
+                  /usr/bin/sawfish &
+               fi
+            elif [ "$WM" = "kde" ]; then
+               exec /usr/bin/startkde
+            elif [ "$WM" = "fluxbox" ]; then
+               exec /tool/pandora/bin/startfluxbox
+            elif [ "$WM" = "fvwm2" ]; then
+               exec /tool/pandora/bin/fvwm2
+            else
+               xterm -title "You didn't set WM to anything I understand" &
+            fi
+        else
+            # Just start an Xterm so we can figure out what to do
+            xterm -title "We didn't find a startup area for this OS" & 
+        fi
+fi
+
+# # Uncomment the following two lines for normal desktop:
+# unset SESSION_MANAGER
+# unset DBUS_SESSION_BUS_ADDRESS
+# 
+# exec /etc/X11/xinit/xinitrc
+# 
+# [ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+# [ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+# xsetroot -solid grey
+# vncconfig -iconic &xterm -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" & twm &
+
+# vim: foldmethod=marker:filetype=tcsh:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
+** create symlinks
+#+BEGIN_SRC sh :results output :dir ~/.vnc
+ln -fs xstartup_IT xstartup
+#+END_SRC
+
+#+RESULTS:
+
 * password less [[http://www.linuxproblem.org/art_9.html][ssh]]
 ** generate public/pricate keys
 #+BEGIN_SRC sh :results output silent :dir ~/ :var ID=(read-string "Enter file in which to save the key") :eval no
@@ -790,7 +1267,7 @@ rm -rfv src/auto/config.cache
 make
 #+END_SRC
 
-* install git command line completions
+* install git command line completions and man pages
 ** clone it to some temp dir
 #+BEGIN_SRC sh :results output :dir ~/
 git clone -v https://github.com/git/git.git /tmp/temp_git
@@ -821,11 +1298,30 @@ ln -fs ~/scripts/downloaded/git-completion.tcsh ~/.git-completion.tcsh
 
 ** make sure of adding to the end of ~/.cshrc
 ** delete the temp directory
+
 #+BEGIN_SRC sh :results output :dir ~/
 rm -rvf /tmp/temp_git
 #+END_SRC
 
 #+RESULTS:
+
+** get the man pages
+#+BEGIN_SRC sh :results output :dir /tmp
+# curl -O "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/git-core/git-manpages-`git --version | awk '{print $3}'`.tar.gz"
+git clone -v http://git.kernel.org/pub/scm/docs/man-pages/man-pages.git temp_git_man
+#+END_SRC
+
+** install the man pages
+#+BEGIN_SRC sh :results output :dir /tmp/temp_git_man
+mkdir -p /home/${USER}/scripts/share/man 
+cp -rfv man* /home/${USER}/scripts/share/man/.
+# tar xzv -C /home/${USER}/scripts/share/man -f git-manpages-`git --version | awk '{print $3}'`.tar.gz
+#+END_SRC
+
+** delete the temp directory
+#+BEGIN_SRC sh :results output :dir ~/
+rm -rvf /tmp/temp_git_man
+#+END_SRC
 
 * create git config
 ** git configuration
@@ -1325,6 +1821,14 @@ cp -vrf bin ~/scripts
 rm -rvf /tmp/temp_fzf
 #+END_SRC
 
+* install p4 utility script
+#+BEGIN_SRC sh :results output :dir ~/scripts/bin
+wget http://projects.joelinoff.com/p4tools/p4-whodunit.py
+chmod u+x p4-whodunit.py
+#+END_SRC
+
+#+RESULTS:
+
 * TODO install vnc
 ** extract the package
 #+BEGIN_SRC sh :results value :dir ~/test
@@ -1360,14 +1864,17 @@ cp -fv  Xresources.dark ~/.Xresources
 ** add custom settings
 
 #+BEGIN_SRC sh :results output :dir ~/ :eval no :tangle ~/tangled_files/xresources_append
+! ================== extra lines ================
+URxvt.intensityStyles: false
+xterm*termName: xterm-256color
 ! I like a LOT of scrollback...
-xterm*savelines: 16384
+xterm*saveLines: 10000000
 ! right hand side scrollbar...
 xterm*rightScrollBar: true
 xterm*ScrollBar: true
 
 ! stop output to terminal from jumping down to bottom of scroll again
-xterm*scrollTtyOutput: true
+xterm*scrollTtyOutput: false
 #+END_SRC
 
 *append it to xresources file*
@@ -1390,6 +1897,121 @@ rm -rvf /tmp/temp_xresources
 #+END_SRC
 
 #+RESULTS:
+#+begin_example
+removed `/tmp/temp_xresources/Xresources.light'
+removed `/tmp/temp_xresources/.git/info/exclude'
+removed directory: `/tmp/temp_xresources/.git/info'
+removed `/tmp/temp_xresources/.git/hooks/commit-msg.sample'
+removed `/tmp/temp_xresources/.git/hooks/pre-push.sample'
+removed `/tmp/temp_xresources/.git/hooks/update.sample'
+removed `/tmp/temp_xresources/.git/hooks/post-update.sample'
+removed `/tmp/temp_xresources/.git/hooks/applypatch-msg.sample'
+removed `/tmp/temp_xresources/.git/hooks/pre-commit.sample'
+removed `/tmp/temp_xresources/.git/hooks/pre-applypatch.sample'
+removed `/tmp/temp_xresources/.git/hooks/pre-rebase.sample'
+removed `/tmp/temp_xresources/.git/hooks/prepare-commit-msg.sample'
+removed directory: `/tmp/temp_xresources/.git/hooks'
+removed `/tmp/temp_xresources/.git/HEAD'
+removed `/tmp/temp_xresources/.git/objects/6d/b1ab8089bcda22887a41d076a235f420ad5dd4'
+removed directory: `/tmp/temp_xresources/.git/objects/6d'
+removed `/tmp/temp_xresources/.git/objects/4b/825dc642cb6eb9a060e54bf8d69288fbee4904'
+removed directory: `/tmp/temp_xresources/.git/objects/4b'
+removed `/tmp/temp_xresources/.git/objects/3b/0881aab4d5ecf303c311d4a76b0a9691b77915'
+removed directory: `/tmp/temp_xresources/.git/objects/3b'
+removed `/tmp/temp_xresources/.git/objects/cb/4cd757379e725d22cbff7df66dd66c3d102c4a'
+removed directory: `/tmp/temp_xresources/.git/objects/cb'
+removed `/tmp/temp_xresources/.git/objects/76/642b624bdc44c9e20600a9aa01342f4ff61837'
+removed directory: `/tmp/temp_xresources/.git/objects/76'
+removed `/tmp/temp_xresources/.git/objects/66/fcfb6061507b404e6a1205a50ef12bdd9b6942'
+removed directory: `/tmp/temp_xresources/.git/objects/66'
+removed `/tmp/temp_xresources/.git/objects/69/29fd2d32e0f87895ae34ddec83c947e9b51b4b'
+removed directory: `/tmp/temp_xresources/.git/objects/69'
+removed `/tmp/temp_xresources/.git/objects/e0/5de54f755a378034696b3440abed1a05738771'
+removed directory: `/tmp/temp_xresources/.git/objects/e0'
+removed `/tmp/temp_xresources/.git/objects/c2/e1f7a85fbdb40d64b4d54ad28ae38e7996e3b0'
+removed directory: `/tmp/temp_xresources/.git/objects/c2'
+removed `/tmp/temp_xresources/.git/objects/bc/7cc237d70f83d299d38a1f63d75da0ea3ea154'
+removed directory: `/tmp/temp_xresources/.git/objects/bc'
+removed `/tmp/temp_xresources/.git/objects/68/2a6d4eb19f7cae1feea8565a2aa72008cdd79a'
+removed directory: `/tmp/temp_xresources/.git/objects/68'
+removed `/tmp/temp_xresources/.git/objects/12/e264a58294059155a85acbcc6d13d3a78ee5dc'
+removed directory: `/tmp/temp_xresources/.git/objects/12'
+removed directory: `/tmp/temp_xresources/.git/objects/pack'
+removed directory: `/tmp/temp_xresources/.git/objects/info'
+removed `/tmp/temp_xresources/.git/objects/f1/691c2eb5f1cfe1a5b1bc23bed8c9dfe250ecf3'
+removed directory: `/tmp/temp_xresources/.git/objects/f1'
+removed `/tmp/temp_xresources/.git/objects/ee/08d7e44f15108ef5359550399dad55955b56ca'
+removed directory: `/tmp/temp_xresources/.git/objects/ee'
+removed `/tmp/temp_xresources/.git/objects/5d/1a212e2fd9cdc2b678e3be56cf776b2f16cfe2'
+removed directory: `/tmp/temp_xresources/.git/objects/5d'
+removed `/tmp/temp_xresources/.git/objects/ca/003f4acd4970cb334e62dc6846d1c98a6be4d1'
+removed `/tmp/temp_xresources/.git/objects/ca/2ebad2addc74f6f340c9efdf9ab8250e7d91f0'
+removed directory: `/tmp/temp_xresources/.git/objects/ca'
+removed `/tmp/temp_xresources/.git/objects/75/f4497e5723cb6cf72875fac63dc5dbe598a3de'
+removed directory: `/tmp/temp_xresources/.git/objects/75'
+removed `/tmp/temp_xresources/.git/objects/26/3a23ab04168665df65bcb5d04d131475f3e2bc'
+removed directory: `/tmp/temp_xresources/.git/objects/26'
+removed `/tmp/temp_xresources/.git/objects/5b/2e4f8a653c6b59efae2ecc36adc5e3421ac0aa'
+removed directory: `/tmp/temp_xresources/.git/objects/5b'
+removed `/tmp/temp_xresources/.git/objects/49/e46c424e49404a470cf70e984b0069035aca6b'
+removed directory: `/tmp/temp_xresources/.git/objects/49'
+removed `/tmp/temp_xresources/.git/objects/0c/426297b558965d462f0e45f87eb16a10586c53'
+removed directory: `/tmp/temp_xresources/.git/objects/0c'
+removed `/tmp/temp_xresources/.git/objects/1e/a4140cca467ac6b8001a55140e0a9d3692a230'
+removed directory: `/tmp/temp_xresources/.git/objects/1e'
+removed `/tmp/temp_xresources/.git/objects/02/3d67adc733ace4979ff4735f7b2ca7c0aaa9f5'
+removed `/tmp/temp_xresources/.git/objects/02/5ceddbddf55f2eb4ab40b05889148aab9699fc'
+removed directory: `/tmp/temp_xresources/.git/objects/02'
+removed `/tmp/temp_xresources/.git/objects/53/3219bad68f060111601a7f2b4bbf05dbbcc6a9'
+removed directory: `/tmp/temp_xresources/.git/objects/53'
+removed `/tmp/temp_xresources/.git/objects/7f/82895ee5223d93dfe15788d406d8aa891d2689'
+removed directory: `/tmp/temp_xresources/.git/objects/7f'
+removed `/tmp/temp_xresources/.git/objects/9f/9f133848273868b9c4c76dda8cf82c2bdd35d9'
+removed directory: `/tmp/temp_xresources/.git/objects/9f'
+removed `/tmp/temp_xresources/.git/objects/9d/11322c6c081f8ba4f3b441d833d5617e08d866'
+removed directory: `/tmp/temp_xresources/.git/objects/9d'
+removed `/tmp/temp_xresources/.git/objects/20/6be496191f52fe0e708574dd0820e97975467b'
+removed directory: `/tmp/temp_xresources/.git/objects/20'
+removed `/tmp/temp_xresources/.git/objects/05/9748b9ec668b757bbefd3dbc0bf25a9f348bcb'
+removed directory: `/tmp/temp_xresources/.git/objects/05'
+removed `/tmp/temp_xresources/.git/objects/f4/363c4c85bf21de81522d7f37a7b062329f7611'
+removed `/tmp/temp_xresources/.git/objects/f4/a24b09bd61d646756b218afe4f0b3d35438eed'
+removed directory: `/tmp/temp_xresources/.git/objects/f4'
+removed `/tmp/temp_xresources/.git/objects/2e/512cf3c01e0f134c4ce3075e5b3e41b922dbbf'
+removed directory: `/tmp/temp_xresources/.git/objects/2e'
+removed `/tmp/temp_xresources/.git/objects/fa/36bb11226d4387cc907414cb24ac2ecc7b57a7'
+removed directory: `/tmp/temp_xresources/.git/objects/fa'
+removed `/tmp/temp_xresources/.git/objects/bf/778f2b0669e26898248802ec1c2fd511b50124'
+removed directory: `/tmp/temp_xresources/.git/objects/bf'
+removed `/tmp/temp_xresources/.git/objects/67/eeb935429a5cfe7ae220ce425160b6d2f81ad3'
+removed directory: `/tmp/temp_xresources/.git/objects/67'
+removed directory: `/tmp/temp_xresources/.git/objects'
+removed directory: `/tmp/temp_xresources/.git/branches'
+removed `/tmp/temp_xresources/.git/index'
+removed `/tmp/temp_xresources/.git/refs/remotes/origin/HEAD'
+removed directory: `/tmp/temp_xresources/.git/refs/remotes/origin'
+removed directory: `/tmp/temp_xresources/.git/refs/remotes'
+removed `/tmp/temp_xresources/.git/refs/heads/master'
+removed directory: `/tmp/temp_xresources/.git/refs/heads'
+removed directory: `/tmp/temp_xresources/.git/refs/tags'
+removed directory: `/tmp/temp_xresources/.git/refs'
+removed `/tmp/temp_xresources/.git/config'
+removed `/tmp/temp_xresources/.git/packed-refs'
+removed `/tmp/temp_xresources/.git/description'
+removed `/tmp/temp_xresources/.git/logs/HEAD'
+removed `/tmp/temp_xresources/.git/logs/refs/remotes/origin/HEAD'
+removed directory: `/tmp/temp_xresources/.git/logs/refs/remotes/origin'
+removed directory: `/tmp/temp_xresources/.git/logs/refs/remotes'
+removed `/tmp/temp_xresources/.git/logs/refs/heads/master'
+removed directory: `/tmp/temp_xresources/.git/logs/refs/heads'
+removed directory: `/tmp/temp_xresources/.git/logs/refs'
+removed directory: `/tmp/temp_xresources/.git/logs'
+removed directory: `/tmp/temp_xresources/.git'
+removed `/tmp/temp_xresources/LICENSE'
+removed `/tmp/temp_xresources/Xresources.dark'
+removed `/tmp/temp_xresources/README.md'
+removed directory: `/tmp/temp_xresources'
+#+end_example
 
 * create perpetual ssh
 ** create multiplexing
@@ -1415,19 +2037,212 @@ chmod 600 config
 
 * Project related
 ** bootenv
+#+BEGIN_SRC tcsh :tangle ~/tangled_files/my_modules_load :eval never
+# path variables that i need even after bootenv
+
+# module load emacs/24.5-b
+# module load vim/7.4-a
+# module load openssh/5.0p1-hpn13v3
+# module load xterm/324
+# module load tkdiff/4.2
+# module load bash/4.3.30
+# module load git/2.4.6
+# module load tcsh/6.18.01
+# module load ctags/5.8
+# module load findutils/4.4.2
+# module load grep/2.22
+# module load less/451
+# module load nomachine/4.1.29_5
+# module load vnc/4.1.2
+# module load llvm/3.8.0-gcc481
+# module load python/3.5.1
+# module load python/3.3.2
+# module load python/2.7.11
+# module load python/2.6.1
+# module load ruby/2.3.0
+# module load perl/5.24.0
+# module load perl/5.22.1
+# module load go/102210
+# module load tree/1.5.0
+# module load libreoffice/4.1.3.2
+# module load tmux/2.2
+# 
+# module load abiword/2.8.6
+# module load ack/1.84
+# module load acrobat/9.4
+# module load bc/1.06-a
+# module load binutils/2.24
+# module load byobu/5.97
+# module load bzip2/1.0.1
+# module load colordiff/1.0.9
+# module load coreutils/8.22
+# module load cscope/15.8
+# module load curl/7.20.0
+# module load dia/0.97
+# module load ddd/3.3.12
+# module load diffutils/3.3
+# module load doxygen/1.8.7
+# module load eclipse/4.4
+# module load file/5.04
+# module load fluxbox/1.3.7
+# module load foxit/1.1
+# module load fvwm/2.4.19
+# module load gawk/4.1.0
+# module load gdb/7.8.1
+# module load ghostscript/8.13-a
+# module load ghostview/3.6.9
+# module load gimp/2.8.10
+# module load gnome-desktop/2.7.4
+# module load graphviz/2.38.0
+# module load gzip/1.6
+# module load htop/0.9
+# module load icewm/1.3.17
+# module load imagemagick/6.9.1-2
+# module load ispell/3.1
+# module load java/1.6
+# module load jdk/1.5.0_05
+# module load j2sdk/1.8.0_66
+# module load kdiff3/0.9.98
+# module load kile/2.0
+# module load komodo/edit-4.0
+# module load meld/3.14.1
+# module load multi-gnome-terminal/1.6.2-a
+# module load multitail/5.2.2
+# module load mutt/1.5.16-d
+# module load mc/4.6.1
+# module load mercurial/3.7.3
+# module load nano/2.3.2
+# module load nedit/5.5
+# module load nxclient/5.1.9_6
+# module load octave/4.0.2
+# module load parallel/20150922
+# module load patch/2.7.1
+# module load perforce/2011.1
+# module load rdesktop/1.6.0
+# module load rsync/3.1.2
+# module load rxvt/2.6.4
+# module load screen/4.2.1
+# module load sed/4.2.2
+# module load sitename/1.6
+# module load tar/1.27
+# module load terminator/0.98
+# module load texinfo/4.13
+# module load texlive/20100924
+# module load the_silver_searcher/0.24.1
+# # module load tigervnc/1.4.3
+# # module load tightvnc/1.3.9
+# module load time/1.7
+# module load unrar/3.6.8
+# module load unzip/5.50
+# module load mplayer/1.0rc2
+# module load vlc/2.0.3
+# module load wget/1.17
+# module load windowmaker/0.92.0
+# module load wireshark/1.0.0
+# module load xpdf/3.02
+# 
+# module load hdk-4.8.1/19
+# module load uvmkit-1.2/3
+
+module load emacs/24.5
+module load vim/7.4-a
+module load openssh/5.0p1-hpn13v3
+module load xterm/324
+module load tkdiff/4.2
+module load bash/4.3.30
+module load git/2.6.3
+module load tcsh/6.18.01
+module load ctags/5.8
+module load findutils/4.4.2
+module load grep/2.22
+module load less/451
+# module load vnc/4.1.2
+module load llvm/3.8.0-gcc481
+module load python/3.5.1
+module load python/3.3.2
+module load python/2.7.11
+module load python/2.6.1
+module load ruby/2.3.0
+module load perl/5.24.0
+module load perl/5.22.1
+module load go/1.0.2
+module load tree/1.5.0
+module load libreoffice/4.1.3.2
+module load tmux/2.2
+
+module load acrobat/9.4
+module load bc/1.06-a
+module load binutils/2.24
+module load byobu/5.97
+module load bzip2/1.0.6
+module load colordiff/1.0.9
+module load coreutils/8.22
+module load cscope/15.8
+module load curl/7.20.0
+module load ddd/3.3.12
+module load diffutils/3.3
+module load doxygen/1.8.7
+module load eclipse/4.4
+module load file/3.41
+module load fluxbox/1.3.7
+module load fvwm/2.4.19
+module load gawk/4.1.0
+module load gdb/7.8.1
+module load ghostscript/8.13-a
+module load gimp/2.8.0
+module load graphviz/2.38.0
+module load gzip/1.6
+module load htop/2.0.1
+module load icewm/1.3.8
+module load imagemagick/6.9.1-2
+module load java/1.6
+module load j2sdk/1.8.0_66
+module load kdiff3/0.9.98
+module load meld/3.12.3-b
+module load mutt/1.6.0
+module load mercurial/3.7.3
+module load nano/2.3.2
+module load nedit/5.5
+module load nxclient/5.1.9_6
+module load octave/4.0.2
+module load parallel/20150922
+module load perforce/2011.1
+module load rdesktop/1.6.0
+module load rsync/3.1.2
+module load screen/4.2.1
+module load sed/4.2.2
+module load sitename/1.6
+module load tar/1.27
+module load terminator/0.98
+module load texlive/20140620
+module load the_silver_searcher/0.24.1
+# module load kde/455
+module load tigervnc/1.4.3
+# module load tightvnc/1.3.10
+module load time/1.7
+module load mplayer/1.3.0
+module load vlc/0.9.9
+module load wget/1.17
+module load xpdf/3.04
+
+module load hdk-4.8.1/19
+module load uvmkit-1.2/3
+
+# vim: foldmethod=marker:filetype=tcsh:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
+
 #+BEGIN_SRC tcsh :tangle ~/.bootenv.modulefile :eval never
 
 # add some output so I remember that this file is being loaded{{{1
 puts stderr "Loading ~/.bootenv.modulefile"
 
-# path variables that i need even after bootenv
-# setup emacs and vim
-module load emacs/24.5-b
-module load vim/7.4-a
+source ~/tangled_files/my_modules_load
+
 
 # put my own bin dir on the path - use append-path here, so no danger of overriding standard tools
 append-path PATH /home/ramondal/scripts/usr 
 append-path PATH /home/ramondal/scripts/downloaded
+append-path PATH /home/ramondal/scripts/bin
 
 ######################################################
 # bootenv related
@@ -1471,4 +2286,20 @@ _-DDEBUG_ is for dumping waves
 go
 dj -e 'run_test "vgt vgtdir_simple_dx9"' -DDEBUG -DRUN_DV=ONLY -l some.log 
 #+END_SRC
+
+* TODO install linuxbrew
+** git clone
+#+BEGIN_SRC sh :results output :dir ~/scripts
+git clone https://github.com/Linuxbrew/brew.git .linuxbrew
+#+END_SRC
+
+#+RESULTS:
+
+** create links
+#+BEGIN_SRC sh :results output :dir ~/
+ln -fs ~/scripts/.linuxbrew/bin/* ~/scripts/bin/
+#+END_SRC
+
+#+RESULTS:
+
 

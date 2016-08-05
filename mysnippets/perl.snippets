@@ -1,60 +1,82 @@
-snippet pod "insert boilerplate perl pod code" bws
+snippet perlheader "insert boilerplate perl pod code" bws
 ################################################################################
+use strict;
+use warnings;
 use FindBin qw(\$Bin);
 BEGIN{
 push(@INC, $Bin);
 }
-use strict;
-use warnings;
-no autovivification;
 use Cwd;
 use Cwd qw(abs_path);
 my $dir = getcwd;
 use FindBin qw(\$Script);
-use Pod::Usage;
+use Clone qw(clone);
 use Term::ANSIColor qw(:constants);
 use Getopt::Long;
-use v5.16;
+use Pod::Usage;
 use YAML;
+use Data::Dumper;
+use Perl::Critic;
+use Carp;
+use English qw(-no_match_vars);
+use Data::Types qw(:all);
+use namespace::autoclean;
+no autovivification;
+
+use v5.18;
+
+sub run_critic{
+  my $file   = shift;
+  my $critic = Perl::Critic->new();
+  my @violations = $critic->critique($file);
+  if(scalar @violations){
+    print @violations;
+    confess "the script modifications did not pass the Perl::Critic test\n";
+  }
+}
 
 my \$debug = 0;
 my \$in_file;
 
+sub options{
+
 # parse the arguments
 my \$test = GetOptions (
-        'help'          => sub{pod2usage({-msg => 'PRINTING HELP .....', -verbose => 3, -output => \*STDERR})},
-        'h|?'           => sub{pod2usage({-msg => 'PRINTING HELP .....', -verbose => 3, -output => \*STDERR})},
+        'help'          => sub{pod2usage({-exitval => 0, -msg => 'PRINTING HELP .....', -verbose => 3, -output => \*STDERR})},
+        'h'           => sub{pod2usage({-exitval => 0, -msg => 'PRINTING HELP .....', -verbose => 3, -output => \*STDERR})},
         'usage|u'       => sub{pod2usage(2)},
-        'name|n'        => sub{pod2usage({-msg => 'PRINTING SCRIPT DEATILS .....', -verbose => 99, -sections => [qw(NAME SYNOPSYS)], -output => \*STDERR})},
-        'copyright|c'   => sub{pod2usage({-msg => 'PRINTING COPYRIGHT INFO .....', -verbose => 99, -sections => "Copyright Information", -output => \*STDERR})},
-        'last|l'        => sub{pod2usage({-msg => 'PRINTING LAST CHECKIN INFO .....', -verbose => 99, -sections => "CHECKIN INFORMATION", -output => \*STDERR})},
+        'name|n'        => sub{pod2usage({-exitval => 0, -msg => 'PRINTING SCRIPT DEATILS .....', -verbose => 99, -sections => [qw(NAME SYNOPSYS)], -output => \*STDERR})},
+        'copyright|c'   => sub{pod2usage({-exitval => 0, -msg => 'PRINTING COPYRIGHT INFO .....', -verbose => 99, -sections => "Copyright Information", -output => \*STDERR})},
         'debug|d+'      => \\\$debug,
         'in=s{1}'       => \\\$in_file,
         '<>'            => sub{pod2usage({-msg => "Unknown Argument(s): " . join(' ', @_) ." " . join(" ", @ARGV)})},
-        ) || pod2usage({-verbose => 0, -output => \*STDERR});
+        ) or pod2usage({-verbose => 0, -output => \*STDERR});
 
 pod2usage({-msg => "-in is a mandatory argument\n", -verbose => 99, -sections => [qw(USAGE)], -output => \*STDERR}) if (!defined \$in_file);
 
-my \$body=<<'PRINT_STRING';
-// vim: filetype=verilog_systemverilog:sw=2:expandtab:norl:
-PRINT_STRING
+}
 
-print STDOUT \$body;
+run_critic($PROGRAM_NAME);
+options();
 
+1;
 __END__
+
 =head1 NAME
 
 ${1:`!p snip.rv = snip.fn`}
 
 =head1 SYNOPSYS
 
-DESCRIPTION: ${2:enter short description}
+=head2 DESCRIPTION
+  
+  ${2:enter short description}
 
  REQUIREMENTS: ---
          BUGS: ---
         NOTES: ---
        AUTHOR: ${3:`whoami`}
- ORGANIZATION: ${4:NVIDIA}
+ ORGANIZATION: ${4:NVIDIA/AMD}
       VERSION: 1.0
       CREATED: ${5:${6:`date +%m`}.${7:`date +%d`}}.`date +%Y`
      REVISION: ---
@@ -82,7 +104,6 @@ rights reserved under the Copyright Laws of the United States.
 
 ----------------------------------------------------------------------
 
-
 =head1 USAGE
 
 perl $1 [options]
@@ -93,10 +114,21 @@ perl $1 [options]
  --usage|u          : prints usage
  --name|n           : prints the name of the script
  --copyright|c      : prints the name of the script
- --last|l           : prints the last ckeckin information
  --debug|d          : specify the debug level
                       -d is counted to determine the verbosity level
  --in*              : input file
+
+=over 8
+
+=item B<-help>
+
+  Print a brief help message and exits.
+
+=item B<-man>
+
+  Prints the manual page and exits.
+
+=back
 
 =cut
 endsnippet
