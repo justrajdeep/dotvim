@@ -687,7 +687,8 @@ if use_neobundle
     " NeoBundle 'MaxSt/FlatColor',                               { 'directory' : 'color_FlatColor'}
     " NeoBundle 'DrSpatula/vim-buddy',                           { 'directory' : 'color_buddy'}
     " NeoBundle 'vim-scripts/BackgroundColor.vim',               { 'directory' : 'BackgroundColor'}
-    " NeoBundle 'zenorocha/dracula-theme',                       { 'directory' : 'color_dracula', 'rtp' : 'vim/'}
+    " NeoBundle 'zenorocha/dracula-theme',                       { 'directory' : 'color_dracula_theme', 'rtp' : 'vim/'}
+    " NeoBundle 'dracula/vim',                                   { 'directory' : 'color_dracula'}
     " NeoBundle 'romainl/vim-dichromatic',                       { 'directory' : 'color_dichromatic'}
     " NeoBundle 'christophermca/meta5',                          { 'directory' : 'color_meta5'}
     " NeoBundle 'Wutzara/vim-materialtheme',                     { 'directory' : 'color_materialtheme'}

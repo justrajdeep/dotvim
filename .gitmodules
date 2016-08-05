@@ -391,9 +391,6 @@
 [submodule "bundle/TaskList"]
 	path = bundle/TaskList
 	url = https://github.com/vim-scripts/TaskList.vim.git
-[submodule "bundle/bufkill"]
-	path = bundle/bufkill
-	url = https://github.com/mattdbridges/bufkill.vim.git
 [submodule "fonts/consolas-powerline"]
 	path = fonts/consolas-powerline
 	url = https://github.com/eugeneching/consolas-powerline-vim.git
@@ -562,9 +559,6 @@
 [submodule "bundle/vimShell"]
 	path = bundle/vimShell
 	url = https://github.com/Shougo/vimshell.vim.git
-[submodule "bundle/togglelist"]
-	path = bundle/togglelist
-	url = https://github.com/kshenoy/vim-togglelist.git
 [submodule "bundle/promptline"]
 	path = bundle/promptline
 	url = https://github.com/edkolev/promptline.vim.git
@@ -592,9 +586,6 @@
 [submodule "bundle/crunch"]
 	path = bundle/crunch
 	url = https://github.com/arecarn/crunch.git
-[submodule "bundle/color_blayden"]
-	path = bundle/color_blayden
-	url = https://github.com/IntuitiveWebSolutions/vim-colors-blayden.git
 [submodule "bundle/color_lavalamp"]
 	path = bundle/color_lavalamp
 	url = https://github.com/jasonlong/lavalamp.git
@@ -607,9 +598,6 @@
 [submodule "bundle/colorv"]
 	path = bundle/colorv
 	url = https://github.com/Rykka/colorv.vim.git
-[submodule "bundle/togglecursor"]
-	path = bundle/togglecursor
-	url = https://github.com/jszakmeister/vim-togglecursor.git
 [submodule "bundle/ag"]
 	path = bundle/ag
 	url = https://github.com/rking/ag.vim.git
@@ -712,9 +700,6 @@
 [submodule "bundle/fatrat"]
 	path = bundle/fatrat
 	url = https://github.com/jmcantrell/vim-fatrat.git
-[submodule "bundle/file-line"]
-	path = bundle/file-line
-	url = https://github.com/blueyed/file-line.git
 [submodule "bundle/fontzoom"]
 	path = bundle/fontzoom
 	url = https://github.com/thinca/vim-fontzoom.git
