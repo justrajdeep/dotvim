@@ -21,7 +21,7 @@
 
 ** clone [[https://github.com/syl20bnr/spacemacs][Spacemacs]] into it
 #+BEGIN_SRC sh :dir ~/
-git -v clone https://github.com/syl20bnr/spacemacs .emacs.d
+git clone -v https://github.com/syl20bnr/spacemacs .emacs.d
 #+END_SRC
 ** Need to clear up elpa
 
@@ -113,8 +113,8 @@ values."
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
-   dotspacemacs-elpa-https t
-   dotspacemacs-melpa-https t
+   dotspacemacs-elpa-https nil
+   dotspacemacs-melpa-https nil
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    dotspacemacs-elpa-timeout 5
    ;; If non nil then spacemacs will check for updates at startup
@@ -599,6 +599,12 @@ complete ping	p/1/\$hosts/
 complete traceroute	p/1/\$hosts/
 complete nslookup   p/1/x:'<host>'/ p/2/\$hosts/
 
+set perlmodules = ("perlmodlib" "perllocal")
+# set perlmodules = ($perlmodules `pmall | awk '{print $1}'`)
+# echo $perlmodules
+complete perldoc p/1/\$perlmodules/
+# unset perlmodules
+
 # rcp and scp allow arguments to be references to either local or remote
 # files.  It's impossible to complete remote files, but its useful to assume
 # that the remote file structure is similar to the local one.
@@ -838,7 +844,7 @@ setenv P4DIFF tkdiff
 
 # vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
 #+END_SRC
-*** alias
+*** TODO alias
 #+BEGIN_SRC tcsh :tangle ~/tangled_files/my_alias :eval never
 #  some default alias {{{1
 unalias xterm; alias xterm 'uxterm'
@@ -854,7 +860,7 @@ unalias grep; alias grep "\grep --color=always"
 unalias tree; alias tree "\tree -C"
 unalias less; alias less "\less -R"
 unalias df; alias df "\df -h"
-unalias lg; alias lg 'ls -1 | grep -i '
+unalias lg; alias lg '\ls -1 | \grep -i '
 
 # xterm related
 unalias kk; alias kk '\konsole &'
@@ -871,13 +877,14 @@ unalias xtb; alias xtb '\uxterm -fg black -bg gray'
 unalias ssh; alias ssh 'ssh -X'
 unalias ss; alias ss 'source ~/tangled_files/my_proj_path'
 unalias v; alias v 'vim'
-unalias vi; alias vi 'vim'
+unalias vi; alias vi 'vim -u NONE'
 unalias g; alias g gvim
 unalias e; alias e 'emacs \!:* &'
 unalias p4o; alias p4o 'p4 opened'
 unalias p4d; alias p4d 'p4 diff \!:* &'
 unalias p4r; alias p4r 'p4 resolve'
 unalias p4e; alias p4e 'p4 edit'
+unalias p4a; alias p4a 'p4 add'
 unalias p4shelved; alias p4shelved 'p4 changes -u $USER -s shelved'
 unalias p4have; alias p4have 'p4 changes -m1 -s submitted #have'
 unalias p4not; alias p4not "( find . -maxdepth 1 -type f -print0 | xargs -0 p4 fstat > /dev/null ) | & awk '{print "\$"1}'"
@@ -1146,8 +1153,9 @@ fi
 # Now let's make some decisions about what we want to run
 
 # Choose "gnome", "kde", "fluxbox", or "fvwm2"
-# WM="gnome"
 WM="kde"
+# WM="fvwm2"
+# WM="fluxbox"
 
 # Are we running Solaris 2.x?
 if echo $OS | grep -q "^so"; then
@@ -1156,16 +1164,18 @@ else
         # Are we running Linux?
         if echo $OS | grep -q "^k2[46]_g2[12345]"; then
             if [ "$WM" = "gnome" ]; then
-               /usr/bin/gnome-session &
+               gnome-session &
                if [ -x /usr/bin/sawfish ]; then
                   /usr/bin/sawfish &
                fi
             elif [ "$WM" = "kde" ]; then
-               exec /usr/bin/startkde
+               exec startkde
             elif [ "$WM" = "fluxbox" ]; then
-               exec /tool/pandora/bin/startfluxbox
+               exec fluxbox
             elif [ "$WM" = "fvwm2" ]; then
-               exec /tool/pandora/bin/fvwm2
+               exec fvwm2
+            elif [ "$WM" = "icewm" ]; then
+               exec icewm
             else
                xterm -title "You didn't set WM to anything I understand" &
             fi
@@ -1189,12 +1199,761 @@ fi
 # vim: foldmethod=marker:filetype=tcsh:sw=2:tw=0:expandtab:norl:foldmethod=marker:
 #+END_SRC
 ** create symlinks
+
 #+BEGIN_SRC sh :results output :dir ~/.vnc
 ln -fs xstartup_IT xstartup
 #+END_SRC
 
 #+RESULTS:
 
+* fvwm settings
+#+BEGIN_SRC fvwmrc :tangle ~/.fvwm2rc :eval never
+###########
+#  ____________________________
+# (   _________________________)
+#  ) (__  _  _  _    _  
+# (   __)( \/ )( \/\/ )/\/\
+#  ) (    \  /  \    //    \
+# (___)    \/    \/\/(_/\/\_) 2.6.2 
+#
+# fvwm2rc resource file
+#
+#######################
+#
+#
+#####
+# Set Environment variables
+###########
+SetEnv fvwm_home             $[HOME]/.fvwm
+SetEnv fvwm_img              $[fvwm_home]/images
+SetEnv fvwm_icon             /usr/share/icons/hicolor
+SetEnv fvwm_pixmaps          /usr/share/pixmaps 
+SetEnv fvwm_scrpt            $[fvwm_home]/scripts
+SetEnv fvwm_wallpapers       $[fvwm_img]/wallpaper
+SetEnv fvwm_icon_size        96
+
+#####
+# Set the image path
+###########
+ImagePath                    $[fvwm_icon]/32x32/apps:$[fvwm_icon]/32x32/apps;.png:$[fvwm_home]/icons:$[fvwm_pixmaps]:$[fvwm_home]/icons/mini:/opt/NX/share/icons/32x32:+
+
+######
+# Shell commands 
+#################
+Test (f /bin/bash) ExecUseShell /bin/bash
+
+#####
+# Virtual Desktops
+###########
+DesktopSize                  1x1
+DesktopName                  0    Aleph
+DesktopName                  1    Lamed
+DesktopName                  2    Hey
+DesktopName                  3    Yod 
+DesktopName                  4    Mem 
+EdgeScroll                   100  100
+EdgeThickness                0
+EdgeResistance               2000
+Style * EdgeMoveDelay        1500
+Style * EdgeMoveResistance   1500
+
+######
+# Use an arrow rather than the `X` cursor on the root window.
+#################
+CursorStyle                  root top_left_arrow
+
+#####
+# Mouse and Focus Behavior
+###########
+ClickTime                    350
+MoveThreshold                3
+Style                        * ClickToFocus
+
+#--------------------------- Left Rite Top Bot
+EwmhBaseStruts               1    114  1   25
+IgnoreModifiers              L25
+
+# ---------------------------------------------------------------------------
+#                             Color Sets
+# ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Window Colorsets
+# ---------------------------------------------------------------------------
+Colorset 3 fg #101060, bg #e6e7d7
+Colorset 4 fg Black, bg #a6a797
+Colorset 5 fg White, bg Black
+# ---------------------------------------------------------------------------
+# Menu Colorsets
+# ---------------------------------------------------------------------------
+Colorset 7 fg Black, bg LightGray, hi Black, sh Black
+Colorset 8 fg Red, bg #e6e7d7, sh Black, hi #202070
+# ---------------------------------------------------------------------------
+# Module Colorsets
+# ---------------------------------------------------------------------------
+Colorset 9  fg rgb:00/00/00, hi rgb:00/00/00, sh rgb:00/00/00, bg rgb:e9/e9/d9
+Colorset 10 fg rgb:00/00/00, hi rgb:dd/00/00, sh rgb:dd/00/00, bg rgb:fb/fc/ec
+# ---------------------------------------------------------------------------
+
+#####
+# Global Options
+###########
+OpaqueMoveSize          -1
+Emulate                 Mwm 
+HideGeometryWindow      Never
+BugOpts                 FlickeringMoveWorkAround On
+XorValue                55555
+SetAnimation            10  -.01 0 .01 .03 .08 .18 .3 .45 .6 .75 .85 .90 .94 .97 .99 1.0
+
+#####
+# Global Styles
+###########
+Style * TileCascadePlacement, GrabFocusOff
+Style * NoPPosition, ResizeOpaque
+Style * DecorateTransient, DontRaiseTransient
+Style * DontLowerTransient, StackTransientParent
+Style * GrabFocusTransientOff
+Style * WindowShadeSteps 20, WindowShadeScrolls
+Style * UseDecor fDecor, SlipperyIcon
+Style * IconBox screen w 15 15 -165 -15, IconGrid 3 3, IconFill right top
+Style * SnapAttraction 5 SameType Screen
+Style * SnapGrid 3 3
+
+#####
+# Program Styles
+###########
+Style "*" Icon programs.xpm, MiniIcon mini.x.xpm
+Style "XTerm" Icon terminator.png, NoActiveIconOverride, MiniIcon /usr/share/icons/hicolor/16x16/apps/terminator.png
+Style "gvim" Icon gvim.png, IconOverride, MiniIcon mini.gvim.xpm, EWMHMiniIconOverride
+Style "Firefox" Icon firefox.png, MiniIcon /usr/share/icons/hicolor/16x16/apps/firefox.png, EWMHMiniIconOverride
+Style DeskControl NoTitle, NeverFocus, CirculateSkip, WindowListSkip, Sticky, StaysOnBottom, FixedSize, NoHandles
+Style FvwmBar NoTitle, WindowListSkip, CirculateSkip, Sticky, NeverFocus, StaysOnBottom, NoHandles
+
+#####
+# Basic Functions
+###########
+DestroyFunc FvwmDeleteOrDestroy
+AddToFunc   FvwmDeleteOrDestroy
++ H Nop
++ M Nop
++ C Delete
++ D Destroy
+
+DestroyFunc FvwmIconifyOrShade
+AddToFunc   FvwmIconifyOrShade
++ C Iconify
++ D WindowShade
+
+DestroyFunc FvwmMaximize
+AddToFunc   FvwmMaximize
++ H Nop
++ M Nop
++ C Maximize $0 $1
+
+DestroyFunc FvwmMoveOrIconify
+AddToFunc   FvwmMoveOrIconify
++ M Move
++ D Iconify
+
+DestroyFunc FvwmWindowShade
+AddToFunc   FvwmWindowShade
++ D WindowShade $0
+
+#####
+# Program Launching Functions
+###########
+DestroyFunc FvwmLibreoffice
+AddToFunc   FvwmLibreoffice
++ I Exec exec libreoffice
+
+DestroyFunc FvwmXTerm
+AddToFunc   FvwmXTerm
++ I Exec exec xterm -ls -sb -sl 5000 -bg black -fg cyan -fn 9x15 -geometry 150x50
+
+DestroyFunc FvwmTerminator
+AddToFunc   FvwmTerminator
++ I Exec exec terminator 
+
+DestroyFunc FvwmGVim
+AddToFunc   FvwmGVim
++ I Exec exec gvim
+
+DestroyFunc FvwmGimp
+AddToFunc   FvwmGimp
++ I Exec exec gimp
+
+DestroyFunc FvwmFireFox
+AddToFunc   FvwmFireFox
++ I Exec exec firefox
+
+DestroyFunc FvwmThunderbird
+AddToFunc   FvwmThunderbird
++ I Exec exec thunderbird
+
+DestroyFunc FvwmNXClient
+AddToFunc   FvwmNXClient
++ I Exec exec /opt/NX/bin/nxclient
+
+DestroyFunc FvwmViewManPage
+AddToFunc   FvwmViewManPage
++ I Exec exec xterm -fg White -bg DarkBlue -g 80x40 -fn 7x14 -fb 7x14bold \
+ -n "Manual Page - $0" -T "Manual Page - $0" -e man "$0"
+
+#####
+# Startup Functions
+###########
+DestroyFunc StartFunction
+AddToFunc   StartFunction
++ I Module FvwmTaskBar
++ I Module FvwmPager 0 4
++ I Module FvwmAnimate
++ I Module FvwmProxy
++ I Module FvwmButtons MyButtons
++ I Module FvwmWinList
+#+ I Module FvwmScript
+
+DestroyFunc InitFunction
+AddToFunc   InitFunction
++ I Exec exec xscreensaver
++ I Exec exec fvwm-root -r $[fvwm_wallpapers]/chicago_skyline.png
+#+ I FvwmXTerm
+
+DestroyFunc RestartFunction
+AddToFunc   RestartFunction
++ I Nop
+
+#####
+# Screenshot Functions (uses ImageMagick)
+###########
+DestroyFunc FvwmWindowScreenshot
+AddToFunc   FvwmWindowScreenshot
++ I ThisWindow (!Shaded !Iconic Iconifiable) \
+  Exec import -window $[w.id] -quality 100 -silent \
+  "$[fvwm_home]/screenshot/screenshot-`date +%F[%R]`.$[w.id].jpg"
+
+DestroyFunc FvwmDesktopScreenshot
+AddToFunc   FvwmDesktopScreenshot
++ I Exec sleep $0; import -window root -quality 100 -silent \
+  "$[fvwm_home]/screenshot/screenshot-`date +%F[%R]`.jpg"
+
+# Handle some Mouse bindings now...
+# Recall that mouse formats look like this:
+#
+# +------------+
+# | ||  ||  || |
+# |            |
+# +------------+
+#   1   3   2
+
+# Binding Functions
+#
+# "I" stands for Immediate
+# "M" stands for Motion
+# "C" stands for Click
+# "H" stands for Hold
+# "D" stands for Double Click
+
+# ---------------------------------------------------------------------------
+# Contexts:
+#     R = Root Window                 rrrrrrrrrrrrrrrrrrrrrr
+#     W = Application Window          rIrrrrFSSSSSSSSSFrrrrr
+#     F = Frame Corners               rrrrrrS13TTTT642Srrrrr
+#     S = Frame Sides                 rIrrrrSwwwwwwwwwSrrrrr
+#     T = Title Bar                   rrrrrrSwwwwwwwwwSrrrrr
+#     I = Icon                        rIrrrrFSSSSSSSSSFrrrrr
+#                                     rrrrrrrrrrrrrrrrrrrrrr
+# Numbers are buttons: 1 3 5 7 9   0 8 6 4 2
+#
+# Modifiers: (A)ny, (C)ontrol, (S)hift, (M)eta, (N)othing
+# ---------------------------------------------------------------------------
+Key   F1      A M Menu MenuFvwmRoot
+Key   Tab     A M WindowList Root c c NoDeskSort, SelectOnRelease Meta_L
+Key   Super_L A A FvwmXTerm
+Key   Escape  A M SendToModule FvwmProxy ShowToggle
+Key   r       A M Exec exec $FVWM_USERDIR/run.sh
+Key   r       A CM Restart 
+Mouse 1       R A Menu FvwmRootMenu
+Mouse 2       R A WindowList 
+Mouse 3       R A Menu FvwmWindowOpsMenu
+Mouse 3       T A Menu FvwmWindowOpsMenu
+Mouse 1       1 A Menu FvwmWindowOpsMenu
+Mouse 1       8 A FvwmDeleteOrDestroy
+Mouse 1       4 A FvwmIconifyOrShade
+Mouse 1       2 A FvwmMaximize 100 100
+Mouse 2       2 A FvwmMaximize 0 100
+Mouse 1       W M FvwmMoveOrIconify
+Mouse 1       I A FvwmMoveOrIconify
+Mouse 4       T A FvwmWindowShade True
+Mouse 5       T A FvwmWindowShade False
+Mouse 0       6 N WindowShade
+
+#####
+# Window Decor
+###########
+# ---------------------------------------------------------------------------
+# ButtonStyle 1 = FvwmWindowOpsMenu 
+#             2 = Maximize
+#             4 = Iconify
+#             6 = Shade
+#             8 = Destroy
+DestroyDecor MyDecor
+AddToDecor   MyDecor
++ TitleStyle Centered Height 20 -- Flat
++ ButtonStyle 1 Pixmap mini.x.xpm -- Flat
++ ButtonStyle 6            Vector 4 50x25@1 85x75@0 15x75@0 50x25@1 -- Flat
++ ButtonStyle 6 ActiveUp   Vector 4 50x75@0 85x25@1 15x25@0 50x75@0 -- Flat
++ ButtonStyle 6 ActiveDown Vector 4 50x75@0 85x25@1 15x25@0 50x75@0 -- Flat
++ ButtonStyle 6 Inactive   Vector 4 50x75@0 85x25@1 15x25@0 50x75@0 -- Flat
++ ButtonStyle 8 ActiveUp   Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 -- Flat
++ ButtonStyle 8 ActiveDown Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 -- Flat
++ ButtonStyle 8 Inactive   Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 -- Flat
++ ButtonStyle 4 ActiveUp   Vector 5 30x60@3 60x60@3 60x50@3 30x50@3 30x60@3 -- Flat
++ ButtonStyle 4 ActiveDown Vector 5 30x60@3 60x60@3 60x50@3 30x50@3 30x60@3 -- Flat
++ ButtonStyle 4 Inactive   Vector 5 30x60@3 60x60@3 60x50@3 30x50@3 30x60@3 -- Flat
++ ButtonStyle 2 ActiveUp   Vector 7 30x30@3 30x60@3 60x60@3 60x30@3 30x30@3 30x35@3 60x35@3 -- Flat
++ ButtonStyle 2 ActiveDown Vector 7 30x30@3 30x60@3 60x60@3 60x30@3 30x30@3 30x35@3 60x35@3 -- Flat
++ ButtonStyle 2 Inactive   Vector 7 30x30@3 30x60@3 60x60@3 60x30@3 30x30@3 30x35@3 60x35@3 -- Flat
++ BorderStyle Simple -- NoInset Flat
++ ButtonStyle All    -- UseTitleStyle
+
+#####
+# Window Styles
+###########
+Style "*" UseDecor MyDecor
+Style "*" Font "xft:Sans:Bold:size=8:minspace=False:antialias=True"
+Style "*" BorderWidth 4, HandleWidth 4
+Style "*" MWMBorder, FirmBorder
+Style "*" Colorset 4
+Style "*" HilightColorset 3
+Style "*" BorderColorset 5
+Style "*" HilightBorderColorset 4
+Style "*" NoIconTitle
+
+#####
+# MenuStyles
+###########
+MenuStyle * PopupImmediately, PopdownImmediately
+MenuStyle * PopupOffset -5 100, TitleWarpOff
+MenuStyle * TitleUnderlines2, SeparatorsLong, TrianglesSolid
+MenuStyle * AnimationOff, AutomaticHotkeysOff
+MenuStyle * BorderWidth 2
+MenuStyle * PopupAsSubmenu, HoldSubmenus, SubmenusRight
+MenuStyle * ItemFormat "%|%5.5i%1.3l%2.3>%|"
+MenuStyle * VerticalItemSpacing 1 1, VerticalTitleSpacing 2 2
+MenuStyle * MenuColorset 7
+MenuStyle * ActiveFore, Hilight3DThin
+MenuStyle * ActiveColorset 8
+MenuStyle * Font "Shadow=0:xft:LiberationSans:Bold:size=8:antialias=True"
+
+#####
+# FvwmRootMenu
+###########
+DestroyMenu FvwmRootMenu
+AddToMenu   FvwmRootMenu "Root Menu%mini.x.xpm%" Title
++ "Programs%mini.window.xpm%"           Popup FvwmProgramsMenu
++ "Chrome%mini.chromium.png%"           Exec exec chromium
++ "XTerm%mini.term2.xpm%"               FvwmXTerm
++ "Konsole%mini.term2.xpm%"             Exec exec konsole
++ "Terminator%mini.term2.xpm%"          Exec exec terminator
++ "Terminal%mini.term2.xpm%"            Exec exec gnome-terminal
++ "GVim%mini.gvim.xpm%"                 FvwmGVim
++ "FVWM Console%mini.xterm.xpm%"        Module FvwmConsole
++ "Xman%mini.xman.xpm%"                 Exec exec xman
++ "" Nop
++ "Help%mini.question.xpm%"             Popup FvwmManPagesMenu
+# + "Restart FVWM%mini.fvwm.xpm%"         Restart
+#+ "Restart FVWM2%mini.fvwm2.xpm%"       Restart fvwm2 -s
+#+ "Restart FVWM-Crystal%mini.fvwm.xpm%" Restart fvwm-crystal -s
+#+ "Restart MWM%mini.mwm.xpm%"           Restart mwm
+# + "Quit FVWM%mini.destroy.xpm%"         Quit
+
+#####
+# Programs Menu
+###########
+DestroyMenu FvwmProgramsMenu
+AddToMenu   FvwmProgramsMenu "Programs" Title
++ "Math and Science"                    Popup MathScienceMenu
++ "Development"                         Popup DevelopmentMenu
++ "Multimedia"                          Popup MultimediaMenu
++ "Office"                              Popup OfficeMenu
++ "Utilities"                           Popup UtilitiesMenu
++ "Remote Logins"                       Popup RemoteLoginsMenu
++ "System Apps"                         Popup SystemMenu
++ "Time Wasters"                        Popup GamesMenu
++ "" Nop
++ "FireFox%mini.firefox.png%"           FvwmFireFox
++ "Thunderbird%mini.thunderbird.png%"   FvwmThunderbird
++ "Gimp%mini.gimp.png%"                 FvwmGimp
++ "NX Client%mini.nxclient.png%"        FvwmNXClient
++ "Terminator%mini.xterm.xpm%"          FvwmTerminator
++ "LibreOffice%mini.libreoffice.png%"   FvwmLibreoffice
+
+####
+# MathScience Menu
+###########
+DestroyMenu MathScienceMenu
+AddToMenu   MathScienceMenu "Math and Science" Title
++ "Gnome Calculator%mini.calc2.xpm%"    exec gcalctool
++ "Genius Calculator%mini.calc2.xpm%"   exec xterm -fn 9x15 -geometry 132x60 -e genius
++ "XCalc%mini.calc2.xpm%"               exec xcalc -rpm
++ "Speedcrunch%mini.calc2.xpm%"         exec speedcrunch
++ "ExtCalc%mini.extcalc.png%"           exec extcalc
++ "Sage%mini.sage.png%"                 exec xterm -e sage
++ "WX Maxima%mini.wxmaxima.png%"        exec wxmaxima
++ "FreeMat"                             exec FreeMat
++ "Mathomatic%mini.mathomatic.png%"     exec xterm -e mathomatic
++ "R"                                   exec xterm -e R --save
++ "ROOT"                                exec xterm -e root
++ "Scilab"                              exec /opt/scilab/bin/scilab
++ "NG Spice (pspice)"                   exec xterm -e ngspice
++ "KiCAD%mini.kicad.png%"               exec kicad
++ "qCAD"                                exec qcad
++ "QtiPlot"                             exec qtiplot
++ "Ghemical"                            exec ghemical
++ "KTechLab"                            exec /opt/kde/bin/ktechlab
+
+####
+# Multimedia Menu
+###########
+DestroyMenu MultimediaMenu
+AddToMenu   MultimediaMenu "Multimedia" Title
++ "Firefox%mini.firefox.png%"           FvwmFireFox
++ "Chromium%mini.chromium.png%"         exec chromium
++ "Opera%mini.opera.png%"               exec opera
++ "Lynx - Text Browser%mini.books.xpm%" exec xterm -fn 9x15 -geometry 125x75 -e lynx
++ "Thunderbird%mini.thunderbird.png%"   FvwmThunderbird
++ "Pidgin%mini.pidgin.png%"             exec pidgin
++ "XV%mini.xv.xpm%"                     exec xv
++ "Digikam%mini.digikam.png%"           exec digikam
++ "Gimp%mini.gimp.png%"                 FvwmGimp 
++ "GPicView%mini.picture.xpm%"          exec gpicview
++ "Ristretto%mini.ristretto.png%"       exec ristretto
++ "Linphone%crystal/sipphone.png%"      exec linphone
++ "Ekiga%mini.ekiga.png%"               exec ekiga
++ "Twinkle%mini.twinkle.png%"           exec twinkle
++ "Totem%mini.totem.png%"               exec totem
++ "VLC%mini.vlc.xpm%"                   exec vlc
+
+#####
+# Utilities Menu
+###########
+DestroyMenu UtilitiesMenu
+AddToMenu   UtilitiesMenu "Utilities" Title
++ "Run"                                 exec $FVWM_USERDIR/run.sh
++ "Unetbootin"                          exec unetbootin
++ "TrueCrypt"                           exec truecrypt
++ "K3b - DVD Burning Tool"              exec k3b
++ "XClock"                              exec xclock
++ "Virtual Box"                         exec VirtualBox
++ "FreeMind"                            exec freemind 
++ "Vym"                                 exec vym
++ "Basket"                              exec basket
++ "Zim Wiki"                            exec zim
+
+DestroyMenu RemoteLoginsMenu
+AddToMenu   RemoteLoginsMenu "Remote Logins" Title
++ "Enterprise"                          Exec exec xterm -ls -sb -sl 5000 -bg black -fg cyan -fn 9x15 -geometry 150x50 -e ssh -p 22222 192.168.1.3   -l root
++ "Sirius"                              Exec exec xterm -ls -sb -sl 5000 -bg black -fg cyan -fn 9x15 -geometry 150x50 -e ssh -p 22    192.168.1.100 -l root 
++ "Cephei"                              Exec exec xterm -ls -sb -sl 5000 -bg black -fg cyan -fn 9x15 -geometry 150x50 -e ssh -p 22    192.168.1.95  -l root
+
+#####
+# Development Menu
+###########
+DestroyMenu DevelopmentMenu
+AddToMenu   DevelopmentMenu "Development" Title
++ "DDD"                                 exec ddd
++ "Netbeans"                            exec netbeans
++ "Eclipse"                             exec eclipse
++ "Ninja IDE"                           exec ninja-ide
++ "Bluefish"                            exec bluefish
++ "QT Designer"                         exec designer
++ "qDevelop"                            exec qdevelop
++ "Python IDE - Spyder"                 exec spyder
++ "Anjuta"                              exec anjuta
++ "Basic -- Yikes!"                     exec xterm -e /opt/bas/bin/bas
++ "Gambas3"                             exec gambas3
++ "Gnu SmallTalk"                       exec xterm -e gst
++ "Gnu Prolog"                          exec xterm -e gprolog
+
+#####
+# Games Menu
+###########
+DestroyMenu GamesMenu
+AddToMenu   GamesMenu "Games" Title
++ "Boggle"                              exec xterm -fn 10x20 -e boggle
++ "Dope Wars"                           exec dopewars
++ "Nethack - ncurses"                   exec xterm -fn 10x20 -e hack
+
+#####
+# System Menu
+###########
+DestroyMenu SystemMenu
+AddToMenu   SystemMenu "System Applications" Title
++ "ZenMap -- Nmap GUI"                  exec /usr/share/zenmap/su-to-zenmap.sh
++ "Thunar"                              exec thunar
++ "Gksu"                                exec gksu
+
+#####
+# Office Menu
+###########
+DestroyMenu OfficeMenu
+AddToMenu   OfficeMenu "Office" Title
++ "Libreoffice Writer"                  exec libreoffice --writer
++ "Libreoffice Calc"                    exec libreoffice --calc
++ "Libreoffice Draw"                    exec libreoffice --draw
++ "Libreoffice Impress"                 exec libreoffice --impress
++ "Libreoffice Math"                    exec libreoffice --math
++ "Libreoffice Web"                     exec libreoffice --html
++ "" Nop
++ "Tex Maker"                           exec texmaker
++ "Xpdf"                                exec xpdf
++ "Storybook"                           exec /opt/storybook/storybook
++ "Ghostscript"                         exec gs
++ "Calibre"                             exec calibre
+
+#####
+# FVWM Help Menu
+###########
+DestroyMenu FvwmManPagesMenu
+AddToMenu   FvwmManPagesMenu "FVWM Man Pages" Title
++ "%mini.book2.xpm%fvwm"                FvwmViewManPage fvwm
++ "%mini.book2.xpm%FvwmAnimate"         FvwmViewManPage FvwmAnimate
++ "%mini.book2.xpm%FvwmAuto"            FvwmViewManPage FvwmAuto
++ "%mini.book2.xpm%FvwmBacker"          FvwmViewManPage FvwmBacker
++ "%mini.book2.xpm%FvwmBanner"          FvwmViewManPage FvwmBanner
++ "%mini.book2.xpm%FvwmButtons"         FvwmViewManPage FvwmButtons
++ "%mini.book2.xpm%FvwmCommand"         FvwmViewManPage FvwmCommand
++ "%mini.book2.xpm%FvwmConsole"         FvwmViewManPage FvwmConsole
++ "%mini.book2.xpm%FvwmConsoleC.pl"     FvwmViewManPage FvwmConsoleC.pl
++ "%mini.book2.xpm%FvwmCpp"             FvwmViewManPage FvwmCpp
++ "%mini.book2.xpm%FvwmDebug"           FvwmViewManPage FvwmDebug
++ "%mini.book2.xpm%FvwmDragWell"        FvwmViewManPage FvwmDragWell
++ "%mini.book2.xpm%FvwmEvent"           FvwmViewManPage FvwmEvent
++ "%mini.book2.xpm%FvwmForm"            FvwmViewManPage FvwmForm
++ "%mini.book2.xpm%FvwmGtk"             FvwmViewManPage FvwmGtk
++ "%mini.book2.xpm%FvwmGtkDebug"        FvwmViewManPage FvwmGtkDebug
++ "%mini.book2.xpm%FvwmIconBox"         FvwmViewManPage FvwmIconBox
++ "%mini.book2.xpm%FvwmIconMan"         FvwmViewManPage FvwmIconMan
++ "%mini.book2.xpm%FvwmIdent"           FvwmViewManPage FvwmIdent
++ "%mini.book2.xpm%FvwmM4"              FvwmViewManPage FvwmM4
++ "%mini.book2.xpm%FvwmPager"           FvwmViewManPage FvwmPager
++ "%mini.book2.xpm%FvwmPerl"            FvwmViewManPage FvwmPerl
++ "%mini.book2.xpm%FvwmProxy"           FvwmViewManPage FvwmProxy
++ "%mini.book2.xpm%FvwmRearrange"       FvwmViewManPage FvwmRearrange
++ "%mini.book2.xpm%FvwmSave"            FvwmViewManPage FvwmSave
++ "%mini.book2.xpm%FvwmSaveDesk"        FvwmViewManPage FvwmSaveDesk
++ "%mini.book2.xpm%FvwmScript"          FvwmViewManPage FvwmScript
++ "%mini.book2.xpm%FvwmScroll"          FvwmViewManPage FvwmScroll
++ "%mini.book2.xpm%FvwmTaskBar"         FvwmViewManPage FvwmTaskBar
++ "%mini.book2.xpm%FvwmTheme"           FvwmViewManPage FvwmTheme
++ "%mini.book2.xpm%FvwmWharf"           FvwmViewManPage FvwmWharf
++ "%mini.book2.xpm%FvwmWinList"         FvwmViewManPage FvwmWinList
++ "%mini.book2.xpm%FvwmWindowMenu"      FvwmViewManPage FvwmWindowMenu
++ "" Nop
++ "%mini.book2.xpm%fvwm-config"         FvwmViewManPage fvwm-config
++ "%mini.book2.xpm%fvwm-perllib"        FvwmViewManPage fvwm-perllib
++ "%mini.book2.xpm%fvwm-root"           FvwmViewManPage fvwm-root
++ "%mini.book2.xpm%fvwm-bug"            FvwmViewManPage fvwm-bug
++ "%mini.book2.xpm%fvwm-convert-2.2"    FvwmViewManPage fvwm-convert-2.2
++ "%mini.book2.xpm%fvwm-convert-2.4"    FvwmViewManPage fvwm-convert-2.4
++ "" Nop
++ "%mini.book2.xpm%fvwm-menu-desktop"   FvwmViewManPage fvwm-menu-desktop
++ "%mini.book2.xpm%fvwm-menu-directory" FvwmViewManPage fvwm-menu-directory
++ "%mini.book2.xpm%fvwm-menu-headlines" FvwmViewManPage fvwm-menu-headlines
++ "%mini.book2.xpm%fvwm-menu-xlock"     FvwmViewManPage fvwm-menu-xlock
+
+#####
+# fvwm Window Operation Menu
+###########
+DestroyFunc MoveAndGotoPagePrev
+AddToFunc MoveAndGotoPagePrev
++ I MoveToPage wrapx -1w 0
++ I GotoPage wrapx -1w 0
+
+DestroyFunc MoveAndGotoPageNext
+AddToFunc MoveAndGotoPageNext
++ I MoveToPage wrapx +1w 0
++ I GotoPage wrapx +1w 0
+
+DestroyMenu FvwmWindowOpsMenu
+AddToMenu   FvwmWindowOpsMenu "Window Operations" Title
++ "Move%mini.move1.xpm%"                   Move
++ "Resize%mini.resize3.xpm%"               Resize
++ "(De)Iconify%mini.iconify.xpm%"          Iconify
++ "(Un)Maximize%mini.winXX-maximize.xpm%"  Maximize
++ "(Un)Shade%mini.shade1.xpm%"             WindowShade
++ "(Un)Stick%mini.stick1.xpm%"             Stick
++ "" Nop
++ "Close%mini.winXX-close.xpm%"            Close
++ "Delete%mini.delete.xpm%"                Delete
++ "Destroy%mini.destroy.xpm%"              Destroy
++ "" Nop
++ "StaysOnTop%mini.raise.xpm%"             Pick (CirculateHit) Layer 0 6
++ "Layer +1%mini.raise3.xpm%"              Pick (CirculateHit) Layer +1
++ "StaysPut%mini.window2.xpm%"             Pick (CirculateHit) Layer 0 4
++ "Layer -1%mini.lower.xpm%"               Pick (CirculateHit) Layer -1
++ "StaysOnBottom%mini.lower3.xpm%"         Pick (CirculateHit) Layer 0 2
++ "" Nop
++ "%mini.picture.xpm%Window Screenshot"    Pick (CirculateHit) FvwmWindowScreenshot
++ "%mini.display.xpm%Screenshot"           FvwmDesktopScreenshot 5
++ "" Nop
++ "Identify%mini.question.xpm%"            Module FvwmIdent
+# + "Prev"          MoveAndGotoPagePrev
+# + "Next"          MoveAndGotoPageNext
++  "Desk &1"      MoveToDesk 0
++  "Desk &2"      MoveToDesk 1
++  "Desk &3"      MoveToDesk 2
++  "Desk &4"      MoveToDesk 3
++  "Desk &5"      MoveToDesk 4
+
+#####
+# FvwmIdent
+###########
+DestroyModuleConfig FvwmIdent: *
+*FvwmIdent: Colorset 9
+*FvwmIdent: Font "xft:Sans:Bold:size=10:antialias=True"
+
+#####
+# FvwmWinList
+###########
+DestroyFunc DeiconifyAndRaise
+AddToFunc DeiconifyAndRaise
++ I Iconify off
++ I Raise
++ I Focus
+
+Style "FvwmWinList" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+  CirculateSkip, StaysOnBottom, FixedPosition, FixedSize, !Iconifiable
+*FvwmWinList: Back #e9e9d9 
+*FvwmWinList: Fore Black
+*FvwmWinList: Font "Shadow=0:xft:LiberationSans:Bold:size=8:antialias=True"
+*FvwmWinList: Action Click1 Function DeiconifyAndRaise
+*FvwmWinList: Action Click2 Iconify
+*FvwmWinList: Action Click3 Module FvwmIdent
+*FvwmWinList: UseSkipList
+*FvwmWinList: UseIconNames
+*FvwmWinList: Geometry -90-25
+*FvwmWinList: MinWidth 24
+*FvwmWinList: MaxWidth 24
+*FvwmWinList: LeftJustify
+*FvwmWinList: Anchor
+*FvwmWinList: BorderReliefWidth 0
+*FvwmWinList: NoIconAction SendToModule FvwmAnimate animate
+
+#####
+# FvwmAnimate
+###########
+# Animations are controlled by this module
+# You could also use Frame, Lines, Flip, Turn, Twist, Random and None.
+DestroyModuleConfig FvwmAnimate: *
+*FvwmAnimate: Effect Flip
+*FvwmAnimate: Delay 2
+*FvwmAnimate: Iterations 50
+*FvwmAnimate: Width 2
+
+#####
+# Hit Alt+Esc to toggle FvwmProxy, which allows you to see all windows on your
+# desktop, even if they've been obscured..really cool.
+##################
+DestroyModuleConfig FvwmProxy: *
+*FvwmProxy: Font "xft:snap;-artwiz-snap-*-r-*-*-*-*-*-*-*-*-iso8859-1"
+*FvwmProxy: ProxyMove false
+
+#####
+# FvwmTaskBar
+###########
+Style "FvwmTaskBar" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+  CirculateSkip, StaysOnTop, FixedPosition, DeskOnly, FixedSize, !Iconifiable
+
+DestroyModuleConfig FvwmTaskBar: *
+*FvwmTaskBar: Geometry +0-0
+*FvwmTaskBar: Rows 1
+*FvwmTaskBar: 3DFvwm
+*FvwmTaskBar: DeskOnly
+*FvwmTaskBar: Font "xft:Sans:Bold:pixelsize=9:minispace=True:antialias=True"
+*FvwmTaskBar: SelFont "xft:Sans:Bold:pixelsize=9:minispace=True:antialias=True"
+*FvwmTaskBar: StatusFont "xft:Sans:Bold:pixelsize=9:minispace=True:antialias=True"
+*FvwmTaskBar: Colorset 1
+*FvwmTaskBar: IconColorset 9
+*FvwmTaskBar: FocusColorset 9
+*FvwmTaskBar: TipsColorset 9
+*FvwmTaskBar: UseSkipList
+*FvwmTaskBar: UseIconNames
+*FvwmTaskBar: UpdateInterval 9999
+*FvwmTaskBar: ClockFormat
+*FvwmTaskBar: MailCheck 0
+*FvwmTaskBar: StartName Push Me 
+*FvwmTaskBar: StartMenu FvwmRootMenu
+*FvwmTaskBar: StartIcon mini.fvwm2.xpm
+*FvwmTaskBar: ButtonWidth 75
+*FvwmTaskBar: Button None,                            Action None 
+*FvwmTaskBar: Button None, Icon mini.appfinder.png,   Action (Mouse 1) exec xfce4-appfinder
+*FvwmTaskBar: Button None, Icon mini.xterm.xpm,       Action (Mouse 1) FvwmXTerm
+*FvwmTaskBar: Button None, Icon mini.terminator.png,  Action (Mouse 1) FvwmTerminator
+*FvwmTaskBar: Button None, Icon mini.pidgin.png,      Action (Mouse 1) exec pidgin
+*FvwmTaskBar: Button None, Icon mini.firefox.png,     Action (Mouse 1) FvwmFirefox
+*FvwmTaskBar: Button None, Icon mini.chromium.png,    Action (Mouse 1) exec chromium
+*FvwmTaskBar: Button None, Icon mini.opera.png,       Action (Mouse 1) exec opera
+*FvwmTaskBar: Button None, Icon mini.books.xpm,       Action (Mouse 1) exec xterm -fn 9x15 -geometry 125x75 -e lynx
+*FvwmTaskBar: Button None, Icon mini.thunderbird.png, Action (Mouse 1) FvwmThunderbird
+*FvwmTaskBar: Button None, Icon mini.libreoffice.png, Action (Mouse 1) FvwmLibreoffice
+*FvwmTaskBar: Button None, Icon mini.nxclient.png,    Action (Mouse 1) FvwmNXClient
+*FvwmTaskBar: Button None, Icon mini.xv.xpm,          Action (Mouse 1) exec xv
+*FvwmTaskBar: Button None, Icon mini.calendar.xpm,    Action (Mouse 1) exec orage
+*FvwmTaskBar: Button None, Icon mini.calc.xpm,        Action (Mouse 1) exec gcalctool
+*FvwmTaskBar: Button None,                            Action None 
+
+#####
+# FvwmPager
+###########
+Style "FvwmPager" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+  CirculateSkip, StaysOnBottom, FixedPosition, FixedSize, !Iconifiable
+
+DestroyModuleConfig FvwmPager: *
+*FvwmPager: Geometry 100x640-0+0
+*FvwmPager: Colorset * 9
+*FvwmPager: HilightColorset * 10
+*FvwmPager: BalloonColorset * 9
+*FvwmPager: WindowColorsets 9 10
+*FvwmPager: Font "xft:Sans:Bold:pixelsize=9:minspace=True:antialias=True"
+*FvwmPager: Balloons All
+*FvwmPager: BalloonFont "xft:Sans:Bold:pixelsize=9:minspace=True:antialias=True"
+*FvwmPager: BallonYOffset +2
+*FvwmPager: Window3dBorders
+*FvwmPager: MiniIcons
+*FvwmPager: UseSkipList
+*FvwmPager: Rows 5
+
+#####
+# MyButtons
+###########
+# Style "MyButtons" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+#   CirculateSkip, StaysOnBottom, FixedPosition, FixedSize, !Iconifiable
+
+# DestroyModuleConfig MyButtons: *
+# *MyButtons: Geometry 85x525-4-25
+# *MyButtons: Colorset 9
+# *MyButtons: Rows 38
+# *MyButtons: Columns 1
+# *MyButtons: Frame 1
+# *MyButtons: Font "Shadow=0:xft:Sans:Bold:pixelsize=9:minspace=True:antialias=True"
+# *MyButtons: (1x1, Frame 1, Title(Center) "Productivity")
+# *MyButtons: (1x1, Swallow "xclock" `Exec xclock -digital -padding 4 -update 1 -face 'Monospace:size=6' -strftime 'TIME %H:%M:%S'`)
+# *MyButtons: (1x1, Swallow "xclock" `Exec xclock -digital -padding 4 -face 'Monospace:size=6' -strftime 'DATE %Y-%m-%d'`)
+# *MyButtons: (1x2, Frame 1, Title(Center) "Chromium",   Icon mini.chromium.png,     Action(Mouse 1) "exec chromium")
+# *MyButtons: (1x2, Frmae 1, Title(Center) "LibreOffice" Icon mini.libreoffice.png,  Action(Mouse 1) "FvwmLibreoffice")
+# *MyButtons: (1x2, Frmae 1, Title(Center) "Boggle"      Icon mini.eyes.xpm,         Action(Mouse 1) "exec xterm -fn 10x20 -e boggle")
+# *MyButtons: (1x2, Frame 1, Title(Center) "DDD",        Icon mini.bug1.xpm,         Action(Mouse 1) "exec ddd")
+# *MyButtons: (1x2, Frame 1, Title(Center) "Eclipse",    Icon mini.eclipse.xpm,      Action(Mouse 1) "exec eclipse")
+# *MyButtons: (1x2, Frame 1, Title(Center) "Netbeans",   Icon mini.netbeans.png,     Action(Mouse 1) "exec netbeans")
+# *MyButtons: (1x2, Frame 1, Title(Center) "Bluefish",   Icon mini.bluefish.png,     Action(Mosue 1) "exec bluefish")
+# *MyButtons: (1x2, Frame 1, Title(Center) "Ninja IDE",  Icon mini.ninja.png,        Action(Mosue 1) "exec ninja-ide")
+# *MyButtons: (1x2, Frame 1, Title(Center) "Basket",     Icon mini.basket.png,       Action(Mosue 1) "exec basket")
+# *MyButtons: (1x2, Frame 1, Title(Center) "Zim Wiki",   Icon mini.zim.png,          Action(Mosue 1) "exec zim")
+# *MyButtons: (1x2, Frmae 1, Title(Center) "Ekiga"       Icon mini.ekiga.png,        Action(Mouse 1) "exec ekiga")
+# *MyButtons: (1x2, Frmae 1, Title(Center) "NMap"        Icon mini.zenmap.png,       Action(Mouse 1) "/usr/share/zenmap/su-to-zenmap.sh")
+
+#### END
+#+END_SRC
 * password less [[http://www.linuxproblem.org/art_9.html][ssh]]
 ** generate public/pricate keys
 #+BEGIN_SRC sh :results output silent :dir ~/ :var ID=(read-string "Enter file in which to save the key") :eval no
@@ -1227,10 +1986,48 @@ git clone -v https://github.com/vim/vim.git vim_latest
 ** create the config file
 #+BEGIN_SRC sh :tangle ~/vim_latest/my_config :shebang "#!/tool/pandora64/bin/tcsh" :eval no
 
+make clean
+make distclean
+\rm -rvf auto/config.cache 
+
+module load freetype/2.4.4
+module load cairo/1.10.2
+module load pango/1.29.4
+module load pixman/0.22.0
+module load glib/2.32.1
+module load gtk+/2.24.10
+module load atk/2.4.0
+# module load gdk-pixbuf/2.24.0
+module load yaml/0.1.1
+module load perl/5.10.0
+module load gcc/4.4.6
+module load ruby/1.9.3-p194
+module load python/2.7.3
+module load libffi/3.0.9
+module load ncurses/6.0
+
+# setenv LDFLAGS "-L/tool/pandora64/.package/ruby-1.9.3-p194/lib -L/tool/pandora64/.package/gcc-4.4.6/lib64 -L/tool/pandora64/.package/freetype-2.4.4/lib -L/tool/pandora64/.package/cairo-1.10.2/lib -L/tool/pandora64/.package/pango-1.29.4/lib -L/tool/pandora64/.package/pixman-0.22.0/lib -L/tool/pandora64/.package/glib-2.32.1/lib -L/tool/pandora64/.package/gtk+-2.24.10/lib -Wl,-rpath,/tool/pandora64/.package/glib-2.32.1/lib:/tool/pandora64/.package/gtk+-2.24.10/lib:/tool/pandora64/.package/cairo-1.10.2/lib:/tool/pandora64/.package/pango-1.29.4/lib:/tool/pandora64/.package/pixman-0.22.0/lib:/tool/pandora64/.package/freetype-2.4.4/lib"
+# setenv LIBS "-L/tool/pandora64/.package/freetype-2.4.4/lib -L/tool/pandora64/.package/cairo-1.10.2/lib -L/tool/pandora64/.package/pango-1.29.4/lib -L/tool/pandora64/.package/pixman-0.22.0/lib -L/tool/pandora64/.package/glib-2.32.1/lib -L/tool/pandora64/.package/gtk+-2.24.10/lib -Wl,-rpath,/tool/pandora64/.package/glib-2.32.1/lib:/tool/pandora64/.package/gtk+-2.24.10/lib:/tool/pandora64/.package/cairo-1.10.2/lib:/tool/pandora64/.package/pango-1.29.4/lib:/tool/pandora64/.package/pixman-0.22.0/lib:/tool/pandora64/.package/freetype-2.4.4/lib"
+# setenv PKG_CONFIG_PATH "/tool/pandora64/.package/glib-2.32.1/lib/pkgconfig:/tool/pandora64/.package/gtk+-2.24.10/lib/pkgconfig:/tool/pandora64/.package/cairo-1.10.2/lib/pkgconfig:/tool/pandora64/.package/pango-1.29.4/lib/pkgconfig:/tool/pandora64/.package/pixman-0.22.0/lib/pkgconfig"
+
+setenv LDFLAGS "-L/tool/pandora64/.package/gcc-4.4.6/lib64 -L/tool/pandora64/.package/ruby-1.9.3-p194/lib -L/tool/pandora64/.package/python-2.7.3/lib -L/tool/pandora64/.package/atk-2.4.0/lib -L/tool/pandora64/.package/gdk-pixbuf-2.24.0/lib -L/tool/pandora64/.package/libffi-3.0.9/lib -L/tool/pandora64/.package/freetype-2.4.4/lib -L/tool/pandora64/.package/cairo-1.10.2/lib -L/tool/pandora64/.package/pango-1.29.4/lib -L/tool/pandora64/.package/pixman-0.22.0/lib -L/tool/pandora64/.package/glib-2.32.1/lib -L/tool/pandora64/.package/gtk+-2.24.10/lib -Wl,-rpath,/tool/pandora64/.package/glib-2.32.1/lib:/tool/pandora64/.package/gtk+-2.24.10/lib:/tool/pandora64/.package/cairo-1.10.2/lib:/tool/pandora64/.package/pango-1.29.4/lib:/tool/pandora64/.package/pixman-0.22.0/lib:/tool/pandora64/.package/freetype-2.4.4/lib:/tool/pandora64/.package/libffi-3.0.9/lib:/tool/pandora64/.package/gdk-pixbuf-2.24.0/lib:/tool/pandora64/.package/atk-2.4.0/lib:/tool/pandora64/.package/freetype-2.4.4/lib:/tool/pandora64/.package/python-2.7.3/lib:/tool/pandora64/.package/ruby-1.9.3-p194/lib:/tool/pandora64/.package/gcc-4.4.6/lib64:/usr/lib64 -lutil"
+
+setenv LIBS "-L/tool/pandora64/.package/gcc-4.4.6/lib64 -L/tool/pandora64/.package/ruby-1.9.3-p194/lib -L/tool/pandora64/.package/python-2.7.3/lib -L/tool/pandora64/.package/freetype-2.4.4/lib -L/tool/pandora64/.package/atk-2.4.0/lib -L/tool/pandora64/.package/gdk-pixbuf-2.24.0/lib -L/tool/pandora64/.package/libffi-3.0.9/lib -L/tool/pandora64/.package/freetype-2.4.4/lib -L/tool/pandora64/.package/cairo-1.10.2/lib -L/tool/pandora64/.package/pango-1.29.4/lib -L/tool/pandora64/.package/pixman-0.22.0/lib -L/tool/pandora64/.package/glib-2.32.1/lib -L/tool/pandora64/.package/gtk+-2.24.10/lib -Wl,-rpath,/tool/pandora64/.package/glib-2.32.1/lib:/tool/pandora64/.package/gtk+-2.24.10/lib:/tool/pandora64/.package/cairo-1.10.2/lib:/tool/pandora64/.package/pango-1.29.4/lib:/tool/pandora64/.package/pixman-0.22.0/lib:/tool/pandora64/.package/freetype-2.4.4/lib:/tool/pandora64/.package/libffi-3.0.9/lib:/tool/pandora64/.package/gdk-pixbuf-2.24.0/lib:/tool/pandora64/.package/atk-2.4.0/lib:/tool/pandora64/.package/freetype-2.4.4/lib:/tool/pandora64/.package/python-2.7.3/lib:/tool/pandora64/.package/ruby-1.9.3-p194/lib:/tool/pandora64/.package/gcc-4.4.6/lib64:/usr/lib64 -lutil"
+
+setenv PATH "/tool/pandora64/.package/gtk+-2.24.10/bin:/tool/pandora64/.package/gcc-4.4.6/lib64:/tool/pandora64/.package/python-2.7.3/bin:/tool/pandora64/.package/freetype-2.4.4/bin:/tool/pandora64/.package/atk-2.4.0/bin:/tool/pandora64/.package/gdk-pixbuf-2.24.0/bin:/tool/pandora64/.package/libffi-3.0.9/bin:/tool/pandora64/.package/python-2.7.3/bin:/tool/pandora64/.package/lua-5.1.4/bin:/tool/pandora64/.package/freetype-2.4.4/bin:/tool/pandora64/.package/pixman-0.22.0/bin:/tool/pandora64/.package/gtk+-2.24.10/bin:/tool/pandora64/.package/glib-2.32.1/bin:/tool/pandora64/.package/cairo-1.10.2/bin:/tool/pandora64/.package/pango-1.29.4/bin:/tool/pandora64/.package/perl-5.10.0/bin:/tool/pandora64/.package/ruby-1.9.3-p194/bin:/tool/pandora64/.package/tcltk-8.5.7/bin:/tool/pandora64/bin:/tool/pandora/bin:/usr/bin:/bin"
+
+setenv LUA_PREFIX "/tool/pandora64/.package/lua-5.1.4"
+
+setenv PKG_CONFIG_PATH "/tool/pandora64/.package/gcc-4.4.6/lib64/pkgconfig:/tool/pandora64/.package/ruby-1.9.3-p194/lib/pkgconfig:/tool/pandora64/.package/python-2.7.3/lib/pkgconfig:/tool/pandora64/.package/freetype-2.4.4/lib/pkgconfig:/tool/pandora64/.package/atk-2.4.0/lib/pkgconfig:/tool/pandora64/.package/gdk-pixbuf-2.24.0/lib/pkgconfig:/tool/pandora64/.package/libffi-3.0.9/lib/pkginfo:/tool/pandora64/.package/glib-2.32.1/lib/pkgconfig:/tool/pandora64/.package/gtk+-2.24.10/lib/pkgconfig:/tool/pandora64/.package/cairo-1.10.2/lib/pkgconfig:/tool/pandora64/.package/pango-1.29.4/lib/pkgconfig:/tool/pandora64/.package/pixman-0.22.0/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/share/pkgconfig"
+
+setenv CFLAGS "-I/tool/pandora64/.package/gcc-4.4.6/include -I/tool/pandora64/.package/ruby-1.9.3-p194/include -I/tool/pandora64/.package/python-2.7.3/include -I/tool/pandora64/.package/freetype-2.4.4/include -I/tool/pandora64/.package/atk-2.4.0/include -I/tool/pandora64/.package/gdk-pixbuf-2.24.0/include -I/tool/pandora64/.package/libffi-3.0.9/include -I/tool/pandora64/.package/freetype-2.4.4/include -I/tool/pandora64/.package/cairo-1.10.2/include -I/tool/pandora64/.package/pango-1.29.4/include -I/tool/pandora64/.package/pixman-0.22.0/include -I/tool/pandora64/.package/glib-2.32.1/include -I/tool/pandora64/.package/gtk+-2.24.10/include"
+
 ./configure --prefix=$HOME/scripts --enable-fail-if-missing --with-features=huge \
   --enable-luainterp=yes --with-lua-prefix=/tool/pandora64/.package/lua-5.1.4 \
   --enable-perlinterp=yes \
-  --with-python-config-dir=/tool/pandora64/.package/python-2.7.3-a/lib/python2.7/config \
+  --with-python-config-dir=/tool/pandora64/.package/python-2.7.3/lib/python2.7/config \
+  --x-libraries=/usr/lib64 \
+  --x-includes=/usr/include \
   --enable-pythoninterp=yes \
   --enable-python3interp=no \
   --enable-cscope \
@@ -1242,14 +2039,16 @@ git clone -v https://github.com/vim/vim.git vim_latest
   --with-x=yes \
   --enable-mzschemeinterp=yes \
   --enable-gtk2-check \
-  --enable-gui=gtk2 \
   --enable-gnome-check \
   --enable-motif-check \
   --enable-athena-check \
   --enable-nextaw-check \
   --enable-carbon-check \
   --disable-smack \
-  --enable-gui=gnome2
+  --enable-gui=auto
+
+# make
+# make install
 #+END_SRC
 ** compile vim
 *** clean up directory
@@ -1804,10 +2603,38 @@ rm -rvf /tmp/temp_fzy
 git clone -v https://github.com/junegunn/fzf /tmp/temp_fzf
 #+END_SRC
 
+#+RESULTS:
+
 ** do an install
-#+BEGIN_SRC sh :results output :dir /tmp/temp_fzf :eval no
-./install
+#+BEGIN_SRC sh :results output :dir /tmp/temp_fzf
+./install --all
 #+END_SRC
+
+#+RESULTS:
+#+begin_example
+Downloading bin/fzf ...
+  - Already exists
+  - Checking fzf executable ... 0.13.3
+
+Generate ~/.fzf.bash ... OK
+Generate ~/.fzf.zsh ... OK
+
+Update /home/ramondal/.bashrc:
+  - [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+    - Already exists: line #2 
+
+Update /home/ramondal/.zshrc:
+  - [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    - Already exists: line #2 
+
+Finished. Restart your shell or reload config file.
+   source ~/.bashrc  # bash
+   source ~/.zshrc   # zsh
+
+Use uninstall script to remove fzf.
+
+For more information, see: https://github.com/junegunn/fzf
+#+end_example
 
 ** copy the man and the binary
 #+BEGIN_SRC sh :results output :dir /tmp/temp_fzf :eval yes
@@ -1815,6 +2642,14 @@ mkdir -p ~/scripts/share ~/scripts/bin
 cp -vfr man ~/scripts/share
 cp -vrf bin ~/scripts
 #+END_SRC
+
+#+RESULTS:
+: 'man/man1/fzf-tmux.1' -> '/home/ramondal/scripts/share/man/man1/fzf-tmux.1'
+: 'man/man1/fzf.1' -> '/home/ramondal/scripts/share/man/man1/fzf.1'
+: removed '/home/ramondal/scripts/bin/fzf'
+: 'bin/fzf' -> '/home/ramondal/scripts/bin/fzf'
+: 'bin/fzf-tmux' -> '/home/ramondal/scripts/bin/fzf-tmux'
+: 'bin/fzf-0.13.3-linux_amd64' -> '/home/ramondal/scripts/bin/fzf-0.13.3-linux_amd64'
 
 ** remove the clone directory
 #+BEGIN_SRC sh :results output :dir ~/
@@ -2036,7 +2871,7 @@ chmod 600 config
 #+RESULTS:
 
 * Project related
-** bootenv
+** TODO bootenv
 #+BEGIN_SRC tcsh :tangle ~/tangled_files/my_modules_load :eval never
 # path variables that i need even after bootenv
 
@@ -2155,16 +2990,16 @@ module load tcsh/6.18.01
 module load ctags/5.8
 module load findutils/4.4.2
 module load grep/2.22
-module load less/451
+module load less/394
 # module load vnc/4.1.2
 module load llvm/3.8.0-gcc481
-module load python/3.5.1
-module load python/3.3.2
-module load python/2.7.11
-module load python/2.6.1
-module load ruby/2.3.0
-module load perl/5.24.0
-module load perl/5.22.1
+# module load python/3.5.1
+# module load python/3.3.2
+# module load python/2.7.11
+# module load python/2.6.1
+# module load ruby/2.3.0
+# module load perl/5.24.0
+# module load perl/5.22.1
 module load go/1.0.2
 module load tree/1.5.0
 module load libreoffice/4.1.3.2
@@ -2198,7 +3033,7 @@ module load imagemagick/6.9.1-2
 module load java/1.6
 module load j2sdk/1.8.0_66
 module load kdiff3/0.9.98
-module load meld/3.12.3-b
+# module load meld/3.12.3-b
 module load mutt/1.6.0
 module load mercurial/3.7.3
 module load nano/2.3.2
@@ -2225,8 +3060,8 @@ module load vlc/0.9.9
 module load wget/1.17
 module load xpdf/3.04
 
-module load hdk-4.8.1/19
-module load uvmkit-1.2/3
+# module load hdk-4.8.1/19
+# module load uvmkit-1.2/3
 
 # vim: foldmethod=marker:filetype=tcsh:sw=2:tw=0:expandtab:norl:foldmethod=marker:
 #+END_SRC
