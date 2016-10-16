@@ -1,7 +1,7 @@
 snippet perlheader "insert boilerplate perl pod code" bws
 ################################################################################
 use strict;
-use warnings;
+use warnings FATAL => 'all';
 use FindBin qw(\$Bin);
 BEGIN{
 push(@INC, $Bin);
@@ -14,14 +14,15 @@ use Clone qw(clone);
 use Term::ANSIColor qw(:constants);
 use Getopt::Long;
 use Pod::Usage;
-use YAML;
+use YAML::XS;
 use Data::Dumper;
 use Perl::Critic;
-use Carp;
+use Carp qw(carp cluck);
 use English qw(-no_match_vars);
 use Data::Types qw(:all);
 use namespace::autoclean;
 no autovivification;
+use diagnostics -verbose;
 
 use v5.18;
 

@@ -684,6 +684,9 @@ endif
 #+BEGIN_SRC tcsh :tangle ~/tangled_files/bindKeys :eval never
 # bindkey {{{1
   ### delete words:
+  # check the value with stty -a
+  # printed using C-v then backspace
+  stty erase 
   bindkey ^W	backward-delete-word
   bindkey ^D	delete-word
   bindkey -b M-k backward-kill-line
@@ -849,7 +852,7 @@ setenv P4DIFF tkdiff
 #  some default alias {{{1
 unalias xterm; alias xterm 'uxterm'
 unalias ls; alias ls "ls-F --color=always -h" #enable thousands grouping and colour
-unalias ll; alias ll 'ls-F -ltr'
+unalias ll; alias ll 'ls-F -ltrh'
 unalias lla; alias lla 'ls-F -l -A'
 unalias flist; alias flist 'find \!:1 -type f >! files'
 # Some alias to force the user to acknowledge when deleting or copying
@@ -858,7 +861,7 @@ unalias cp; alias cp "\cp -i -v"
 unalias mv; alias mv "\mv -i -v"
 unalias grep; alias grep "\grep --color=always"
 unalias tree; alias tree "\tree -C"
-unalias less; alias less "\less -R"
+unalias less; alias less "\less -R -i"
 unalias df; alias df "\df -h"
 unalias lg; alias lg '\ls -1 | \grep -i '
 
@@ -2980,7 +2983,7 @@ chmod 600 config
 # module load uvmkit-1.2/3
 
 module load emacs/24.5
-module load vim/7.4-a
+module load vim/8.0
 module load openssh/5.0p1-hpn13v3
 module load xterm/324
 module load tkdiff/4.2
@@ -2988,6 +2991,7 @@ module load bash/4.3.30
 module load git/2.6.3
 module load tcsh/6.18.01
 module load ctags/5.8
+module load ack/2.14
 module load findutils/4.4.2
 module load grep/2.22
 module load less/394
@@ -3084,18 +3088,18 @@ append-path PATH /home/ramondal/scripts/bin
 ######################################################
 # ORL
 # Set common arguments for verbose, color, local mode, and max number of jobs (number of cores)
-setenv DJ_INIT "-v -c -J local -m4"
+setenv DJ_INIT "-v -c -DMAKEJ -J local -m4 --save_cmd_logs -DUSE_FDL -DGENERATE_GLOBAL_FEATURES -DRELAX_FEATURE_ACCESS_CKS -DNO_LEGACY_GEN_DVFLOWS"
 # ATL
 # setenv DJ_INIT -v -c -J lsf -m4"
 
 # Use -DUSE_ALE by default for gcB. Specify -DUSE_RGB on command line to override.
 if { [string equal $env(SCMROOT) //gfxip/gcB] } {
-    setenv DJ_INIT "$env(DJ_INIT) -DUSE_ALE"
+    setenv DJ_INIT "$env(DJ_INIT) -DUSE_ALE --save_cmd_logs"
 }
 
 # Use -DAUTOMGR_OPTS=-nostrict by default for gfx9.
 if { [string equal $env(SCMROOT) //gfxip/gfx9] } {
-   setenv DJ_INIT "$env(DJ_INIT) --save_cmd_logs -DAUTOMGR_OPTS=-nostrict"
+   setenv DJ_INIT "$env(DJ_INIT) --save_cmd_logs -DAUTOMGR_OPTS=-nostrict --save_cmd_logs"
 }
 
 # }}}1
