@@ -81,7 +81,7 @@ $1endif ${5:`!p snip.rv = _get_comment_format()[0]`} $2__$3$4 $5
 endsnippet
 
 snippet uvm_info "add uvm_info macro" sw
-\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_DEBUG});
+\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_FULL});
 endsnippet
 
 snippet uvm_debug "add uvm_debug macro" sw

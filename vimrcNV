@@ -633,12 +633,32 @@ if use_neobundle
       \ })
     " " color {{{2 "
     " NeoBundle 'Elle518/Duna',                                           { 'directory' : 'color_duna'}
+    " NeoBundle 'bruth/vim-newsprint-theme',                              { 'directory' : 'color_newsPrint'}
+    " NeoBundle 'zacanger/angr.vim',                              { 'directory' : 'color_angr'}
+    " NeoBundle 'encody/nvim',                                    { 'directory' : 'color_nvim'}
+    " NeoBundle 'zaki/zazen',                              { 'directory' : 'color_zazen'}
+    " NeoBundle 'KeitaNakamura/neodark.vim',                              { 'directory' : 'color_neodark'}
+    " NeoBundle 'rmnv/vim-simple-colors',                                 { 'directory' : 'color_simpleColors'}
+    " NeoBundle 'Blevs/vim-dzo',                                          { 'directory' : 'color_dzo'}
+    " NeoBundle 'rhysd/vim-color-shiny-white',                                          { 'directory' : 'color_shinyWhite'}
+    " NeoBundle 'juanpabloaj/vim-pixelmuerto',                                          { 'directory' : 'color_pixelmuerto'}
+    " NeoBundle 'acoustichero/goldenrod.vim',                                          { 'directory' : 'color_goldenrod'}
+    " NeoBundle 'vim-scripts/calmar256-lightdark.vim',                                          { 'directory' : 'color_calmar'}
+    " NeoBundle 'kamwitsta/nordisk',                              { 'directory' : 'color_nordisk'}
+    " NeoBundle 'kamwitsta/mythos',                              { 'directory' : 'color_mythos'}
+    " NeoBundle 'shawncplus/skittles_berry',                     { 'directory' : 'color_skittles_berry'}
+    " NeoBundle 'vim-scripts/habiLight',                         { 'directory' : 'color_shabiLight'}
+    " NeoBundle 'liuchengxu/space-vim-dark',                              { 'directory' : 'color_spaceVimDark'}
+    " NeoBundle 'dunckr/vim-monokai-soda',                                { 'directory' : 'color_molokaiSoda'}
+    " NeoBundle 'tyrannicaltoucan/vim-quantum',                           { 'directory' : 'color_quantum'}
+    " NeoBundle 'taecilla/fairyfloss.vim',                                { 'directory' : 'color_fairyfloss'}
     " NeoBundle 'albertocg/contrastneed-theme',                           { 'directory' : 'color_contrastneed'}
     " NeoBundle 'bitterjug/vim-colors-bitterjug',                         { 'directory' : 'color_bitterjug'}
     " NeoBundle 'AlessandroYorba/Despacio',                               { 'directory' : 'color_despacio'}
     " NeoBundle 'muellan/am-colors',                                      { 'directory' : 'color_am'}
     " NeoBundle 'hericks/vimicks',                                        { 'directory' : 'color_vimicks'}
     " NeoBundle 'vim-scripts/kate.vim',                                   { 'directory' : 'color_kate'}
+    " NeoBundle 'vim-scripts/borland.vim',                                { 'directory' : 'color_borland'}
     " NeoBundle 'josuegaleas/jay',                                        { 'directory' : 'color_jay'}
     " NeoBundle 'ianremmler/frood',                                       { 'directory' : 'color_jay'}
     " NeoBundle 'akutschi/vim-colokschi',                                 { 'directory' : 'color_colokschi'}
@@ -943,7 +963,8 @@ if use_neobundle
     " " }}}2 " color
     NeoBundle 'metakirby5/codi.vim',                               { 'directory' : 'codi'}
     NeoBundleLazy 'sjl/clam.vim',                                  { 'directory' : 'clam', 'autoload' : {'commands' : ['ClamVisual', 'SClam']}}
-    NeoBundle     'kshenoy/vim-origami',                           { 'directory' : 'origami'}
+    NeoBundle   'brooth/far.vim',                           { 'directory' : 'far'}
+    " NeoBundle     'kshenoy/vim-origami',                           { 'directory' : 'origami'}
     NeoBundle     'Chiel92/vim-autoformat',                            { 'directory' : 'autoformat'}
     NeoBundle     'EinfachToll/DidYouMean',                            { 'directory' : 'didUmean'}
     NeoBundleLazy 'tweekmonster/braceless.vim',                    { 'directory' : 'braceless', 'autoload' : {'commands' : ['BracelessEnable']}}
@@ -962,10 +983,12 @@ if use_neobundle
     NeoBundle 'Lokaltog/vim-easymotion',                       { 'directory' : 'easymotion'}
     NeoBundle 'Valloric/MatchTagAlways',                       { 'directory' : 'matchTagAlways'}
     NeoBundle 'kopischke/vim-fetch',                           { 'directory' : 'fetch'}
-    NeoBundle 'maralla/completor.vim',                         { 'directory' : 'completor'}
+    " NeoBundle 'maralla/completor.vim',                         { 'directory' : 'completor'}
     " NeoBundle 'ajh17/VimCompletesMe',                          { 'directory' : 'vimCompleteMe'}
     NeoBundle 'ervandew/supertab',                             { 'directory' : 'supertab'}
-    " NeoBundle 'Shougo/neocomplete.vim',                        { 'directory' : 'neocomplete'}
+    " NeoBundle 'lifepillar/vim-mucomplete',                     { 'directory' : 'mucomplete'}
+    " NeoBundle 'maxboisvert/vim-simple-complete',               { 'directory' : 'simple_complete'}
+    NeoBundle 'Shougo/neocomplete.vim',                        { 'directory' : 'neocomplete'}
     NeoBundle 'c9s/perlomni.vim',                          { 'directory' : 'perlOmni'}
     " NeoBundleSource perlomni.vim
     " autocmd FileType perl,viva,verilog_systemverilog NeoBundleSource perlomni.vim
@@ -979,7 +1002,7 @@ if use_neobundle
     NeoBundle 'junegunn/rainbow_parentheses.vim',              { 'directory' : 'rainbow_paren'}
     NeoBundle 'vim-ruby/vim-ruby',                                 { 'directory' : 'vimRuby'}
     NeoBundleLazy 'mbbill/undotree',                               { 'directory' : 'undoTree', 'autoload' : {'commands' : ['UndotreeFocus', 'UndotreeHide', 'UndotreeShow', 'UndotreeToggle']}}
-    NeoBundleLazy 'mileszs/ack.vim',                               { 'directory' : 'ack', 'autoload' : {'commands' : ['Ack', 'AckAdd', 'AckFromSearch', 'LAck', 'LAckAdd', 'AckFile', 'AckHelp', 'LAckHelp', 'AckWindow', 'LAckWindow']}}
+    " NeoBundleLazy 'mileszs/ack.vim',                               { 'directory' : 'ack', 'autoload' : {'commands' : ['Ack', 'AckAdd', 'AckFromSearch', 'LAck', 'LAckAdd', 'AckFile', 'AckHelp', 'LAckHelp', 'AckWindow', 'LAckWindow']}}
     NeoBundleLazy 'rking/ag.vim',                                  { 'directory' : 'ag', 'autoload' : {'commands' : ['Ag', 'AgAdd', 'AgFromSearch', 'LAg', 'LAgAdd', 'AgFile', 'AgHelp', 'LAgHelp']}}
     NeoBundle 'gabesoft/vim-ags',                              { 'directory' : 'ags'}
     NeoBundle 'myusuf3/numbers.vim',                           { 'directory' : 'numbers'}
@@ -1040,10 +1063,12 @@ if use_neobundle
     NeoBundle 'octol/vim-cpp-enhanced-highlight',              { 'directory' : 'CppEnhanced'}
     NeoBundle 'jceb/vim-orgmode',                              { 'directory' : 'orgmode'}
     NeoBundle 'tpope/vim-abolish',                             { 'directory' : 'abolish'}
-    NeoBundle 'junegunn/fzf',                                    { 'directory' : '~/.fzf', 'build': {'unix' : './install --all' }}
-    NeoBundle 'junegunn/fzf.vim',                                  { 'directory' : 'fzf'}
+    NeoBundle 'wincent/ferret',                                { 'directory' : 'ferret'}
+    " NeoBundle 'junegunn/fzf',                                    { 'directory' : '~/.fzf', 'build': {'unix' : './install --all' }}
+    " NeoBundle 'junegunn/fzf.vim',                                  { 'directory' : 'fzf'}
     NeoBundle 'ctrlpvim/ctrlp.vim',                                { 'directory' : 'ctrlp'}
     NeoBundle 'zweifisch/pipe2eval',                           { 'directory' : 'pipe2eval'}
+    NeoBundle 'mhinz/vim-grepper',          { 'directory' : 'grepper'}
     " {{{2
     " NeoBundle 'rbong/galvanize.vim',                               { 'directory' : 'galvanize'}
     " NeoBundleLazy 'idbrii/AsyncCommand',                           { 'directory' : 'asyncCommand', 'autoload' : {'commands' : ['AsyncGrep', 'AsyncShell', 'AsyncCscopeFindSymbol', 'AsyncCscopeFindCalls', 'AsyncCscopeFindX', 'AsyncMake']}}
@@ -1052,7 +1077,6 @@ if use_neobundle
     " NeoBundle 'osyo-manga/vim-agrep',                          { 'directory' : 'vim-agrep'}
     " NeoBundle 'ctjhoa/spacevim',                               { 'directory' : 'SpaceVim'}
     " NeoBundle 'vimwiki/vimwiki.git',        { 'directory' : 'vimwiki'}
-    " NeoBundle 'mhinz/vim-grepper',          { 'directory' : 'grepper'}
     " NeoBundle 'junegunn/vim-pseudocl',      { 'directory' : 'pseudocl'}
     " NeoBundle 'junegunn/vim-fnr',           { 'directory' : 'fnr'}
     " NeoBundle     'junegunn/vim-peekaboo',                         { 'directory' : 'peekaboo'}
@@ -1188,6 +1212,7 @@ if use_neobundle
     " NeoBundle 'julienr/vim-cellmode',                          { 'directory' : 'cellmode'}
     " NeoBundle 'junegunn/vim-plug',                             { 'directory' : 'plug'}
     " NeoBundle 'justinmk/vim-sneak',                            { 'directory' : 'sneak'}
+    " NeoBundle 'hauleth/sad.vim',                               { 'directory' : 'sad'}
     " NeoBundle 'kana/vim-operator-replace',                     { 'directory' : 'operator-replace'}
     " NeoBundle 'kana/vim-operator-user',                        { 'directory' : 'operator-user'}
     " NeoBundle 'kana/vim-smartinput',                           { 'directory' : 'smartinput'}
@@ -1315,7 +1340,7 @@ if use_neobundle
     " NeoBundle 'Shougo/unite.vim',                              { 'directory' : 'unite'}
     " NeoBundle 'soh335/unite-qflist',                           { 'directory' : 'unite_qfix'}
     " NeoBundle 'jimf/vim-async-make-green',                     { 'directory' : 'async_make_green'}
-    " NeoBundle 'MattesGroeger/vim-bookmarks',                   { 'directory' : 'bookmarks'}
+    NeoBundle 'MattesGroeger/vim-bookmarks',                   { 'directory' : 'bookmarks'}
     " NeoBundle 'tpope/vim-dotenv',                                  { 'directory' : 'dotenv'}
     " NeoBundleLazy 'Bogdanp/pyrepl.vim',                            { 'directory' : 'pyrepl', 'autoload' : {'commands' : ['PyREPLToggle', 'PyREPLEvalFile']}}
     " NeoBundleLazy 'Peeja/vim-cdo',                                 { 'directory' : 'cdo', 'autoload' : {'commands' : ['Cdo', 'Ldo']}}
@@ -1405,6 +1430,7 @@ let g:indentLine_enabled = 1
 " }}}1 " indent-lines
 set viewoptions=cursor,folds,slash,unix
 let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = 'context'
 " let g:codi#log= '/home/ramondal/logs/codi_log'
 let g:codi#interpreters = {
       \ 'python': {
@@ -1572,6 +1598,10 @@ let g:hardtime_default_on = 1
 let g:hardtime_showmsg = 1
 " }}}1
 let g:zipPlugin_ext = '*.zip,*.jar,*.xpi,*.ja,*.war,*.ear,*.celzip,*.oxt,*.kmz,*.wsz,*.xap,*.docx,*.docm,*.dotx,*.dotm,*.potx,*.potm,*.ppsx,*.ppsm,*.pptx,*.pptm,*.ppam,*.sldx,*.thmx,*.crtx,*.vdw,*.glox,*.gcsx,*.gqsx'
+" completor settings
+" let g:completor_auto_trigger = 0
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-x>\<C-u>\<C-n>"
 
 " Default to Unix LF line endings
 set ffs=unix
@@ -1609,7 +1639,7 @@ set splitright
 " Square up visual selections...
 set virtualedit=all
 " when switching buffer go to the open one"
-set switchbuf=useopen,usetab
+set switchbuf=useopen
 
 " settings handy ..
 " Display an incomplete command in the lower right corner of the Vim window
@@ -2166,7 +2196,7 @@ augroup END
 " Highlight TODO and FIXME.
 augroup HiglightTODO
   autocmd!
-  autocmd WinEnter,VimEnter * :silent! call matchadd('Todo', 'TODO\|FIXME\|DRAFT', 10)
+  autocmd WinEnter,VimEnter * :silent! call matchadd('Todo', 'NOTE\|TODO\|FIXME\|DRAFT\|HACK', 10)
 augroup END
 " Rainbow paren
 let g:rbpt_colorpairs = [
@@ -2202,6 +2232,7 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
+inoremap <c-r>? <c-r>=substitute(@/, '\v^\\\<(.+)\\\>$', '\1', '')<cr>
 inoremap <c-a> <esc>I
 inoremap <C-c> <ESC>
 inoremap <A-a> <esc>A
@@ -2378,6 +2409,21 @@ endfunction
 " Take off and nuke the entire buffer contents from space
 " (It's the only way to be sure)...
 nmap XX 1GdG
+augroup gzip
+  autocmd!
+  autocmd BufReadPre,FileReadPre	*.gz set bin
+  autocmd BufReadPost,FileReadPost	*.gz '[,']!gunzip
+  autocmd BufReadPost,FileReadPost	*.gz set nobin
+  autocmd BufReadPost,FileReadPost	*.gz execute ":doautocmd BufReadPost " . expand("%:r")
+  autocmd BufWritePost,FileWritePost	*.gz !mv <afile> <afile>:r
+  autocmd BufWritePost,FileWritePost	*.gz !gzip <afile>:r
+
+  autocmd FileAppendPre		*.gz !gunzip <afile>
+  autocmd FileAppendPre		*.gz !mv <afile>:r <afile>
+  autocmd FileAppendPost		*.gz !mv <afile> <afile>:r
+  autocmd FileAppendPost		*.gz !gzip <afile>:r
+augroup END
+
 " :cabbrev w <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'W' : 'w')<CR>
 
 " -------------> Edit compressed files <-------------
@@ -2424,6 +2470,15 @@ augroup filetype_crontab
 :autocmd FileType crontab set backupcopy=yes
 augroup END
 
+augroup filetype_ale
+:autocmd!
+:autocmd BufNewFile,BufEnter,BufRead *.ale set filetype=cpp
+augroup END
+augroup filetype_dj
+:autocmd!
+:autocmd BufNewFile,BufEnter,BufRead *.dj set filetype=ruby
+augroup END
+
 augroup filetype_snippets
 :autocmd!
 :autocmd FileType snippets setlocal modeline
@@ -2431,7 +2486,9 @@ augroup END
 
 " -------------> Create tags   <-------------
 " cscope
+set tags=./tags;
 set tags+=$HOME/ctags/vrtl/tags,tags;`depth`
+set tags+=~/tags
 let g:easytags_dynamic_files = 1
 :set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
 
@@ -2534,33 +2591,49 @@ augroup filetype_tt2
 :autocmd!
   :au BufNewFile,BufRead *.tt setf tt2
 augroup END
+
+" set foldmethod to manual when editing file
+function! s:setFoldManual()
+  let b:last_fdm = &foldmethod
+  setlocal foldmethod=manual
+endfunction
+function! s:resFoldMethod()
+  let &l:foldmethod = b:last_fdm
+  silent! normal zv
+endfunction
+augroup fold
+  autocmd!
+  autocmd InsertEnter * call s:setFoldManual()
+  autocmd InsertLeave * call s:resFoldMethod()
+augroup END
+
 augroup filetype_verilog
 :autocmd!
 " :au BufNewFile,BufRead *.sv setf verilog |set foldmethod=indent/syntax|set foldnestmax=12|set shiftwidth=4|set softtabstop=4|set tabstop=4
 " :au BufNewFile,BufRead *.sv setf verilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal tabstop=4|setlocal fdc=4|setlocal foldopen+=search|source \~/.vim/cus_fold/folding.vim|call MarkdownSVFolds()
-:au BufNewFile,BufRead *.sv setf verilog_systemverilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4
-:au BufNewFile,BufRead *.ness setf verilog_systemverilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4
-:au BufNewFile,BufRead *.spp setf verilog
-:au BufNewFile,BufRead *.vx setf viva
-:au BufNewFile,BufRead *.dpl setf deperl
-:au BufNewFile,BufRead *.v setf verilog
-:au BufNewFile,BufRead *.vcp setf viva
-:au BufNewFile,BufRead *.vcp.err setf viva
-:au BufNewFile,BufRead *.vhx setf viva
-:au BufNewFile,BufRead *.vxh setf viva
-:au BufNewFile,BufRead *.vhxcp.err setf viva
-:au BufNewFile,BufRead *.v.exp setf verilog
-:au BufNewFile,BufRead *.vtx setf verilog
-:au BufNewFile,BufRead *.svx setf verilog_systemverilog
-:au BufNewFile,BufRead *.svix setf verilog_systemverilog
-:au BufNewFile,BufRead *.svcp setf verilog_systemverilog
-:au BufNewFile,BufRead *.svi setf verilog_systemverilog
-:au BufNewFile,BufRead *.svixcp setf verilog_systemverilog
-:au BufNewFile,BufRead *.gv setf verilog
-:au BufNewFile,BufRead *.spec setf verilog
-:au BufNewFile,BufRead *.vhxcp setf verilog
-:au BufNewFile,BufRead *.svh setf verilog_systemverilog|setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4
-:au BufNewFile,BufRead *.svhx setf verilog_systemverilog
+:au BufNewFile,BufEnter,BufRead *.ness setf verilog_systemverilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4
+:au BufNewFile,BufEnter,BufRead *.spp setf verilog
+:au BufNewFile,BufEnter,BufRead *.vx setf viva
+:au BufNewFile,BufEnter,BufRead *.dpl setf deperl
+:au BufNewFile,BufEnter,BufRead *.v setf verilog |setlocal commentstring=//\ %s
+:au BufNewFile,BufEnter,BufRead *.vcp setf viva
+:au BufNewFile,BufEnter,BufRead *.vcp.err setf viva
+:au BufNewFile,BufEnter,BufRead *.vhx setf viva
+:au BufNewFile,BufEnter,BufRead *.vxh setf viva
+:au BufNewFile,BufEnter,BufRead *.vhxcp.err setf viva
+:au BufNewFile,BufEnter,BufRead *.v.exp setf verilog
+:au BufNewFile,BufEnter,BufRead *.vtx setf verilog
+:au BufNewFile,BufEnter,BufRead *.svx setf verilog_systemverilog
+:au BufNewFile,BufEnter,BufRead *.svix setf verilog_systemverilog
+:au BufNewFile,BufEnter,BufRead *.svcp setf verilog_systemverilog
+:au BufNewFile,BufEnter,BufRead *.svi setf verilog_systemverilog
+:au BufNewFile,BufEnter,BufRead *.svixcp setf verilog_systemverilog
+:au BufNewFile,BufEnter,BufRead *.gv setf verilog
+:au BufNewFile,BufEnter,BufRead *.spec setf verilog
+:au BufNewFile,BufEnter,BufRead *.sv setf verilog_systemverilog |setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal commentstring=//\ %s 
+:au BufNewFile,BufEnter,BufRead *.vhxcp setf verilog|setlocal commentstring=//\ %s 
+:au BufNewFile,BufEnter,BufRead *.svh setf verilog_systemverilog|setlocal foldnestmax=12|setlocal shiftwidth=4|setlocal softtabstop=4|setlocal commentstring=//\ %s 
+:au BufNewFile,BufEnter,BufRead *.svhx setf verilog_systemverilog
 
 :au Filetype *verilog* set softtabstop=2
 :au BufReadPost * if exists("b:current_syntax")
@@ -3450,19 +3523,19 @@ else
   " set guifont=Century\ Schoolbook\ L\ 12
   " set guifont=DejaVu\ Sans\ Mono\ 12
 
-  " set guifont=Monaco\ 9 "favourite
-  " set guifont=Monofur\ 13 "unique
+  set guifont=Monaco\ 10 " favourite
+  " set guifont=Monofur\ 13 " unique
   " set guifont=Liberation\ Mono\ 11
   " set guifont=Inconsolata\ for\ Powerline\ 12
-  " set guifont=Ubuntu\ Mono\ 14 "beautiful
-  " set guifont=Menlo\ 11 "favourite
+  " set guifont=Ubuntu\ Mono\ 14 " beautiful
+  " set guifont=Menlo\ 11 " favourite
   " set guifont=CamingoCode\ 11
   " set guifont=cousine\ 11
-  " set guifont=Fira\ Mono\ 11 "beautiful
+  " set guifont=Fira\ Mono\ 10 " beautiful
   " set guifont=Menlo\ 9 "beautiful
   " set guifont=Fantasque\ Sans\ Mono\ 10
   " set guifont=Iosevka\ 10
-  set guifont=PragmataPro\ 10
+  " set guifont=PragmataPro\ 10
   " set guifont=PFDin\ 8\ 10
   " set guifont=M+\ 1mn\ medium\ 10
 

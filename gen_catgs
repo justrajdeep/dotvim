@@ -1,0 +1,7 @@
+#!/bin/env tcsh
+\find /proj/verif_release_ro/uvmkit-1.2/4/uvm \
+      -name '*.sv' \
+      -o -name "*.svh" \
+      >! ~/cscope.files
+# ctags --languages=systemverilog --extra=+q --fields=+i -R .
+ctags --exclude=.git --languages=systemverilog --extra=+q --fields=+i -L ~/cscope.files
