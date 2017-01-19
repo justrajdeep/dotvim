@@ -40,6 +40,11 @@
 [alias]
 	logtree = log --graph --oneline --decorate --all
 	stash-unapply = git status stash show -p | git apply -R
+	d = difftool
+        ls = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative --graph
+        ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat --graph
+        new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+        checkout = !sh -c 'git stash; git stash apply; git checkout "$*"'
 [core]
 	editor = gvim -f
 	autocrlf = input
@@ -47,3 +52,9 @@
 	auto = 1
 [git-p4]
 	useClientSpec = 1
+[diff]
+	tool = gvimdiff
+[difftool]
+	prompt = false
+[help]
+	autocorrect = 1

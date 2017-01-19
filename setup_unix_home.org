@@ -445,7 +445,7 @@ set symlinks=ignore
 # set noglob # caused an issue with ~/.vim
 
 # directories
-complete cd 'C/*/d/'
+# complete cd 'C/*/d/'
 complete rmdir 'C/*/d/'
 complete chdir 	p/1/d/
 complete pushd 	p/1/d/
@@ -708,7 +708,8 @@ endif
 
 # vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
 #+END_SRC
-*** prompt
+*** DONE prompt
+    CLOSED: [2017-01-06 Fri 13:02]
 #+BEGIN_SRC sh :tangle ~/scripts/bin/cgb :shebang "#!/tool/pandora64/hdk-4.8.1/19/bin/perl" :eval no
 
 # git branch --no-color 2> /dev/null' | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /
@@ -761,6 +762,14 @@ set     end="%{\033[0m%}" # This is needed at the end... :(
 set system=`hostname`
 unalias setprompt; alias setprompt 'set prompt="${green}%n${end}@${magenta}${system}${end}: ${red}%B%c03%b${end} :${cyan}%t${end}:[ \! ][%?] ${blue} ${end} \n${end}%#"'
 unalias cd; alias cd 'chdir \!* && setprompt'	# reset prompt after change dir
+unalias cdz; alias cdz 'chdir `$HOME/scripts/bin/cdf_command . | $HOME/scripts/bin/fzf` && setprompt'	# reset prompt after change dir
+unalias cdy; alias cdy 'chdir `$HOME/scripts/bin/cdf_command . | $HOME/scripts/bin/fzy` && setprompt'	# reset prompt after change dir
+unalias cdpz; alias cdpz 'chdir `$HOME/scripts/bin/cdf_command $STEM/src/ | $HOME/scripts/bin/fzf` && setprompt'	# reset prompt after change dir
+unalias cdpy; alias cdpy 'chdir `$HOME/scripts/bin/cdf_command $STEM/src/ | $HOME/scripts/bin/fzy` && setprompt'	# reset prompt after change dir
+unalias cdfz; alias cdfz 'chdir `$HOME/scripts/bin/cdf_command \!:1 | $HOME/scripts/bin/fzf` && setprompt'	# reset prompt after change dir
+unalias cdfy; alias cdfy 'chdir `$HOME/scripts/bin/cdf_command \!:1 | $HOME/scripts/bin/fzy` && setprompt'	# reset prompt after change dir
+unalias cdoz; alias cdoz 'chdir `$HOME/scripts/bin/cdf_command $OUT_HOME/ | $HOME/scripts/bin/fzf` && setprompt'	# reset prompt after change dir
+unalias cdoy; alias cdoy 'chdir `$HOME/scripts/bin/cdf_command $OUT_HOME/ | $HOME/scripts/bin/fzy` && setprompt'	# reset prompt after change dir
 if ( $?prompt && -x  /tool/pandora64/.package/git-2.4.6/bin/git && -x $HOME/scripts/bin/cgb ) then
    alias precmd $HOME/scripts/bin/cgb
  endif
@@ -841,6 +850,8 @@ exit 2
 endsw
 
 setenv P4DIFF tkdiff
+setenv P4EDITOR 'gvim -f'
+setenv P4MERGE p4merge
 
 
 # }}}1
@@ -850,16 +861,51 @@ setenv P4DIFF tkdiff
 *** TODO alias
 #+BEGIN_SRC tcsh :tangle ~/tangled_files/my_alias :eval never
 #  some default alias {{{1
+# escaping quotes example
+# alias t echo hello world                # you may not actually need any quotes
+# alias u 'echo "hello world"'            # nested quotes of different types
+# alias v echo\ \"hello\ world\"          # escape everything
+# alias w echo '\;'hello'";"' world       # quote/escape problem areas only
+# alias x 'echo \"hello world\"'          # single quote and escape for literal "
+# alias y "echo "\""hello world"\"        # unquote, escaped quote, quote ("\"")
+# alias z 'echo '\''hello world'\'        # same goes for single quotes ('\'')
+
 unalias xterm; alias xterm 'uxterm'
 unalias ls; alias ls "ls-F --color=always -h" #enable thousands grouping and colour
+unalias lz; alias lz 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command . ; $HOME/scripts/bin/ag_file_command . ) | $HOME/scripts/bin/fzf`'
+unalias lfz; alias lfz 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command \!:1 ; $HOME/scripts/bin/ag_file_command \!:1 ) | $HOME/scripts/bin/fzf`'
+unalias ly; alias ly 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command . ; $HOME/scripts/bin/ag_file_command . ) | $HOME/scripts/bin/fzy`'
+unalias lfy; alias lfy 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command \!:1 ; $HOME/scripts/bin/ag_file_command \!:1 ) | $HOME/scripts/bin/fzy`'
+unalias llz; alias llz 'ls-F --color=always -ltrh `( $HOME/scripts/bin/cdf_command . ; $HOME/scripts/bin/ag_file_command . ) | $HOME/scripts/bin/fzf`'
+unalias llfz; alias llfz 'ls-F --color=always -ltrh `( $HOME/scripts/bin/cdf_command \!:1 ; $HOME/scripts/bin/ag_file_command \!:1 ) | $HOME/scripts/bin/fzf`'
+unalias lly; alias lly 'ls-F --color=always -ltrh `( $HOME/scripts/bin/cdf_command . ; $HOME/scripts/bin/ag_file_command . ) | $HOME/scripts/bin/fzy`'
+unalias llfy; alias lly 'ls-F --color=always -ltrh `( $HOME/scripts/bin/cdf_command \!:1 ; $HOME/scripts/bin/ag_file_command \!:1 ) | $HOME/scripts/bin/fzy`'
+# current directory
+unalias vz; alias vz 'gvim `$HOME/scripts/bin/ag_file_command . | $HOME/scripts/bin/fzf`'
+unalias vy; alias vy 'gvim `$HOME/scripts/bin/ag_file_command . | $HOME/scripts/bin/fzy`'
+unalias vfz; alias vfz 'gvim `$HOME/scripts/bin/ag_file_command \!:1 | $HOME/scripts/bin/fzf`'
+unalias vfy; alias vfy 'gvim `$HOME/scripts/bin/ag_file_command \!:1 | $HOME/scripts/bin/fzy`'
+unalias vagz; alias vagz 'gvim `ag \!:* | $HOME/scripts/bin/fzf | awk '\''{print $1}'\''`'
+unalias vagy; alias vagy 'gvim `ag \!:* | $HOME/scripts/bin/fzy | awk '\''{print $1}'\''`'
+unalias vmz; alias vmz '$HOME/scripts/downloaded/vimer -t -s \!:1 `$HOME/scripts/bin/ag_file_command . | $HOME/scripts/bin/fzf`'
+unalias vmy; alias vmy '$HOME/scripts/downloaded/vimer -t -s \!:1 `$HOME/scripts/bin/ag_file_command . | $HOME/scripts/bin/fzy`'
+# project specific
+unalias vpz; alias vpz 'gvim `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzf`'
+unalias vpy; alias vpy 'gvim `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzy`'
+unalias voz; alias voz 'gvim `$HOME/scripts/bin/ag_file_command $OUT_HOME/ | $HOME/scripts/bin/fzf`'
+unalias voy; alias voy 'gvim `$HOME/scripts/bin/ag_file_command $OUT_HOME/ | $HOME/scripts/bin/fzy`'
+unalias vmpz; alias vmpz '$HOME/scripts/downloaded/vimer -t -s \!:1 `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzf`'
+unalias vmpy; alias vmpy '$HOME/scripts/downloaded/vimer -t -s \!:1 `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzy`'
+unalias vmoz; alias vmoz '$HOME/scripts/downloaded/vimer -t -s \!:1 `$HOME/scripts/bin/ag_file_command $OUT_HOME/ | $HOME/scripts/bin/fzf`'
+unalias vmoy; alias vmoy '$HOME/scripts/downloaded/vimer -t -s \!:1 `$HOME/scripts/bin/ag_file_command $OUT_HOME/ | $HOME/scripts/bin/fzy`'
 unalias ll; alias ll 'ls-F -ltrh'
 unalias lla; alias lla 'ls-F -l -A'
-unalias flist; alias flist 'find \!:1 -type f >! files'
+unalias flist; alias flist '\find \!:1 -type f >! files'
 # Some alias to force the user to acknowledge when deleting or copying
 unalias rm; alias rm "\rm -i -v"
 unalias cp; alias cp "\cp -i -v"
 unalias mv; alias mv "\mv -i -v"
-unalias grep; alias grep "\grep --color=always"
+unalias grep; alias grep "\grep --color=always -s"
 unalias tree; alias tree "\tree -C"
 unalias less; alias less "\less -R -i"
 unalias df; alias df "\df -h"
@@ -868,14 +914,15 @@ unalias lg; alias lg '\ls -1 | \grep -i '
 # xterm related
 unalias kk; alias kk '\konsole &'
 unalias xx; alias xx '\uxterm -fg white -bg #262626 &'
+unalias xb; alias xb '\uxterm &'
 unalias xtg; alias xtg '\uxterm -fg green -bg black &'
-unalias xtgr; alias xtgr '\uxterm -fg gray  -bg black' 
-unalias xty; alias xty '\uxterm -fg yellow -bg black' 
-unalias xto; alias xto '\uxterm -fg orange -bg black' 
-unalias xtw; alias xtw '\uxterm -fg white -bg black' 
-unalias xtwh; alias xtwh '\uxterm -fg wheat -bg black' 
-unalias xtv; alias xtv '\uxterm -fg violet -bg black' 
-unalias xtb; alias xtb '\uxterm -fg black -bg gray' 
+unalias xtgr; alias xtgr '\uxterm -fg gray  -bg black &' 
+unalias xty; alias xty '\uxterm -fg yellow -bg black &' 
+unalias xto; alias xto '\uxterm -fg orange -bg black &' 
+unalias xtw; alias xtw '\uxterm -fg white -bg black &' 
+unalias xtwh; alias xtwh '\uxterm -fg wheat -bg black &' 
+unalias xtv; alias xtv '\uxterm -fg violet -bg black &' 
+unalias xtb; alias xtb '\uxterm -fg black -bg gray &' 
 
 unalias ssh; alias ssh 'ssh -X'
 unalias ss; alias ss 'source ~/tangled_files/my_proj_path'
@@ -893,10 +940,13 @@ unalias p4have; alias p4have 'p4 changes -m1 -s submitted #have'
 unalias p4not; alias p4not "( find . -maxdepth 1 -type f -print0 | xargs -0 p4 fstat > /dev/null ) | & awk '{print "\$"1}'"
 unalias init; alias init 'source /proj/verif_release_ro/cbwa_initscript/current/cbwa_init.csh'
 
-unalias diskspace; alias diskspace 'cd /local_vol1_nobackup/user/ramondal/'
-unalias decoderb; alias decoderb '$STEM/src/test/tools/scripts/decode_registers.pl rbbm.dmp> ! decode_rbbm; vi decode_rbbm'
+unalias diskspace; alias diskspace 'chdir `\ls -d -1 /local_vol1_nobackup/user/ramondal/*/ | $HOME/scripts/bin/fzf ` && setprompt'
+unalias decoderb; alias decoderb '$STEM/src/test/tools/scripts/decode_registers.pl rbbm.dmp | gvim -R -'
+unalias decoderbz; alias decoderbz '$STEM/src/test/tools/scripts/decode_registers.pl rbbm.dmp | $HOME/scripts/bin/fzf'
 set backslash_quote
 unalias hbo; alias hbo 'dj -c -v -e \'here_in_design.build_self("\!:*")\''
+
+unalias createVnc; alias createVnc 'vncserver :\!:1 -depth 24 -geometry 3820x1025 --alwaysshared -log \*:stdout:0'
 
 # unalias module; alias module 'eval `$TCLSH $MODULESHOME/modulecmd.tcl tcsh !*`'
 # }}} 1
@@ -1119,6 +1169,11 @@ ln -fs ~/.vim/tmux.conf ~/.tmux.conf
 #+END_SRC
 ** TODO install tmux scripts
 *** https://github.com/tmuxinator/tmuxinator
+* set up your fluxbox
+** fluxbox configuration
+# #+BEGIN_SRC sh :results silent :dir ~/ :tangle ~/.fluxboxrc :eval never
+
+# #+END_SRC
 * setup vnc xstartup
 ** check the modline
 #+BEGIN_SRC sh :results output :dir ~/
@@ -1157,8 +1212,8 @@ fi
 
 # Choose "gnome", "kde", "fluxbox", or "fvwm2"
 # WM="kde"
-WM="fvwm2"
-# WM="fluxbox"
+# WM="fvwm2"
+WM="fluxbox"
 
 # Are we running Solaris 2.x?
 if echo $OS | grep -q "^so"; then
@@ -1413,16 +1468,16 @@ AddToFunc   StartFunction
 + I Module FvwmTaskBar
 + I Module FvwmPager 0 4
 + I Module FvwmAnimate
-+ I Module FvwmProxy
+# + I Module FvwmProxy
 + I Module FvwmButtons MyButtons
 + I Module FvwmWinList
 #+ I Module FvwmScript
 
 DestroyFunc InitFunction
 AddToFunc   InitFunction
-+ I Exec exec xscreensaver
-+ I Exec exec fvwm-root -r $[fvwm_wallpapers]/chicago_skyline.png
-#+ I FvwmXTerm
+# + I Exec exec xscreensaver
+# + I Exec exec fvwm-root -r $[fvwm_wallpapers]/chicago_skyline.png
+# + I FvwmXTerm
 
 DestroyFunc RestartFunction
 AddToFunc   RestartFunction
@@ -1528,7 +1583,7 @@ AddToDecor   MyDecor
 # Window Styles
 ###########
 Style "*" UseDecor MyDecor
-Style "*" Font "xft:Sans:Bold:size=8:minspace=False:antialias=True"
+# Style "*" Font "xft:fixed:Bold:size=8:minspace=False:antialias=True"
 Style "*" BorderWidth 4, HandleWidth 4
 Style "*" MWMBorder, FirmBorder
 Style "*" Colorset 4
@@ -1551,7 +1606,7 @@ MenuStyle * VerticalItemSpacing 1 1, VerticalTitleSpacing 2 2
 MenuStyle * MenuColorset 7
 MenuStyle * ActiveFore, Hilight3DThin
 MenuStyle * ActiveColorset 8
-MenuStyle * Font "Shadow=0:xft:LiberationSans:Bold:size=8:antialias=True"
+# MenuStyle * Font "Shadow=0:xft:LiberationSans:Bold:size=8:antialias=True"
 
 #####
 # FvwmRootMenu
@@ -1819,7 +1874,7 @@ AddToMenu   FvwmWindowOpsMenu "Window Operations" Title
 ###########
 DestroyModuleConfig FvwmIdent: *
 *FvwmIdent: Colorset 9
-*FvwmIdent: Font "xft:Sans:Bold:size=10:antialias=True"
+# *FvwmIdent: Font "xft:fixed:Bold:size=10:antialias=True"
 
 #####
 # FvwmWinList
@@ -1834,7 +1889,7 @@ Style "FvwmWinList" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
   CirculateSkip, StaysOnBottom, FixedPosition, FixedSize, !Iconifiable
 *FvwmWinList: Back #e9e9d9 
 *FvwmWinList: Fore Black
-*FvwmWinList: Font "Shadow=0:xft:LiberationSans:Bold:size=8:antialias=True"
+# *FvwmWinList: Font "Shadow=0:xft:LiberationSans:Bold:size=8:antialias=True"
 *FvwmWinList: Action Click1 Function DeiconifyAndRaise
 *FvwmWinList: Action Click2 Iconify
 *FvwmWinList: Action Click3 Module FvwmIdent
@@ -1878,9 +1933,9 @@ DestroyModuleConfig FvwmTaskBar: *
 *FvwmTaskBar: Rows 1
 *FvwmTaskBar: 3DFvwm
 *FvwmTaskBar: DeskOnly
-*FvwmTaskBar: Font "xft:Sans:Bold:pixelsize=9:minispace=True:antialias=True"
-*FvwmTaskBar: SelFont "xft:Sans:Bold:pixelsize=9:minispace=True:antialias=True"
-*FvwmTaskBar: StatusFont "xft:Sans:Bold:pixelsize=9:minispace=True:antialias=True"
+# *FvwmTaskBar: Font "xft:fixed:Bold:pixelsize=9:minispace=True:antialias=True"
+# *FvwmTaskBar: SelFont "xft:fixed:Bold:pixelsize=9:minispace=True:antialias=True"
+# *FvwmTaskBar: StatusFont "xft:fixed:Bold:pixelsize=9:minispace=True:antialias=True"
 *FvwmTaskBar: Colorset 1
 *FvwmTaskBar: IconColorset 9
 *FvwmTaskBar: FocusColorset 9
@@ -1923,9 +1978,9 @@ DestroyModuleConfig FvwmPager: *
 *FvwmPager: HilightColorset * 10
 *FvwmPager: BalloonColorset * 9
 *FvwmPager: WindowColorsets 9 10
-*FvwmPager: Font "xft:Sans:Bold:pixelsize=9:minspace=True:antialias=True"
+# *FvwmPager: Font "xft:fixed:Bold:pixelsize=9:minspace=True:antialias=True"
 *FvwmPager: Balloons All
-*FvwmPager: BalloonFont "xft:Sans:Bold:pixelsize=9:minspace=True:antialias=True"
+# *FvwmPager: BalloonFont "xft:fixed:Bold:pixelsize=9:minspace=True:antialias=True"
 *FvwmPager: BallonYOffset +2
 *FvwmPager: Window3dBorders
 *FvwmPager: MiniIcons
@@ -1944,7 +1999,7 @@ DestroyModuleConfig FvwmPager: *
 # *MyButtons: Rows 38
 # *MyButtons: Columns 1
 # *MyButtons: Frame 1
-# *MyButtons: Font "Shadow=0:xft:Sans:Bold:pixelsize=9:minspace=True:antialias=True"
+# *MyButtons: Font "Shadow=0:xft:fixed:Bold:pixelsize=9:minspace=True:antialias=True"
 # *MyButtons: (1x1, Frame 1, Title(Center) "Productivity")
 # *MyButtons: (1x1, Swallow "xclock" `Exec xclock -digital -padding 4 -update 1 -face 'Monospace:size=6' -strftime 'TIME %H:%M:%S'`)
 # *MyButtons: (1x1, Swallow "xclock" `Exec xclock -digital -padding 4 -face 'Monospace:size=6' -strftime 'DATE %Y-%m-%d'`)
@@ -2151,7 +2206,7 @@ cp -vf vimer ~/scripts/downloaded
 #+END_SRC
 
 #+RESULTS:
-: `vimer' -> `/home/ramondal/scripts/downloaded/vimer'
+: 'vimer' -> '/home/ramondal/scripts/downloaded/vimer'
 
 ** remove the git directory
 #+BEGIN_SRC sh :results output :dir ~/
@@ -2160,207 +2215,207 @@ rm -rvf /tmp/temp_vimer
 
 #+RESULTS:
 #+begin_example
-removed `/tmp/temp_vimer/vimer'
-removed `/tmp/temp_vimer/test/test_vimer'
-removed `/tmp/temp_vimer/test/test'
-removed `/tmp/temp_vimer/test/mockvim'
-removed `/tmp/temp_vimer/test/mockcat'
-removed `/tmp/temp_vimer/test/setup'
-removed directory: `/tmp/temp_vimer/test'
-removed `/tmp/temp_vimer/vimer.cmd'
-removed `/tmp/temp_vimer/.travis.yml'
-removed `/tmp/temp_vimer/.git/info/exclude'
-removed directory: `/tmp/temp_vimer/.git/info'
-removed `/tmp/temp_vimer/.git/hooks/commit-msg.sample'
-removed `/tmp/temp_vimer/.git/hooks/pre-push.sample'
-removed `/tmp/temp_vimer/.git/hooks/update.sample'
-removed `/tmp/temp_vimer/.git/hooks/post-update.sample'
-removed `/tmp/temp_vimer/.git/hooks/applypatch-msg.sample'
-removed `/tmp/temp_vimer/.git/hooks/pre-commit.sample'
-removed `/tmp/temp_vimer/.git/hooks/pre-applypatch.sample'
-removed `/tmp/temp_vimer/.git/hooks/pre-rebase.sample'
-removed `/tmp/temp_vimer/.git/hooks/prepare-commit-msg.sample'
-removed directory: `/tmp/temp_vimer/.git/hooks'
-removed `/tmp/temp_vimer/.git/HEAD'
-removed `/tmp/temp_vimer/.git/objects/c0/59bcddbdfc7cffc17be37b8d0ae3d09a38ac3b'
-removed directory: `/tmp/temp_vimer/.git/objects/c0'
-removed `/tmp/temp_vimer/.git/objects/7c/a525aefd5348e06378b5bff1c784e18a382671'
-removed directory: `/tmp/temp_vimer/.git/objects/7c'
-removed `/tmp/temp_vimer/.git/objects/b9/c0cffa152d94c5244b5e717983975d8766b78e'
-removed `/tmp/temp_vimer/.git/objects/b9/f27378ef1243ac11608fb29db4923efdf080f5'
-removed directory: `/tmp/temp_vimer/.git/objects/b9'
-removed `/tmp/temp_vimer/.git/objects/e6/1a3140735a4449f08ec621d33770ee97891028'
-removed `/tmp/temp_vimer/.git/objects/e6/76feacf5a75ee76b7f7eadc9064dc0ac64d9df'
-removed directory: `/tmp/temp_vimer/.git/objects/e6'
-removed `/tmp/temp_vimer/.git/objects/c9/d2dc5e6c7b89f5eaba17998337457e6a85b59b'
-removed directory: `/tmp/temp_vimer/.git/objects/c9'
-removed `/tmp/temp_vimer/.git/objects/00/9b281132ae5820598c43e9f6592fb041883c4b'
-removed directory: `/tmp/temp_vimer/.git/objects/00'
-removed `/tmp/temp_vimer/.git/objects/b0/0f07a6499df033b92d868c06ea43b216f95397'
-removed directory: `/tmp/temp_vimer/.git/objects/b0'
-removed `/tmp/temp_vimer/.git/objects/18/786cd9a1c8c4a19eb4a33d6582957fa92065b9'
-removed directory: `/tmp/temp_vimer/.git/objects/18'
-removed `/tmp/temp_vimer/.git/objects/54/1157cf64e4e7bf88476d28fad4d8dbca1efeab'
-removed `/tmp/temp_vimer/.git/objects/54/bd6031dba8725fee7986efa5b9320f17972ca2'
-removed directory: `/tmp/temp_vimer/.git/objects/54'
-removed `/tmp/temp_vimer/.git/objects/ed/33951d681bad85f990492351f4ba8b9d6617f3'
-removed directory: `/tmp/temp_vimer/.git/objects/ed'
-removed `/tmp/temp_vimer/.git/objects/1c/b975de29d211cdac09cb622b7a431054081e8a'
-removed directory: `/tmp/temp_vimer/.git/objects/1c'
-removed `/tmp/temp_vimer/.git/objects/76/e8af2a2e8fdc8f570bb0d70d099fb55b082cfa'
-removed directory: `/tmp/temp_vimer/.git/objects/76'
-removed `/tmp/temp_vimer/.git/objects/5e/75e4d83d3ad5a80d9b1826898023dfdb0fb883'
-removed directory: `/tmp/temp_vimer/.git/objects/5e'
-removed `/tmp/temp_vimer/.git/objects/dd/c0fd1065aeb3ab3bb115b44a5f5821fb4dd385'
-removed directory: `/tmp/temp_vimer/.git/objects/dd'
-removed `/tmp/temp_vimer/.git/objects/2b/1eef6c49bd0af8984d57c834c209a92da0b5e4'
-removed directory: `/tmp/temp_vimer/.git/objects/2b'
-removed `/tmp/temp_vimer/.git/objects/8a/b8c546a83857e5eb997272c288780008de8ab7'
-removed directory: `/tmp/temp_vimer/.git/objects/8a'
-removed `/tmp/temp_vimer/.git/objects/35/f9d19505ec82e052d7c5b04ba8bdc1be8d8813'
-removed directory: `/tmp/temp_vimer/.git/objects/35'
-removed `/tmp/temp_vimer/.git/objects/6c/957ad8779da24199a534632511d7c1f0813364'
-removed directory: `/tmp/temp_vimer/.git/objects/6c'
-removed `/tmp/temp_vimer/.git/objects/69/08ce44c700b2235d972ee35af21bff86555afc'
-removed directory: `/tmp/temp_vimer/.git/objects/69'
-removed `/tmp/temp_vimer/.git/objects/24/aa0f0b918215a5204587810f5ed1c1b3b5a460'
-removed directory: `/tmp/temp_vimer/.git/objects/24'
-removed `/tmp/temp_vimer/.git/objects/ad/9682908f97f06278a0344749828a9d6b3659e1'
-removed directory: `/tmp/temp_vimer/.git/objects/ad'
-removed `/tmp/temp_vimer/.git/objects/12/9bb020b19fe52acf3a6734dbc03fed716d1d79'
-removed directory: `/tmp/temp_vimer/.git/objects/12'
-removed `/tmp/temp_vimer/.git/objects/47/dae336620e0ea994fcd881ea153349bed0aa88'
-removed directory: `/tmp/temp_vimer/.git/objects/47'
-removed `/tmp/temp_vimer/.git/objects/8f/16a23a345249d2505a58852d75be95b3afa132'
-removed directory: `/tmp/temp_vimer/.git/objects/8f'
-removed directory: `/tmp/temp_vimer/.git/objects/pack'
-removed `/tmp/temp_vimer/.git/objects/8c/845abe8f2eab9b1904c1f02adcb900328768d4'
-removed directory: `/tmp/temp_vimer/.git/objects/8c'
-removed directory: `/tmp/temp_vimer/.git/objects/info'
-removed `/tmp/temp_vimer/.git/objects/f1/21cc41b844c03767c6e7d4ce89be4374d9f7ee'
-removed directory: `/tmp/temp_vimer/.git/objects/f1'
-removed `/tmp/temp_vimer/.git/objects/f5/8a21ba54568e0771855266e849a16c21287adb'
-removed directory: `/tmp/temp_vimer/.git/objects/f5'
-removed `/tmp/temp_vimer/.git/objects/78/157628483bb66747e2780058bea7cee3b34d4c'
-removed directory: `/tmp/temp_vimer/.git/objects/78'
-removed `/tmp/temp_vimer/.git/objects/ee/cc8f0c6b282b15dde47fa6c0d23ff4bc6b7701'
-removed directory: `/tmp/temp_vimer/.git/objects/ee'
-removed `/tmp/temp_vimer/.git/objects/c3/1b4cbc10974eda3a2a0f0fc75b82c432be0a77'
-removed directory: `/tmp/temp_vimer/.git/objects/c3'
-removed `/tmp/temp_vimer/.git/objects/ca/508fde516f19d5c84302441afbfcf53b47e10e'
-removed directory: `/tmp/temp_vimer/.git/objects/ca'
-removed `/tmp/temp_vimer/.git/objects/e8/b232565ff2bfab2a1b709e613f1d1b05490cd6'
-removed `/tmp/temp_vimer/.git/objects/e8/172eaccd5c8f436f868890a923edcfeec80549'
-removed directory: `/tmp/temp_vimer/.git/objects/e8'
-removed `/tmp/temp_vimer/.git/objects/3c/7cb69c90003cb86d09b6901149098ffac5a833'
-removed directory: `/tmp/temp_vimer/.git/objects/3c'
-removed `/tmp/temp_vimer/.git/objects/b5/fc7d8dfdfc67eb477da61a7c3d02cd974ae21b'
-removed directory: `/tmp/temp_vimer/.git/objects/b5'
-removed `/tmp/temp_vimer/.git/objects/7b/827268f123f40f5bb4b14ca96d93a5142c73cf'
-removed `/tmp/temp_vimer/.git/objects/7b/b62ff4cd0b2c2da65e8641898da57cc7d4f4b2'
-removed directory: `/tmp/temp_vimer/.git/objects/7b'
-removed `/tmp/temp_vimer/.git/objects/44/c6bdea3740428896bfd5975c10947a0bc76915'
-removed directory: `/tmp/temp_vimer/.git/objects/44'
-removed `/tmp/temp_vimer/.git/objects/0c/bb8e70c82873eee8c493d76419f36cf319e288'
-removed directory: `/tmp/temp_vimer/.git/objects/0c'
-removed `/tmp/temp_vimer/.git/objects/d9/980322416e08a09af575f97f0b96eef2fb0b91'
-removed directory: `/tmp/temp_vimer/.git/objects/d9'
-removed `/tmp/temp_vimer/.git/objects/d6/b387598b9e3fbaf420011b3a6f97693b7d29d6'
-removed directory: `/tmp/temp_vimer/.git/objects/d6'
-removed `/tmp/temp_vimer/.git/objects/d1/a6d2fecaa5117cc0dcc78fe8142bab272d3160'
-removed directory: `/tmp/temp_vimer/.git/objects/d1'
-removed `/tmp/temp_vimer/.git/objects/6f/8da9d6da51bd8386debeb98058e64dc74e487f'
-removed directory: `/tmp/temp_vimer/.git/objects/6f'
-removed `/tmp/temp_vimer/.git/objects/b1/7f159b3f3791d39f54593e2c5dbb1a642334bb'
-removed directory: `/tmp/temp_vimer/.git/objects/b1'
-removed `/tmp/temp_vimer/.git/objects/53/04b9900ec561fd5335a0195f7066412165d996'
-removed directory: `/tmp/temp_vimer/.git/objects/53'
-removed `/tmp/temp_vimer/.git/objects/7f/2b9695b11b4a8a2e57f0e9c7c52a98e0d07777'
-removed directory: `/tmp/temp_vimer/.git/objects/7f'
-removed `/tmp/temp_vimer/.git/objects/9f/3f43ac875a8f5cafcf3db0c274567072a19248'
-removed directory: `/tmp/temp_vimer/.git/objects/9f'
-removed `/tmp/temp_vimer/.git/objects/eb/a02149ce26923445a8a6a8ff620c6a870179f5'
-removed directory: `/tmp/temp_vimer/.git/objects/eb'
-removed `/tmp/temp_vimer/.git/objects/d3/7b3977e06c149f59162e56e9bfdb8a625f20fa'
-removed directory: `/tmp/temp_vimer/.git/objects/d3'
-removed `/tmp/temp_vimer/.git/objects/aa/7c713076dc990cf6f91b5fd1b4cd092109350d'
-removed `/tmp/temp_vimer/.git/objects/aa/ae809949a39e6cfc42e441d3b021c129235412'
-removed directory: `/tmp/temp_vimer/.git/objects/aa'
-removed `/tmp/temp_vimer/.git/objects/af/2ee3a96a4154c836f8a5828e1e2dc5fd3627f4'
-removed directory: `/tmp/temp_vimer/.git/objects/af'
-removed `/tmp/temp_vimer/.git/objects/a3/ccb5ff1dd61815fb28e5d0c6efd7c813ce360d'
-removed directory: `/tmp/temp_vimer/.git/objects/a3'
-removed `/tmp/temp_vimer/.git/objects/98/4cf72ed615b407a248423272afd760542f0aa9'
-removed directory: `/tmp/temp_vimer/.git/objects/98'
-removed `/tmp/temp_vimer/.git/objects/31/18df58d98396e2516a43e51fc08382a48bc97f'
-removed directory: `/tmp/temp_vimer/.git/objects/31'
-removed `/tmp/temp_vimer/.git/objects/9a/990c9ac25147e5b0a3c540eccbbb5fed030efb'
-removed directory: `/tmp/temp_vimer/.git/objects/9a'
-removed `/tmp/temp_vimer/.git/objects/f9/7e20b0fb27ff662c0830a0b787afd795c6b6ef'
-removed directory: `/tmp/temp_vimer/.git/objects/f9'
-removed `/tmp/temp_vimer/.git/objects/64/24d4b8cc1eb18ccacf8ce28978d8421ad70ed3'
-removed `/tmp/temp_vimer/.git/objects/64/1f31178e0760f4f79f808135c6ba6a89f10a86'
-removed directory: `/tmp/temp_vimer/.git/objects/64'
-removed `/tmp/temp_vimer/.git/objects/38/53f13fbac11c987c80d0cb4e3a0256833a162c'
-removed directory: `/tmp/temp_vimer/.git/objects/38'
-removed `/tmp/temp_vimer/.git/objects/27/67def31da4cdda8005b7bcbe7bf15ed288d30d'
-removed `/tmp/temp_vimer/.git/objects/27/66aedc04ed1666e1ba762d77079e86051d0adb'
-removed directory: `/tmp/temp_vimer/.git/objects/27'
-removed `/tmp/temp_vimer/.git/objects/48/6e2b71910c137f24abda027e8c63d6ad784a9b'
-removed directory: `/tmp/temp_vimer/.git/objects/48'
-removed `/tmp/temp_vimer/.git/objects/4c/4c8f0b5fa973576ead3afda1afa30cd21c311c'
-removed directory: `/tmp/temp_vimer/.git/objects/4c'
-removed `/tmp/temp_vimer/.git/objects/f4/e3ad7c944788d26fa8ce3853c702b99c7f224f'
-removed directory: `/tmp/temp_vimer/.git/objects/f4'
-removed `/tmp/temp_vimer/.git/objects/c7/0e404c96379235571d18b5c010a7539e8e7e27'
-removed `/tmp/temp_vimer/.git/objects/c7/d0c70fe065c23548ee11141fcf5773ce50fff8'
-removed directory: `/tmp/temp_vimer/.git/objects/c7'
-removed `/tmp/temp_vimer/.git/objects/be/0d8cdcd5b0e03241bebc9f98ae4e77e3b6a3e1'
-removed directory: `/tmp/temp_vimer/.git/objects/be'
-removed `/tmp/temp_vimer/.git/objects/03/7a5f19a29cb81e78d6cebce06ca7897a098f7a'
-removed directory: `/tmp/temp_vimer/.git/objects/03'
-removed `/tmp/temp_vimer/.git/objects/0b/20b40e142e95e1e0bd497acd4b35a332df80de'
-removed directory: `/tmp/temp_vimer/.git/objects/0b'
-removed `/tmp/temp_vimer/.git/objects/d2/03e1be5ff4635ff55002504a0b84b224b7863c'
-removed directory: `/tmp/temp_vimer/.git/objects/d2'
-removed `/tmp/temp_vimer/.git/objects/4e/d89e06d15a42195c54cf192531ea567e446b0d'
-removed directory: `/tmp/temp_vimer/.git/objects/4e'
-removed `/tmp/temp_vimer/.git/objects/f3/881bd3898c740fdfcf16656089b64d0924023c'
-removed directory: `/tmp/temp_vimer/.git/objects/f3'
-removed `/tmp/temp_vimer/.git/objects/79/35f647b42bdb044ac0fcb2c0e87fa64082f0ee'
-removed directory: `/tmp/temp_vimer/.git/objects/79'
-removed `/tmp/temp_vimer/.git/objects/21/5c2358d7ac0f5db6468178bf52ff367cb0e81c'
-removed directory: `/tmp/temp_vimer/.git/objects/21'
-removed directory: `/tmp/temp_vimer/.git/objects'
-removed directory: `/tmp/temp_vimer/.git/branches'
-removed `/tmp/temp_vimer/.git/index'
-removed `/tmp/temp_vimer/.git/refs/remotes/origin/HEAD'
-removed directory: `/tmp/temp_vimer/.git/refs/remotes/origin'
-removed directory: `/tmp/temp_vimer/.git/refs/remotes'
-removed `/tmp/temp_vimer/.git/refs/heads/master'
-removed directory: `/tmp/temp_vimer/.git/refs/heads'
-removed directory: `/tmp/temp_vimer/.git/refs/tags'
-removed directory: `/tmp/temp_vimer/.git/refs'
-removed `/tmp/temp_vimer/.git/config'
-removed `/tmp/temp_vimer/.git/packed-refs'
-removed `/tmp/temp_vimer/.git/description'
-removed `/tmp/temp_vimer/.git/logs/HEAD'
-removed `/tmp/temp_vimer/.git/logs/refs/remotes/origin/HEAD'
-removed directory: `/tmp/temp_vimer/.git/logs/refs/remotes/origin'
-removed directory: `/tmp/temp_vimer/.git/logs/refs/remotes'
-removed `/tmp/temp_vimer/.git/logs/refs/heads/master'
-removed directory: `/tmp/temp_vimer/.git/logs/refs/heads'
-removed directory: `/tmp/temp_vimer/.git/logs/refs'
-removed directory: `/tmp/temp_vimer/.git/logs'
-removed directory: `/tmp/temp_vimer/.git'
-removed `/tmp/temp_vimer/Makefile'
-removed `/tmp/temp_vimer/CHANGES.md'
-removed `/tmp/temp_vimer/LICENSE.md'
-removed `/tmp/temp_vimer/.gitignore'
-removed `/tmp/temp_vimer/dev/README.md'
-removed directory: `/tmp/temp_vimer/dev'
-removed `/tmp/temp_vimer/README.md'
-removed directory: `/tmp/temp_vimer'
+removed '/tmp/temp_vimer/dev/README.md'
+removed directory: '/tmp/temp_vimer/dev'
+removed '/tmp/temp_vimer/.git/index'
+removed '/tmp/temp_vimer/.git/packed-refs'
+removed '/tmp/temp_vimer/.git/hooks/prepare-commit-msg.sample'
+removed '/tmp/temp_vimer/.git/hooks/pre-applypatch.sample'
+removed '/tmp/temp_vimer/.git/hooks/update.sample'
+removed '/tmp/temp_vimer/.git/hooks/pre-commit.sample'
+removed '/tmp/temp_vimer/.git/hooks/commit-msg.sample'
+removed '/tmp/temp_vimer/.git/hooks/applypatch-msg.sample'
+removed '/tmp/temp_vimer/.git/hooks/pre-push.sample'
+removed '/tmp/temp_vimer/.git/hooks/pre-rebase.sample'
+removed '/tmp/temp_vimer/.git/hooks/post-update.sample'
+removed directory: '/tmp/temp_vimer/.git/hooks'
+removed directory: '/tmp/temp_vimer/.git/branches'
+removed '/tmp/temp_vimer/.git/HEAD'
+removed '/tmp/temp_vimer/.git/objects/12/9bb020b19fe52acf3a6734dbc03fed716d1d79'
+removed directory: '/tmp/temp_vimer/.git/objects/12'
+removed '/tmp/temp_vimer/.git/objects/78/157628483bb66747e2780058bea7cee3b34d4c'
+removed directory: '/tmp/temp_vimer/.git/objects/78'
+removed '/tmp/temp_vimer/.git/objects/53/04b9900ec561fd5335a0195f7066412165d996'
+removed directory: '/tmp/temp_vimer/.git/objects/53'
+removed '/tmp/temp_vimer/.git/objects/31/18df58d98396e2516a43e51fc08382a48bc97f'
+removed directory: '/tmp/temp_vimer/.git/objects/31'
+removed '/tmp/temp_vimer/.git/objects/54/bd6031dba8725fee7986efa5b9320f17972ca2'
+removed '/tmp/temp_vimer/.git/objects/54/1157cf64e4e7bf88476d28fad4d8dbca1efeab'
+removed directory: '/tmp/temp_vimer/.git/objects/54'
+removed '/tmp/temp_vimer/.git/objects/8f/16a23a345249d2505a58852d75be95b3afa132'
+removed directory: '/tmp/temp_vimer/.git/objects/8f'
+removed '/tmp/temp_vimer/.git/objects/1c/b975de29d211cdac09cb622b7a431054081e8a'
+removed directory: '/tmp/temp_vimer/.git/objects/1c'
+removed directory: '/tmp/temp_vimer/.git/objects/pack'
+removed '/tmp/temp_vimer/.git/objects/35/f9d19505ec82e052d7c5b04ba8bdc1be8d8813'
+removed directory: '/tmp/temp_vimer/.git/objects/35'
+removed '/tmp/temp_vimer/.git/objects/27/67def31da4cdda8005b7bcbe7bf15ed288d30d'
+removed '/tmp/temp_vimer/.git/objects/27/66aedc04ed1666e1ba762d77079e86051d0adb'
+removed directory: '/tmp/temp_vimer/.git/objects/27'
+removed '/tmp/temp_vimer/.git/objects/0b/20b40e142e95e1e0bd497acd4b35a332df80de'
+removed directory: '/tmp/temp_vimer/.git/objects/0b'
+removed '/tmp/temp_vimer/.git/objects/5e/75e4d83d3ad5a80d9b1826898023dfdb0fb883'
+removed directory: '/tmp/temp_vimer/.git/objects/5e'
+removed '/tmp/temp_vimer/.git/objects/dd/c0fd1065aeb3ab3bb115b44a5f5821fb4dd385'
+removed directory: '/tmp/temp_vimer/.git/objects/dd'
+removed '/tmp/temp_vimer/.git/objects/47/dae336620e0ea994fcd881ea153349bed0aa88'
+removed directory: '/tmp/temp_vimer/.git/objects/47'
+removed '/tmp/temp_vimer/.git/objects/9a/990c9ac25147e5b0a3c540eccbbb5fed030efb'
+removed directory: '/tmp/temp_vimer/.git/objects/9a'
+removed '/tmp/temp_vimer/.git/objects/8c/845abe8f2eab9b1904c1f02adcb900328768d4'
+removed directory: '/tmp/temp_vimer/.git/objects/8c'
+removed '/tmp/temp_vimer/.git/objects/aa/ae809949a39e6cfc42e441d3b021c129235412'
+removed '/tmp/temp_vimer/.git/objects/aa/7c713076dc990cf6f91b5fd1b4cd092109350d'
+removed directory: '/tmp/temp_vimer/.git/objects/aa'
+removed '/tmp/temp_vimer/.git/objects/8a/b8c546a83857e5eb997272c288780008de8ab7'
+removed directory: '/tmp/temp_vimer/.git/objects/8a'
+removed '/tmp/temp_vimer/.git/objects/48/6e2b71910c137f24abda027e8c63d6ad784a9b'
+removed directory: '/tmp/temp_vimer/.git/objects/48'
+removed '/tmp/temp_vimer/.git/objects/ad/9682908f97f06278a0344749828a9d6b3659e1'
+removed directory: '/tmp/temp_vimer/.git/objects/ad'
+removed '/tmp/temp_vimer/.git/objects/c3/1b4cbc10974eda3a2a0f0fc75b82c432be0a77'
+removed directory: '/tmp/temp_vimer/.git/objects/c3'
+removed '/tmp/temp_vimer/.git/objects/d6/b387598b9e3fbaf420011b3a6f97693b7d29d6'
+removed directory: '/tmp/temp_vimer/.git/objects/d6'
+removed '/tmp/temp_vimer/.git/objects/f3/881bd3898c740fdfcf16656089b64d0924023c'
+removed directory: '/tmp/temp_vimer/.git/objects/f3'
+removed '/tmp/temp_vimer/.git/objects/03/7a5f19a29cb81e78d6cebce06ca7897a098f7a'
+removed directory: '/tmp/temp_vimer/.git/objects/03'
+removed '/tmp/temp_vimer/.git/objects/d3/7b3977e06c149f59162e56e9bfdb8a625f20fa'
+removed directory: '/tmp/temp_vimer/.git/objects/d3'
+removed '/tmp/temp_vimer/.git/objects/e6/76feacf5a75ee76b7f7eadc9064dc0ac64d9df'
+removed '/tmp/temp_vimer/.git/objects/e6/1a3140735a4449f08ec621d33770ee97891028'
+removed directory: '/tmp/temp_vimer/.git/objects/e6'
+removed '/tmp/temp_vimer/.git/objects/d2/03e1be5ff4635ff55002504a0b84b224b7863c'
+removed directory: '/tmp/temp_vimer/.git/objects/d2'
+removed '/tmp/temp_vimer/.git/objects/4c/4c8f0b5fa973576ead3afda1afa30cd21c311c'
+removed directory: '/tmp/temp_vimer/.git/objects/4c'
+removed '/tmp/temp_vimer/.git/objects/38/53f13fbac11c987c80d0cb4e3a0256833a162c'
+removed directory: '/tmp/temp_vimer/.git/objects/38'
+removed '/tmp/temp_vimer/.git/objects/2b/1eef6c49bd0af8984d57c834c209a92da0b5e4'
+removed directory: '/tmp/temp_vimer/.git/objects/2b'
+removed '/tmp/temp_vimer/.git/objects/7b/827268f123f40f5bb4b14ca96d93a5142c73cf'
+removed '/tmp/temp_vimer/.git/objects/7b/b62ff4cd0b2c2da65e8641898da57cc7d4f4b2'
+removed directory: '/tmp/temp_vimer/.git/objects/7b'
+removed '/tmp/temp_vimer/.git/objects/eb/a02149ce26923445a8a6a8ff620c6a870179f5'
+removed directory: '/tmp/temp_vimer/.git/objects/eb'
+removed '/tmp/temp_vimer/.git/objects/b0/0f07a6499df033b92d868c06ea43b216f95397'
+removed directory: '/tmp/temp_vimer/.git/objects/b0'
+removed '/tmp/temp_vimer/.git/objects/b1/7f159b3f3791d39f54593e2c5dbb1a642334bb'
+removed directory: '/tmp/temp_vimer/.git/objects/b1'
+removed '/tmp/temp_vimer/.git/objects/00/9b281132ae5820598c43e9f6592fb041883c4b'
+removed directory: '/tmp/temp_vimer/.git/objects/00'
+removed '/tmp/temp_vimer/.git/objects/b9/f27378ef1243ac11608fb29db4923efdf080f5'
+removed '/tmp/temp_vimer/.git/objects/b9/c0cffa152d94c5244b5e717983975d8766b78e'
+removed directory: '/tmp/temp_vimer/.git/objects/b9'
+removed '/tmp/temp_vimer/.git/objects/24/aa0f0b918215a5204587810f5ed1c1b3b5a460'
+removed directory: '/tmp/temp_vimer/.git/objects/24'
+removed '/tmp/temp_vimer/.git/objects/e8/172eaccd5c8f436f868890a923edcfeec80549'
+removed '/tmp/temp_vimer/.git/objects/e8/b232565ff2bfab2a1b709e613f1d1b05490cd6'
+removed directory: '/tmp/temp_vimer/.git/objects/e8'
+removed '/tmp/temp_vimer/.git/objects/4e/d89e06d15a42195c54cf192531ea567e446b0d'
+removed directory: '/tmp/temp_vimer/.git/objects/4e'
+removed '/tmp/temp_vimer/.git/objects/3c/7cb69c90003cb86d09b6901149098ffac5a833'
+removed directory: '/tmp/temp_vimer/.git/objects/3c'
+removed '/tmp/temp_vimer/.git/objects/9f/3f43ac875a8f5cafcf3db0c274567072a19248'
+removed directory: '/tmp/temp_vimer/.git/objects/9f'
+removed '/tmp/temp_vimer/.git/objects/6f/8da9d6da51bd8386debeb98058e64dc74e487f'
+removed directory: '/tmp/temp_vimer/.git/objects/6f'
+removed '/tmp/temp_vimer/.git/objects/d1/a6d2fecaa5117cc0dcc78fe8142bab272d3160'
+removed directory: '/tmp/temp_vimer/.git/objects/d1'
+removed '/tmp/temp_vimer/.git/objects/76/e8af2a2e8fdc8f570bb0d70d099fb55b082cfa'
+removed directory: '/tmp/temp_vimer/.git/objects/76'
+removed '/tmp/temp_vimer/.git/objects/d9/980322416e08a09af575f97f0b96eef2fb0b91'
+removed directory: '/tmp/temp_vimer/.git/objects/d9'
+removed '/tmp/temp_vimer/.git/objects/af/2ee3a96a4154c836f8a5828e1e2dc5fd3627f4'
+removed directory: '/tmp/temp_vimer/.git/objects/af'
+removed '/tmp/temp_vimer/.git/objects/c7/0e404c96379235571d18b5c010a7539e8e7e27'
+removed '/tmp/temp_vimer/.git/objects/c7/d0c70fe065c23548ee11141fcf5773ce50fff8'
+removed directory: '/tmp/temp_vimer/.git/objects/c7'
+removed '/tmp/temp_vimer/.git/objects/ca/508fde516f19d5c84302441afbfcf53b47e10e'
+removed directory: '/tmp/temp_vimer/.git/objects/ca'
+removed '/tmp/temp_vimer/.git/objects/44/c6bdea3740428896bfd5975c10947a0bc76915'
+removed directory: '/tmp/temp_vimer/.git/objects/44'
+removed '/tmp/temp_vimer/.git/objects/7c/a525aefd5348e06378b5bff1c784e18a382671'
+removed directory: '/tmp/temp_vimer/.git/objects/7c'
+removed '/tmp/temp_vimer/.git/objects/be/0d8cdcd5b0e03241bebc9f98ae4e77e3b6a3e1'
+removed directory: '/tmp/temp_vimer/.git/objects/be'
+removed '/tmp/temp_vimer/.git/objects/21/5c2358d7ac0f5db6468178bf52ff367cb0e81c'
+removed directory: '/tmp/temp_vimer/.git/objects/21'
+removed '/tmp/temp_vimer/.git/objects/b5/fc7d8dfdfc67eb477da61a7c3d02cd974ae21b'
+removed directory: '/tmp/temp_vimer/.git/objects/b5'
+removed '/tmp/temp_vimer/.git/objects/c0/59bcddbdfc7cffc17be37b8d0ae3d09a38ac3b'
+removed directory: '/tmp/temp_vimer/.git/objects/c0'
+removed '/tmp/temp_vimer/.git/objects/98/4cf72ed615b407a248423272afd760542f0aa9'
+removed directory: '/tmp/temp_vimer/.git/objects/98'
+removed '/tmp/temp_vimer/.git/objects/c9/d2dc5e6c7b89f5eaba17998337457e6a85b59b'
+removed directory: '/tmp/temp_vimer/.git/objects/c9'
+removed '/tmp/temp_vimer/.git/objects/79/35f647b42bdb044ac0fcb2c0e87fa64082f0ee'
+removed directory: '/tmp/temp_vimer/.git/objects/79'
+removed '/tmp/temp_vimer/.git/objects/0c/bb8e70c82873eee8c493d76419f36cf319e288'
+removed directory: '/tmp/temp_vimer/.git/objects/0c'
+removed '/tmp/temp_vimer/.git/objects/7f/2b9695b11b4a8a2e57f0e9c7c52a98e0d07777'
+removed directory: '/tmp/temp_vimer/.git/objects/7f'
+removed '/tmp/temp_vimer/.git/objects/ee/cc8f0c6b282b15dde47fa6c0d23ff4bc6b7701'
+removed directory: '/tmp/temp_vimer/.git/objects/ee'
+removed '/tmp/temp_vimer/.git/objects/f4/e3ad7c944788d26fa8ce3853c702b99c7f224f'
+removed directory: '/tmp/temp_vimer/.git/objects/f4'
+removed directory: '/tmp/temp_vimer/.git/objects/info'
+removed '/tmp/temp_vimer/.git/objects/18/786cd9a1c8c4a19eb4a33d6582957fa92065b9'
+removed directory: '/tmp/temp_vimer/.git/objects/18'
+removed '/tmp/temp_vimer/.git/objects/f1/21cc41b844c03767c6e7d4ce89be4374d9f7ee'
+removed directory: '/tmp/temp_vimer/.git/objects/f1'
+removed '/tmp/temp_vimer/.git/objects/64/1f31178e0760f4f79f808135c6ba6a89f10a86'
+removed '/tmp/temp_vimer/.git/objects/64/24d4b8cc1eb18ccacf8ce28978d8421ad70ed3'
+removed directory: '/tmp/temp_vimer/.git/objects/64'
+removed '/tmp/temp_vimer/.git/objects/69/08ce44c700b2235d972ee35af21bff86555afc'
+removed directory: '/tmp/temp_vimer/.git/objects/69'
+removed '/tmp/temp_vimer/.git/objects/6c/957ad8779da24199a534632511d7c1f0813364'
+removed directory: '/tmp/temp_vimer/.git/objects/6c'
+removed '/tmp/temp_vimer/.git/objects/f5/8a21ba54568e0771855266e849a16c21287adb'
+removed directory: '/tmp/temp_vimer/.git/objects/f5'
+removed '/tmp/temp_vimer/.git/objects/ed/33951d681bad85f990492351f4ba8b9d6617f3'
+removed directory: '/tmp/temp_vimer/.git/objects/ed'
+removed '/tmp/temp_vimer/.git/objects/a3/ccb5ff1dd61815fb28e5d0c6efd7c813ce360d'
+removed directory: '/tmp/temp_vimer/.git/objects/a3'
+removed '/tmp/temp_vimer/.git/objects/f9/7e20b0fb27ff662c0830a0b787afd795c6b6ef'
+removed directory: '/tmp/temp_vimer/.git/objects/f9'
+removed directory: '/tmp/temp_vimer/.git/objects'
+removed '/tmp/temp_vimer/.git/refs/remotes/origin/HEAD'
+removed directory: '/tmp/temp_vimer/.git/refs/remotes/origin'
+removed directory: '/tmp/temp_vimer/.git/refs/remotes'
+removed directory: '/tmp/temp_vimer/.git/refs/tags'
+removed '/tmp/temp_vimer/.git/refs/heads/master'
+removed directory: '/tmp/temp_vimer/.git/refs/heads'
+removed directory: '/tmp/temp_vimer/.git/refs'
+removed '/tmp/temp_vimer/.git/logs/HEAD'
+removed '/tmp/temp_vimer/.git/logs/refs/remotes/origin/HEAD'
+removed directory: '/tmp/temp_vimer/.git/logs/refs/remotes/origin'
+removed directory: '/tmp/temp_vimer/.git/logs/refs/remotes'
+removed '/tmp/temp_vimer/.git/logs/refs/heads/master'
+removed directory: '/tmp/temp_vimer/.git/logs/refs/heads'
+removed directory: '/tmp/temp_vimer/.git/logs/refs'
+removed directory: '/tmp/temp_vimer/.git/logs'
+removed '/tmp/temp_vimer/.git/config'
+removed '/tmp/temp_vimer/.git/description'
+removed '/tmp/temp_vimer/.git/info/exclude'
+removed directory: '/tmp/temp_vimer/.git/info'
+removed directory: '/tmp/temp_vimer/.git'
+removed '/tmp/temp_vimer/CHANGES.md'
+removed '/tmp/temp_vimer/LICENSE.md'
+removed '/tmp/temp_vimer/vimer'
+removed '/tmp/temp_vimer/test/setup'
+removed '/tmp/temp_vimer/test/test_vimer'
+removed '/tmp/temp_vimer/test/mockvim'
+removed '/tmp/temp_vimer/test/test'
+removed '/tmp/temp_vimer/test/mockcat'
+removed directory: '/tmp/temp_vimer/test'
+removed '/tmp/temp_vimer/README.md'
+removed '/tmp/temp_vimer/.travis.yml'
+removed '/tmp/temp_vimer/.gitignore'
+removed '/tmp/temp_vimer/vimer.cmd'
+removed '/tmp/temp_vimer/Makefile'
+removed directory: '/tmp/temp_vimer'
 #+end_example
 
 * install [[http://joeyh.name/code/moreutils/][vipe]]
@@ -2601,10 +2656,109 @@ git clone -v https://github.com/jhawthorn/fzy /tmp/temp_fzy
 make PREFIX=/home/ramondal/scripts && make PREFIX=/home/ramondal/scripts install
 #+END_SRC
 
+#+RESULTS:
+#+begin_example
+cp src/config.def.h config.h
+cc -DVERSION=\"0.8\" -D_GNU_SOURCE -Wall -Wextra -g -std=c99 -O3 -pedantic -c -o src/fzy.o src/fzy.c
+cc -DVERSION=\"0.8\" -D_GNU_SOURCE -Wall -Wextra -g -std=c99 -O3 -pedantic -c -o src/match.o src/match.c
+cc -DVERSION=\"0.8\" -D_GNU_SOURCE -Wall -Wextra -g -std=c99 -O3 -pedantic -c -o src/tty.o src/tty.c
+cc -DVERSION=\"0.8\" -D_GNU_SOURCE -Wall -Wextra -g -std=c99 -O3 -pedantic -c -o src/choices.o src/choices.c
+cc -DVERSION=\"0.8\" -D_GNU_SOURCE -Wall -Wextra -g -std=c99 -O3 -pedantic -c -o src/options.o src/options.c
+cc -DVERSION=\"0.8\" -D_GNU_SOURCE -Wall -Wextra -g -std=c99 -O3 -pedantic -c -o src/tty_interface.o src/tty_interface.c
+cc -Wall -Wextra -g -std=c99 -O3 -pedantic  -o fzy src/fzy.o src/match.o src/tty.o src/choices.o src/options.o src/tty_interface.o -lpthread
+mkdir -p /home/ramondal/scripts/bin
+cp fzy /home/ramondal/scripts/bin/
+chmod 755 /home/ramondal/scripts/bin/fzy
+mkdir -p /home/ramondal/scripts/share/man/man1
+cp fzy.1 /home/ramondal/scripts/share/man/man1/
+chmod 644 /home/ramondal/scripts/share/man/man1/fzy.1
+#+end_example
+
 ** remove the clone directory
 #+BEGIN_SRC sh :results output :dir ~/
 rm -rvf /tmp/temp_fzy
 #+END_SRC
+
+#+RESULTS:
+#+begin_example
+removed '/tmp/temp_fzy/config.h'
+removed '/tmp/temp_fzy/fzy.1'
+removed '/tmp/temp_fzy/.git/index'
+removed '/tmp/temp_fzy/.git/packed-refs'
+removed '/tmp/temp_fzy/.git/hooks/prepare-commit-msg.sample'
+removed '/tmp/temp_fzy/.git/hooks/pre-applypatch.sample'
+removed '/tmp/temp_fzy/.git/hooks/update.sample'
+removed '/tmp/temp_fzy/.git/hooks/pre-commit.sample'
+removed '/tmp/temp_fzy/.git/hooks/commit-msg.sample'
+removed '/tmp/temp_fzy/.git/hooks/applypatch-msg.sample'
+removed '/tmp/temp_fzy/.git/hooks/pre-push.sample'
+removed '/tmp/temp_fzy/.git/hooks/pre-rebase.sample'
+removed '/tmp/temp_fzy/.git/hooks/post-update.sample'
+removed directory: '/tmp/temp_fzy/.git/hooks'
+removed directory: '/tmp/temp_fzy/.git/branches'
+removed '/tmp/temp_fzy/.git/HEAD'
+removed '/tmp/temp_fzy/.git/objects/pack/pack-1d44748271321a944207384c73ba5d25b5e7f1a5.idx'
+removed '/tmp/temp_fzy/.git/objects/pack/pack-1d44748271321a944207384c73ba5d25b5e7f1a5.pack'
+removed directory: '/tmp/temp_fzy/.git/objects/pack'
+removed directory: '/tmp/temp_fzy/.git/objects/info'
+removed directory: '/tmp/temp_fzy/.git/objects'
+removed '/tmp/temp_fzy/.git/refs/remotes/origin/HEAD'
+removed directory: '/tmp/temp_fzy/.git/refs/remotes/origin'
+removed directory: '/tmp/temp_fzy/.git/refs/remotes'
+removed directory: '/tmp/temp_fzy/.git/refs/tags'
+removed '/tmp/temp_fzy/.git/refs/heads/master'
+removed directory: '/tmp/temp_fzy/.git/refs/heads'
+removed directory: '/tmp/temp_fzy/.git/refs'
+removed '/tmp/temp_fzy/.git/logs/HEAD'
+removed '/tmp/temp_fzy/.git/logs/refs/remotes/origin/HEAD'
+removed directory: '/tmp/temp_fzy/.git/logs/refs/remotes/origin'
+removed directory: '/tmp/temp_fzy/.git/logs/refs/remotes'
+removed '/tmp/temp_fzy/.git/logs/refs/heads/master'
+removed directory: '/tmp/temp_fzy/.git/logs/refs/heads'
+removed directory: '/tmp/temp_fzy/.git/logs/refs'
+removed directory: '/tmp/temp_fzy/.git/logs'
+removed '/tmp/temp_fzy/.git/config'
+removed '/tmp/temp_fzy/.git/description'
+removed '/tmp/temp_fzy/.git/info/exclude'
+removed directory: '/tmp/temp_fzy/.git/info'
+removed directory: '/tmp/temp_fzy/.git'
+removed '/tmp/temp_fzy/src/choices.c'
+removed '/tmp/temp_fzy/src/options.h'
+removed '/tmp/temp_fzy/src/match.c'
+removed '/tmp/temp_fzy/src/config.def.h'
+removed '/tmp/temp_fzy/src/tty.o'
+removed '/tmp/temp_fzy/src/fzy.c'
+removed '/tmp/temp_fzy/src/fzy.o'
+removed '/tmp/temp_fzy/src/tty_interface.h'
+removed '/tmp/temp_fzy/src/tty.h'
+removed '/tmp/temp_fzy/src/tty.c'
+removed '/tmp/temp_fzy/src/tty_interface.c'
+removed '/tmp/temp_fzy/src/choices.o'
+removed '/tmp/temp_fzy/src/tty_interface.o'
+removed '/tmp/temp_fzy/src/choices.h'
+removed '/tmp/temp_fzy/src/match.h'
+removed '/tmp/temp_fzy/src/options.c'
+removed '/tmp/temp_fzy/src/match.o'
+removed '/tmp/temp_fzy/src/bonus.h'
+removed '/tmp/temp_fzy/src/options.o'
+removed directory: '/tmp/temp_fzy/src'
+removed '/tmp/temp_fzy/fzy'
+removed '/tmp/temp_fzy/LICENSE'
+removed '/tmp/temp_fzy/test/fzytest.c'
+removed '/tmp/temp_fzy/test/acceptance/acceptance_test.rb'
+removed '/tmp/temp_fzy/test/acceptance/Gemfile'
+removed '/tmp/temp_fzy/test/acceptance/Gemfile.lock'
+removed directory: '/tmp/temp_fzy/test/acceptance'
+removed directory: '/tmp/temp_fzy/test'
+removed '/tmp/temp_fzy/CHANGELOG.md'
+removed '/tmp/temp_fzy/.clang-format'
+removed '/tmp/temp_fzy/README.md'
+removed '/tmp/temp_fzy/ALGORITHM.md'
+removed '/tmp/temp_fzy/.travis.yml'
+removed '/tmp/temp_fzy/.gitignore'
+removed '/tmp/temp_fzy/Makefile'
+removed directory: '/tmp/temp_fzy'
+#+end_example
 
 * checkout [[https://github.com/junegunn/fzf][FZF]]
 ** clone it to some temp dir
@@ -2622,8 +2776,11 @@ git clone -v https://github.com/junegunn/fzf /tmp/temp_fzf
 #+RESULTS:
 #+begin_example
 Downloading bin/fzf ...
-  - Already exists
-  - Checking fzf executable ... 0.13.3
+  - Found in $PATH
+  - Creating symlink: /home/ramondal/scripts/bin/fzf -> bin/fzf
+  - Checking fzf executable ... 0.13.3 != 0.15.9
+  - Creating symlink: bin/fzf-0.15.9-linux_amd64 -> bin/fzf
+  - Checking fzf executable ... 0.15.9
 
 Generate ~/.fzf.bash ... OK
 Generate ~/.fzf.zsh ... OK
@@ -2657,13 +2814,149 @@ cp -vrf bin ~/scripts
 : 'man/man1/fzf.1' -> '/home/ramondal/scripts/share/man/man1/fzf.1'
 : removed '/home/ramondal/scripts/bin/fzf'
 : 'bin/fzf' -> '/home/ramondal/scripts/bin/fzf'
+: 'bin/fzf-0.15.9-linux_amd64' -> '/home/ramondal/scripts/bin/fzf-0.15.9-linux_amd64'
 : 'bin/fzf-tmux' -> '/home/ramondal/scripts/bin/fzf-tmux'
-: 'bin/fzf-0.13.3-linux_amd64' -> '/home/ramondal/scripts/bin/fzf-0.13.3-linux_amd64'
 
 ** remove the clone directory
 #+BEGIN_SRC sh :results output :dir ~/
 rm -rvf /tmp/temp_fzf
 #+END_SRC
+
+#+RESULTS:
+#+begin_example
+removed '/tmp/temp_fzf/bin/fzf'
+removed '/tmp/temp_fzf/bin/fzf-0.15.9-linux_amd64'
+removed '/tmp/temp_fzf/bin/fzf-tmux'
+removed directory: '/tmp/temp_fzf/bin'
+removed '/tmp/temp_fzf/fzf'
+removed '/tmp/temp_fzf/uninstall'
+removed '/tmp/temp_fzf/.git/index'
+removed '/tmp/temp_fzf/.git/packed-refs'
+removed '/tmp/temp_fzf/.git/hooks/prepare-commit-msg.sample'
+removed '/tmp/temp_fzf/.git/hooks/pre-applypatch.sample'
+removed '/tmp/temp_fzf/.git/hooks/update.sample'
+removed '/tmp/temp_fzf/.git/hooks/pre-commit.sample'
+removed '/tmp/temp_fzf/.git/hooks/commit-msg.sample'
+removed '/tmp/temp_fzf/.git/hooks/applypatch-msg.sample'
+removed '/tmp/temp_fzf/.git/hooks/pre-push.sample'
+removed '/tmp/temp_fzf/.git/hooks/pre-rebase.sample'
+removed '/tmp/temp_fzf/.git/hooks/post-update.sample'
+removed directory: '/tmp/temp_fzf/.git/hooks'
+removed directory: '/tmp/temp_fzf/.git/branches'
+removed '/tmp/temp_fzf/.git/HEAD'
+removed '/tmp/temp_fzf/.git/objects/pack/pack-d76a1f94984666315a2bbb7510c8d23371f00f0a.pack'
+removed '/tmp/temp_fzf/.git/objects/pack/pack-d76a1f94984666315a2bbb7510c8d23371f00f0a.idx'
+removed directory: '/tmp/temp_fzf/.git/objects/pack'
+removed directory: '/tmp/temp_fzf/.git/objects/info'
+removed directory: '/tmp/temp_fzf/.git/objects'
+removed '/tmp/temp_fzf/.git/refs/remotes/origin/HEAD'
+removed directory: '/tmp/temp_fzf/.git/refs/remotes/origin'
+removed directory: '/tmp/temp_fzf/.git/refs/remotes'
+removed directory: '/tmp/temp_fzf/.git/refs/tags'
+removed '/tmp/temp_fzf/.git/refs/heads/master'
+removed directory: '/tmp/temp_fzf/.git/refs/heads'
+removed directory: '/tmp/temp_fzf/.git/refs'
+removed '/tmp/temp_fzf/.git/logs/HEAD'
+removed '/tmp/temp_fzf/.git/logs/refs/remotes/origin/HEAD'
+removed directory: '/tmp/temp_fzf/.git/logs/refs/remotes/origin'
+removed directory: '/tmp/temp_fzf/.git/logs/refs/remotes'
+removed '/tmp/temp_fzf/.git/logs/refs/heads/master'
+removed directory: '/tmp/temp_fzf/.git/logs/refs/heads'
+removed directory: '/tmp/temp_fzf/.git/logs/refs'
+removed directory: '/tmp/temp_fzf/.git/logs'
+removed '/tmp/temp_fzf/.git/config'
+removed '/tmp/temp_fzf/.git/description'
+removed '/tmp/temp_fzf/.git/info/exclude'
+removed directory: '/tmp/temp_fzf/.git/info'
+removed directory: '/tmp/temp_fzf/.git'
+removed '/tmp/temp_fzf/src/cache_test.go'
+removed '/tmp/temp_fzf/src/constants_unix.go'
+removed '/tmp/temp_fzf/src/terminal_test.go'
+removed '/tmp/temp_fzf/src/pattern.go'
+removed '/tmp/temp_fzf/src/fzf/main.go'
+removed directory: '/tmp/temp_fzf/src/fzf'
+removed '/tmp/temp_fzf/src/history.go'
+removed '/tmp/temp_fzf/src/merger_test.go'
+removed '/tmp/temp_fzf/src/result_test.go'
+removed '/tmp/temp_fzf/src/Dockerfile.centos'
+removed '/tmp/temp_fzf/src/terminal_windows.go'
+removed '/tmp/temp_fzf/src/tokenizer.go'
+removed '/tmp/temp_fzf/src/options.go'
+removed '/tmp/temp_fzf/src/result.go'
+removed '/tmp/temp_fzf/src/core.go'
+removed '/tmp/temp_fzf/src/terminal.go'
+removed '/tmp/temp_fzf/src/constants.go'
+removed '/tmp/temp_fzf/src/ansi.go'
+removed '/tmp/temp_fzf/src/reader_test.go'
+removed '/tmp/temp_fzf/src/LICENSE'
+removed '/tmp/temp_fzf/src/Dockerfile.android'
+removed '/tmp/temp_fzf/src/item_test.go'
+removed '/tmp/temp_fzf/src/update_assets.rb'
+removed '/tmp/temp_fzf/src/pattern_test.go'
+removed '/tmp/temp_fzf/src/chunklist_test.go'
+removed '/tmp/temp_fzf/src/item.go'
+removed '/tmp/temp_fzf/src/options_test.go'
+removed '/tmp/temp_fzf/src/algo/algo_test.go'
+removed '/tmp/temp_fzf/src/algo/algo.go'
+removed directory: '/tmp/temp_fzf/src/algo'
+removed '/tmp/temp_fzf/src/history_test.go'
+removed '/tmp/temp_fzf/src/matcher.go'
+removed '/tmp/temp_fzf/src/cache.go'
+removed '/tmp/temp_fzf/src/README.md'
+removed '/tmp/temp_fzf/src/tui/tcell.go'
+removed '/tmp/temp_fzf/src/tui/tui_test.go'
+removed '/tmp/temp_fzf/src/tui/ncurses.go'
+removed '/tmp/temp_fzf/src/tui/tui.go'
+removed directory: '/tmp/temp_fzf/src/tui'
+removed '/tmp/temp_fzf/src/chunklist.go'
+removed '/tmp/temp_fzf/src/Dockerfile.ubuntu'
+removed '/tmp/temp_fzf/src/ansi_test.go'
+removed '/tmp/temp_fzf/src/constants_windows.go'
+removed '/tmp/temp_fzf/src/util/util_test.go'
+removed '/tmp/temp_fzf/src/util/slab.go'
+removed '/tmp/temp_fzf/src/util/chars_test.go'
+removed '/tmp/temp_fzf/src/util/util_unix.go'
+removed '/tmp/temp_fzf/src/util/eventbox_test.go'
+removed '/tmp/temp_fzf/src/util/util.go'
+removed '/tmp/temp_fzf/src/util/atomicbool_test.go'
+removed '/tmp/temp_fzf/src/util/util_windows.go'
+removed '/tmp/temp_fzf/src/util/eventbox.go'
+removed '/tmp/temp_fzf/src/util/atomicbool.go'
+removed '/tmp/temp_fzf/src/util/chars.go'
+removed directory: '/tmp/temp_fzf/src/util'
+removed '/tmp/temp_fzf/src/Makefile'
+removed '/tmp/temp_fzf/src/merger.go'
+removed '/tmp/temp_fzf/src/tokenizer_test.go'
+removed '/tmp/temp_fzf/src/Dockerfile.arch'
+removed '/tmp/temp_fzf/src/terminal_unix.go'
+removed '/tmp/temp_fzf/src/reader.go'
+removed directory: '/tmp/temp_fzf/src'
+removed '/tmp/temp_fzf/LICENSE'
+removed '/tmp/temp_fzf/test/test_go.rb'
+removed '/tmp/temp_fzf/test/fzf.vader'
+removed directory: '/tmp/temp_fzf/test'
+removed '/tmp/temp_fzf/CHANGELOG.md'
+removed '/tmp/temp_fzf/BUILD.md'
+removed '/tmp/temp_fzf/man/man1/fzf-tmux.1'
+removed '/tmp/temp_fzf/man/man1/fzf.1'
+removed directory: '/tmp/temp_fzf/man/man1'
+removed directory: '/tmp/temp_fzf/man'
+removed '/tmp/temp_fzf/README.md'
+removed '/tmp/temp_fzf/.travis.yml'
+removed '/tmp/temp_fzf/install'
+removed '/tmp/temp_fzf/.gitignore'
+removed '/tmp/temp_fzf/shell/key-bindings.zsh'
+removed '/tmp/temp_fzf/shell/key-bindings.bash'
+removed '/tmp/temp_fzf/shell/completion.bash'
+removed '/tmp/temp_fzf/shell/completion.zsh'
+removed '/tmp/temp_fzf/shell/key-bindings.fish'
+removed directory: '/tmp/temp_fzf/shell'
+removed '/tmp/temp_fzf/plugin/fzf.vim'
+removed directory: '/tmp/temp_fzf/plugin'
+removed '/tmp/temp_fzf/.github/ISSUE_TEMPLATE.md'
+removed directory: '/tmp/temp_fzf/.github'
+removed directory: '/tmp/temp_fzf'
+#+end_example
 
 * install p4 utility script
 #+BEGIN_SRC sh :results output :dir ~/scripts/bin
@@ -3044,7 +3337,7 @@ module load imagemagick/6.9.1-2
 module load java/1.6
 module load j2sdk/1.8.0_66
 module load kdiff3/0.9.98
-# module load meld/3.12.3-b
+module load meld/3.16.4
 module load mutt/1.6.0
 module load mercurial/3.7.3
 module load nano/2.3.2
@@ -3070,6 +3363,7 @@ module load mplayer/1.3.0
 module load vlc/0.9.9
 module load wget/1.17
 module load xpdf/3.04
+module load parallel/20160922
 
 # module load hdk-4.8.1/19
 # module load uvmkit-1.2/3
