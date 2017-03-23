@@ -1,5 +1,5 @@
 #!/bin/env tcsh
-\find /proj/verif_release_ro/uvmkit-1.2/4/uvm \
+\find $UVMKIT_HOME/uvm \
       -name '*.sv' \
       -o -name "*.svh" \
       >! ~/cscope.files

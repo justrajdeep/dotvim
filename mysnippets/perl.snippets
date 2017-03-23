@@ -12,15 +12,16 @@ my $dir = getcwd;
 use FindBin qw(\$Script);
 use Clone qw(clone);
 use Term::ANSIColor qw(:constants);
-use Getopt::Long;
+use Getopt::Long qw(:config auto_version auto_help);
 use Pod::Usage;
 use YAML::XS;
 use Data::Dumper;
 use Perl::Critic;
-use Carp qw(carp cluck);
+use Carp qw(confess cluck);
 use English qw(-no_match_vars);
 use Data::Types qw(:all);
 use namespace::autoclean;
+use MIME::Lite;
 no autovivification;
 use diagnostics -verbose;
 
@@ -32,7 +33,7 @@ sub run_critic{
   my @violations = $critic->critique($file);
   if(scalar @violations){
     print @violations;
-    confess "the script modifications did not pass the Perl::Critic test\n";
+    cluck "the script modifications did not pass the Perl::Critic test\n";
   }
 }
 
@@ -44,6 +45,7 @@ sub options{
 # parse the arguments
 my \$test = GetOptions (
         'help'          => sub{pod2usage({-exitval => 0, -msg => 'PRINTING HELP .....', -verbose => 3, -output => \*STDERR})},
+        'man'          => sub{pod2usage({-exitval => 0, -msg => 'PRINTING HELP .....', -verbose => 3, -output => \*STDERR})},
         'h'           => sub{pod2usage({-exitval => 0, -msg => 'PRINTING HELP .....', -verbose => 3, -output => \*STDERR})},
         'usage|u'       => sub{pod2usage(2)},
         'name|n'        => sub{pod2usage({-exitval => 0, -msg => 'PRINTING SCRIPT DEATILS .....', -verbose => 99, -sections => [qw(NAME SYNOPSYS)], -output => \*STDERR})},
@@ -111,21 +113,21 @@ perl $1 [options]
 
 =head2 OPTIONS
 
- --help|h|?         : prints help
  --usage|u          : prints usage
  --name|n           : prints the name of the script
  --copyright|c      : prints the name of the script
+ --version          : prints version
  --debug|d          : specify the debug level
                       -d is counted to determine the verbosity level
  --in*              : input file
 
 =over 8
 
-=item B<-help>
+=item B<--help>
 
   Print a brief help message and exits.
 
-=item B<-man>
+=item B<--man>
 
   Prints the manual page and exits.
 

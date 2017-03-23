@@ -873,13 +873,21 @@ setenv P4MERGE p4merge
 unalias xterm; alias xterm 'uxterm'
 unalias ls; alias ls "ls-F --color=always -h" #enable thousands grouping and colour
 unalias lz; alias lz 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command . ; $HOME/scripts/bin/ag_file_command . ) | $HOME/scripts/bin/fzf`'
-unalias lfz; alias lfz 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command \!:1 ; $HOME/scripts/bin/ag_file_command \!:1 ) | $HOME/scripts/bin/fzf`'
 unalias ly; alias ly 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command . ; $HOME/scripts/bin/ag_file_command . ) | $HOME/scripts/bin/fzy`'
+unalias lfz; alias lfz 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command \!:1 ; $HOME/scripts/bin/ag_file_command \!:1 ) | $HOME/scripts/bin/fzf`'
 unalias lfy; alias lfy 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command \!:1 ; $HOME/scripts/bin/ag_file_command \!:1 ) | $HOME/scripts/bin/fzy`'
+unalias lpz; alias lpz 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command $STEM/src ; $HOME/scripts/bin/ag_file_command $STEM/src ) | $HOME/scripts/bin/fzf`'
+unalias lpy; alias lpy 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command $STEM/src ; $HOME/scripts/bin/ag_file_command $STEM/src ) | $HOME/scripts/bin/fzy`'
+unalias loz; alias loz 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command $OUT_HOME ; $HOME/scripts/bin/ag_file_command $OUT_HOME ) | $HOME/scripts/bin/fzf`'
+unalias loy; alias loy 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command $OUT_HOME ; $HOME/scripts/bin/ag_file_command $OUT_HOME ) | $HOME/scripts/bin/fzy`'
 unalias llz; alias llz 'ls-F --color=always -ltrh `( $HOME/scripts/bin/cdf_command . ; $HOME/scripts/bin/ag_file_command . ) | $HOME/scripts/bin/fzf`'
-unalias llfz; alias llfz 'ls-F --color=always -ltrh `( $HOME/scripts/bin/cdf_command \!:1 ; $HOME/scripts/bin/ag_file_command \!:1 ) | $HOME/scripts/bin/fzf`'
 unalias lly; alias lly 'ls-F --color=always -ltrh `( $HOME/scripts/bin/cdf_command . ; $HOME/scripts/bin/ag_file_command . ) | $HOME/scripts/bin/fzy`'
-unalias llfy; alias lly 'ls-F --color=always -ltrh `( $HOME/scripts/bin/cdf_command \!:1 ; $HOME/scripts/bin/ag_file_command \!:1 ) | $HOME/scripts/bin/fzy`'
+unalias llfz; alias llfz 'ls-F --color=always -ltrh `( $HOME/scripts/bin/cdf_command \!:1 ; $HOME/scripts/bin/ag_file_command \!:1 ) | $HOME/scripts/bin/fzf`'
+unalias llfy; alias llfy 'ls-F --color=always -ltrh `( $HOME/scripts/bin/cdf_command \!:1 ; $HOME/scripts/bin/ag_file_command \!:1 ) | $HOME/scripts/bin/fzy`'
+unalias llpz; alias llpz 'ls-F --color=always -ltrh `( $HOME/scripts/bin/cdf_command $STEM/src ; $HOME/scripts/bin/ag_file_command $STEM/src ) | $HOME/scripts/bin/fzf`'
+unalias llpy; alias llpy 'ls-F --color=always -ltrh `( $HOME/scripts/bin/cdf_command $STEM/src ; $HOME/scripts/bin/ag_file_command $STEM/src ) | $HOME/scripts/bin/fzy`'
+unalias lloz; alias lloz 'ls-F --color=always -ltrh `( $HOME/scripts/bin/cdf_command $OUT_HOME ; $HOME/scripts/bin/ag_file_command $OUT_HOME ) | $HOME/scripts/bin/fzf`'
+unalias lloy; alias lloy 'ls-F --color=always -ltrh `( $HOME/scripts/bin/cdf_command $OUT_HOME ; $HOME/scripts/bin/ag_file_command $OUT_HOME ) | $HOME/scripts/bin/fzy`'
 # current directory
 unalias vz; alias vz 'gvim `$HOME/scripts/bin/ag_file_command . | $HOME/scripts/bin/fzf`'
 unalias vy; alias vy 'gvim `$HOME/scripts/bin/ag_file_command . | $HOME/scripts/bin/fzy`'
@@ -887,17 +895,20 @@ unalias vfz; alias vfz 'gvim `$HOME/scripts/bin/ag_file_command \!:1 | $HOME/scr
 unalias vfy; alias vfy 'gvim `$HOME/scripts/bin/ag_file_command \!:1 | $HOME/scripts/bin/fzy`'
 unalias vagz; alias vagz 'gvim `ag \!:* | $HOME/scripts/bin/fzf | awk '\''{print $1}'\''`'
 unalias vagy; alias vagy 'gvim `ag \!:* | $HOME/scripts/bin/fzy | awk '\''{print $1}'\''`'
-unalias vmz; alias vmz '$HOME/scripts/downloaded/vimer -t -s \!:1 `$HOME/scripts/bin/ag_file_command . | $HOME/scripts/bin/fzf`'
-unalias vmy; alias vmy '$HOME/scripts/downloaded/vimer -t -s \!:1 `$HOME/scripts/bin/ag_file_command . | $HOME/scripts/bin/fzy`'
+unalias vmz; alias vmz '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scripts/bin/ag_file_command . | $HOME/scripts/bin/fzf`'
+unalias vmy; alias vmy '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scripts/bin/ag_file_command . | $HOME/scripts/bin/fzy`'
+unalias vmfz; alias vmfz '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scripts/bin/ag_file_command \!:2 | $HOME/scripts/bin/fzf`'
+unalias vmfy; alias vmfy '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scripts/bin/ag_file_command \!:2 | $HOME/scripts/bin/fzy`'
 # project specific
+unalias dj; alias dj 'bootenv && sleep 2 && \dj'
 unalias vpz; alias vpz 'gvim `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzf`'
 unalias vpy; alias vpy 'gvim `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzy`'
 unalias voz; alias voz 'gvim `$HOME/scripts/bin/ag_file_command $OUT_HOME/ | $HOME/scripts/bin/fzf`'
 unalias voy; alias voy 'gvim `$HOME/scripts/bin/ag_file_command $OUT_HOME/ | $HOME/scripts/bin/fzy`'
-unalias vmpz; alias vmpz '$HOME/scripts/downloaded/vimer -t -s \!:1 `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzf`'
-unalias vmpy; alias vmpy '$HOME/scripts/downloaded/vimer -t -s \!:1 `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzy`'
-unalias vmoz; alias vmoz '$HOME/scripts/downloaded/vimer -t -s \!:1 `$HOME/scripts/bin/ag_file_command $OUT_HOME/ | $HOME/scripts/bin/fzf`'
-unalias vmoy; alias vmoy '$HOME/scripts/downloaded/vimer -t -s \!:1 `$HOME/scripts/bin/ag_file_command $OUT_HOME/ | $HOME/scripts/bin/fzy`'
+unalias vmpz; alias vmpz '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzf`'
+unalias vmpy; alias vmpy '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzy`'
+unalias vmoz; alias vmoz '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scripts/bin/ag_file_command $OUT_HOME/ | $HOME/scripts/bin/fzf`'
+unalias vmoy; alias vmoy '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scripts/bin/ag_file_command $OUT_HOME/ | $HOME/scripts/bin/fzy`'
 unalias ll; alias ll 'ls-F -ltrh'
 unalias lla; alias lla 'ls-F -l -A'
 unalias flist; alias flist '\find \!:1 -type f >! files'
@@ -946,7 +957,7 @@ unalias decoderbz; alias decoderbz '$STEM/src/test/tools/scripts/decode_register
 set backslash_quote
 unalias hbo; alias hbo 'dj -c -v -e \'here_in_design.build_self("\!:*")\''
 
-unalias createVnc; alias createVnc 'vncserver :\!:1 -depth 24 -geometry 3820x1025 --alwaysshared -log \*:stdout:0'
+unalias createVnc; alias createVnc 'cd && vncserver :\!:1 -depth 24 -geometry 3820x1025 --alwaysshared -log \*:stdout:0 && cd -'
 
 # unalias module; alias module 'eval `$TCLSH $MODULESHOME/modulecmd.tcl tcsh !*`'
 # }}} 1
@@ -3011,7 +3022,7 @@ xterm*rightScrollBar: true
 xterm*ScrollBar: true
 
 ! stop output to terminal from jumping down to bottom of scroll again
-xterm*scrollTtyOutput: false
+xterm*scrollTtyOutput: true
 #+END_SRC
 
 *append it to xresources file*
