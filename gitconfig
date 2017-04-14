@@ -7,8 +7,8 @@
   branch = auto
   diff = auto
   status = auto
-	ui = true
-	interactive = auto
+  ui = true
+  interactive = auto
 [color "branch"]
   current = yellow reverse
   local = yellow 
@@ -57,4 +57,4 @@
 [difftool]
 	prompt = false
 [help]
-	autocorrect = 1
+	autocorrect = 0

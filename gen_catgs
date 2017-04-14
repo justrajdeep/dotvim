@@ -5,3 +5,5 @@
       >! ~/cscope.files
 # ctags --languages=systemverilog --extra=+q --fields=+i -R .
 ctags --exclude=.git --languages=systemverilog --extra=+q --fields=+i -L ~/cscope.files
+
+# vim: filetype=tcsh:syntax=tcsh:ts=4:tw=0:sw=2:expandtab:norl:

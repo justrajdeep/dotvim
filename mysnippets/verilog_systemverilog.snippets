@@ -81,15 +81,15 @@ $1endif ${5:`!p snip.rv = _get_comment_format()[0]`} $2__$3$4 $5
 endsnippet
 
 snippet uvm_info "add uvm_info macro" sw
-\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_FULL});
+\`uvm_info(get_type_name(), $sformatf("$1"), uvm_pkg::${2:UVM_FULL});
 endsnippet
 
 snippet uvm_debug "add uvm_debug macro" sw
-\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_DEBUG});
+\`uvm_info(get_type_name(), $sformatf("$1"), uvm_pkg::${2:UVM_DEBUG});
 endsnippet
 
 snippet uvm_full "add uvm_full macro" sw
-\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_FULL});
+\`uvm_info(get_type_name(), $sformatf("$1"), uvm_pkg::${2:UVM_FULL});
 endsnippet
 
 snippet assert "add uvm assertion macro" sw
@@ -100,20 +100,34 @@ snippet assert "add uvm assertion macro" sw
   assert_$1: assert property($1);
 endsnippet
 
-snippet uvm_high "add uvm_full macro" sw
-\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_HIGH});
+snippet uvm_factory "not use the macro" sw
+  localparam type_name = $sformatf("${1:CLASS#(%s)}"${2: , PARAM1::type_name});
+  ${3:typedef uvm_pkg::uvm_component_registry#(${4:CLASS#(PARAM1,)}, type_name) type_id;
+  static function type_id get_type();
+    return type_id::get();
+  endfunction: get_type
+  virtual function uvm_pkg::uvm_object_wrapper get_object_type();
+    return type_id::get();
+  endfunction: get_object_type
+  virtual }function string get_type_name();
+    return type_name;
+  endfunction: get_type_name
 endsnippet
 
-snippet uvm_medium "add uvm_full macro" sw
-\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_MEDIUM});
+snippet uvm_high "add uvm_high macro" sw
+\`uvm_info(get_type_name(), $sformatf("$1"), uvm_pkg::${2:UVM_HIGH});
 endsnippet
 
-snippet uvm_low "add uvm_full macro" sw
-\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_LOW});
+snippet uvm_medium "add uvm_medium macro" sw
+\`uvm_info(get_type_name(), $sformatf("$1"), uvm_pkg::${2:UVM_MEDIUM});
 endsnippet
 
-snippet uvm_none "add uvm_full macro" sw
-\`uvm_info(get_type_name(), $sformatf("$1"), ${2:UVM_NONE});
+snippet uvm_low "add uvm_low macro" sw
+\`uvm_info(get_type_name(), $sformatf("$1"), uvm_pkg::${2:UVM_LOW});
+endsnippet
+
+snippet uvm_none "add uvm_none macro" sw
+\`uvm_info(get_type_name(), $sformatf("$1"), uvm_pkg::${2:UVM_NONE});
 endsnippet
 
 snippet uvm_fatal "add uvm_fatal macro" sw
@@ -130,14 +144,14 @@ endsnippet
 
 snippet config_get "add cfgdb::get macro" sw
   // get ${1:field_name} from config_db, of ${2:type} type and pass it to ${3:value}
-  if(!(uvm_config_db#($2)::get(.cntxt(${4:this}), .inst_name("$5"), .field_name("$1"), .value($3)))) begin
+  if(!(uvm_pkg::uvm_config_db#($2)::get(.cntxt(${4:this}), .inst_name("$5"), .field_name("$1"), .value($3)))) begin
     \`uvm_${6:error}(get_type_name(), $sformatf("Unable to obtain $1 from $4->$5->$1 in config DB."));
   end
 endsnippet
 
 snippet config_set "add cfgdb::set macro" sw
   // set ${1:field_name} from config_db, of ${2:type} type and assign value = ${3:value}
-  uvm_config_db#($2)::set(.cntxt(${4:uvm_root::get()}), .inst_name("$5"), .field_name("$1"), .value($3));
+  uvm_pkg::uvm_config_db#($2)::set(.cntxt(${4:uvm_root::get()}), .inst_name("$5"), .field_name("$1"), .value($3));
 endsnippet
 
 snippet comp_utils "add component utils macro" sw
@@ -147,14 +161,14 @@ endsnippet
 
 snippet new "add new function" sw
   function new(string name="${1:`!p snip.rv = snip.basename.lower()`}", uvm_component parent=${2:null});
-    super.new(name, parent);
+    super.new(.name(name), .parent(parent));
   endfunction:new
 endsnippet
 
 snippet function "add * function" sw
 ${1:`!p snip.rv = _get_comment_format()[0]`} virtual function ${2:void} ${3:name}_f($4) `!p snip.rv = foldmarker()[0]`${5:1} $1
 virtual function $2 $3_f($4);
-  \`uvm_info(get_type_name(), $sformatf("in $3_f"), UVM_DEBUG);
+  \`uvm_info(get_type_name(), $sformatf("in $3_f"), uvm_pkg::UVM_DEBUG);
 endfunction:$3_f
 $1 `!p snip.rv = foldmarker()[1]`$5 $1 virtual function $2 $3_f
 endsnippet
@@ -162,13 +176,13 @@ endsnippet
 snippet task "add * function" sw
 ${1:`!p snip.rv = _get_comment_format()[0]`} virtual task ${2:void} ${3:name}_f($4) `!p snip.rv = foldmarker()[0]`${5:1} $1
 virtual task $2 $3_f($4);
-  \`uvm_info(get_type_name(), $sformatf("in $3_f"), UVM_DEBUG);
+  \`uvm_info(get_type_name(), $sformatf("in $3_f"), uvm_pkg::UVM_DEBUG);
 endfunction:$3_f
 $1 `!p snip.rv = foldmarker()[1]`$5 $1 virtual function $2 $3_f
 endsnippet
 
 snippet phase "add * phase" sw
-  virtual ${1:function} void ${2:build}_phase(uvm_phase phase);
+  virtual ${1:function} void ${2:build}_phase(uvm_pkg::uvm_phase phase);
     super.$2_phase(phase);
   endfunction:$2_phase
 endsnippet

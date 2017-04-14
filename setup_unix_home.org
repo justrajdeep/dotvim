@@ -901,6 +901,7 @@ unalias vmfz; alias vmfz '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/s
 unalias vmfy; alias vmfy '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scripts/bin/ag_file_command \!:2 | $HOME/scripts/bin/fzy`'
 # project specific
 unalias dj; alias dj 'bootenv && sleep 2 && \dj'
+unalias p4q; alias p4q 'bootenv && sleep 2 && source /proj/verif_release_ro/p4w/current/_p4w.csh'
 unalias vpz; alias vpz 'gvim `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzf`'
 unalias vpy; alias vpy 'gvim `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzy`'
 unalias voz; alias voz 'gvim `$HOME/scripts/bin/ag_file_command $OUT_HOME/ | $HOME/scripts/bin/fzf`'
@@ -920,6 +921,7 @@ unalias grep; alias grep "\grep --color=always -s"
 unalias tree; alias tree "\tree -C"
 unalias less; alias less "\less -R -i"
 unalias df; alias df "\df -h"
+unalias du; alias du "\du -h"
 unalias lg; alias lg '\ls -1 | \grep -i '
 
 # xterm related
@@ -3416,6 +3418,7 @@ if { [string equal $env(SCMROOT) //gfxip/gcB] } {
 if { [string equal $env(SCMROOT) //gfxip/gfx9] } {
    setenv DJ_INIT "$env(DJ_INIT) --save_cmd_logs -DAUTOMGR_OPTS=-nostrict --save_cmd_logs"
 }
+
 
 # vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
 #+END_SRC

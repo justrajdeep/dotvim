@@ -33,7 +33,7 @@ sub run_critic{
   my @violations = $critic->critique($file);
   if(scalar @violations){
     print @violations;
-    cluck "the script modifications did not pass the Perl::Critic test\n";
+    confess "the script modifications did not pass the Perl::Critic test\n";
   }
 }
 
