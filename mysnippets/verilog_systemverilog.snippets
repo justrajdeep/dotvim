@@ -101,7 +101,7 @@ snippet assert "add uvm assertion macro" sw
 endsnippet
 
 snippet uvm_factory "not use the macro" sw
-  localparam type_name = $sformatf("${1:CLASS#(%s)}"${2: , PARAM1::type_name});
+  const static string type_name = $sformatf("${1:CLASS#(%s)}"${2: , $typename(T)});
   ${3:typedef uvm_pkg::uvm_component_registry#(${4:CLASS#(PARAM1,)}, type_name) type_id;
   static function type_id get_type();
     return type_id::get();

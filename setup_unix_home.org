@@ -557,14 +557,14 @@ complete uncomplete 'p/*/X/'
 #   first argument:           adds "-s"
 #   arguments that follow -s: reminds you of which argument is expected
 # complete ln 'C/?/f/' 'p/1/(-s)/' 'n/-s/x:[first arg is path to original file]/' 'N/-s/x:[second arg is new link]/'
-complete ln		c/--/"(backup directory force no-dereference \
-    			interactive symbolic suffix verbose version-control \
-			help version)"/ \
-			c/-/"(b d F f i n S s V v -)"/ \
-			n/{-S,--suffix}/x:'<suffix>'/ \
-			n/{-V,--version-control}/"(t numbered nil existing \
-			never simple)"/ n/-/f/ N/-/x:'<link_name>'/ \
-			p/1/f/ p/2/x:'<link_name>'/
+# complete ln		c/--/"(backup directory force no-dereference \
+#     			interactive symbolic suffix verbose version-control \
+# 			help version)"/ \
+# 			c/-/"(b d F f i n S s V v -)"/ \
+# 			n/{-S,--suffix}/x:'<suffix>'/ \
+# 			n/{-V,--version-control}/"(t numbered nil existing \
+# 			never simple)"/ n/-/f/ N/-/x:'<link_name>'/ \
+# 			p/1/f/ p/2/x:'<link_name>'/
 
 # set a list of hosts, for use with rlogin
 foreach f ($HOME/.hosts /usr/local/etc/csh.hosts $HOME/.rhosts /etc/hosts /etc/hosts.equiv)
@@ -901,6 +901,7 @@ unalias vmfz; alias vmfz '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/s
 unalias vmfy; alias vmfy '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scripts/bin/ag_file_command \!:2 | $HOME/scripts/bin/fzy`'
 # project specific
 unalias dj; alias dj 'bootenv && sleep 2 && \dj'
+unalias mkverdi; alias mkverdi 'bootenv && sleep 2 && \mkverdi'
 unalias p4q; alias p4q 'bootenv && sleep 2 && source /proj/verif_release_ro/p4w/current/_p4w.csh'
 unalias vpz; alias vpz 'gvim `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzf`'
 unalias vpy; alias vpy 'gvim `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzy`'
@@ -926,6 +927,7 @@ unalias lg; alias lg '\ls -1 | \grep -i '
 
 # xterm related
 unalias kk; alias kk '\konsole &'
+unalias tt; alias tt '\terminator &'
 unalias xx; alias xx '\uxterm -fg white -bg #262626 &'
 unalias xb; alias xb '\uxterm &'
 unalias xtg; alias xtg '\uxterm -fg green -bg black &'
@@ -3301,7 +3303,7 @@ module load openssh/5.0p1-hpn13v3
 module load xterm/324
 module load tkdiff/4.2
 module load bash/4.3.30
-module load git/2.6.3
+module load git/2.13.1
 module load tcsh/6.18.01
 module load ctags/5.8
 module load ack/2.14
@@ -3403,7 +3405,7 @@ prepend-path PATH /home/ramondal/scripts/bin
 ######################################################
 # ORL
 # Set common arguments for verbose, color, local mode, and max number of jobs (number of cores)
-setenv DJ_INIT "-v -c -DMAKEJ -J local -m4 --save_cmd_logs -DUSE_FDL -DGENERATE_GLOBAL_FEATURES -DRELAX_FEATURE_ACCESS_CKS -DNO_LEGACY_GEN_DVFLOWS -DDEBUG -DRDFT_SHELL"
+setenv DJ_INIT "-v -c -DMAKEJ -J local -m8 --save_cmd_logs -DUSE_FDL -DGENERATE_GLOBAL_FEATURES -DRELAX_FEATURE_ACCESS_CKS -DNO_LEGACY_GEN_DVFLOWS -DDEBUG -DRDFT_SHELL"
 # ATL
 # setenv DJ_INIT -v -c -J lsf -m4"
 
