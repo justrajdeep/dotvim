@@ -17,6 +17,8 @@
   --enable-fontset \
   --with-tlib=ncurses \
   --with-x=yes \
+  --enable-terminal \
+  --enable-xterm_save \
   --enable-sniff \
   --enable-mzschemeinterp=yes \
   --enable-gtk2-check \

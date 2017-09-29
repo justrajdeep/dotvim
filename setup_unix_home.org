@@ -90,7 +90,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(tramp dash s f verilog-mode ob-ipython org-bullets meacupla-theme)
+   dotspacemacs-additional-packages '(tramp dash s f verilog-mode ob-ipython org-bullets)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -147,7 +147,6 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(spacemacs-dark
-                         meacupla
                          spacemacs-light
                          solarized-light
                          solarized-dark
@@ -760,7 +759,7 @@ set   white="%{\033[0;37m%}"
 set     end="%{\033[0m%}" # This is needed at the end... :(
 # }}}2
 set system=`hostname`
-unalias setprompt; alias setprompt 'set prompt="${green}%n${end}@${magenta}${system}${end}: ${red}%B%c03%b${end} :${cyan}%t${end}:[ \! ][%?] ${blue} ${end} \n${end}%#"'
+unalias setprompt; alias setprompt 'set prompt="${green}%n${end}@${magenta}${system}${end}: ${red}%B%c03%b${end} :${cyan}%w-%D(%d)-%t${end}:[ \! ][%?] ${blue} ${end} \n${end}%#"'
 unalias cd; alias cd 'chdir \!* && setprompt'	# reset prompt after change dir
 unalias cdz; alias cdz 'chdir `$HOME/scripts/bin/cdf_command . | $HOME/scripts/bin/fzf` && setprompt'	# reset prompt after change dir
 unalias cdy; alias cdy 'chdir `$HOME/scripts/bin/cdf_command . | $HOME/scripts/bin/fzy` && setprompt'	# reset prompt after change dir
@@ -871,7 +870,9 @@ setenv P4MERGE p4merge
 # alias z 'echo '\''hello world'\'        # same goes for single quotes ('\'')
 
 unalias xterm; alias xterm 'uxterm'
-unalias ls; alias ls "ls-F --color=always -h" #enable thousands grouping and colour
+if ($?prompt) then
+  unalias ls; alias ls "ls-F --color=always -h" #enable thousands grouping and colour
+endif
 unalias lz; alias lz 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command . ; $HOME/scripts/bin/ag_file_command . ) | $HOME/scripts/bin/fzf`'
 unalias ly; alias ly 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command . ; $HOME/scripts/bin/ag_file_command . ) | $HOME/scripts/bin/fzy`'
 unalias lfz; alias lfz 'ls-F --color=always -h `( $HOME/scripts/bin/cdf_command \!:1 ; $HOME/scripts/bin/ag_file_command \!:1 ) | $HOME/scripts/bin/fzf`'
@@ -900,8 +901,9 @@ unalias vmy; alias vmy '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scr
 unalias vmfz; alias vmfz '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scripts/bin/ag_file_command \!:2 | $HOME/scripts/bin/fzf`'
 unalias vmfy; alias vmfy '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scripts/bin/ag_file_command \!:2 | $HOME/scripts/bin/fzy`'
 # project specific
-unalias dj; alias dj 'bootenv && sleep 2 && \dj'
+unalias dj; alias dj 'bootenv && sleep 2 && \dj --console_status_line cmd'
 unalias mkverdi; alias mkverdi 'bootenv && sleep 2 && \mkverdi'
+# unalias dmp2vec; alias dmp2vec  'sh -c \'for dmp in `ls \!*`; do echo -n "Generating $dmp.view now..."; perl $STEM/src/test/tools/scripts/dmp2vec.pl $dmp > $dmp\.view && echo "Done" || echo "Error"; done;\'
 unalias p4q; alias p4q 'bootenv && sleep 2 && source /proj/verif_release_ro/p4w/current/_p4w.csh'
 unalias vpz; alias vpz 'gvim `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzf`'
 unalias vpy; alias vpy 'gvim `$HOME/scripts/bin/ag_file_command $STEM/src/ | $HOME/scripts/bin/fzy`'
@@ -1007,7 +1009,7 @@ sleep 5
 #
 
 # setenv BOOTENV_NOCLEAN 1	# mznoj this is dangerous!
-# setenv DJ_INIT '-v -c -m2 --save_cmd_logs'
+# setenv DJ_INIT '-c -m2 --save_cmd_logs'
 # echo -n "in gl_terminal.tcshrc"
 
 if (! $?ProjectName ) then
@@ -2116,6 +2118,7 @@ setenv PKG_CONFIG_PATH "/tool/pandora64/.package/glib-2.32.1/lib/pkgconfig:/usr/
   --enable-multibyte \
   --enable-fontset \
   --with-x=yes \
+  --enable-terminal \
   --enable-mzschemeinterp=yes \
   --enable-gtk2-check \
   --enable-gnome-check \
@@ -3405,9 +3408,9 @@ prepend-path PATH /home/ramondal/scripts/bin
 ######################################################
 # ORL
 # Set common arguments for verbose, color, local mode, and max number of jobs (number of cores)
-setenv DJ_INIT "-v -c -DMAKEJ -J local -m8 --save_cmd_logs -DUSE_FDL -DGENERATE_GLOBAL_FEATURES -DRELAX_FEATURE_ACCESS_CKS -DNO_LEGACY_GEN_DVFLOWS -DDEBUG -DRDFT_SHELL"
+setenv DJ_INIT "-c -DMAKEJ -J local -m0 --save_cmd_logs -DUSE_FDL -DGENERATE_GLOBAL_FEATURES -DRELAX_FEATURE_ACCESS_CKS -DNO_LEGACY_GEN_DVFLOWS -DDEBUG -DRDFT_SHELL"
 # ATL
-# setenv DJ_INIT -v -c -J lsf -m4"
+# setenv DJ_INIT -c -J lsf -m0"
 
 # setenv GREP_OPTIONS "--color=auto"
 

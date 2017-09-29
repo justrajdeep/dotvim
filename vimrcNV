@@ -635,6 +635,12 @@ if use_neobundle
     NeoBundle 'reedes/vim-thematic',                           { 'directory' : 'color_thematic'}
     NeoBundle 'vim-scripts/Colour-Sampler-Pack',               { 'directory' : 'colour_sampler_pack'}
     " NeoBundle 'hzchirs/vim-material',                        { 'directory' : 'colour_material'}
+    " NeoBundle 'nightsense/carbonized',                       { 'directory' : 'colour_carbonized'}
+    " NeoBundle 'nightsense/willy',                            { 'directory' : 'colour_willy'}
+    " NeoBundle 'beigebrucewayne/skull-vim',                   { 'directory' : 'colour_skull'}
+    " NeoBundle 'Drogglbecher/vim-moonscape',                  { 'directory' : 'colour_moonscape'}
+    " NeoBundle 'beigebrucewayne/hacked_ayu.vim',              { 'directory' : 'colour_hacked'}
+    " NeoBundle 'baines/vim-colorscheme-thaumaturge',          { 'directory' : 'colour_thaumaturge'}
     " NeoBundle 'chr4/jellygrass.vim',                         { 'directory' : 'colour_jellygrass'}
     " NeoBundle 'ytet5uy4/abyss.vim',                          { 'directory' : 'colour_abyss'}
     " NeoBundle 'yuttie/hydrangea-vim',                        { 'directory' : 'colour_hydrangea'}
@@ -653,6 +659,7 @@ if use_neobundle
     " NeoBundle 'prognostic/plasticine',                                     { 'directory' : 'color_plasticine'}
     " NeoBundle 'preocanin/greenwint',                                       { 'directory' : 'color_greenwint'}
     " NeoBundle 'dim13/xedit.vim',                                       { 'directory' : 'color_xedit'}
+    " NeoBundle 'dim13/smyck.vim',                                       { 'directory' : 'color_smyck'}
     " NeoBundle 'sts10/vim-mustard',                                        { 'directory' : 'color_mustard'}
     " NeoBundle 'nightsense/vim-crunchbang',                                { 'directory' : 'color_crunchbang'}
     " NeoBundle 'sonjapeterson/1989.vim',                                   { 'directory' : 'color_1989'}
@@ -1045,6 +1052,7 @@ if use_neobundle
     " " NeoBundle 'zefei/vim-colortuner',                          { 'directory' : 'colortuner'}
     " " }}}2 " color
     NeoBundleLazy 'sjl/clam.vim',                                  { 'directory' : 'clam', 'autoload' : {'commands' : ['ClamVisual', 'SClam']}}
+    NeoBundle     'xtal8/traces.vim',                              { 'directory' : 'traces'}
     NeoBundle     'wellsjo/vim-save-cursor-position',            { 'directory' : 'saveCursorPosition'}
     " NeoBundle     'skywind3000/quickmenu.vim',                   { 'directory' : 'quickMenu'}
     NeoBundle     'natw/Decho',                                  { 'directory' : 'decho'}
@@ -1067,6 +1075,7 @@ if use_neobundle
     NeoBundle 'vim-utils/vim-vertical-move',                      { 'directory' : 'vertical_move'}
     NeoBundle 'justinmk/vim-syntax-extra',                     { 'directory' : 'syntax-extra'}
     NeoBundleLazy 'AndrewRadev/linediff.vim',                      { 'directory' : 'linediff', 'autoload' : {'commands' : ['Linediff', 'LinediffReset']}}
+    " NeoBundle 'ckarnell/history-traverse',                     { 'directory' : 'historyTraverse'}
     NeoBundle 'Lokaltog/vim-easymotion',                       { 'directory' : 'easymotion'}
     NeoBundle 'Valloric/MatchTagAlways',                       { 'directory' : 'matchTagAlways'}
     NeoBundle 'kopischke/vim-fetch',                           { 'directory' : 'fetch'}
@@ -2158,8 +2167,8 @@ set scrolloff=2 "skip 2 lines when scrolling
 set sidescrolloff=10
 " no jumpy behaviour
 set sidescroll=1
-" confirm action using a dialog box
-set confirm
+" " confirm action using a dialog box
+" set confirm
 " prevent cursor to change position when changing line
 set nostartofline
 " always show something in statusline
@@ -2221,10 +2230,10 @@ noremap gV `[v`]
 " xnoremap p "_dP
 " xnoremap P "_dP
 
-" home moves cursor to the first non-blank char
-noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
-imap <silent> <Home> <C-O><Home>
-noremap 0 ^
+" " home moves cursor to the first non-blank char
+" noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+" imap <silent> <Home> <C-O><Home>
+" noremap 0 ^
 
 " perforce settings
 let g:p4EnableRuler=0
@@ -2707,7 +2716,7 @@ augroup filetype_dj
 augroup END
 augroup filetype_dv
 :autocmd!
-:autocmd BufNewFile,BufEnter,BufRead *.dv set filetype=ruby
+:autocmd BufNewFile,BufEnter,BufRead *.dv set filetype=ruby  | setlocal commentstring=//\ %s
 augroup END
 
 augroup filetype_snippets
@@ -3218,7 +3227,7 @@ cnoremap #a <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete modifiable
 cnoremap #L <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !p4 filelog <C-r>=resolve(expand('%'))<CR>
 " cnoremap #l <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !/home/nv/bin//p4print <C-r>=resolve(expand('%'))<CR>
 cnoremap #l <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !p4-whodunit.py <C-r>=resolve(expand('%'))<CR>
-cnoremap #p <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !/proj/verif_release_ro/p4w/266/p4pr <C-r>=resolve(expand('%'))<CR>
+cnoremap #p <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !/proj/verif_release_ro/p4w/268/p4pr <C-r>=resolve(expand('%'))<CR>
 cnoremap #D <C-U>!p4 diff <C-r>=resolve(expand('%'))<CR> &
 cnoremap #d <C-U>sp \| enew \| setlocal bt=nofile bh=delete modifiable \| r !p4 describe <C-r><C-w>
 cnoremap #N <C-U>!nedit <C-r>=resolve(expand('%'))<CR>
@@ -3420,7 +3429,6 @@ function! EnsureDirExists ()
     if !isdirectory(required_dir)
         call AskQuit("Parent directory '" . required_dir . "' doesn't exist.",
              \       "&Create it\nor &Quit?", 2)
-
         try
             call mkdir( required_dir, 'p' )
         catch
@@ -3529,8 +3537,16 @@ function! GrepQuickFix(pat)
   call setqflist(all)
 endfunction
 command! -nargs=* GrepQF call GrepQuickFix(<q-args>)
-nnoremap <C-n> :cnext<CR>
-nnoremap <C-p> :cprev<CR>
+" nnoremap <C-n> :cnext<CR>
+" nnoremap <C-p> :cprev<CR>
+" " Use this setting to override the default mapping (<c-m>) for going back in the history
+" let g:history_back_map = '<c-p>'
+" " Use this setting to override the default mapping (<c-n>) for going forward in the history
+" let g:history_forward_map = '<c-P>'
+" " Set filetypes to pass over putting in the history. Defaults to ['netrw']
+" let g:history_ft_ignore = ['pyc', 'netrw']
+" " Set the maximum length of each buffers history. Defaults to 100
+" let g:history_max_len = 1000
 
 command! -nargs=0 Blame :call P4blame()
 function! P4blame()
