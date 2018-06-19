@@ -416,6 +416,51 @@ unset dunique
 *** TODO Completion
 #+BEGIN_SRC tcsh :tangle ~/tangled_files/complete :eval never
 # completion/directory {{{1
+#
+# example file using the new completion code
+#
+# Debian GNU/Linux
+# /usr/share/doc/tcsh/examples/complete.gz
+#
+# This file may be read from user's ~/.cshrc or ~/.tcshrc file by
+# decompressing it into the home directory as ~/.complete and
+# then adding the line "source ~/.complete" and maybe defining
+# some of the shell variables described below.
+#
+# Added two Debian-specific completions: dpkg and dpkg-deb (who
+# wrote them?). Changed completions of several commands. The ones
+# are evaluated if the `traditional_complete' shell variable is
+# defined.
+#
+# Debian enhancements by Vadim Vygonets <vadik@cs.huji.ac.il>.
+# Bugfixes and apt completions by Miklos Quartus <miklos.quartus@nokia.com>.
+# Cleanup by Martin A. Godisch <martin@godisch.de>.
+
+# onintr -
+if ( ! $?prompt ) goto end
+
+if ( $?tcsh ) then
+  if ( $tcsh != 1 ) then
+    set rev=$tcsh:r:r
+    set rel=$tcsh:r:e
+    if ( $rev > 6 || ( $rev > 5 && $rel > 1 ) ) then
+      set _has_complete=1
+    endif
+  endif
+  unset rev rel
+endif
+
+if ( ! $?_has_complete ) goto end
+
+# if ( ! $?noglob ) set noglob _unset_noglob
+
+# Old TCSH versions don't define OSTYPE.
+# Use a close approximation instead.
+
+if ( ! $?OSTYPE ) then
+  setenv OSTYPE `echo "$HOSTTYPE" | sed -e 's/^(i[3456]86|(amd|x86_)64)-//'`
+endif
+
 # show hidden files in list and completion
 set showdots		
 set implicitcd
@@ -452,6 +497,12 @@ complete popd 	p/1/d/
 complete pu 	p/1/d/
 complete po 	p/1/d/
 
+complete rm \
+  'c/--/"(directory force interactive verbose recursive help version)"/' \
+  'c/-/"(d f i v r R -)"/' \
+  'n/*/f:^*.{c,cc,C,h,in}/'
+  # Protect precious files
+
 # signal names
 # also note that the initial - can be created with the first completion
 # but without appending a space (note the extra slash with no
@@ -476,6 +527,45 @@ complete du		c/--/"(all block-size bytes total dereference-args \
 			exclude-from exclude max-depth help version"/ \
 			c/-/"(a b c D H h k L l m S s X x)"/
 
+complete mv		c/--/"(backup force interactive update verbose suffix \
+		    version-control help version)"/ \
+		    c/-/"(b f i S u V v -)"/ \
+		    n/{-S,--suffix}/x:'<suffix>'/ \
+		    n/{-V,--version-control}/"(t numbered nil existing \
+		    never simple)"/ n/-/f/ N/-/d/ p/1/f/ p/2/d/ 'n/*/f/'
+
+complete cp		c/--/"(archive backup no-dereference force \
+		    interactive link preserve parents sparse recursive \
+		    symbolic-link suffix update verbose version-control \
+		    one-file-system help version)"/ \
+		    c/-/"(a b d f i l P p R r S s u V v x -)"/ \
+		    'n/-*r/d/' n/{-S,--suffix}/x:'<suffix>'/ \
+		    n/{-V,--version-control}/"(t numbered nil existing \
+		    never simple)"/ n/-/f/ N/-/d/ p/1/f/ p/2/d/ 'n/*/f/'
+
+complete ln		c/--/"(backup directory force no-dereference \
+		    interactive symbolic suffix verbose version-control \
+		    help version)"/ \
+		    c/-/"(b d F f i n S s V v -)"/ \
+		    n/{-S,--suffix}/x:'<suffix>'/ \
+		    n/{-V,--version-control}/"(t numbered nil existing \
+		    never simple)"/ 'n/-*/f/' N/-\*/x:'<link_name>'/ \
+		    p/1/f/ p/2/x:'<link_name>'/
+
+complete touch	c/--/"(date reference time help version)"/ \
+		    c/-/"(a c d f m r t -)"/ \
+		    n/{-d,--date}/x:'<date_string>'/ \
+		    c/--time/"(access atime mtime modify use)"/ \
+		    n/{-r,--file}/f/ n/-t/x:'<time_stamp>'/ 'n/*/f/'
+
+complete mkdir	c/--/"(mode parents verbose help version)"/ \
+		    c/-/"(p m -)"/ \
+		    n/{-m,--mode}/x:'<mode>'/ 'n/*/d/'
+
+complete complete 	p/1/X/		# Completions only
+# of course, this completes with all current completions
+# complete uncomplete 'p/*/X/'
+complete uncomplete	'n/*/X/'
 complete exec 	p/1/c/		# Commands only
 complete trace 	p/1/c/
 complete strace 	p/1/c/
@@ -502,6 +592,32 @@ complete wget 	c/--/"(accept= append-output= background cache= \
 		server-response span-hosts spider timeout= \
 		timestamping tries= user-agent= verbose version wait=)"/
 
+if (-f "$STEM/P4CONFIG" && -X perl) then
+    # This is from Greg Allen.
+    set p4cmds=(add branch branches commands change changes client clients \
+	counter counters delete depot depots describe diff diff2 \
+	edit filelog files fix fixes fstat group groups have help \
+	info integrate integrated job jobs jobspec label labels \
+	labelsync lock obliterate opened passwd print protect rename \
+	reopen resolve resolved revert review reviews set submit \
+	sync triggers unlock user users verify where)
+
+    set p4wcmds=($p4cmds advise audit_workspace branch_all change_branch check_servers check_submit_info \
+                  chwacfg copy diff_all find_changelist opened_all p4v reconcile remove \
+                  sanity_check ssync stage status status_all submit_all sync_all sync_local \
+                  unsubmit update_client update_env)
+
+    complete p4 'p/1/$p4cmds/' 'n/help/$p4cmds/' \
+	'n%{-l,label}%`p4 labels | sed "s/Label \([^ ]*\) .*/\1/"`%' \
+	'n%-t%`p4 $:1s | sed "s/[^ ]* \([^ ]*\) .*/\1/"`%' \
+	'c%*@%`p4 labels | sed "s/Label \([^ ]*\) .*/\1/"`%' \
+	'c@//*/*@`p4 files $:-0... |& perl -nle "m%\Q$:-0\E([^#][^/# ] \
+	*)%;print "\$"1 if \\\!/no such/&&\!"\$"h{"\$"1}++"`@@' \
+	'c@//@`p4 depots | sed "s/Depot \([^ ]*\) .*/\1/"`@/@'
+
+    complete p4w 'p/1/$p4wcmds/' 'n/help/$p4wcmds/'
+endif
+
 # aliases
 complete alias 'p/1/a/'
 complete unalias 'p/1/a/'
@@ -512,7 +628,7 @@ complete set 'p/1/s/'
 
 # environment variables
 complete unsetenv 'p/1/e/'
-complete setenv 'p/1/e/'
+complete setenv 'p/1/e/' 'c/*:/f/'
 #(kinda cool: complete first arg with an env variable, and add an =,
 # continue completion of first arg with a filename.  complete 2nd arg
 # with a command)
@@ -534,21 +650,18 @@ complete chown 'p/1/u/'
 # Please check your version before using these completions, as some
 # differences may exist.
 complete find 'n/-name/f/' 'n/-newer/f/' 'n/-{,n}cpio/f/' \
-'n/-exec/c/' 'n/-ok/c/' 'n/-user/u/' 'n/-group/g/' \
-'n/-fstype/(nfs 4.2)/' 'n/-type/(b c d f l p s)/' \
-'c/-/(name newer cpio ncpio exec ok user group fstype type atime \
-ctime depth inum ls mtime nogroup nouser perm print prune \
-size xdev)/' \
-'p/*/d/'
+      'n/-exec/c/' 'n/-ok/c/' 'n/-user/u/' 'n/-group/g/' \
+      'n/-fstype/(nfs 4.2)/' 'n/-type/(b c d f l p s)/' \
+      'c/-/(name newer cpio ncpio exec ok user group fstype type atime \
+      ctime depth inum ls mtime nogroup nouser perm print prune \
+      size xdev)/' \
+      'p/*/d/'
 
 complete -%*	c/%/j/			# fill in the jobs builtin
 complete {fg,bg,stop}	c/%/j/ p/1/"(%)"//
 
 # set up cc to complete only with files ending in .c, .a, and .o
 complete cc 'p/*/f:*.[cao]/'
-
-# of course, this completes with all current completions
-complete uncomplete 'p/*/X/'
 
 # complex completion for ln
 # In all cases, if you start typing, it completes with a filename
@@ -592,11 +705,196 @@ complete rsh 'p/1/$hosts/' 'p/2/c/'
 complete ssh 'p/1/$hosts/' 'p/2/c/'
 # complete telnet p/1/\$hosts/ p/2/x:'<port>'/ n/*/n/
 
+if (-X zcat) then
+  zcat --version >& /dev/null
+  if ($status != 0) then
+    complete zcat	'n/*/f:*.Z/'
+  else
+    complete zcat	'c/--/"(force help license quiet version)"/' \
+			'c/-/"(f h L q V -)"/' \
+			'n/*/f:*.{gz,Z,z,zip}/'
+  endif
+endif
 
-# complete finger	c/*@/\$hosts/ n/*/u/@ 
+complete gzcat	c/--/"(force help license quiet version)"/ \
+		    c/-/"(f h L q V -)"/ 'n/*/f:*.{gz,Z,z,zip}/'
+
+complete gzip	c/--/"(stdout to-stdout decompress uncompress \
+		    force help list license no-name quiet recurse \
+		    suffix test verbose version fast best)"/ \
+		    c/-/"(c d f h l L n q r S t v V 1 2 3 4 5 6 7 8 9 -)"/\
+		    n/{-S,--suffix}/x:'<file_name_suffix>'/ \
+		    'n/{-d,--{de,un}compress}/f:*.{gz,Z,z,zip,taz,tgz}/' \
+		    'N/{-d,--{de,un}compress}/f:*.{gz,Z,z,zip,taz,tgz}/' \
+		    'n/*/f:^*.{gz,Z,z,zip,taz,tgz}/'
+
+complete {gunzip,ungzip} c/--/"(stdout to-stdout force help list license \
+		    no-name quiet recurse suffix test verbose version)"/ \
+		    c/-/"(c f h l L n q r S t v V -)"/ \
+		    n/{-S,--suffix}/x:'<file_name_suffix>'/ \
+		    'n/*/f:*.{gz,Z,z,zip,taz,tgz}/'
+
+complete zgrep	c/-\*A/x:'<#_lines_after>'/ c/-\*B/x:'<#_lines_before>'/\
+		    c/-/"(A b B c C e f h i l n s v V w x)"/ \
+		    p/1/x:'<limited_regular_expression>'/ 'N/-*e/f/' \
+		    n/-\*e/x:'<limited_regular_expression>'/ 'n/-*f/f/' 'n/*/f/'
+
+complete zegrep	c/-\*A/x:'<#_lines_after>'/ c/-\*B/x:'<#_lines_before>'/\
+		    c/-/"(A b B c C e f h i l n s v V w x)"/ \
+		    p/1/x:'<full_regular_expression>'/ 'N/-*e/f/' \
+		    n/-\*e/x:'<full_regular_expression>'/ 'n/-*f/f/' 'n/*/f/'
+
+complete zfgrep	c/-\*A/x:'<#_lines_after>'/ c/-\*B/x:'<#_lines_before>'/\
+		    c/-/"(A b B c C e f h i l n s v V w x)"/ \
+		    p/1/x:'<fixed_string>'/ 'N/-*e/f/' \
+		    n/-\*e/x:'<fixed_string>'/ 'n/-*f/f/' 'n/*/f/'
+
+complete znew	c/-/"(f t v 9 P K)"/ 'n/*/f:*.Z/'
+complete zmore	'n/*/f:*.{gz,Z,z,zip}/'
+complete zfile	'n/*/f:*.{gz,Z,z,zip,taz,tgz}/'
+complete ztouch	'n/*/f:*.{gz,Z,z,zip,taz,tgz}/'
+complete zforce	'n/*/f:^*.{gz,tgz}/'
+
+complete grep	c/-\*A/x:'<#_lines_after>'/ c/-\*B/x:'<#_lines_before>'/\
+		    c/--/"(extended-regexp fixed-regexp basic-regexp \
+		    regexp file ignore-case word-regexp line-regexp \
+		    no-messages revert-match version help byte-offset \
+		    line-number with-filename no-filename quiet silent \
+		    text directories recursive files-without-match \
+		    files-with-matches count before-context after-context \
+		    context binary unix-byte-offsets)"/ \
+		    c/-/"(A a B b C c d E e F f G H h i L l n q r s U u V \
+			    v w x)"/ \
+		    p/1/x:'<limited_regular_expression>'/ 'N/-*e/f/' \
+		    n/-\*e/x:'<limited_regular_expression>'/ 'n/-*f/f/' 'n/*/f/'
+
+complete egrep	c/-\*A/x:'<#_lines_after>'/ c/-\*B/x:'<#_lines_before>'/\
+		    c/--/"(extended-regexp fixed-regexp basic-regexp \
+		    regexp file ignore-case word-regexp line-regexp \
+		    no-messages revert-match version help byte-offset \
+		    line-number with-filename no-filename quiet silent \
+		    text directories recursive files-without-match \
+		    files-with-matches count before-context after-context \
+		    context binary unix-byte-offsets)"/ \
+		    c/-/"(A a B b C c d E e F f G H h i L l n q r s U u V \
+			    v w x)"/ \
+		    p/1/x:'<full_regular_expression>'/ 'N/-*e/f/' \
+		    n/-\*e/x:'<full_regular_expression>'/ 'n/-*f/f/' 'n/*/f/'
+
+complete fgrep	c/-\*A/x:'<#_lines_after>'/ c/-\*B/x:'<#_lines_before>'/\
+		    c/--/"(extended-regexp fixed-regexp basic-regexp \
+		    regexp file ignore-case word-regexp line-regexp \
+		    no-messages revert-match version help byte-offset \
+		    line-number with-filename no-filename quiet silent \
+		    text directories recursive files-without-match \
+		    files-with-matches count before-context after-context \
+		    context binary unix-byte-offsets)"/ \
+		    c/-/"(A a B b C c d E e F f G H h i L l n q r s U u V \
+			    v w x)"/ \
+		    p/1/x:'<fixed_string>'/ 'N/-*e/f/' \
+		    n/-\*e/x:'<fixed_string>'/ 'n/-*f/f/' 'n/*/f/'
+
+complete sed	c/--/"(quiet silent version help expression file)"/   \
+      c/-/"(n V e f -)"/ n/{-e,--expression}/x:'<script>'/  \
+      'n/{-f,--file}/f:*.sed/ N/-{e,f,-{file,expression}}/f/' \
+      n/-/x:'<script>'/ N/-/f/ p/1/x:'<script>'/ p/2/f/
+
+complete finger	'n/*/u/' 
 complete ping	p/1/\$hosts/
 complete traceroute	p/1/\$hosts/
 complete nslookup   p/1/x:'<host>'/ p/2/\$hosts/
+
+#from Dan Nicolaescu <dann@ics.uci.edu>
+if ( $?MODULESHOME ) then
+  alias Compl_module \
+    'find ${MODULEPATH:as/:/ /} -name .version -o -name .modulea\* -prune \
+    -o -print | sed `echo "-e s@${MODULEPATH:as%:%/\*@@g -e s@%}/\*@@g"`'
+  complete module \
+    'p%1%(add load unload switch display avail use unuse update purge list \
+	  clear help initadd initrm initswitch initlist initclear)%' \
+    'n%{unl*,sw*,inits*}%`echo "$LOADEDMODULES:as/:/ /"`%' \
+    'n%{lo*,di*,he*,inita*,initr*}%`eval Compl_module`%' \
+    'N%{sw*,initsw*}%`eval Compl_module`%' \
+    'C%-%(-append)%' \
+    'n%{use,unu*,av*}%d%' \
+    'n%-append%d%' \
+    'C%[^-]*%`eval Compl_module`%'
+endif
+
+complete go \
+      "p@1@D:$STEM/@"
+
+complete ggo \
+      "p@*@F:$STEM/@"
+
+complete goa \
+      "p@1@D:${OUT_HOME}/common/@"
+
+complete ggoa \
+      "p@*@F:${OUT_HOME}/common/@"
+
+complete gog \
+      "p@1@D:${STEM}/src/test/gold/@"
+
+complete ggog \
+      "p@*@F:${STEM}/src/test/gold/@"
+
+complete goi \
+      "p@1@D:${STEM}/import/ip/@"
+
+complete ggoi \
+      "p@*@F:${STEM}/import/ip/@"
+
+complete gom \
+      "p@1@D:${STEM}/src/meta/@"
+
+complete ggom \
+      "p@*@F:${STEM}/src/meta/@"
+
+complete goo \
+      "p@1@D:${OUT_HOME}/@"
+
+complete ggoo \
+      "p@*@F:${OUT_HOME}/@"
+
+complete gor \
+      "p@1@D:${STEM}/src/rtl/@"
+
+complete ggor \
+      "p@*@F:${STEM}/src/rtl/@"
+
+complete gosc \
+      "p@1@D:${STEM}/setup/scripts/@"
+
+complete ggosc \
+      "p@*@F:${STEM}/setup/scripts/@"
+
+complete gose \
+      "p@1@D:${STEM}/setup/@"
+
+complete ggose \
+      "p@*@F:${STEM}/setup/@"
+
+complete got \
+      "p@1@D:${STEM}/src/test/@"
+
+complete ggot \
+      "p@*@F:${STEM}/src/test/@"
+
+complete gov \
+      "p@1@D:${STEM}/src/verif/@"
+
+complete ggov \
+      "p@*@F:${STEM}/src/verif/@"
+
+complete cdrun \
+      "p@1@D:${OUT_HOME}/${DESIGN_NAME}/config/ge/run/block/ge/@"
+
+complete gcdrun \
+      "p@*@F:${OUT_HOME}/${DESIGN_NAME}/config/ge/run/block/ge/@"
+
+complete gcdsim \
+      "p@*@F:${OUT_HOME}/${DESIGN_NAME}/config/ge/pub/sim/@"
 
 set perlmodules = ("perlmodlib" "perllocal")
 # set perlmodules = ($perlmodules `pmall | awk '{print $1}'`)
@@ -633,9 +931,10 @@ set MESSAGES on
 # ding in the clock
 unset noding
 # monitor for login activity
+# http://1-linux.blogspot.ca/2008/01/tcsh-shell-variables.html
 set watch=(5 any any)
 set who='%n has %a %l from %m at %t'
-# monitor time taken to run a commadn
+# monitor time taken to run a command
 set time=(300 Elapsed:%E,User=%U,System=%S,CPU=%P.)
 # print exit status
 set printexitvalue
@@ -768,7 +1067,23 @@ unalias cdpy; alias cdpy 'chdir `$HOME/scripts/bin/cdf_command $STEM/src/ | $HOM
 unalias cdfz; alias cdfz 'chdir `$HOME/scripts/bin/cdf_command \!:1 | $HOME/scripts/bin/fzf` && setprompt'	# reset prompt after change dir
 unalias cdfy; alias cdfy 'chdir `$HOME/scripts/bin/cdf_command \!:1 | $HOME/scripts/bin/fzy` && setprompt'	# reset prompt after change dir
 unalias cdoz; alias cdoz 'chdir `$HOME/scripts/bin/cdf_command $OUT_HOME/ | $HOME/scripts/bin/fzf` && setprompt'	# reset prompt after change dir
+unalias cdsim; alias cdsim 'chdir $OUT_HOME/$DESIGN_NAME/config/ge/pub/sim'
+unalias cdrun; alias cdrun 'chdir $OUT_HOME/$DESIGN_NAME/config/ge/run/block/ge/\!:*'
 unalias cdoy; alias cdoy 'chdir `$HOME/scripts/bin/cdf_command $OUT_HOME/ | $HOME/scripts/bin/fzy` && setprompt'	# reset prompt after change dir
+unalias ggo; alias ggo 'pushd ${STEM}/ && gvim \!:* && popd' 
+unalias ggoa; alias ggoa 'pushd ${OUT_HOME}/common/ && gvim \!:* && popd'
+unalias ggog; alias ggog 'pushd ${STEM}/src/test/gold/ && gvim \!:* && popd'
+unalias ggoi; alias ggoi 'pushd ${STEM}/import/ip/ && gvim \!:* && popd'
+unalias ggom; alias ggom 'pushd ${STEM}/src/meta/ && gvim \!:* && popd'
+unalias ggoo; alias ggoo 'pushd ${OUT_HOME}/ && gvim \!:* && popd'
+unalias ggor; alias ggor 'pushd ${STEM}/src/rtl/ && gvim \!:* && popd'
+unalias ggosc; alias ggosc 'pushd ${STEM}/setup/scripts/ && gvim \!:* && popd'
+unalias ggose; alias ggose 'pushd ${STEM}/setup/ && gvim \!:* && popd'
+unalias ggot; alias ggot 'pushd ${STEM}/src/test/ && gvim \!:* && popd'
+unalias ggov; alias ggov 'pushd ${STEM}/src/verif/ && gvim \!:* && popd'
+unalias gcdrun; alias gcdrun 'pushd ${OUT_HOME}/${DESIGN_NAME}/config/ge/run/block/ge/ && gvim \!:* && popd'
+unalias gcdsim; alias gcdsim 'pushd ${OUT_HOME}/${DESIGN_NAME}/config/ge/pub/sim/ && gvim \!:* && popd'
+
 if ( $?prompt && -x  /tool/pandora64/.package/git-2.4.6/bin/git && -x $HOME/scripts/bin/cgb ) then
    alias precmd $HOME/scripts/bin/cgb
  endif
@@ -778,7 +1093,7 @@ setprompt				# to set the initial prompt
 
 # vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
 #+END_SRC
-*** path variables
+*** TODO path variables
 #+BEGIN_SRC tcsh :tangle ~/tangled_files/my_path :eval never
 # path variables {{{1
 ########################################
@@ -799,16 +1114,6 @@ set path = ( \
   ~/scripts/bin/ \
   ~/scripts/downloaded/ \
   ~/scripts/usr/ \
-  /tool/pandora64/.package/cmake-3.3.2/bin \
-  /tool/pandora64/.package/docbook2X-0.8.8/bin \
-  /tool/pandora64/.package/glib-2.23.6/bin \
-  /tool/pandora64/.package/gtk+-2.20.1/bin \
-  /tool/pandora64/.package/cairo-1.12.16-b/bin \
-  /tool/pandora64/.package/pango-1.27.1/bin \
-  /tool/pandora64/.package/gcc-4.9.3/bin \
-  /tool/pandora64/.package/lua-5.1.4/bin \
-  /tool/pandora64/.package/python-2.7/bin \
-  /tool/pandora64/.package/perl-5.24.0/bin \
   $path:q \
   )
 
@@ -850,7 +1155,10 @@ endsw
 
 setenv P4DIFF tkdiff
 setenv P4EDITOR 'gvim -f'
-setenv P4MERGE p4merge
+setenv P4MERGE 'gvim -f $1 $3 $2 $4 +SpliceInit'
+# perforce :base, theirs, yours and merge file
+# splice $BASE $LOCAL $REMOTE $MERGED
+# setenv P4MERGE p4merge
 
 
 # }}}1
@@ -940,6 +1248,7 @@ unalias xtw; alias xtw '\uxterm -fg white -bg black &'
 unalias xtwh; alias xtwh '\uxterm -fg wheat -bg black &' 
 unalias xtv; alias xtv '\uxterm -fg violet -bg black &' 
 unalias xtb; alias xtb '\uxterm -fg black -bg gray &' 
+unalias xt4e4e4e; alias xt4e4e4e '\uxterm -fg white -bg #4e4e4e &' 
 
 unalias ssh; alias ssh 'ssh -X'
 unalias ss; alias ss 'source ~/tangled_files/my_proj_path'
@@ -958,7 +1267,7 @@ unalias p4not; alias p4not "( find . -maxdepth 1 -type f -print0 | xargs -0 p4 f
 unalias init; alias init 'source /proj/verif_release_ro/cbwa_initscript/current/cbwa_init.csh'
 
 unalias diskspace; alias diskspace 'chdir `\ls -d -1 /local_vol1_nobackup/user/ramondal/*/ | $HOME/scripts/bin/fzf ` && setprompt'
-unalias decoderb; alias decoderb '$STEM/src/test/tools/scripts/decode_registers.pl rbbm.dmp | gvim -R -'
+unalias decoderb; alias decoderb '$STEM/src/test/tools/scripts/decode_registers.pl \!:*rbbm.dmp | tee \!:*decoded_rbbm.dmp && gvim \!:*decoded_rbbm.dmp'
 unalias decoderbz; alias decoderbz '$STEM/src/test/tools/scripts/decode_registers.pl rbbm.dmp | $HOME/scripts/bin/fzf'
 set backslash_quote
 unalias hbo; alias hbo 'dj -c -v -e \'here_in_design.build_self("\!:*")\''
@@ -1230,7 +1539,8 @@ fi
 # Choose "gnome", "kde", "fluxbox", or "fvwm2"
 # WM="kde"
 # WM="fvwm2"
-WM="fluxbox"
+WM="i3"
+# WM="fluxbox"
 
 # Are we running Solaris 2.x?
 if echo $OS | grep -q "^so"; then
@@ -1251,6 +1561,8 @@ else
                exec fvwm2
             elif [ "$WM" = "icewm" ]; then
                exec icewm
+            elif [ "$WM" = "i3" ]; then
+               exec i3
             else
                xterm -title "You didn't set WM to anything I understand" &
             fi
@@ -2064,7 +2376,7 @@ cat ~/.ssh/id_rsa.pub | ssh ${REMOTE} 'mkdir -p ~/.ssh && cat >> .ssh/authorized
 git clone -v https://github.com/vim/vim.git vim_latest
 #+END_SRC
 
-** create the config file
+** TODO create the config file
 #+BEGIN_SRC sh :tangle ~/vim_latest/my_config :shebang "#!/tool/pandora64/bin/tcsh" :eval no
 
 make clean
@@ -2083,7 +2395,8 @@ module load yaml/0.1.1
 module load perl/5.10.0
 module load gcc/4.4.6
 module load ruby/1.9.3-p194
-module load python/2.7.3
+module load python/2.7.5
+# module load python/3.4.3
 module load libffi/3.0.9
 module load ncurses/6.0
 
@@ -2091,7 +2404,8 @@ module load ncurses/6.0
 # setenv LIBS "-L/tool/pandora64/.package/freetype-2.4.4/lib -L/tool/pandora64/.package/cairo-1.10.2/lib -L/tool/pandora64/.package/pango-1.29.4/lib -L/tool/pandora64/.package/pixman-0.22.0/lib -L/tool/pandora64/.package/glib-2.32.1/lib -L/tool/pandora64/.package/gtk+-2.24.10/lib -Wl,-rpath,/tool/pandora64/.package/glib-2.32.1/lib:/tool/pandora64/.package/gtk+-2.24.10/lib:/tool/pandora64/.package/cairo-1.10.2/lib:/tool/pandora64/.package/pango-1.29.4/lib:/tool/pandora64/.package/pixman-0.22.0/lib:/tool/pandora64/.package/freetype-2.4.4/lib"
 # setenv PKG_CONFIG_PATH "/tool/pandora64/.package/glib-2.32.1/lib/pkgconfig:/tool/pandora64/.package/gtk+-2.24.10/lib/pkgconfig:/tool/pandora64/.package/cairo-1.10.2/lib/pkgconfig:/tool/pandora64/.package/pango-1.29.4/lib/pkgconfig:/tool/pandora64/.package/pixman-0.22.0/lib/pkgconfig"
 
-setenv LDFLAGS "-L/tool/pandora64/.package/python-2.7.3/lib -Wl,-rpath,/usr/lib64 -lutil"
+# setenv LDFLAGS "-L/tool/pandora64/.package/python-2.7.3/lib -Wl,-rpath,/usr/lib64 -lutil"
+setenv LDFLAGS "-L/tool/pandora64/.package/python-2.7.5/lib -Wl,-rpath,/usr/lib64 -lutil"
 
 # setenv LIBS "-L/tool/pandora64/.package/gcc-4.4.6/lib64 -L/tool/pandora64/.package/ruby-1.9.3-p194/lib -L/tool/pandora64/.package/python-2.7.3/lib -L/tool/pandora64/.package/freetype-2.4.4/lib -L/tool/pandora64/.package/atk-2.4.0/lib -L/tool/pandora64/.package/gdk-pixbuf-2.24.0/lib -L/tool/pandora64/.package/libffi-3.0.9/lib -L/tool/pandora64/.package/freetype-2.4.4/lib -L/tool/pandora64/.package/cairo-1.10.2/lib -L/tool/pandora64/.package/pango-1.29.4/lib -L/tool/pandora64/.package/pixman-0.22.0/lib -L/tool/pandora64/.package/glib-2.32.1/lib -L/tool/pandora64/.package/gtk+-2.24.10/lib -Wl,-rpath,/tool/pandora64/.package/glib-2.32.1/lib:/tool/pandora64/.package/gtk+-2.24.10/lib:/tool/pandora64/.package/cairo-1.10.2/lib:/tool/pandora64/.package/pango-1.29.4/lib:/tool/pandora64/.package/pixman-0.22.0/lib:/tool/pandora64/.package/freetype-2.4.4/lib:/tool/pandora64/.package/libffi-3.0.9/lib:/tool/pandora64/.package/gdk-pixbuf-2.24.0/lib:/tool/pandora64/.package/atk-2.4.0/lib:/tool/pandora64/.package/freetype-2.4.4/lib:/tool/pandora64/.package/python-2.7.3/lib:/tool/pandora64/.package/ruby-1.9.3-p194/lib:/tool/pandora64/.package/gcc-4.4.6/lib64:/usr/lib64 -lutil"
 
@@ -2106,7 +2420,7 @@ setenv PKG_CONFIG_PATH "/tool/pandora64/.package/glib-2.32.1/lib/pkgconfig:/usr/
 ./configure --prefix=$HOME/scripts --enable-fail-if-missing --with-features=huge \
   --enable-luainterp=yes --with-lua-prefix=/tool/pandora64/.package/lua-5.1.4 \
   --enable-perlinterp=yes \
-  --with-python-config-dir=/tool/pandora64/.package/python-2.7.3/lib/python2.7/config \
+  --with-python-config-dir=/tool/pandora64/.package/python-2.7.5/lib/python2.7/config \
   --x-libraries=/usr/lib64 \
   --x-includes=/usr/include \
   --enable-pythoninterp=yes \
@@ -3300,21 +3614,21 @@ chmod 600 config
 # module load hdk-4.8.1/19
 # module load uvmkit-1.2/3
 
-module load emacs/24.5
+module load emacs/25.1
 module load vim/8.0
 module load openssh/5.0p1-hpn13v3
 module load xterm/324
 module load tkdiff/4.2
-module load bash/4.3.30
-module load git/2.13.1
-module load tcsh/6.18.01
+module load bash/4.4
+module load git/2.16.2
+module load tcsh/6.19.00
 module load ctags/5.8
 module load ack/2.14
-module load findutils/4.4.2
-module load grep/2.22
-module load less/394
+module load findutils/4.6.0-patch
+module load grep/2.26
+module load less/481
 # module load vnc/4.1.2
-module load llvm/3.8.0-gcc481
+# module load llvm/3.8.0-gcc481
 # module load python/3.5.1
 # module load python/3.3.2
 # module load python/2.7.11
@@ -3322,36 +3636,36 @@ module load llvm/3.8.0-gcc481
 # module load ruby/2.3.0
 # module load perl/5.24.0
 # module load perl/5.22.1
-module load go/1.0.2
+module load go/1.7.4
 module load tree/1.5.0
-module load libreoffice/4.1.3.2
-module load tmux/2.2
+module load libreoffice/6.0.1.1
+module load tmux/2.4
 
 module load acrobat/9.4
 module load bc/1.06-a
-module load binutils/2.24
+# module load binutils/2.27
 module load byobu/5.97
 module load bzip2/1.0.6
 module load colordiff/1.0.9
-module load coreutils/8.22
+module load coreutils/8.25
 module load cscope/15.8
-module load curl/7.20.0
+module load curl/7.54.0
 module load ddd/3.3.12
-module load diffutils/3.3
-module load doxygen/1.8.7
-module load eclipse/4.4
-module load file/3.41
+module load diffutils/3.5
+module load doxygen/1.8.12
+module load eclipse/4.6
+module load file/5.28
 module load fluxbox/1.3.7
 module load fvwm/2.4.19
-module load gawk/4.1.0
-module load gdb/7.8.1
-module load ghostscript/8.13-a
+module load gawk/4.1.4
+module load gdb/7.12
+module load ghostscript/8.14
 module load gimp/2.8.0
 module load graphviz/2.38.0
-module load gzip/1.6
-module load htop/2.0.1
-module load icewm/1.3.8
-module load imagemagick/6.9.1-2
+module load gzip/1.8
+module load htop/2.0.2
+module load icewm/1.3.8-a
+module load imagemagick/7.0.3-4
 module load java/1.6
 module load j2sdk/1.8.0_66
 module load kdiff3/0.9.98
@@ -3359,29 +3673,29 @@ module load meld/3.16.4
 module load mutt/1.6.0
 module load mercurial/3.7.3
 module load nano/2.3.2
-module load nedit/5.5
-module load nxclient/5.1.9_6
+module load nedit/5.7
+module load nxclient/5.1.62_1
 module load octave/4.0.2
-module load parallel/20150922
-module load perforce/2011.1
-module load rdesktop/1.6.0
+module load parallel/20170122
+module load perforce/2016.1
+module load rdesktop/1.8.3
 module load rsync/3.1.2
-module load screen/4.2.1
+module load screen/4.6.1
 module load sed/4.2.2
 module load sitename/1.6
-module load tar/1.27
-module load terminator/0.98
-module load texlive/20140620
-module load the_silver_searcher/0.33.0
+module load tar/1.29
+module load terminator/1.0
+module load texlive/20160920
+module load the_silver_searcher/2.1.0
 # module load kde/455
-module load tigervnc/1.4.3
+# module load tigervnc/1.7.1
 # module load tightvnc/1.3.10
 module load time/1.7
 module load mplayer/1.3.0
-module load vlc/0.9.9
+module load vlc/2.2.6
 module load wget/1.17
 module load xpdf/3.04
-module load parallel/20160922
+module load i3/4.13
 
 # module load hdk-4.8.1/19
 # module load uvmkit-1.2/3
@@ -3408,7 +3722,7 @@ prepend-path PATH /home/ramondal/scripts/bin
 ######################################################
 # ORL
 # Set common arguments for verbose, color, local mode, and max number of jobs (number of cores)
-setenv DJ_INIT "-c -DMAKEJ -J local -m0 --save_cmd_logs -DUSE_FDL -DGENERATE_GLOBAL_FEATURES -DRELAX_FEATURE_ACCESS_CKS -DNO_LEGACY_GEN_DVFLOWS -DDEBUG -DRDFT_SHELL"
+setenv DJ_INIT "-c -DMAKEJ -J local -m0 --color --save_cmd_logs :none --tar -DUSE_FDL -DGENERATE_GLOBAL_FEATURES -DRELAX_FEATURE_ACCESS_CKS -DNO_LEGACY_GEN_DVFLOWS -DDEBUG -DRDFT_SHELL"
 # ATL
 # setenv DJ_INIT -c -J lsf -m0"
 
