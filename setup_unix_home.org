@@ -592,32 +592,6 @@ complete wget 	c/--/"(accept= append-output= background cache= \
 		server-response span-hosts spider timeout= \
 		timestamping tries= user-agent= verbose version wait=)"/
 
-if (-f "$STEM/P4CONFIG" && -X perl) then
-    # This is from Greg Allen.
-    set p4cmds=(add branch branches commands change changes client clients \
-	counter counters delete depot depots describe diff diff2 \
-	edit filelog files fix fixes fstat group groups have help \
-	info integrate integrated job jobs jobspec label labels \
-	labelsync lock obliterate opened passwd print protect rename \
-	reopen resolve resolved revert review reviews set submit \
-	sync triggers unlock user users verify where)
-
-    set p4wcmds=($p4cmds advise audit_workspace branch_all change_branch check_servers check_submit_info \
-                  chwacfg copy diff_all find_changelist opened_all p4v reconcile remove \
-                  sanity_check ssync stage status status_all submit_all sync_all sync_local \
-                  unsubmit update_client update_env)
-
-    complete p4 'p/1/$p4cmds/' 'n/help/$p4cmds/' \
-	'n%{-l,label}%`p4 labels | sed "s/Label \([^ ]*\) .*/\1/"`%' \
-	'n%-t%`p4 $:1s | sed "s/[^ ]* \([^ ]*\) .*/\1/"`%' \
-	'c%*@%`p4 labels | sed "s/Label \([^ ]*\) .*/\1/"`%' \
-	'c@//*/*@`p4 files $:-0... |& perl -nle "m%\Q$:-0\E([^#][^/# ] \
-	*)%;print "\$"1 if \\\!/no such/&&\!"\$"h{"\$"1}++"`@@' \
-	'c@//@`p4 depots | sed "s/Depot \([^ ]*\) .*/\1/"`@/@'
-
-    complete p4w 'p/1/$p4wcmds/' 'n/help/$p4wcmds/'
-endif
-
 # aliases
 complete alias 'p/1/a/'
 complete unalias 'p/1/a/'
@@ -821,81 +795,6 @@ if ( $?MODULESHOME ) then
     'C%[^-]*%`eval Compl_module`%'
 endif
 
-complete go \
-      "p@1@D:$STEM/@"
-
-complete ggo \
-      "p@*@F:$STEM/@"
-
-complete goa \
-      "p@1@D:${OUT_HOME}/common/@"
-
-complete ggoa \
-      "p@*@F:${OUT_HOME}/common/@"
-
-complete gog \
-      "p@1@D:${STEM}/src/test/gold/@"
-
-complete ggog \
-      "p@*@F:${STEM}/src/test/gold/@"
-
-complete goi \
-      "p@1@D:${STEM}/import/ip/@"
-
-complete ggoi \
-      "p@*@F:${STEM}/import/ip/@"
-
-complete gom \
-      "p@1@D:${STEM}/src/meta/@"
-
-complete ggom \
-      "p@*@F:${STEM}/src/meta/@"
-
-complete goo \
-      "p@1@D:${OUT_HOME}/@"
-
-complete ggoo \
-      "p@*@F:${OUT_HOME}/@"
-
-complete gor \
-      "p@1@D:${STEM}/src/rtl/@"
-
-complete ggor \
-      "p@*@F:${STEM}/src/rtl/@"
-
-complete gosc \
-      "p@1@D:${STEM}/setup/scripts/@"
-
-complete ggosc \
-      "p@*@F:${STEM}/setup/scripts/@"
-
-complete gose \
-      "p@1@D:${STEM}/setup/@"
-
-complete ggose \
-      "p@*@F:${STEM}/setup/@"
-
-complete got \
-      "p@1@D:${STEM}/src/test/@"
-
-complete ggot \
-      "p@*@F:${STEM}/src/test/@"
-
-complete gov \
-      "p@1@D:${STEM}/src/verif/@"
-
-complete ggov \
-      "p@*@F:${STEM}/src/verif/@"
-
-complete cdrun \
-      "p@1@D:${OUT_HOME}/${DESIGN_NAME}/config/ge/run/block/ge/@"
-
-complete gcdrun \
-      "p@*@F:${OUT_HOME}/${DESIGN_NAME}/config/ge/run/block/ge/@"
-
-complete gcdsim \
-      "p@*@F:${OUT_HOME}/${DESIGN_NAME}/config/ge/pub/sim/@"
-
 set perlmodules = ("perlmodlib" "perllocal")
 # set perlmodules = ($perlmodules `pmall | awk '{print $1}'`)
 # echo $perlmodules
@@ -916,6 +815,113 @@ complete perldoc p/1/\$perlmodules/
 # 
 complete rcp "c,*:/,F:/," "c,*:,F:$HOME," 'c/*@/$hostlist/:/'
 complete scp "c,*:/,F:/," "c,*:,F:$HOME," 'c/*@/$hostlist/:/'
+
+if (-f "$STEM/P4CONFIG" && -X perl) then
+    # This is from Greg Allen.
+    set p4cmds=(add branch branches commands change changes client clients \
+	counter counters delete depot depots describe diff diff2 \
+	edit filelog files fix fixes fstat group groups have help \
+	info integrate integrated job jobs jobspec label labels \
+	labelsync lock obliterate opened passwd print protect rename \
+	reopen resolve resolved revert review reviews set submit \
+	sync triggers unlock user users verify where)
+
+    set p4wcmds=($p4cmds advise audit_workspace branch_all change_branch check_servers check_submit_info \
+                  chwacfg copy diff_all find_changelist opened_all p4v reconcile remove \
+                  sanity_check ssync stage status status_all submit_all sync_all sync_local \
+                  unsubmit update_client update_env)
+
+    complete p4 'p/1/$p4cmds/' 'n/help/$p4cmds/' \
+	'n%{-l,label}%`p4 labels | sed "s/Label \([^ ]*\) .*/\1/"`%' \
+	'n%-t%`p4 $:1s | sed "s/[^ ]* \([^ ]*\) .*/\1/"`%' \
+	'c%*@%`p4 labels | sed "s/Label \([^ ]*\) .*/\1/"`%' \
+	'c@//*/*@`p4 files $:-0... |& perl -nle "m%\Q$:-0\E([^#][^/# ] \
+	*)%;print "\$"1 if \\\!/no such/&&\!"\$"h{"\$"1}++"`@@' \
+	'c@//@`p4 depots | sed "s/Depot \([^ ]*\) .*/\1/"`@/@'
+
+    complete p4w 'p/1/$p4wcmds/' 'n/help/$p4wcmds/'
+
+    complete go \
+          "p@1@D:$STEM/@"
+
+    complete ggo \
+          "p@*@F:$STEM/@"
+
+    complete goa \
+          "p@1@D:${OUT_HOME}/common/@"
+
+    complete ggoa \
+          "p@*@F:${OUT_HOME}/common/@"
+
+    complete gog \
+          "p@1@D:${STEM}/src/test/gold/@"
+
+    complete ggog \
+          "p@*@F:${STEM}/src/test/gold/@"
+
+    complete goi \
+          "p@1@D:${STEM}/import/ip/@"
+
+    complete ggoi \
+          "p@*@F:${STEM}/import/ip/@"
+
+    complete gom \
+          "p@1@D:${STEM}/src/meta/@"
+
+    complete ggom \
+          "p@*@F:${STEM}/src/meta/@"
+
+    complete goo \
+          "p@1@D:${OUT_HOME}/@"
+
+    complete ggoo \
+          "p@*@F:${OUT_HOME}/@"
+
+    complete gor \
+          "p@1@D:${STEM}/src/rtl/@"
+
+    complete ggor \
+          "p@*@F:${STEM}/src/rtl/@"
+
+    complete gosc \
+          "p@1@D:${STEM}/setup/scripts/@"
+
+    complete ggosc \
+          "p@*@F:${STEM}/setup/scripts/@"
+
+    complete gose \
+          "p@1@D:${STEM}/setup/@"
+
+    complete ggose \
+          "p@*@F:${STEM}/setup/@"
+
+    complete got \
+          "p@1@D:${STEM}/src/test/@"
+
+    complete ggot \
+          "p@*@F:${STEM}/src/test/@"
+
+    complete gov \
+          "p@1@D:${STEM}/src/verif/@"
+
+    complete ggov \
+          "p@*@F:${STEM}/src/verif/@"
+
+    complete cdrun \
+          "p@1@D:${OUT_HOME}/${DESIGN_NAME}/config/ge/run/block/ge/@"
+
+    complete gcdrun \
+          "p@*@F:${OUT_HOME}/${DESIGN_NAME}/config/ge/run/block/ge/@"
+
+    complete gcdsim \
+          "p@*@F:${OUT_HOME}/${DESIGN_NAME}/config/ge/pub/sim/@"
+
+endif
+
+
+end:
+unset _has_complete
+onintr
 # }}}1
 
 # vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
@@ -1058,7 +1064,7 @@ set   white="%{\033[0;37m%}"
 set     end="%{\033[0m%}" # This is needed at the end... :(
 # }}}2
 set system=`hostname`
-unalias setprompt; alias setprompt 'set prompt="${green}%n${end}@${magenta}${system}${end}: ${red}%B%c03%b${end} :${cyan}%w-%D(%d)-%t${end}:[ \! ][%?] ${blue} ${end} \n${end}%#"'
+unalias setprompt; alias setprompt 'set prompt="${green}%n${end}@${magenta}${system}${end}: ${red}%B%c03%b ${end}  :${cyan}%w-%D(%d)-%t${end}:[ \! ][%?] ${blue} ${end} \n${end}%#"'
 unalias cd; alias cd 'chdir \!* && setprompt'	# reset prompt after change dir
 unalias cdz; alias cdz 'chdir `$HOME/scripts/bin/cdf_command . | $HOME/scripts/bin/fzf` && setprompt'	# reset prompt after change dir
 unalias cdy; alias cdy 'chdir `$HOME/scripts/bin/cdf_command . | $HOME/scripts/bin/fzy` && setprompt'	# reset prompt after change dir
@@ -1209,7 +1215,7 @@ unalias vmy; alias vmy '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scr
 unalias vmfz; alias vmfz '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scripts/bin/ag_file_command \!:2 | $HOME/scripts/bin/fzf`'
 unalias vmfy; alias vmfy '$HOME/scripts/downloaded/vimer -t -s GVIM\!:1 `$HOME/scripts/bin/ag_file_command \!:2 | $HOME/scripts/bin/fzy`'
 # project specific
-unalias dj; alias dj 'bootenv && sleep 2 && \dj --console_status_line cmd'
+# unalias dj; alias dj 'bootenv && sleep 2 && \dj --console_status_line cmd'
 unalias mkverdi; alias mkverdi 'bootenv && sleep 2 && \mkverdi'
 # unalias dmp2vec; alias dmp2vec  'sh -c \'for dmp in `ls \!*`; do echo -n "Generating $dmp.view now..."; perl $STEM/src/test/tools/scripts/dmp2vec.pl $dmp > $dmp\.view && echo "Done" || echo "Error"; done;\'
 unalias p4q; alias p4q 'bootenv && sleep 2 && source /proj/verif_release_ro/p4w/current/_p4w.csh'
@@ -1318,7 +1324,7 @@ sleep 5
 #
 
 # setenv BOOTENV_NOCLEAN 1	# mznoj this is dangerous!
-# setenv DJ_INIT '-c -m2 --save_cmd_logs'
+# setenv DJ_INIT '-c -m2 --save_cmd_logs --console_status_line cmd'
 # echo -n "in gl_terminal.tcshrc"
 
 if (! $?ProjectName ) then
@@ -3737,7 +3743,6 @@ if { [string equal $env(SCMROOT) //gfxip/gcB] } {
 if { [string equal $env(SCMROOT) //gfxip/gfx9] } {
    setenv DJ_INIT "$env(DJ_INIT) --save_cmd_logs -DAUTOMGR_OPTS=-nostrict --save_cmd_logs"
 }
-
 
 # vim: foldmethod=marker:filetype=vim:sw=2:tw=0:expandtab:norl:foldmethod=marker:
 #+END_SRC

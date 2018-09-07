@@ -48,6 +48,7 @@
 [core]
 	editor = gvim -f
 	autocrlf = input
+	whitespace = cr-at-eol
 [gc]
 	auto = 1
 [git-p4]
