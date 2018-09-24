@@ -638,7 +638,10 @@ if use_neobundle
     " NeoBundle 'KKPMW/sacredforest-vim',                        { 'directory' : 'colour_sacredforest'}
     " NeoBundle 'tjammer/blayu.vim',                             { 'directory' : 'colour_blayu'}
     " NeoBundle 'koirand/tokyo-metro.vim',                       { 'directory' : 'colour_tokyo'}
+    " NeoBundle 'DrXVII/vim_colors',                             { 'directory' : 'colour_edar_elit'}
     " NeoBundle 'whzup/greent.vim',                       { 'directory' : 'colour_greent'}
+    " NeoBundle 'julien/vim-colors-green',                { 'directory' : 'colour_green'}
+    " NeoBundle 'KimNorgaard/vim-frign',                { 'directory' : 'colour_frign'}
     " NeoBundle 'jeffkreeftmeijer/vim-dim',                      { 'directory' : 'colour_dim'}
     NeoBundle 'nightsense/rusticated',                         { 'directory' : 'colour_rusticated'}
     NeoBundle 'rafi/awesome-vim-colorschemes',                 { 'directory' : 'colour_awesome'}
@@ -1145,6 +1148,7 @@ if use_neobundle
     " NeoBundle 'rakr/vim-one.git',                              { 'directory' : 'color_One'}
     " NeoBundle 'bounceme/highwayman',                           { 'directory' : 'color_highwayman'}
     " NeoBundle 'roosta/srcery',                                 { 'directory' : 'color_srcery'}
+    " NeoBundle 'srcery-colors/srcery-vim',                      { 'directory' : 'color_srceryVim'}
     " NeoBundle 'aereal/vim-colors-japanesque',                  { 'directory' : 'color_japanesque'}
     NeoBundle 'rakr/vim-two-firewatch',                          { 'directory' : 'color_twoFirewatch'}
     " NeoBundle 'MvanDiemen/ghostbuster',                          { 'directory' : 'color_ghostbuster'}
@@ -2856,14 +2860,16 @@ noremap <expr> k v:count > 1 ? 'm`' . v:count . 'k' : 'gk'
 " vnoremap <expr> <Down> v:count == 0 ? 'gj' : 'j'
 " nnoremap <expr> <Up> v:count == 0 ? 'gk' : 'k'
 " vnoremap <expr> <Up> v:count == 0 ? 'gk' : 'k'
-nnoremap gj j
-nnoremap gk k
-nnoremap j gj
-nnoremap k gk
-vnoremap gj j
-vnoremap gk k
-vnoremap j gj
-vnoremap k gk
+nnoremap <expr> 'gj' v:count == 0 ? 'j' : 'gj'
+nnoremap <expr> 'gk' v:count == 0 ? 'k' : 'gk'
+nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+
+vnoremap <expr> 'gj' v:count == 0 ? 'j' : 'gj'
+vnoremap <expr> 'gk' v:count == 0 ? 'k' : 'gk'
+vnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+vnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+
 vnoremap . :norm.<CR>
 " inoremap <Down> <C-o>gj
 " inoremap <Up> <C-o>gk

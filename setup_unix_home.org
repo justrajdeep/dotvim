@@ -2432,6 +2432,7 @@ setenv PKG_CONFIG_PATH "/tool/pandora64/.package/glib-2.32.1/lib/pkgconfig:/usr/
   --enable-pythoninterp=yes \
   --enable-python3interp=no \
   --enable-cscope \
+  --enable-autoservername \
   --enable-xim \
   --enable-netbeans \
   --enable-rubyinterp=yes \
@@ -2529,6 +2530,127 @@ rm -rvf /tmp/temp_git_man
 #+BEGIN_SRC sh :results silent :dir ~/
 ln -fs ~/.vim/gitconfig ~/.gitconfig
 #+END_SRC
+* install [[https://github.com/JonParr/p4-diff][p4-diff]]
+** git clone it into a temp dir
+#+BEGIN_SRC shell :results output :dir ~/
+git clone -v https://github.com/JonParr/p4-diff /tmp/temp_p4_diff
+#+END_SRC
+
+#+RESULTS:
+
+** get p4-diff into the path
+#+BEGIN_SRC sh :results output :dir /tmp/temp_p4_diff
+chmod u+x p4-diff
+cp -vf p4-diff ~/scripts/downloaded
+#+END_SRC
+
+#+RESULTS:
+: 'p4-diff' -> '/home/ramondal/scripts/downloaded/p4-diff'
+
+** remove the git directory
+#+BEGIN_SRC sh :results output :dir ~/
+rm -rvf /tmp/temp_p4_diff
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+removed '/tmp/temp_p4_diff/README.md'
+removed '/tmp/temp_p4_diff/.git/logs/HEAD'
+removed '/tmp/temp_p4_diff/.git/logs/refs/heads/master'
+removed directory '/tmp/temp_p4_diff/.git/logs/refs/heads'
+removed '/tmp/temp_p4_diff/.git/logs/refs/remotes/origin/HEAD'
+removed directory '/tmp/temp_p4_diff/.git/logs/refs/remotes/origin'
+removed directory '/tmp/temp_p4_diff/.git/logs/refs/remotes'
+removed directory '/tmp/temp_p4_diff/.git/logs/refs'
+removed directory '/tmp/temp_p4_diff/.git/logs'
+removed '/tmp/temp_p4_diff/.git/info/exclude'
+removed directory '/tmp/temp_p4_diff/.git/info'
+removed '/tmp/temp_p4_diff/.git/objects/83/a2056cd643a81ee0c619c59ce53d1ac2ca475a'
+removed directory '/tmp/temp_p4_diff/.git/objects/83'
+removed '/tmp/temp_p4_diff/.git/objects/78/a4b80c448f290034e757f04ffebce86c7a136c'
+removed directory '/tmp/temp_p4_diff/.git/objects/78'
+removed '/tmp/temp_p4_diff/.git/objects/ec/dd6107ff9883c00cc585496f3fd05f47179995'
+removed directory '/tmp/temp_p4_diff/.git/objects/ec'
+removed '/tmp/temp_p4_diff/.git/objects/39/91b2494fbe582fc9921f7ebac1ab68ec5d1f5e'
+removed directory '/tmp/temp_p4_diff/.git/objects/39'
+removed directory '/tmp/temp_p4_diff/.git/objects/info'
+removed '/tmp/temp_p4_diff/.git/objects/8c/cf0f4a29ab3be66c5a05fcd23c262c073f09d6'
+removed directory '/tmp/temp_p4_diff/.git/objects/8c'
+removed '/tmp/temp_p4_diff/.git/objects/27/22793bc6ce2fefad7b682e1d9cbac6f18f0190'
+removed directory '/tmp/temp_p4_diff/.git/objects/27'
+removed '/tmp/temp_p4_diff/.git/objects/bf/1c67e9939c26e9b0ff3984aae72f9b934f092c'
+removed directory '/tmp/temp_p4_diff/.git/objects/bf'
+removed '/tmp/temp_p4_diff/.git/objects/f6/18efc03b5b3f6f41c46340e0de9bae914d74dc'
+removed directory '/tmp/temp_p4_diff/.git/objects/f6'
+removed '/tmp/temp_p4_diff/.git/objects/b2/0b48f1699a1a0fc9cefdf767e3d9fb78b7cebf'
+removed '/tmp/temp_p4_diff/.git/objects/b2/c14a2efa24329a967998472f5f3e9309bdd5be'
+removed directory '/tmp/temp_p4_diff/.git/objects/b2'
+removed '/tmp/temp_p4_diff/.git/objects/47/2e310fbd24401142a29282019859670ae50cf3'
+removed directory '/tmp/temp_p4_diff/.git/objects/47'
+removed '/tmp/temp_p4_diff/.git/objects/8d/d098ce2d86d0a3f6a0aa79984c50ab1c57d9d1'
+removed directory '/tmp/temp_p4_diff/.git/objects/8d'
+removed '/tmp/temp_p4_diff/.git/objects/25/2a63ba05c3a19d9201e274f891fda14e8c8965'
+removed directory '/tmp/temp_p4_diff/.git/objects/25'
+removed '/tmp/temp_p4_diff/.git/objects/1d/4642db1f12fb3fe88212d36d6af3277b7ebb46'
+removed directory '/tmp/temp_p4_diff/.git/objects/1d'
+removed '/tmp/temp_p4_diff/.git/objects/b1/d1150b064630b94e28452709395229594407a5'
+removed directory '/tmp/temp_p4_diff/.git/objects/b1'
+removed '/tmp/temp_p4_diff/.git/objects/7e/ec9bb563ee728d29702b9a367a35c7acdaab5f'
+removed directory '/tmp/temp_p4_diff/.git/objects/7e'
+removed '/tmp/temp_p4_diff/.git/objects/49/ab7f268cc4b51bc0e433f8bf47fb5ff04eeb40'
+removed '/tmp/temp_p4_diff/.git/objects/49/2f020b22c1b457c0f1db3fc3753b90cb46fc11'
+removed directory '/tmp/temp_p4_diff/.git/objects/49'
+removed '/tmp/temp_p4_diff/.git/objects/91/01dfa2b2c91a0ef7b9b5085a52282f5074efc8'
+removed '/tmp/temp_p4_diff/.git/objects/91/b154b0f8a8127688777eeed616b3838b6863a0'
+removed directory '/tmp/temp_p4_diff/.git/objects/91'
+removed '/tmp/temp_p4_diff/.git/objects/37/f78f2c7c489e962d8b039ab629c866be8537fb'
+removed directory '/tmp/temp_p4_diff/.git/objects/37'
+removed '/tmp/temp_p4_diff/.git/objects/0a/ac8e644150767a9d84612f1b242a7f812a7eea'
+removed directory '/tmp/temp_p4_diff/.git/objects/0a'
+removed '/tmp/temp_p4_diff/.git/objects/b6/eed3aa4c6698f6b14a7cabb1119a9591559fb0'
+removed directory '/tmp/temp_p4_diff/.git/objects/b6'
+removed '/tmp/temp_p4_diff/.git/objects/a6/fc187c4a81a1a782f8712b291e618a2a638355'
+removed directory '/tmp/temp_p4_diff/.git/objects/a6'
+removed '/tmp/temp_p4_diff/.git/objects/6e/8e22661ad04a9abcd6b1afacc94e6db937e98b'
+removed directory '/tmp/temp_p4_diff/.git/objects/6e'
+removed directory '/tmp/temp_p4_diff/.git/objects/pack'
+removed '/tmp/temp_p4_diff/.git/objects/7d/55c27c0796d3884d51f9d3a91855080e78ca38'
+removed directory '/tmp/temp_p4_diff/.git/objects/7d'
+removed '/tmp/temp_p4_diff/.git/objects/46/ecc32cfc50e6fad86b4240f8b5124192cdf840'
+removed directory '/tmp/temp_p4_diff/.git/objects/46'
+removed '/tmp/temp_p4_diff/.git/objects/22/05ba2c12ccb96eaff4757e5ff0abfd83b492e3'
+removed directory '/tmp/temp_p4_diff/.git/objects/22'
+removed directory '/tmp/temp_p4_diff/.git/objects'
+removed '/tmp/temp_p4_diff/.git/index'
+removed '/tmp/temp_p4_diff/.git/config'
+removed '/tmp/temp_p4_diff/.git/description'
+removed '/tmp/temp_p4_diff/.git/HEAD'
+removed '/tmp/temp_p4_diff/.git/hooks/post-update.sample'
+removed '/tmp/temp_p4_diff/.git/hooks/pre-receive.sample'
+removed '/tmp/temp_p4_diff/.git/hooks/update.sample'
+removed '/tmp/temp_p4_diff/.git/hooks/applypatch-msg.sample'
+removed '/tmp/temp_p4_diff/.git/hooks/prepare-commit-msg.sample'
+removed '/tmp/temp_p4_diff/.git/hooks/commit-msg.sample'
+removed '/tmp/temp_p4_diff/.git/hooks/pre-push.sample'
+removed '/tmp/temp_p4_diff/.git/hooks/pre-applypatch.sample'
+removed '/tmp/temp_p4_diff/.git/hooks/fsmonitor-watchman.sample'
+removed '/tmp/temp_p4_diff/.git/hooks/pre-commit.sample'
+removed '/tmp/temp_p4_diff/.git/hooks/pre-rebase.sample'
+removed directory '/tmp/temp_p4_diff/.git/hooks'
+removed directory '/tmp/temp_p4_diff/.git/branches'
+removed directory '/tmp/temp_p4_diff/.git/refs/tags'
+removed '/tmp/temp_p4_diff/.git/refs/heads/master'
+removed directory '/tmp/temp_p4_diff/.git/refs/heads'
+removed '/tmp/temp_p4_diff/.git/refs/remotes/origin/HEAD'
+removed directory '/tmp/temp_p4_diff/.git/refs/remotes/origin'
+removed directory '/tmp/temp_p4_diff/.git/refs/remotes'
+removed directory '/tmp/temp_p4_diff/.git/refs'
+removed '/tmp/temp_p4_diff/.git/packed-refs'
+removed directory '/tmp/temp_p4_diff/.git'
+removed '/tmp/temp_p4_diff/p4-diff'
+removed directory '/tmp/temp_p4_diff'
+#+end_example
+
 * install [[https://github.com/susam/vimer][vimer]]
 ** git clone it into a temp dir
 #+BEGIN_SRC sh :results output :dir ~/
