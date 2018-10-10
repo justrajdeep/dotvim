@@ -3850,7 +3850,7 @@ prepend-path PATH /home/ramondal/scripts/bin
 ######################################################
 # ORL
 # Set common arguments for verbose, color, local mode, and max number of jobs (number of cores)
-setenv DJ_INIT "-c -DMAKEJ -J local -m0 --color --save_cmd_logs :none --tar -DUSE_FDL -DGENERATE_GLOBAL_FEATURES -DRELAX_FEATURE_ACCESS_CKS -DNO_LEGACY_GEN_DVFLOWS -DDEBUG -DRDFT_SHELL"
+setenv DJ_INIT "-c -DMAKEJ -J local -m0 --color --save_cmd_logs all -DDEBUG -DDUMP -DCOMP_MAX_ERRORS=100 -DTRIAGE_EMAIL_SELF --tar -DUSE_FDL -DGENERATE_GLOBAL_FEATURES -DRELAX_FEATURE_ACCESS_CKS -DNO_LEGACY_GEN_DVFLOWS -DRDFT_SHELL"
 # ATL
 # setenv DJ_INIT -c -J lsf -m0"
 
