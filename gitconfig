@@ -59,3 +59,5 @@
 	prompt = false
 [help]
 	autocorrect = 0
+[commit]
+	verbose = true
