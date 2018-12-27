@@ -1818,7 +1818,7 @@ endif
 let g:monokai_term_italic = 1
 let g:monokai_gui_italic = 1
 
-" let CtrlSpaceFileEngine = 'file_engine_linux_386'
+let CtrlSpaceFileEngine = 'file_engine_linux_amd64'
 
 
 " map <unique> <Leader>m <Plug>ToggleMarkbar
