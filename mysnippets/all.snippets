@@ -6,6 +6,7 @@
 ##############
 global !p
 import string, vim
+import pprint
 
 """ Maps a filetype to comment format used for boxes.
 Automatically filled during usage"""
@@ -57,8 +58,8 @@ def _get_comment_format():
 
     ft = vim.eval("&filetype")
     # check if the comment dict has the format for the current file
-    if _commentDict.has_key(ft):
-        return _commentDict[ft]
+    if ft in _commentDict
+      return _commentDict[ft]
 
     # otherwise parse vim's comments and add it for later use
     commentformat = _parse_comments(vim.eval("&comments"))[0]
@@ -113,7 +114,7 @@ $1 ${6:comment}
 endsnippet
 
 snippet modline "add the modline" sw
-${1:`!p snip.rv = _get_comment_format()[0]`} vim: filetype=${2:`!p snip.rv = snip.ft`}:syntax=${3:`!p snip.rv = snip.ft`}:ts=4:tw=0:sw=2:expandtab:norl:
+${1:`!p snip.rv = _get_comment_format()[0]`} vim: filetype=${2:`!p snip.rv = snip.ft`}:syntax=${3:`!p snip.rv = snip.ft`}:ts=4:tw=0:sw=4:sts=4:expandtab:norl:
 endsnippet
 
 snippet copyright "add copyright Information" bsw

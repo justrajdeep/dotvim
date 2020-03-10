@@ -19,7 +19,8 @@ ln -fs ~/.vim/bundle/plug/plug.vim ~/.vim/autoload/plug.vim
 ====================
 Plugins Install
 ====================
-git submodule add <path-to git repo> <local path>
+git submodule add -b <branch> <path-to git repo> <local submodle-path>
+git config -f .gitmodules submodule.<submodule-path>.update rebase
 git add .gitmodules == this will add the submodule
 This will create a file .gitmodules commit it by
 git commit -m "Installing <plugin name> plugin"

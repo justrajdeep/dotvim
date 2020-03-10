@@ -21,6 +21,7 @@ use Carp qw(confess cluck);
 use English qw(-no_match_vars);
 use Data::Types qw(:all);
 use namespace::autoclean;
+use autodie 'open';
 use MIME::Lite;
 no autovivification;
 use diagnostics -verbose;
