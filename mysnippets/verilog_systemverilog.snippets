@@ -52,19 +52,22 @@ def _parse_comments(s):
        return rv
 
 def _get_comment_format():
-    """ Returns a 4-element tuple representing the comment format for
-    the current file. """
+    """ Returns a 4-element tuple (first_line, middle_lines, end_line, indent)
+    representing the comment format for the current file.
 
-    ft = vim.eval("&filetype")
-    # check if the comment dict has the format for the current file
-    if _commentDict.has_key(ft):
-        return _commentDict[ft]
-
-    # otherwise parse vim's comments and add it for later use
-    commentformat = _parse_comments(vim.eval("&comments"))[0]
-    _commentDict[ft] = commentformat
-
-    return commentformat
+    It first looks at the 'commentstring', if that ends with %s, it uses that.
+    Otherwise it parses '&comments' and prefers single character comment
+    markers if there are any.
+    """
+    commentstring = vim.eval("&commentstring")
+    if commentstring.endswith("%s"):
+        c = commentstring[:-2]
+        return (c.rstrip(), c.rstrip(), c.rstrip(), "")
+    comments = _parse_comments(vim.eval("&comments"))
+    for c in comments:
+        if c[0] == "SINGLE_CHAR":
+            return c[1:]
+    return comments[0][1:]
 
 def foldmarker():
 	"Return a tuple of (open fold marker, close fold marker)"

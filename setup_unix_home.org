@@ -342,6 +342,9 @@ endif
 if (-r "$HOME/tangled_files/complete") then
     source "$HOME/tangled_files/complete"
 endif
+if (-r "/usr/share/doc/tcsh-6.17/complete.tcsh") then
+    source "/usr/share/doc/tcsh-6.17/complete.tcsh"
+endif
 if (-r "$HOME/tangled_files/history") then
     source "$HOME/tangled_files/history"
 endif
@@ -439,6 +442,7 @@ unset dunique
 # Debian enhancements by Vadim Vygonets <vadik@cs.huji.ac.il>.
 # Bugfixes and apt completions by Miklos Quartus <miklos.quartus@nokia.com>.
 # Cleanup by Martin A. Godisch <martin@godisch.de>.
+# https://opensource.apple.com/source/tcsh/tcsh-66/tcsh/complete.tcsh
 
 # onintr -
 if ( ! $?prompt ) goto end
@@ -501,6 +505,7 @@ complete pushd 	p/1/d/
 complete popd 	p/1/d/
 complete pu 	p/1/d/
 complete po 	p/1/d/
+complete lsd 'C/*/d/'
 
 complete rm \
   'c/--/"(directory force interactive verbose recursive help version)"/' \
@@ -781,7 +786,7 @@ complete sed	c/--/"(quiet silent version help expression file)"/   \
 complete finger	'n/*/u/' 
 complete ping	p/1/\$hosts/
 complete traceroute	p/1/\$hosts/
-complete nslookup   p/1/x:'<host>'/ p/2/\$hosts/
+complete nslookup   p/1/x:\$hosts/ p/2/\$hosts/
 
 #from Dan Nicolaescu <dann@ics.uci.edu>
 if ( $?MODULESHOME ) then
@@ -818,10 +823,10 @@ complete perldoc p/1/\$perlmodules/
 # if ":" has been typed, complete with a filename relative to home directory
 # if ":/" has been typed, complete with a filename relative to root directory
 # 
-complete rcp "c,*:/,F:/," "c,*:,F:$HOME," 'c/*@/$hostlist/:/'
-complete scp "c,*:/,F:/," "c,*:,F:$HOME," 'c/*@/$hostlist/:/'
+complete rcp "c,*:/,F:/," "c,*:,F:$HOME," 'c/*@/$hosts/:/'
+complete scp "c,*:/,F:/," "c,*:,F:$HOME," 'c/*@/$hosts/:/'
 
-if (-f "$STEM/P4CONFIG" && -X perl) then
+if (-X perl) then
     # This is from Greg Allen.
     set p4cmds=(add branch branches commands change changes client clients \
 	counter counters delete depot depots describe diff diff2 \
@@ -845,81 +850,6 @@ if (-f "$STEM/P4CONFIG" && -X perl) then
 	'c@//@`p4 depots | sed "s/Depot \([^ ]*\) .*/\1/"`@/@'
 
     complete p4w 'p/1/$p4wcmds/' 'n/help/$p4wcmds/'
-
-    complete go \
-          "p@1@D:$STEM/@"
-
-    complete ggo \
-          "p@*@F:$STEM/@"
-
-    complete goa \
-          "p@1@D:${OUT_HOME}/common/@"
-
-    complete ggoa \
-          "p@*@F:${OUT_HOME}/common/@"
-
-    complete gog \
-          "p@1@D:${STEM}/src/test/gold/@"
-
-    complete ggog \
-          "p@*@F:${STEM}/src/test/gold/@"
-
-    complete goi \
-          "p@1@D:${STEM}/import/ip/@"
-
-    complete ggoi \
-          "p@*@F:${STEM}/import/ip/@"
-
-    complete gom \
-          "p@1@D:${STEM}/src/meta/@"
-
-    complete ggom \
-          "p@*@F:${STEM}/src/meta/@"
-
-    complete goo \
-          "p@1@D:${OUT_HOME}/@"
-
-    complete ggoo \
-          "p@*@F:${OUT_HOME}/@"
-
-    complete gor \
-          "p@1@D:${STEM}/src/rtl/@"
-
-    complete ggor \
-          "p@*@F:${STEM}/src/rtl/@"
-
-    complete gosc \
-          "p@1@D:${STEM}/setup/scripts/@"
-
-    complete ggosc \
-          "p@*@F:${STEM}/setup/scripts/@"
-
-    complete gose \
-          "p@1@D:${STEM}/setup/@"
-
-    complete ggose \
-          "p@*@F:${STEM}/setup/@"
-
-    complete got \
-          "p@1@D:${STEM}/src/test/@"
-
-    complete ggot \
-          "p@*@F:${STEM}/src/test/@"
-
-    complete gov \
-          "p@1@D:${STEM}/src/verif/@"
-
-    complete ggov \
-          "p@*@F:${STEM}/src/verif/@"
-
-    complete cdrun \
-          "p@1@D:${OUT_HOME}/${DESIGN_NAME}/config/ge/run/block/ge/@"
-
-    complete gcdrun \
-          "p@*@F:${OUT_HOME}/${DESIGN_NAME}/config/ge/run/block/ge/@"
-
-    complete gcdsim \
-          "p@*@F:${OUT_HOME}/${DESIGN_NAME}/config/ge/pub/sim/@"
 
 endif
 
@@ -1019,7 +949,7 @@ endif
 #+END_SRC
 *** DONE prompt
     CLOSED: [2017-01-06 Fri 13:02]
-#+BEGIN_SRC sh :tangle ~/scripts/bin/cgb :shebang "#!/tool/pandora64/.package/perl-5.26.0/bin/perl" :eval no
+#+BEGIN_SRC sh :tangle ~/scripts/bin/cgb :shebang "#!/tool/pandora64/.package/perl-5.24.0-gcc620/bin/perl" :eval no
 
 # git branch --no-color 2> /dev/null' | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /
 # git branch 2> /dev/null | grep '^*' | awk '{ print $2; }'
@@ -1029,6 +959,7 @@ endif
 #       alias precmd $HOME/bin/gitprompt.pl
 #   endif
 use Env;
+use File::Spec;
 my $prompt="";
 my $GITBR="";
 
@@ -1051,7 +982,24 @@ if ( $GITBR ne "" ) {
   $prompt .= "]\n";
 }
 
-${prompt} .= "[" . $ENV{PROJECT} . "] ";
+# my $stem = dir($ENV{ANCHOR_STEM_GC});
+# my $relative = $stem->relative($ENV{OUT_ANCHOR});
+my $relative = File::Spec->abs2rel($ENV{OUT_ANCHOR}, $ENV{ANCHOR_STEM_GC});
+
+if(exists $ENV{PROJECT}){
+    ${prompt} .= "[" . $ENV{PROJECT} . "]";
+} else {
+    ${prompt} .= "";
+}
+if($relative eq '.'){
+    if(exists $ENV{PROJECT}){
+        ${prompt} .= " ";
+    } else {
+        ${prompt} .= "";
+    }
+} else {
+    ${prompt} .= "[" . ${relative} . "] ";
+}
 print ${prompt};
 
 #+END_SRC
@@ -1110,7 +1058,8 @@ unalias gcdsim; alias gcdsim 'pushd ${OUT_HOME}/${DESIGN_NAME}/config/ge/pub/sim
 if ( $?prompt && -x  /tool/pandora64/.package/git-2.21.0/bin/git && -x $HOME/scripts/bin/cgb ) then
    alias precmd $HOME/scripts/bin/cgb
 endif
-setprompt				# to set the initial prompt
+alias precmd 'set prompt="`env PYTHONIOENCODING=utf8 ~/.local/bin/powerline-shell --shell tcsh $?`"'
+# setprompt				# to set the initial prompt
 # unset red green yellow blue magenta cyan white end
 # }}}1
 
@@ -1287,7 +1236,7 @@ unalias p4e; alias p4e 'p4 edit'
 unalias p4a; alias p4a 'p4 add'
 unalias p4shelved; alias p4shelved 'p4 changes -u $USER -s shelved'
 unalias p4have; alias p4have 'p4 changes -m1 -s submitted #have'
-unalias p4not; alias p4not "( find . -maxdepth 1 -type f -print0 | xargs -0 p4 fstat > /dev/null ) | & awk '{print "\$"1}'"
+unalias p4not; alias p4not "( fd . --type f "\$"PWD --color never --print0 | xargs -0 p4 fstat > /dev/null ) | & awk '{print "\$"1}'"
 unalias init; alias init 'source /proj/verif_release_ro/cbwa_initscript/current/cbwa_init.csh'
 
 # unalias boot; alias boot 'setenv PROJECT \!* && init && eval bootenv -v ${PROJECT} && cd && cd -'
@@ -1301,7 +1250,7 @@ set backslash_quote
 unalias hbo; alias hbo 'dj -c -v -e \'here_in_design.build_self("\!:*")\''
 
 unalias createVnc; alias createVnc 'cd && vncserver :\!:1 -depth 24 -geometry 3820x1025 --alwaysshared -log \*:stdout:0 && cd -'
-unalias createVncSmall; alias createVncSmall 'cd && vncserver :\!:1 -depth 24 -geometry 19100x1025 --alwaysshared -log \*:stdout:0 && cd -'
+unalias createVncSmall; alias createVncSmall 'cd && vncserver :\!:1 -depth 24 -geometry 1910x1025 --alwaysshared -log \*:stdout:0 && cd -'
 
 # unalias module; alias module 'eval `$TCLSH $MODULESHOME/modulecmd.tcl tcsh !*`'
 # }}} 1
@@ -1529,6 +1478,116 @@ ln -fs ~/.vim/tmux.conf ~/.tmux.conf
 # #+BEGIN_SRC sh :results silent :dir ~/ :tangle ~/.fluxboxrc :eval never
 
 # #+END_SRC
+* set the defatult colors
+#+BEGIN_SRC tcsh :shebang "#!/bin/sh" :tangle ~/.dircolors :eval never
+# Configuration file for dircolors, a utility to help you set the
+# LS_COLORS environment variable used by GNU ls with the --color option.
+
+# The keywords COLOR, OPTIONS, and EIGHTBIT (honored by the
+# slackware version of dircolors) are recognized but ignored.
+
+# Below, there should be one TERM entry for each termtype that is colorizable
+TERM linux
+TERM linux-c
+TERM mach-color
+TERM console
+TERM con132x25
+TERM con132x30
+TERM con132x43
+TERM con132x60
+TERM con80x25
+TERM con80x28
+TERM con80x30
+TERM con80x43
+TERM con80x50
+TERM con80x60
+TERM dtterm
+TERM xterm
+TERM xterm-color
+TERM xterm-debian
+TERM rxvt
+TERM screen
+TERM screen-w
+TERM vt100
+TERM Eterm
+
+# Below are the color init strings for the basic file types. A color init
+# string consists of one or more of the following numeric codes:
+# Attribute codes:
+# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# Text color codes:
+# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+# Background color codes:
+# 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+NORMAL 00	# global default, although everything should be something.
+FILE 00 	# normal file
+DIR 01;35 	# directory
+LINK 01;36 	# symbolic link.  (If you set this to 'target' instead of a
+           	# numerical value, the color is as for the file pointed to.)
+FIFO 40;33	# pipe
+SOCK 01;35	# socket
+DOOR 01;35	# door
+BLK 40;33;01	# block device driver
+CHR 40;33;01 	# character device driver
+ORPHAN 40;31;01 # symlink to nonexistent file
+
+# This is for files with execute permission:
+EXEC 01;32
+
+# List any file extensions like '.gz' or '.tar' that you would like ls
+# to colorize below. Put the extension, a space, and the color init string.
+# (and any comments you want to add after a '#')
+
+# If you use DOS-style suffixes, you may want to uncomment the following:
+#.cmd 01;32 # executables (bright green)
+#.exe 01;32
+#.com 01;32
+#.btm 01;32
+#.bat 01;32
+
+.tar 01;31 # archives or compressed (bright red)
+.tgz 01;31
+.arj 01;31
+.taz 01;31
+.lzh 01;31
+.zip 01;31
+.z   01;31
+.Z   01;31
+.gz  01;31
+.bz2 01;31
+.deb 01;31
+.rpm 01;31
+.jar 01;31
+
+# image formats
+.jpg 01;35
+.jpeg 01;35
+.gif 01;35
+.bmp 01;35
+.pbm 01;35
+.pgm 01;35
+.ppm 01;35
+.tga 01;35
+.xbm 01;35
+.xpm 01;35
+.tif 01;35
+.tiff 01;35
+.png 01;35
+.mpg 01;35
+.mpeg 01;35
+.avi 01;35
+.fli 01;35
+.gl 01;35
+.dl 01;35
+.xcf 01;35
+.xwd 01;35
+
+# audio formats
+.ogg 01;35
+.mp3 01;35
+.wav 01;35
+# vim: foldmethod=marker:filetype=tcsh:sw=2:tw=0:expandtab:norl:foldmethod=marker:
+#+END_SRC
 * setup vnc xstartup
 ** check the modline
 #+BEGIN_SRC sh :results output :dir ~/
@@ -1539,8 +1598,11 @@ cvt 3820 1025 60
 : # 3824x1025 59.94 Hz (CVT) hsync: 63.77 kHz; pclk: 325.50 MHz
 : Modeline "3824x1025_60.00"  325.50  3824 4064 4464 5104  1025 1028 1038 1064 -hsync +vsync
 
-** TODO set the defatult xstartup
+** set the defatult xstartup
 #+BEGIN_SRC tcsh :shebang "#!/bin/sh" :tangle ~/.vnc/xstartup_IT :eval never
+# ftp://atlftptest/pub/leostream/xstartup
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
 xrandr --rate 60 --newmode "3824x1025_60.00" 325.50  3824 4064 4464 5104  1025 1028 1038 1064 -hsync +vsync
 xrandr --addmode default "3824x1025_60.00"
 OS=`/tool/pandora/bin/whatos`
@@ -1572,6 +1634,7 @@ fi
 WM="i3"
 # WM="fluxbox"
 # WM="icewm"
+# WM="xfce"
 
 # Are we running Solaris 2.x?
 if echo $OS | grep -q "^so"; then
@@ -1580,12 +1643,16 @@ else
         # Are we running Linux?
         if echo $OS | grep -q "^k2[46]_g2[12345]"; then
             if [ "$WM" = "gnome" ]; then
-               gnome-session &
+               if [ -x /usr/bin/gnome-session ]; then
+                  exec gnome-session
+               fi
                if [ -x /usr/bin/sawfish ]; then
                   /usr/bin/sawfish &
                fi
             elif [ "$WM" = "kde" ]; then
-               exec startkde
+               if [ -x /usr/bin/startkde ]; then
+                  exec startkde
+               fi
             elif [ "$WM" = "fluxbox" ]; then
                exec fluxbox
             elif [ "$WM" = "fvwm2" ]; then
@@ -1594,6 +1661,8 @@ else
                exec icewm
             elif [ "$WM" = "i3" ]; then
                exec i3
+            elif [ "$WM" == "xfce" ]; then
+                exec /tool/pandora64/.package/xfce-4.12/bin/startxfce4
             else
                xterm -title "You didn't set WM to anything I understand" &
             fi
@@ -3450,6 +3519,383 @@ removed directory '/tmp/temp_fzf/test'
 removed directory '/tmp/temp_fzf'
 #+end_example
 
+* install powerline-shell
+** do pip install
+#+BEGIN_SRC sh :results output :dir ~/scripts/bin
+pip install pip --user --upgrade
+pip install powerline-shell --user --upgrade
+mkdir -p ~/.config/powerline-shell
+#+END_SRC
+
+#+RESULTS:
+: Collecting pip
+:   Using cached https://files.pythonhosted.org/packages/54/0c/d01aa759fdc501a58f431eb594a17495f15b88da142ce14b5845662c13f3/pip-20.0.2-py2.py3-none-any.whl
+: Installing collected packages: pip
+: Successfully installed pip-8.1.2
+: Requirement already up-to-date: powerline-shell in /home/ramondal/.local/lib/python2.7/site-packages
+: Requirement already up-to-date: argparse in /home/ramondal/.local/lib/python2.7/site-packages (from powerline-shell)
+
+** install config.json
+#+BEGIN_SRC sh :results output :dir ~/ :eval no :tangle ~/.config/powerline-shell/config.json
+{
+  "segments": [
+    {
+      "type": "env",
+      "var": "PROJECT",
+      "fg_color": 15,
+      "bg_color": 161
+    },
+    "~/.config/powerline-shell/my_uptime.py",
+    "username",
+    "hostname",
+    "~/.config/powerline-shell/my_git.py",
+    "~/.config/powerline-shell/my_git_stash.py",
+    "~/.config/powerline-shell/my_time.py",
+    "~/.config/powerline-shell/my_cwd.py",
+    "~/.config/powerline-shell/my_history_count.py",
+    "exit_code",
+    "~/.config/powerline-shell/my_newline.py",
+    "root"
+  ],
+  "mode": "flat",
+  "cwd": {
+    "mode": "plain",
+    "max_depth": 8
+  },
+  "time": {
+    "format": "%b-%d(%a)-%Y %I:%M%p"
+  },
+  "hostname": {
+    "colorize": 1
+  },
+  "theme": "solarized_light"
+}
+#+END_SRC
+
+** install uptime
+#+BEGIN_SRC sh :results output :dir ~/ :eval no :tangle ~/.config/powerline-shell/my_uptime.py
+import subprocess
+import re
+from powerline_shell.utils import BasicSegment, decode
+
+
+class Segment(BasicSegment):
+    def add_to_powerline(self):
+        powerline = self.powerline
+        try:
+            output = decode(subprocess.check_output(['uptime'], stderr=subprocess.STDOUT))
+            raw_uptime = re.search('(?<=up).+(?=,\s+\d+\s+user)', output).group(0)
+            day_search = re.search('\d+(?=\s+day)', output)
+            days = '' if not day_search else '%sd ' % day_search.group(0)
+            hour_search =  re.search('\d{1,2}(?=\:)', raw_uptime)
+            hours = '' if not hour_search else '%sh ' %  hour_search.group(0)
+            minutes =  re.search('(?<=\:)\d{1,2}|\d{1,2}(?=\s+min)', raw_uptime).group(0)
+            # uptime = u' %s%s%sm ' % (days, hours, minutes)
+            uptime = u' %s' % (days)
+            powerline.append(uptime, powerline.theme.CWD_FG, powerline.theme.PATH_BG)
+        except OSError:
+            return
+#+END_SRC
+
+** install git
+#+BEGIN_SRC sh :results output :dir ~/ :eval no :tangle ~/.config/powerline-shell/my_git.py
+import re
+import subprocess
+import yaml
+from powerline_shell.utils import RepoStats, ThreadedSegment, get_git_subprocess_env
+
+
+def parse_git_branch_info(status):
+    info = re.search('^## (?P<local>\S+?)''(\.{3}(?P<remote>\S+?)( \[(ahead (?P<ahead>\d+)(, )?)?(behind (?P<behind>\d+))?\])?)?$', status[0])
+    return info.groupdict() if info else None
+
+
+def _get_git_detached_branch():
+    p = subprocess.Popen(['git', 'describe', '--tags', '--always'],
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                         env=get_git_subprocess_env())
+    detached_ref = p.communicate()[0].decode("utf-8").rstrip('\n')
+    if p.returncode == 0:
+        branch = u'{} {}'.format(RepoStats.symbols['detached'], detached_ref)
+    else:
+        branch = 'Big Bang'
+    return branch
+
+
+def parse_git_stats(status):
+    stats = RepoStats()
+    for statusline in status[1:]:
+        code = statusline[:2]
+        if code == '??':
+            stats.new += 1
+        elif code in ('DD', 'AU', 'UD', 'UA', 'DU', 'AA', 'UU'):
+            stats.conflicted += 1
+        else:
+            if code[1] != ' ':
+                stats.changed += 1
+            if code[0] != ' ':
+                stats.staged += 1
+
+    return stats
+
+
+def build_stats():
+    try:
+        p = subprocess.Popen(['git', 'status', '--porcelain', '-b'],
+                             stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                             env=get_git_subprocess_env())
+    except OSError:
+        # Popen will throw an OSError if git is not found
+        return (None, None)
+
+    pdata = p.communicate()
+    if p.returncode != 0:
+        return (None, None)
+
+    status = pdata[0].decode("utf-8").splitlines()
+    stats = parse_git_stats(status)
+    branch_info = parse_git_branch_info(status)
+
+    if branch_info:
+        stats.ahead = branch_info["ahead"]
+        stats.behind = branch_info["behind"]
+        branch = branch_info['local']
+    else:
+        branch = _get_git_detached_branch()
+    return stats, branch
+
+
+class Segment(ThreadedSegment):
+    def run(self):
+        self.stats, self.branch = build_stats()
+
+    def add_to_powerline(self):
+        self.join()
+        if not self.stats:
+            return
+        bg = self.powerline.theme.REPO_CLEAN_BG
+        fg = self.powerline.theme.REPO_CLEAN_FG
+        if self.stats.dirty:
+            bg = self.powerline.theme.REPO_DIRTY_BG
+            fg = self.powerline.theme.REPO_DIRTY_FG
+        if self.powerline.segment_conf("vcs", "show_symbol"):
+            symbol = RepoStats().symbols["git"] + " "
+        else:
+            symbol = ""
+        self.powerline.append(" " + symbol + self.branch + " ", fg, bg)
+        # self.stats.add_to_powerline(self.powerline)
+#+END_SRC
+
+** install git_stash
+#+BEGIN_SRC sh :results output :dir ~/ :eval no :tangle ~/.config/powerline-shell/my_git_stash.py
+import re
+import subprocess
+import yaml
+from pprint import pprint
+from powerline_shell.utils import RepoStats, ThreadedSegment, get_git_subprocess_env
+
+
+def get_stash_count():
+    try:
+        p = subprocess.Popen(['git', 'stash', 'list'],
+                             stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                             env=get_git_subprocess_env())
+    except OSError:
+        return 0
+
+    pdata = p.communicate()
+    if p.returncode != 0:
+        return 0
+
+    return pdata[0].count(b'\n')
+
+
+class Segment(ThreadedSegment):
+    def run(self):
+        self.stash_count = get_stash_count()
+
+    def add_to_powerline(self):
+        self.join()
+        if not self.stash_count:
+            return
+
+        bg = self.powerline.theme.GIT_STASH_BG
+        fg = self.powerline.theme.GIT_STASH_FG
+
+        sc = self.stash_count if self.stash_count > 1 else ''
+        # stash_str = u' {}{} '.format(sc, RepoStats.symbols['stash'])
+        stash_str = u' {} {} '.format(sc, 'st*')
+        self.powerline.append(stash_str, fg, bg)
+#+END_SRC
+
+** install time
+#+BEGIN_SRC sh :results output :dir ~/ :eval no :tangle ~/.config/powerline-shell/my_time.py
+from __future__ import absolute_import
+from powerline_shell.utils import BasicSegment
+import time
+
+
+class Segment(BasicSegment):
+    def add_to_powerline(self):
+        powerline = self.powerline
+        format = powerline.segment_conf('time', 'format')
+        if format:
+            time_ = ' %s ' % time.strftime(format)
+        elif powerline.args.shell == 'bash':
+            time_ = ' \\t '
+        elif powerline.args.shell == 'zsh':
+            time_ = ' %* '
+        else:
+            time_ = ' %s ' % time.strftime('%H:%M:%S')
+        powerline.append(time_,
+                         powerline.theme.TIME_FG,
+                         powerline.theme.SSH_BG)
+#+END_SRC
+
+** install cwd
+#+BEGIN_SRC sh :results output :dir ~/ :eval no :tangle ~/.config/powerline-shell/my_cwd.py
+import os
+import sys
+import yaml
+from powerline_shell.utils import warn, py3, BasicSegment
+
+ELLIPSIS = u'\u2026'
+
+
+def replace_home_dir(cwd):
+    home = os.path.realpath(os.getenv('HOME'))
+    if cwd.startswith(home):
+        return '~' + cwd[len(home):]
+    return cwd
+
+
+def split_path_into_names(cwd):
+    names = cwd.split(os.sep)
+
+    if names[0] == '':
+        names = names[1:]
+
+    if not names[0]:
+        return ['/']
+
+    return names
+
+
+def requires_special_home_display(powerline, name):
+    """Returns true if the given directory name matches the home indicator and
+    the chosen theme should use a special home indicator display."""
+    return (name == '~' and powerline.theme.HOME_SPECIAL_DISPLAY)
+
+
+def maybe_shorten_name(powerline, name):
+    """If the user has asked for each directory name to be shortened, will
+    return the name up to their specified length. Otherwise returns the full
+    name."""
+    max_size = powerline.segment_conf("cwd", "max_dir_size")
+    if max_size:
+        return name[:max_size]
+    return name
+
+
+def get_fg_bg(powerline, name, is_last_dir):
+    """Returns the foreground and background color to use for the given name.
+    """
+    if requires_special_home_display(powerline, name):
+        return (powerline.theme.HOME_FG, powerline.theme.HOME_BG,)
+
+    if is_last_dir:
+        return (powerline.theme.CWD_FG, powerline.theme.PATH_BG,)
+    else:
+        return (powerline.theme.PATH_FG, powerline.theme.PATH_BG,)
+
+
+def add_cwd_segment(powerline):
+    cwd = powerline.cwd
+    if not py3:
+        cwd = cwd.decode("utf-8")
+    cwd = replace_home_dir(cwd)
+
+    names = split_path_into_names(cwd)
+
+    full_cwd = powerline.segment_conf("cwd", "full_cwd", False)
+    max_depth = powerline.segment_conf("cwd", "max_depth", 5)
+    if max_depth <= 0:
+        warn("Ignoring cwd.max_depth option since it's not greater than 0")
+    elif len(names) > max_depth:
+        # https://github.com/milkbikis/powerline-shell/issues/148
+        # n_before is the number is the number of directories to put before the
+        # ellipsis. So if you are at ~/a/b/c/d/e and max depth is 4, it will
+        # show `~ a ... d e`.
+        #
+        # max_depth must be greater than n_before or else you end up repeating
+        # parts of the path with the way the splicing is written below.
+        n_before = 2 if max_depth > 2 else max_depth - 1
+        # how many are we reducing?
+        n_reduced = len(names) - max_depth
+        # names = names[:n_before] + ["<%d>" % (n_reduced)] + names[n_before - max_depth:]
+        names = ["<%d>" % (n_reduced)] + names[len(names) - max_depth:]
+
+    if powerline.segment_conf("cwd", "mode") == "dironly":
+        # The user has indicated they only want the current directory to be
+        # displayed, so chop everything else off
+        names = names[-1:]
+
+    elif powerline.segment_conf("cwd", "mode") == "plain":
+        joined = os.path.sep.join(names)
+        powerline.append(" %s " % (joined,), powerline.theme.CWD_FG,
+                         powerline.theme.PATH_BG)
+        return
+
+    for i, name in enumerate(names):
+        is_last_dir = (i == len(names) - 1)
+        fg, bg = get_fg_bg(powerline, name, is_last_dir)
+
+        separator = powerline.separator_thin
+        separator_fg = powerline.theme.SEPARATOR_FG
+        if requires_special_home_display(powerline, name) or is_last_dir:
+            separator = None
+            separator_fg = None
+
+        if not (is_last_dir and full_cwd):
+            name = maybe_shorten_name(powerline, name)
+        powerline.append(' %s ' % name, fg, bg, separator, separator_fg)
+
+class Segment(BasicSegment):
+    def add_to_powerline(self):
+        add_cwd_segment(self.powerline)
+#+END_SRC
+
+** install history
+#+BEGIN_SRC sh :results output :dir ~/ :eval no :tangle ~/.config/powerline-shell/my_history_count.py
+from powerline_shell.utils import BasicSegment
+
+
+class Segment(BasicSegment):
+    def add_to_powerline(self):
+        powerline = self.powerline
+        bg = powerline.theme.CMD_PASSED_BG
+        fg = powerline.theme.CMD_PASSED_FG
+        host_prompt = " %h "
+        powerline.append(host_prompt, fg, bg, sanitize=False)
+#+END_SRC
+
+** install newline
+#+BEGIN_SRC sh :results output :dir ~/ :eval no :tangle ~/.config/powerline-shell/my_newline.py
+from powerline_shell.utils import BasicSegment, warn
+
+
+class Segment(BasicSegment):
+    def add_to_powerline(self):
+        newline_string = "\n"
+        if self.powerline.args.shell == "tcsh":
+            newline_string = " \\n"
+        self.powerline.append(newline_string,
+                              self.powerline.theme.RESET,
+                              self.powerline.theme.RESET,
+                              separator="")
+#+END_SRC
+
+
 * install p4 utility script
 #+BEGIN_SRC sh :results output :dir ~/scripts/bin
 wget http://projects.joelinoff.com/p4tools/p4-whodunit.py
@@ -3791,7 +4237,8 @@ module load openssh/5.0p1-hpn13v3
 module load xterm/326
 module load tkdiff/4.2
 module load bash/4.4
-module load git/2.21.0
+# module load git/2.21.0
+module load git/2.16.2
 module load tcsh/6.19.00
 module load ctags/5.8
 module load ack/2.14
@@ -3858,6 +4305,7 @@ module load tar/1.29
 module load terminator/1.0
 module load texlive/20160920
 module load the_silver_searcher/2.1.0
+module load ripgrep/11.0.2
 # module load kde/455
 # module load tigervnc/1.7.1
 # module load tightvnc/1.3.10
@@ -3867,6 +4315,8 @@ module load vlc/2.2.6
 module load wget/1.17
 module load xpdf/3.04
 module load i3/4.13
+module load awesome/3.4.10
+module load xmonad/0.13
 module load icewm/1.3.8
 
 # module load hdk-4.8.1/19
