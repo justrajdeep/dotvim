@@ -3410,6 +3410,7 @@ augroup PatchDiffHighlight
   autocmd FileType diff syntax enable | setlocal nocursorline
 augroup END
 
+let g:committia_use_singlecolumn = 'always'
 augroup filetype_make
 :autocmd!
 :au BufNewFile,BufRead Makeppfile setf make |setlocal ts=4 sts=4 sw=4 noexpandtab
