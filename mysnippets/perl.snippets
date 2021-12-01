@@ -15,6 +15,7 @@ use Cwd;
 use Cwd qw(abs_path);
 my $dir = getcwd;
 use FindBin qw(\$Script);
+use Modern::Perl;
 use Clone qw(clone);
 use Term::ANSIColor qw(:constants);
 use Getopt::Long qw(:config auto_version auto_help);

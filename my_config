@@ -3,29 +3,29 @@ make clean
 make distclean
 \rm -rvf auto/config.cache 
 
-module load freetype/2.4.4
-module load cairo/1.10.2
-module load pango/1.29.4
-module load pixman/0.22.0
-module load glib/2.32.1
-module load gtk+/2.24.10
-module load atk/2.4.0
-# module load gdk-pixbuf/2.24.0
-module load yaml/0.1.1
-module load perl/5.10.0
-module load gcc/4.4.6
-module load ruby/1.9.3-p194
-module load python/2.7.5
+module load freetype/2.9.1
+module load pixman/0.32.8
+module load glib/2.50.0
+module load yaml/0.2.1
+module load perl/5.26.0
+module load gcc/10.2.0
+module load ruby/2.7.1
+module load python/2.7.16
 # module load python/3.4.3
-module load libffi/3.0.9
-module load ncurses/6.0
+module load libffi/3.2.1
+module load ncurses/6.2
+module load binutils/2.35
+module load libpng/1.6.34
 
 # setenv LDFLAGS "-L/tool/pandora64/.package/ruby-1.9.3-p194/lib -L/tool/pandora64/.package/gcc-4.4.6/lib64 -L/tool/pandora64/.package/freetype-2.4.4/lib -L/tool/pandora64/.package/cairo-1.10.2/lib -L/tool/pandora64/.package/pango-1.29.4/lib -L/tool/pandora64/.package/pixman-0.22.0/lib -L/tool/pandora64/.package/glib-2.32.1/lib -L/tool/pandora64/.package/gtk+-2.24.10/lib -Wl,-rpath,/tool/pandora64/.package/glib-2.32.1/lib:/tool/pandora64/.package/gtk+-2.24.10/lib:/tool/pandora64/.package/cairo-1.10.2/lib:/tool/pandora64/.package/pango-1.29.4/lib:/tool/pandora64/.package/pixman-0.22.0/lib:/tool/pandora64/.package/freetype-2.4.4/lib"
 # setenv LIBS "-L/tool/pandora64/.package/freetype-2.4.4/lib -L/tool/pandora64/.package/cairo-1.10.2/lib -L/tool/pandora64/.package/pango-1.29.4/lib -L/tool/pandora64/.package/pixman-0.22.0/lib -L/tool/pandora64/.package/glib-2.32.1/lib -L/tool/pandora64/.package/gtk+-2.24.10/lib -Wl,-rpath,/tool/pandora64/.package/glib-2.32.1/lib:/tool/pandora64/.package/gtk+-2.24.10/lib:/tool/pandora64/.package/cairo-1.10.2/lib:/tool/pandora64/.package/pango-1.29.4/lib:/tool/pandora64/.package/pixman-0.22.0/lib:/tool/pandora64/.package/freetype-2.4.4/lib"
 # setenv PKG_CONFIG_PATH "/tool/pandora64/.package/glib-2.32.1/lib/pkgconfig:/tool/pandora64/.package/gtk+-2.24.10/lib/pkgconfig:/tool/pandora64/.package/cairo-1.10.2/lib/pkgconfig:/tool/pandora64/.package/pango-1.29.4/lib/pkgconfig:/tool/pandora64/.package/pixman-0.22.0/lib/pkgconfig"
 
 # setenv LDFLAGS "-L/tool/pandora64/.package/python-2.7.5/lib -Wl,-rpath,/usr/lib64 -lutil"
-setenv LDFLAGS "-L/tool/pandora64/.package/python-2.7.5/lib -Wl,-rpath,/usr/lib64 -lutil"
+setenv LDFLAGS "-L/tool/pandora64/.package/python-2.7.16/lib -Wl,--as-needed -Wl,-rpath,/usr/lib64 -lutil -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo -lpango-1.0 -lfontconfig -lgobject-2.0 -lglib-2.0 -lfreetype -lSM -lICE -lXt -lX11 -lXdmcp -lSM -lICE -lm -ltinfo -lelf -lnsl -rdynamic -Wl,-rpath,/usr/lib64/perl5/CORE"
+setenv EXTRA_IPATHS "-I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 I/usr/include/libdrm -I/usr/include/harfbuzz"
+setenv EXTRA_LIBS "-L/usr/local/lib"
+setenv GUI_INC_LOC "-I/usr/include/gtk-2.0 -I/usr/lib64/gtk-2.0/include"
 
 # setenv LIBS "-L/tool/pandora64/.package/gcc-4.4.6/lib64 -L/tool/pandora64/.package/ruby-1.9.3-p194/lib -L/tool/pandora64/.package/python-2.7.5/lib -L/tool/pandora64/.package/freetype-2.4.4/lib -L/tool/pandora64/.package/atk-2.4.0/lib -L/tool/pandora64/.package/gdk-pixbuf-2.24.0/lib -L/tool/pandora64/.package/libffi-3.0.9/lib -L/tool/pandora64/.package/freetype-2.4.4/lib -L/tool/pandora64/.package/cairo-1.10.2/lib -L/tool/pandora64/.package/pango-1.29.4/lib -L/tool/pandora64/.package/pixman-0.22.0/lib -L/tool/pandora64/.package/glib-2.32.1/lib -L/tool/pandora64/.package/gtk+-2.24.10/lib -Wl,-rpath,/tool/pandora64/.package/glib-2.32.1/lib:/tool/pandora64/.package/gtk+-2.24.10/lib:/tool/pandora64/.package/cairo-1.10.2/lib:/tool/pandora64/.package/pango-1.29.4/lib:/tool/pandora64/.package/pixman-0.22.0/lib:/tool/pandora64/.package/freetype-2.4.4/lib:/tool/pandora64/.package/libffi-3.0.9/lib:/tool/pandora64/.package/gdk-pixbuf-2.24.0/lib:/tool/pandora64/.package/atk-2.4.0/lib:/tool/pandora64/.package/freetype-2.4.4/lib:/tool/pandora64/.package/python-2.7.5/lib:/tool/pandora64/.package/ruby-1.9.3-p194/lib:/tool/pandora64/.package/gcc-4.4.6/lib64:/usr/lib64 -lutil"
 
@@ -33,14 +33,14 @@ setenv LDFLAGS "-L/tool/pandora64/.package/python-2.7.5/lib -Wl,-rpath,/usr/lib6
 
 # setenv LUA_PREFIX "/tool/pandora64/.package/lua-5.1.4"
 
-setenv PKG_CONFIG_PATH "/tool/pandora64/.package/glib-2.32.1/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/share/pkgconfig"
+# setenv PKG_CONFIG_PATH "/tool/pandora64/.package/glib-2.50.0/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/share/pkgconfig"
 
 # setenv CFLAGS "-I/tool/pandora64/.package/gcc-4.4.6/include -I/tool/pandora64/.package/ruby-1.9.3-p194/include -I/tool/pandora64/.package/python-2.7.5/include -I/tool/pandora64/.package/freetype-2.4.4/include -I/tool/pandora64/.package/atk-2.4.0/include -I/tool/pandora64/.package/gdk-pixbuf-2.24.0/include -I/tool/pandora64/.package/libffi-3.0.9/include -I/tool/pandora64/.package/freetype-2.4.4/include -I/tool/pandora64/.package/cairo-1.10.2/include -I/tool/pandora64/.package/pango-1.29.4/include -I/tool/pandora64/.package/pixman-0.22.0/include -I/tool/pandora64/.package/glib-2.32.1/include -I/tool/pandora64/.package/gtk+-2.24.10/include"
 
 ./configure --prefix=$HOME/scripts --enable-fail-if-missing --with-features=huge \
-  --enable-luainterp=yes --with-lua-prefix=/tool/pandora64/.package/lua-5.1.4 \
+  --enable-luainterp=yes --with-lua-prefix=/tool/pandora64/.package/lua-5.3.5 \
   --enable-perlinterp=yes \
-  --with-python-config-dir=/tool/pandora64/.package/python-2.7.5/lib/python2.7/config \
+  --with-python-config-dir=/tool/pandora64/.package/python-2.7.16/lib/python2.7/config \
   --x-libraries=/usr/lib64 \
   --x-includes=/usr/include \
   --enable-pythoninterp=yes \
@@ -59,8 +59,8 @@ setenv PKG_CONFIG_PATH "/tool/pandora64/.package/glib-2.32.1/lib/pkgconfig:/usr/
   --enable-motif-check \
   --enable-athena-check \
   --enable-nextaw-check \
-  --enable-carbon-check \
   --disable-smack \
+  --disable-gtktest \
   --enable-gui=gtk2
 
 # make

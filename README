@@ -119,6 +119,9 @@ Adding viva support
 ---------------------------
 ln -fs /home/vim-nv/plugins/viva ~/.vim/bundle/viva
 
+USING vim-plug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 USING NEOBUNDLE
 git clone https://github.com/Shougo/neobundle.vim neobundle_bundle/neobundle
 cd bundle

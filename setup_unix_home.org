@@ -1231,6 +1231,8 @@ unalias g; alias g 'gvim -u NONE'
 unalias e; alias e 'emacs \!:* &'
 unalias p4o; alias p4o 'p4 opened'
 unalias p4d; alias p4d 'p4 diff \!:* &'
+unalias p4pd; alias p4pd 'p4 opened \!:* | awk -F'\''[#]'\'' '\''{print $1}'\'' | parallel --eta '\''env P4DIFF="gvim -d -f" p4 diff {}'\'''
+unalias p4of; alias p4of 'p4 opened \!:* | awk -F'\''[#]'\'' '\''{print $1}'\'' | xargs p4 where | awk '\''{print $NF}'\'''
 unalias p4r; alias p4r 'p4 resolve'
 unalias p4e; alias p4e 'p4 edit'
 unalias p4a; alias p4a 'p4 add'
@@ -1243,7 +1245,7 @@ unalias init; alias init 'source /proj/verif_release_ro/cbwa_initscript/current/
 # unalias bootnv31; alias bootnv31 'boot navi31'
 # unalias bootrem; alias bootrem 'boot rembrandt'
 
-unalias diskspace; alias diskspace 'chdir `\ls -d -1 /local_vol1_nobackup/user/ramondal/*/ | $HOME/scripts/bin/fzf ` && setprompt'
+unalias diskspace; alias diskspace 'chdir `\fd . --color never --type d --max-depth 1 /local_vol1_nobackup/user/ramondal/ | $HOME/scripts/bin/fzf ` && setprompt'
 unalias decoderb; alias decoderb '$STEM/src/test/tools/scripts/decode_registers.pl \!:*rbbm.dmp | tee \!:*decoded_rbbm.dmp && gvim \!:*decoded_rbbm.dmp'
 unalias decoderbz; alias decoderbz '$STEM/src/test/tools/scripts/decode_registers.pl rbbm.dmp | $HOME/scripts/bin/fzf'
 set backslash_quote
@@ -4232,7 +4234,8 @@ module load pixman/0.32.8
 module load cairo/1.14.6
 module load freetype/2.4.4
 module load emacs/26.1
-module load vim/8.0
+module load fd/7.4.0
+module load vim/8.1.0914
 module load openssh/5.0p1-hpn13v3
 module load xterm/326
 module load tkdiff/4.2
@@ -4258,7 +4261,7 @@ module load pandoc/2.9.1.1
 module load go/1.7.4
 module load tree/1.5.0
 module load libreoffice/6.0.1.1
-module load tmux/2.4
+module load tmux/2.7
 
 module load acrobat/9.4
 module load bc/1.06-a
@@ -4294,8 +4297,8 @@ module load nano/2.3.2
 module load nedit/5.7
 module load nxclient/5.1.62_1
 module load octave/4.0.2
-module load parallel/20170122
-module load perforce/2016.1
+module load parallel/20190322
+module load perforce/2018.2
 module load rdesktop/1.8.3
 module load rsync/3.1.2
 module load screen/4.6.1
