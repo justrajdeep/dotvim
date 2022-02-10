@@ -647,7 +647,6 @@ if use_neobundle
     " " NeoBundle 'zefei/vim-colortuner',                          { 'directory' : 'colortuner'}
     " NeoBundle 'vim-scripts/Colour-Sampler-Pack',               { 'directory' : 'colour_sampler_pack'}
     NeoBundle 'flazz/vim-colorschemes',                        { 'directory' : 'colour_Fazz'}
-    " NeoBundle 'McAuleyPenney/vim-dissonance',                  { 'directory' : 'colour_dissonance'}
     NeoBundle 'embark-theme/vim',                              { 'directory' : 'colour_embark'}
     NeoBundle 'habamax/vim-psionic',                           { 'directory' : 'colour_psionic'}
     NeoBundle 'habamax/vim-alchemist',                           { 'directory' : 'colour_alchemist'}

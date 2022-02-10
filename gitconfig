@@ -61,3 +61,5 @@
 	autocorrect = 0
 [commit]
 	verbose = true
+[credential]
+	helper = cache
