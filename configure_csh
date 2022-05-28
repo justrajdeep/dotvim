@@ -1,0 +1,6 @@
+curl -sS https://starship.rs/install.sh > ! starship_install.sh
+mkdir -p ~/.local/bin
+./starship_install.sh -b ~/.local/bin
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
+cd nerd-fonts/
+./install.sh

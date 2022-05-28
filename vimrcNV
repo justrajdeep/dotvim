@@ -1279,10 +1279,10 @@ if use_neobundle
     " NeoBundle 'vim-scripts/confirm-quit',                             { 'directory' : 'confirm_quit'}
     NeoBundle 'fadein/vim-FIGlet',                                    { 'directory' : 'figlet'}
     NeoBundle 'JRasmusBm/vim-peculiar',                               { 'directory' : 'peculiar'}
-    NeoBundle 'aonemd/fmt.vim',                                       { 'directory' : 'fmt'}
+    " NeoBundle 'aonemd/fmt.vim',                                       { 'directory' : 'fmt'}
     " NeoBundle 'tyru/capture.vim',                                   { 'directory' : 'capture'}
     " NeoBundle 'abdalrahman-ali/vim-remembers',                      { 'directory' : 'remembers'}
-    NeoBundle 'axvr/zepl.vim',                                 { 'directory' : 'zepl'}
+    " NeoBundle 'axvr/zepl.vim',                                 { 'directory' : 'zepl'}
     " NeoBundle 'urbainvaes/vim-macaw',                        { 'directory' : 'macaw'}
     " NeoBundle 'DanilaMihailov/beacon.nvim',                    { 'directory' : 'beacon'}
     " NeoBundle 'inside/vim-search-pulse',                       { 'directory' : 'SearchPulse'}
@@ -1341,11 +1341,12 @@ if use_neobundle
     " NeoBundle 'windwp/vim-floaterm-repl',                     { 'directory' : 'floaterm_repl'}
     " NeoBundle 'coot/vim-term',                                  { 'directory' : 'vimTerm'}
     " NeoBundle 'puremourning/vimspector',                        { 'directory' : 'vimspector'}
-    NeoBundle 'gu-fan/simpleterm.vim',                                    { 'directory' : 'simpleterm'}
-    NeoBundle 'chengzeyi/multiterm.vim',                                { 'directory' : 'multiterm'}
+    " NeoBundle 'gu-fan/simpleterm.vim',                                    { 'directory' : 'simpleterm'}
+    NeoBundle 'kassio/neoterm',                                         { 'directory' : 'neoterm'}
+    " NeoBundle 'chengzeyi/multiterm.vim',                                { 'directory' : 'multiterm'}
     " NeoBundle 'erietz/vim-terminator',                                  { 'directory' : 'terminator'}
     " NeoBundle 'ledesmablt/vim-run',                                       { 'directory' : 'vim_run'}
-    NeoBundle 'habamax/vim-sendtoterm',                                   { 'directory' : 'sendtoTerm'}
+    " NeoBundle 'habamax/vim-sendtoterm',                                   { 'directory' : 'sendtoTerm'}
     " NeoBundle 'chrisbra/vpager',                                          { 'directory' : 'vpager'}
     " NeoBundle 'manu-mannattil/vim-longlines',                             { 'directory' : 'longlines'}
     " NeoBundle 'ipod825/vim-netranger',                                    { 'directory' : 'netranger'} " does not work for me
@@ -1480,7 +1481,7 @@ if use_neobundle
     NeoBundle 'yssl/QFEnter',                                  { 'directory' : 'QFEnter'}
     NeoBundle 'vim-scripts/xemacs-mouse-drag-copy',            { 'directory' : 'xemacs-mouse-drag-copy'}
     NeoBundleLazy 'majutsushi/tagbar',                             { 'directory' : 'tagbar', 'autoload' : {'commands' : ['TagbarToggle']}}
-    NeoBundle 'SirVer/ultisnips',                              { 'directory' : 'ultisnips'}
+    " NeoBundle 'SirVer/ultisnips',                              { 'directory' : 'ultisnips'}
     " NeoBundle 'andreyorst/SimpleSnippets.vim',                 { 'directory' : 'SimpleSnippets'}
     NeoBundle 'tpope/vim-fugitive',                            { 'directory' : 'fugitive'}
     NeoBundle 'rbong/vim-flog',                                { 'directory' : 'flog'}
@@ -1570,11 +1571,10 @@ if use_neobundle
     NeoBundle 'vim-pandoc/vim-pandoc-syntax',                             { 'directory' : 'pandocSyntax'}
     " NeoBundle 'vim-pandoc/vim-pandoc',                         { 'directory' : 'vimPandoc'}
     NeoBundle 'vimwiki/vimwiki.git',        { 'directory' : 'vimwiki'}
-    NeoBundle 'gu-fan/riv.vim',             { 'directory' : 'riv'}
+    " NeoBundle 'gu-fan/riv.vim',             { 'directory' : 'riv'}
     NeoBundle 'AndrewRadev/inline_edit.vim', {'directory' : 'lnline_edit'}
     " NeoBundle 'michaelb/vim-tips',           {'directory' : 'tips'}
     " NeoBundle 'JMcKiern/vim-shoot',          {'directory' : 'shoot'}
-    " NeoBundle 'gu-fan/riv.vim',             { 'directory' : 'riv'}
     " NeoBundle 'Yilin-Yang/vim-markbar',                        { 'directory' : 'Markbar'}
     NeoBundle 'ernstwi/vim-secret',                            { 'directory' : 'secret'}
     " NeoBundle 'jdhao/better-escape.vim',                       { 'directory' : 'better_escape'}
@@ -3537,7 +3537,8 @@ if !has('nvim')
                             \ 'humanoid', 'gruvbox',
                             \ 'base16-default-dark',
                             \ 'alchemist', 'apprentice', 'gruvbit',
-                            \ 'saturnite', 'ghdark', 'codedark', 'bogster']
+                            \ 'saturnite', 'ghdark', 'codedark', 'bogster'
+                            \ 'vim-material']
 endif
 if &diff
   colorscheme peachpuff
@@ -4489,7 +4490,7 @@ nnoremap c "_c
 xnoremap p pgvy
 xnoremap p ""p:let @"=@0<CR>
 " Escape as normal
-tnoremap <esc> <c-\><c-n>
+" tnoremap <esc> <c-\><c-n>
 " go to correct column
 noremap ' `
 " non-saving delete
@@ -4910,6 +4911,10 @@ if has('terminal')
     tnoremap <silent> <M-Down> <C-w>j
     tnoremap <silent> <M-Up> <C-w>k
     tnoremap <silent> <M-Left> <C-w>l
+    tnoremap <C-w>h <C-\><C-n><C-w>h
+    tnoremap <C-w>j <C-\><C-n><C-w>j
+    tnoremap <C-w>k <C-\><C-n><C-w>k
+    tnoremap <C-w>l <C-\><C-n><C-w>l
 endif
 " if v:version >= 700
 "   au BufLeave * let b:winview = winsaveview()
@@ -5576,7 +5581,7 @@ cnoremap #E <C-U><C-\>eAbsFile("edit")<cr>
 cnoremap #v <C-U>FZF $STEM/src/verif/
 cnoremap #g <C-U>FZF $STEM/src/verif/glx
 cnoremap #c <C-U>FZF $STEM/src/verif/cmm/sstb
-cnoremap #e <C-U>FZF $STEM/src/
+cnoremap #e <C-U>FZF
 cnoremap #t <C-U>FZF $STEM/src/test/suites/block/
 cnoremap #o <C-U>FZF $OUT_HOME/
 " cnoremap #u <C-U>FZF $UVMKIT_HOME/uvm/src
@@ -5603,7 +5608,7 @@ cnoremap #G <C-U>!gnome-terminal &
 " cnoremap #f <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !/home/nv/toolroot/bin/nvfind <C-r><C-w>
 cnoremap #X <C-U>!xterm -e xx &
 cnoremap #K <C-U>!konsole &
-cnoremap #M <C-U>!pwd \| mutt -s <C-r>=resolve(expand('%'))<CR> -a <C-r>=resolve(expand('%'))<CR> -- Rajdeep.Mondal@amd.com
+cnoremap #M <C-U>!pwd \| mutt -s <C-r>=resolve(expand('%'))<CR> -a <C-r>=resolve(expand('%'))<CR> -- rmondal@nvidia.com
 cnoremap #m <C-U>:setl modifiable!
 cnoremap #H <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !p4 have <C-r>=resolve(expand('%'))<CR>
 cnoremap #f <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !p4 fstat <C-r>=resolve(expand('%'))<CR>
@@ -6285,6 +6290,7 @@ highlight WHITE_ON_RED    ctermfg=white  ctermbg=red
 
 " map so that ctrl-g shows the full path"
 nnoremap <C-g>  11<C-g>
+nmap fp :let @" = expand("%:p")<cr>
 " Yank from the cursor to the end of the line, to be consistentwith C and D.
 " nnoremap y <Plug>(operator-flashy)
 " nnoremap Y <Plug>(operator-flashy)$
@@ -6411,7 +6417,7 @@ else
   " set guifont=Century\ Schoolbook\ L\ 12
   " set guifont=DejaVu\ Sans\ Mono\ 12
 
-  " set guifont=Monaco\ 10 " favourite
+  set guifont=Monaco\ 10 " favourite
   " set guifont=Monoisome\ 9 " super thin
   " set guifont=Monofur\ 13 " unique
   " set guifont=Liberation\ Mono\ 11
@@ -6427,7 +6433,7 @@ else
   " set guifont=LispM\ 12 " dont like
   " set guifont=Monoid\ 10 " thin
   " set guifont=mononoki\ 11.5 " clean
-  set guifont=agave\ 15 "fun
+  " set guifont=agave\ 15 "fun
   " set guifont=Envy\ Code\ R\ 12 " clean
   " set guifont=Fira\ Code\ iScript\ 11.5
   " set guifont=Iosevka\ 10
