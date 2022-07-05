@@ -1,0 +1,31 @@
+snippet modline "add the modline"
+	${1:`split(&commentstring, '%s')[0]`} vim: filetype=${2:`&filetype`}:syntax=${2}:ts=4:tw=0:sw=4:sts=4:expandtab:norl:
+
+snippet FIXME "insert boilerplate FIXME"
+	${1:`split(&commentstring, '%s')[0]`} FIXME: ${2:`system("whoami")`}: ${3:${4:`system("date +%m")`}.${5:`system("date +%d")`}}.`system("date +%Y")`
+
+snippet copyright "add copyright Information"
+	${1:`split(&commentstring, '%s')[0]`}----------------------------------------------------------------------
+	$1
+	$1 Copyright (c) ${2:`system("date +%Y")`}, ${3:NVIDIA Corp.|ATI Technologies Inc.}
+	$1 All Rights Reserved.
+	$1
+	$1 This is UNPUBLISHED PROPRIETARY SOURCE CODE of $3;
+	$1 the contents of this file may not be disclosed to third parties, copied or
+	$1 duplicated in any form, in whole or in part, without the prior written
+	$1 permission of $3.
+	$1 All rights reserved.  This notice is intended as a precaution against
+	$1 inadvertent publication and does not imply publication or any waiver
+	$1 of confidentiality.  The year included in the foregoing notice is the
+	$1 year of creation of the work.
+	$1
+	$1 RESTRICTED RIGHTS LEGEND:
+	$1
+	$1 Use, duplication or disclosure by the Government is subject to restrictions
+	$1 as set forth in subdivision (c)(1)(ii) of the Rights in Technical Data
+	$1 and Computer Software clause at DFARS 252.227-7013, and/or in similar or
+	$1 successor clauses in the FAR, DOD or NASA FAR Supplement. Unpublished -
+	$1 rights reserved under the Copyright Laws of the United States.
+	$1
+	$1----------------------------------------------------------------------
+

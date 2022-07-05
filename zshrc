@@ -234,6 +234,7 @@ plugins=(
     # zsh-autocomplete
     zsh-autosuggestions
     # zsh-syntax-highlighting
+    # zsh-expand-all
     fast-syntax-highlighting
     zsh-interactive-cd
     fzf-tab
@@ -244,6 +245,8 @@ plugins=(
     emacs
     extract
     poetry
+    command-time
+    # zsh-vi-mode
 )
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
@@ -340,6 +343,7 @@ bindkey -s '^o' 'lfcd\n'
 [ -f ~/.config/zsh/zsh-aliases ] && source ~/.config/zsh/zsh-aliases
 
 source /home/rmondal/.config/broot/launcher/bash/br
+source /etc/profile.d/vte.sh
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"

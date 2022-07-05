@@ -645,7 +645,7 @@ if use_neobundle
     " NeoBundle 'chuling/equinusocio-material.vim',                      { 'directory' : 'color_equinusocio_material'}
     " NeoBundle 'josegamez82/starrynight',                               { 'directory' : 'color_starrynight'}
     " " NeoBundle 'zefei/vim-colortuner',                          { 'directory' : 'colortuner'}
-    " NeoBundle 'vim-scripts/Colour-Sampler-Pack',               { 'directory' : 'colour_sampler_pack'}
+    NeoBundle 'vim-scripts/Colour-Sampler-Pack',               { 'directory' : 'colour_sampler_pack'}
     NeoBundle 'flazz/vim-colorschemes',                        { 'directory' : 'colour_Fazz'}
     NeoBundle 'embark-theme/vim',                              { 'directory' : 'colour_embark'}
     NeoBundle 'habamax/vim-psionic',                           { 'directory' : 'colour_psionic'}
@@ -1304,8 +1304,8 @@ if use_neobundle
     NeoBundle 'potamides/painless-digraph',                { 'directory' : 'painlessDigraph'}
     NeoBundle 'dstein64/vim-startuptime',                            {'directory' : 'vim_startuptime'}
     NeoBundle 'dstein64/vim-win',                                    {'directory' : 'vim_win'}
-    NeoBundle 'bfrg/vim-qf-preview',                                 {'directory' : 'qf_preview'}
-    " NeoBundle 'romainl/vim-qf',                                { 'directory' : 'qf'}
+    " NeoBundle 'bfrg/vim-qf-preview',                                 {'directory' : 'qf_preview'}
+    NeoBundle 'romainl/vim-qf',                                { 'directory' : 'qf'}
     " NeoBundle 'gcavallanti/vim-noscrollbar',                         {'directory' : 'noscrollbar'}
     NeoBundle 'ojroques/vim-scrollstatus',                         {'directory' : 'scrollstatus'}
     " NeoBundle 'drzel/vim-line-no-indicator',                         {'directory' : 'line_no_indicator'}
@@ -1334,6 +1334,7 @@ if use_neobundle
     NeoBundle 'arp242/zev.vim',                                { 'directory' : 'zev'}
     " NeoBundle 'unblevable/quick-scope',                                     { 'directory' : 'QuickScope'}
     NeoBundle 'machakann/vim-highlightedyank',                            { 'directory' : 'highlightedyank'}
+    " NeoBundle 'azabiong/vim-board'
     " NeoBundle 'kana/vim-niceblock',                                       { 'directory' : 'niceBlock'}
     " NeoBundle 'Lenovsky/nuake',                                           { 'directory' : 'nuake'}
     " NeoBundle 'voldikss/vim-floaterm',                        { 'directory' : 'floaterm'}
@@ -1343,11 +1344,12 @@ if use_neobundle
     " NeoBundle 'puremourning/vimspector',                        { 'directory' : 'vimspector'}
     " NeoBundle 'gu-fan/simpleterm.vim',                                    { 'directory' : 'simpleterm'}
     NeoBundle 'kassio/neoterm',                                         { 'directory' : 'neoterm'}
+    " NeoBundle 'vimlab/split-term'
     " NeoBundle 'chengzeyi/multiterm.vim',                                { 'directory' : 'multiterm'}
     " NeoBundle 'erietz/vim-terminator',                                  { 'directory' : 'terminator'}
     " NeoBundle 'ledesmablt/vim-run',                                       { 'directory' : 'vim_run'}
     " NeoBundle 'habamax/vim-sendtoterm',                                   { 'directory' : 'sendtoTerm'}
-    " NeoBundle 'chrisbra/vpager',                                          { 'directory' : 'vpager'}
+    NeoBundle 'chrisbra/vpager',                                          { 'directory' : 'vpager'}
     " NeoBundle 'manu-mannattil/vim-longlines',                             { 'directory' : 'longlines'}
     " NeoBundle 'ipod825/vim-netranger',                                    { 'directory' : 'netranger'} " does not work for me
     " NeoBundle 'philFernandez/rangerFilePicker.vim',                       { 'directory' : 'rangerFilePicker'}
@@ -1381,6 +1383,7 @@ if use_neobundle
     " NeoBundle     'jeetsukumaran/vim-markology',                       { 'directory' : 'markology'}
     NeoBundleLazy 'tweekmonster/braceless.vim',                    { 'directory' : 'braceless', 'autoload' : {'commands' : ['BracelessEnable']}}
     NeoBundle 'junkblocker/patchreview-vim',                   { 'directory' : 'patchreview'}
+    " NeoBundle 'ourigen/skyline.vim'
     " NeoBundle 'AriSweedler/vim-statusline',                    { 'directory' : 'vimStatusline'}
     " NeoBundle 'itchyny/lightline.vim',                         { 'directory' : 'lightline'}
     " NeoBundle 'bling/vim-airline',                             { 'directory' : 'vim_airline'}
@@ -1423,13 +1426,13 @@ if use_neobundle
     " NeoBundle 'roblillack/vim-bufferlist',                     { 'directory' : 'bufferlist'}
     " NeoBundle 'johngrib/vim-game-code-break',                  { 'directory' : 'game_code_break'}
     " NeoBundle 'kien/tabman.vim',                               { 'directory' : 'tabman'}
-    NeoBundleLazy 'junegunn/vim-easy-align',                       { 'directory' : 'easy_align', 'autoload' : {'commands' : ['EasyAlign']}}
+    " NeoBundleLazy 'junegunn/vim-easy-align',                       { 'directory' : 'easy_align', 'autoload' : {'commands' : ['EasyAlign']}}
     NeoBundle 'luochen1990/rainbow',                           { 'directory' : 'rainbow_better'}
     " NeoBundle 'junegunn/rainbow_parentheses.vim',              { 'directory' : 'rainbow_paren'}
     NeoBundle 'vim-ruby/vim-ruby',                                 { 'directory' : 'vimRuby'}
     NeoBundleLazy 'mbbill/undotree',                               { 'directory' : 'undoTree', 'autoload' : {'commands' : ['UndotreeFocus', 'UndotreeHide', 'UndotreeShow', 'UndotreeToggle']}}
     " NeoBundle 'myusuf3/numbers.vim',                           { 'directory' : 'numbers'}
-    NeoBundle 'jeffkreeftmeijer/vim-numbertoggle',             { 'directory' : 'numbertoggle'}
+    " NeoBundle 'jeffkreeftmeijer/vim-numbertoggle',             { 'directory' : 'numbertoggle'}
     NeoBundle 'AndrewRadev/undoquit.vim',                      { 'directory' : 'undoQuit'}
     NeoBundle 'simnalamburt/vim-mundo',                        { 'directory' : 'mundo'}
     NeoBundle 'sukima/xmledit',                                { 'directory' : 'xml'}
@@ -1515,16 +1518,18 @@ if use_neobundle
     " NeoBundle 'tamago324/LeaderF-filer',                       { 'directory' : 'leaderF_Filer'}
     NeoBundleLazy 'vim-scripts/PatternsOnText',                    { 'directory' : 'PatternsOnText', 'autoload' : {'commands' : ['DeleteExcept', 'SubstituteInSearch', 'DeleteDuplicateLinesOf', 'DeleteDuplicateLinesIgnoring', 'DeleteAllDuplicateLinesIgnoring', 'SubstituteNotInSearch', 'DeleteUniqueLinesIgnoring']}}
     NeoBundle 'vim-scripts/LogiPat',                           { 'directory' : 'logipat'}
-    NeoBundle 'ramele/agrep',                                  { 'directory' : 'agrep'}
+    " NeoBundle 'ramele/agrep',                                  { 'directory' : 'agrep'}
+    " NeoBundle 'idbrii/vim-notgrep',                                { 'directory' : 'notgrep'}
     " NeoBundle 'svermeulen/nvim-marksman',                      { 'directory' : 'marksman'}
     " NeoBundle 'EerikSaksi/vim-marks-overhaul',                 { 'directory' : 'marksOverhaul'}
     NeoBundle 'vim-scripts/GrepCommands',                      { 'directory' : 'GrepCommands'}
+    " NeoBundleLazy 'idbrii/AsyncCommand',                           { 'directory' : 'asyncCommand', 'autoload' : {'commands' : ['AsyncGrep', 'AsyncShell', 'AsyncCscopeFindSymbol', 'AsyncCscopeFindCalls', 'AsyncCscopeFindX', 'AsyncMake']}}
     " NeoBundle 'mhinz/vim-grepper',          { 'directory' : 'grepper'}
     " NeoBundle 'qalshidi/vim-bettergrep',    { 'directory' : 'betterGrep'}
     " NeoBundle   'brooth/far.vim',                           { 'directory' : 'far'}
     NeoBundle 'wincent/ferret',                                { 'directory' : 'ferret'}
     " NeoBundleLazy 'mileszs/ack.vim',                               { 'directory' : 'ack', 'autoload' : {'commands' : ['Ack', 'AckAdd', 'AckFromSearch', 'LAck', 'LAckAdd', 'AckFile', 'AckHelp', 'LAckHelp', 'AckWindow', 'LAckWindow']}}
-    NeoBundle 'jremmen/vim-ripgrep',                           { 'directory' : 'ripgrep'}
+    " NeoBundle 'jremmen/vim-ripgrep',                           { 'directory' : 'ripgrep'}
     NeoBundle 'dyng/ctrlsf.vim',                               { 'directory' : 'ctrlsf'}
     " NeoBundle 'henrik/vim-indexed-search',                     { 'directory' : 'indexedsearch'}
     " NeoBundle 'osyo-manga/vim-anzu',                           { 'directory' : 'anzu'}
@@ -1655,12 +1660,12 @@ if use_neobundle
     " NeoBundleLazy 'mtth/locate.vim',                                       { 'directory' : 'locate', 'autoload' : {'commands' : ['L', 'Lpurge']}}
     " NeoBundleLocal '~/scripts/bin/fzf'
     " NeoBundle 'neoclide/coc.nvim', 'release', { 'directory': 'coc_nvim', 'build': { 'others': 'git checkout release' } }
-    NeoBundle 'junegunn/fzf',                                    { 'directory' : 'fzf', 'build': {'unix' : './install --all' }}
-    NeoBundle 'junegunn/fzf.vim',                                  { 'directory' : 'fzf_vim'}
-    NeoBundle 'laher/fuzzymenu.vim',                               { 'directory' : 'fuzzymenu'}
+    " NeoBundle 'junegunn/fzf',                                    { 'directory' : 'fzf', 'build': {'unix' : './install --all' }}
+    " NeoBundle 'junegunn/fzf.vim',                                  { 'directory' : 'fzf_vim'}
+    " NeoBundle 'laher/fuzzymenu.vim',                               { 'directory' : 'fuzzymenu'}
     NeoBundle 'mike-hearn/vim-combosearch',                        { 'directory' : 'fzf_combosearch'}
-    NeoBundle 'stsewd/fzf-checkout.vim',                           { 'directory' : 'fzf_checkout'}
-    NeoBundle 'UncleBill/vim-fzf-picker',                          { 'directory' : 'fzf_picker'}
+    " NeoBundle 'stsewd/fzf-checkout.vim',                           { 'directory' : 'fzf_checkout'}
+    " NeoBundle 'UncleBill/vim-fzf-picker',                          { 'directory' : 'fzf_picker'}
     " NeoBundle 'antoinemadec/coc-fzf',                              { 'directory' : 'cocFZF'}
     " NeoBundle 'dstein64/vim-menu',                               { 'directory' : 'vimMenu'}
     " NeoBundle 'chengzeyi/fzf-preview.vim',                         { 'directory' : 'fzf_preview'}
@@ -1668,7 +1673,6 @@ if use_neobundle
     " NeoBundle 'krisajenkins/vim-pipe',                         { 'directory' : 'pipe'}
     " NeoBundle 'regedarek/ZoomWin',                             { 'directory' : 'zoomWin'}
     " NeoBundle 'rbong/galvanize.vim',                               { 'directory' : 'galvanize'}
-    " NeoBundleLazy 'idbrii/AsyncCommand',                           { 'directory' : 'asyncCommand', 'autoload' : {'commands' : ['AsyncGrep', 'AsyncShell', 'AsyncCscopeFindSymbol', 'AsyncCscopeFindCalls', 'AsyncCscopeFindX', 'AsyncMake']}}
     " NeoBundle 'kopischke/vim-stay',                                { 'directory' : 'stay'}
     " NeoBundle 'osyo-manga/vim-agrep',                          { 'directory' : 'vim-agrep'}
     " NeoBundle 'ctjhoa/spacevim',                               { 'directory' : 'SpaceVim'}
@@ -1723,6 +1727,9 @@ if use_neobundle
     " NeoBundle 'thinca/lexima.vim',                             { 'directory' : 'lexima'}
     " NeoBundle 'haya14busa/incsearch.vim',                          { 'directory' : 'incsearch'}
     " NeoBundle 'gelguy/snapshot.vim',                               { 'directory' : 'snapshot'}
+    NeoBundle 'garbas/vim-snipmate',                           { 'directory' : 'snipMate'}
+    NeoBundle 'MarcWeber/vim-addon-mw-utils',                  { 'directory' : 'mw_utils'}
+    NeoBundle 'tomtom/tlib_vim',                               { 'directory' : 'tlib'}
     " NeoBundle 'Shougo/neosnippet',                             { 'directory' : 'neosnippet'}
     " NeoBundle 'Shougo/neosnippet-snippets',                    { 'directory' : 'neosnippet-snippets'}
     NeoBundle 'honza/vim-snippets',                            { 'directory' : 'snippets'}
@@ -1736,7 +1743,6 @@ if use_neobundle
     " NeoBundle 'JazzCore/neocomplcache-ultisnips',              { 'directory' : 'neocomplcache-ultisnips'}
     " NeoBundle 'LnL7/vim-tslime',                               { 'directory' : 'tslime'}
     " NeoBundle 'MarcWeber/vim-addon-manager',                   { 'directory' : 'addon-manager'}
-    " NeoBundle 'MarcWeber/vim-addon-mw-utils',                  { 'directory' : 'mw_utils'}
     " NeoBundle 'Rykka/colorv.vim',                              { 'directory' : 'colorv'}
     " NeoBundle 'Shougo/context_filetype.vim',                   { 'directory' : 'context_filetype'}
     " NeoBundle 'Shougo/neocomplcache.vim',                      { 'directory' : 'neocomplcache'}
@@ -1786,7 +1792,6 @@ if use_neobundle
     " NeoBundle 'fholgado/minibufexpl.vim',                      { 'directory' : 'minibufexpl'}
     " NeoBundle 'fs111/pydoc.vim',                               { 'directory' : 'pydoc'}
     " NeoBundle 'fweep/vim-tabber',                              { 'directory' : 'tabber'}
-    " NeoBundle 'garbas/vim-snipmate',                           { 'directory' : 'snipMate'}
     " NeoBundle 'gcmt/wildfire.vim',                             { 'directory' : 'wildfire'}
     " NeoBundle 'gmarik/vundle',                                 { 'directory' : 'vundle'}
     " NeoBundle 'kristijanhusak/vim-packager',                   { 'directory' : 'packager'}
@@ -1876,7 +1881,6 @@ if use_neobundle
     " NeoBundle 'tomtom/shymenu_vim',                            { 'directory' : 'shymenu'}
     " NeoBundle 'tomtom/tcomment_vim',                           { 'directory' : 'tcomment'}
     " NeoBundle 'tomtom/tinykeymap_vim',                         { 'directory' : 'tinykeymap'}
-    " NeoBundle 'tomtom/tlib_vim',                               { 'directory' : 'tlib'}
     " NeoBundle 'tomtom/tmarks_vim',                             { 'directory' : 'tmarks'}
     " NeoBundle 'tomtom/tmru_vim',                               { 'directory' : 'tmru'}
     " NeoBundle 'tomtom/tplugin_vim',                            { 'directory' : 'tplugin'}
@@ -1981,7 +1985,6 @@ if use_neobundle
     " NeoBundle 'hrsh7th/vim-eft',                                   { 'directory' : 'eft'}
     " NeoBundle 'paradigm/skybison',                                 { 'directory' : 'skybison'}
     " NeoBundle 'idbrii/vim-searchsavvy',                            { 'directory' : 'searchsavvy'}
-    " NeoBundle 'idbrii/vim-notgrep',                                { 'directory' : 'notgrep'}
     " NeoBundle 'bruno-/vim-husk',                                   { 'directory' : 'husk'}
     " NeoBundle 'justinmk/vim-matchparenalways',                     { 'directory' : 'matchparenalways'}
     " NeoBundle 'Townk/vim-autoclose',                               { 'directory' : 'autoClose'}
@@ -2049,6 +2052,36 @@ if use_neobundle
   call neobundle#end()
 endif
 " }}}1
+
+call plug#begin()
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+"   - Vim (Windows): '~/vimfiles/plugged'
+"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
+" You can specify a custom plugin directory by passing it as the argument
+"   - e.g. `call plug#begin('~/.vim/plugged')`
+"   - Avoid using standard Vim directory names like 'plugin'
+
+" Make sure you use single quotes
+Plug 'vimlab/split-term.vim'
+" Plugin outside ~/.vim/plugged with post-update hook
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'azabiong/vim-board'
+Plug 'jssteinberg/hackline.vim'
+
+" Initialize plugin system
+call plug#end()
+
+" {{{ hackline
+let g:hackline_highlight_normal    = 'StatusLine'
+let g:hackline_highlight_secondary = 'StatusLine'
+let g:hackline_highlight_items     = 'StatusLine'
+let g:hackline_hightlight_branch   = 'StatusLine'
+let g:hackline_highlight_end       = 'StatusLine'
+let g:hackline_bufnum = 1
+" }}} hackline
 
 " {{{ wheel config
  " Init
@@ -3535,10 +3568,12 @@ if !has('nvim')
   let g:prism_colorschemes = ['peachpuff', 'solarized8_dark',
                             \ 'PaperColor', 'OceanicNext',
                             \ 'humanoid', 'gruvbox',
-                            \ 'base16-default-dark',
-                            \ 'alchemist', 'apprentice', 'gruvbit',
-                            \ 'saturnite', 'ghdark', 'codedark', 'bogster'
-                            \ 'vim-material']
+                            \ 'alchemist', 'gruvbit',
+                            \ 'bogster',
+                            \ 'vimhut', 'solarized++']
+  " defaults to 0, disabled
+  " let g:prism_count_tab = 1
+  " let g:prism_dir_changed_pattern = ['auto']
 endif
 if &diff
   colorscheme peachpuff
@@ -3600,7 +3635,7 @@ let g:vimwiki_list = [{'path': '~/mypandoc',
     \ 'custom_wiki2html': 'vimwiki_markdown',
     \ 'template_ext': '.tpl',
     \'syntax': 'markdown',
-    \'ext': '.md'}]
+    \'ext': '.wiki'}]
 
 let g:monokai_term_italic = 1
 let g:embark_terminal_italics = 1
@@ -3940,6 +3975,7 @@ let g:ycm_filetype_specific_completion_to_disable = {}
 " Solid line for vsplit separator
 " set fillchars=vert:'|'
 set fillchars=vert:\
+" re-org windows vertically/horizontally
 nnoremap <silent> <leader>th <C-w>t<C-w>H
 nnoremap <silent> <leader>tv <C-w>t<C-w>K
 
@@ -3993,6 +4029,7 @@ endif
 " set titlestring=%f
 " set title titlestring=%<%F%=%l/%L-%P
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
+set titlestring+=%{strftime('%c',getftime(expand('%')))}
 " multiples of shiftwidth when using >
 set shiftround
 if executable('rg')
@@ -4192,7 +4229,7 @@ set fillchars=diff:⣿,vert:\|
 " set ttimeoutlen=10
 " set rel num and current line number"
 set timeoutlen=1000 ttimeoutlen=0
-set relativenumber
+" set relativenumber
 set number
 augroup custom_backup
   autocmd!
@@ -4418,6 +4455,7 @@ set regexpengine=1 "
 " leave my cursor where it was"
 " change to the current dir automatically
 set autochdir
+set autoshelldir
 " open file in the current buffer dir
 set browsedir=buffer
 " netrw in tree like browsing
@@ -4467,6 +4505,9 @@ map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
 map <C-S-Insert> <MiddleMouse>
 map! <C-S-Insert> <MiddleMouse>
+tmap <S-Insert> <MiddleMouse>
+tmap <C-S-Insert> <MiddleMouse>
+tmap <C-\><C-\>  <Plug>(BoardTermCd)
 " Writes to the unnamed register also writes to the * and + registers. This
 " makes it easy to interact with the system clipboard
 " if has ('unnamedplus')
@@ -4915,6 +4956,7 @@ if has('terminal')
     tnoremap <C-w>j <C-\><C-n><C-w>j
     tnoremap <C-w>k <C-\><C-n><C-w>k
     tnoremap <C-w>l <C-\><C-n><C-w>l
+    tnoremap <Esc> <Esc> <C-w>N
 endif
 " if v:version >= 700
 "   au BufLeave * let b:winview = winsaveview()
@@ -5578,7 +5620,7 @@ endfunction
 " cnoremap #b <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !`depth`/bin/p4blame <C-r>=resolve(expand('%'))<CR>:<C-R>=line(".")<CR>
 " cnoremap #E <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !p4 edit <C-\>eAbsFile()<cr>
 cnoremap #E <C-U><C-\>eAbsFile("edit")<cr>
-cnoremap #v <C-U>FZF $STEM/src/verif/
+" cnoremap #v <C-U>FZF $STEM/src/verif/
 cnoremap #g <C-U>FZF $STEM/src/verif/glx
 cnoremap #c <C-U>FZF $STEM/src/verif/cmm/sstb
 cnoremap #e <C-U>FZF
@@ -5594,12 +5636,12 @@ cnoremap #r <C-U>!p4 reopen -t text+k <C-r>=resolve(expand('%'))<CR>
 " cnoremap #rs <C-U>sp scp://o-xterm-99/
 " cnoremap #rt <C-U>tabe scp://o-xterm-99/
 cnoremap #A <C-U>!p4 add -t text+k <C-r>=resolve(expand('%'))<CR>
-cnoremap #a <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !p4 annotate <C-r>=resolve(expand('%'))<CR>
-cnoremap #L <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !p4 filelog <C-r>=resolve(expand('%'))<CR>
+cnoremap #a <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| -r !p4 annotate <C-r>=resolve(expand('%'))<CR>
+cnoremap #L <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| -r !p4 filelog <C-r>=resolve(expand('%'))<CR>
 " cnoremap #l <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !/home/nv/bin//p4print <C-r>=resolve(expand('%'))<CR>
-cnoremap #l <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !p4 print -q <C-r>=resolve(expand('%'))<CR>
-cnoremap #w <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !p4 where <C-r>=resolve(expand('%'))<CR>
-cnoremap #p <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !/proj/verif_release_ro/p4w/current/p4pr <C-r>=resolve(expand('%'))<CR>
+cnoremap #l <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| -r !p4 print -q <C-r>=resolve(expand('%'))<CR>
+cnoremap #w <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| -r !p4 where <C-r>=resolve(expand('%'))<CR>
+cnoremap #p <C-U>vs \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| -r !p4print <C-r>=resolve(expand('%'))<CR>
 cnoremap #D <C-U>!p4 diff <C-r>=resolve(expand('%'))<CR> &
 cnoremap #d <C-U>sp \| enew \| setlocal bt=nofile bh=delete modifiable \| r !p4 describe -dU <C-r><C-w>
 cnoremap #N <C-U>!nedit <C-r>=resolve(expand('%'))<CR>
@@ -5614,11 +5656,31 @@ cnoremap #H <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete modifiable
 cnoremap #f <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !p4 fstat <C-r>=resolve(expand('%'))<CR>
 cnoremap #S <C-U>sp \| enew \| setlocal expandtab bt=nofile bh=delete modifiable \| r !p4 sync <C-r>=resolve(expand('%'))<CR>
 cnoremap #s <C-U>!p4 submit <C-r>=resolve(expand('%'))<CR>
-" cnoremap #T <C-U>sp <C-\>eMy_Depth("tabe")<cr>
-" cnoremap #t <C-U>tabe <C-\>eMy_Depth("tabe")<cr>
+cnoremap #T <C-U>sp <C-\>eMy_Depth("FZF")<cr>
+cnoremap #t <C-U>tabe <C-\>eMy_Depth("FZF")<cr>
+cnoremap #TO <C-U>sp <C-\>eMy_Depth("FZF")<cr>
+cnoremap #to <C-U>tabe <C-\>eMy_Depth("FZF")<cr>
+cnoremap #TOG <C-U>sp <C-\>eMy_Depth("FZF", "", "/home/scratch.nvgrok_nvmobile/indices/nvmobile/src0/output_*")<cr>
+cnoremap #toG <C-U>tabe <C-\>eMy_Depth("FZF", "", "/home/scratch.nvgrok_nvmobile/indices/nvmobile/src0/output_*")<cr>
+cnoremap #td <C-U>tabe <C-\>eMy_Depth("FZF", "hw/*/ip/ucf/slc/2.0/dvlib")<cr>
+cnoremap #TD <C-U>tabe <C-\>eMy_Depth("FZF", "hw/*/ip/ucf/slc/2.0/dvlib")<cr>
+cnoremap #TR <C-U>tabe <C-\>eMy_Depth("FZF", "hw/*/ip/ucf/slc/2.0/vmod")<cr>
+cnoremap #tr <C-U>tabe <C-\>eMy_Depth("FZF", "hw/*/ip/ucf/slc/2.0/vmod")<cr>
+cnoremap #TI <C-U>tabe <C-\>eMy_Depth("FZF", "hw/*/ip/")<cr>
+cnoremap #ti <C-U>tabe <C-\>eMy_Depth("FZF", "hw/*/ip/")<cr>
+cnoremap #FO <C-U>sp <C-\>eMy_Depth("CtrlSF")<cr>
+cnoremap #fo <C-U>tabe <C-\>eMy_Depth("CtrlSF")<cr>
+cnoremap #FOG <C-U>sp <C-\>eMy_Depth("CtrlSF", "", "/home/scratch.nvgrok_nvmobile/indices/nvmobile/src0/output_*")<cr>
+cnoremap #fog <C-U>tabe <C-\>eMy_Depth("CtrlSF", "", "/home/scratch.nvgrok_nvmobile/indices/nvmobile/src0/output_*")<cr>
+cnoremap #fd <C-U>tabe <C-\>eMy_Depth("CtrlSF", "hw/*/ip/ucf/slc/2.0/dvlib")<cr>
+cnoremap #FD <C-U>tabe <C-\>eMy_Depth("CtrlSF", "hw/*/ip/ucf/slc/2.0/dvlib")<cr>
+cnoremap #FR <C-U>tabe <C-\>eMy_Depth("CtrlSF", "hw/*/ip/ucf/slc/2.0/vmod")<cr>
+cnoremap #fr <C-U>tabe <C-\>eMy_Depth("CtrlSF", "hw/*/ip/ucf/slc/2.0/vmod")<cr>
+cnoremap #FI <C-U>tabe <C-\>eMy_Depth("CtrlSF", "hw/*/ip/")<cr>
+cnoremap #fi <C-U>tabe <C-\>eMy_Depth("CtrlSF", "hw/*/ip/")<cr>
 " cnoremap #e <C-U>vs <C-\>eMy_Depth("e")<cr>
-" cnoremap #V <C-U>vs <C-\>eMy_Depth("vs")<cr>
-" cnoremap #v <C-U>vs <C-\>eMy_Depth("sp")<cr>
+" cnoremap #V <C-U>vs <C-\>eMy_Depth("FZF")<cr>
+" cnoremap #v <C-U>vs <C-\>eMy_Depth("FZF")<cr>
 " cnoremap #F <C-U>setl filetype=verilog_systemverilog
 cnoremap #x <C-U>.s/\\d\\+/\\=printf("0x%04x", submatch(0))
 cnoremap #Z <C-U>!tar cvzf <C-r>=resolve(expand('%'))<CR>.tar.gz <C-r>=resolve(expand('%'))<CR> && mutt -s <C-r>=resolve(expand('%'))<CR> -a <C-r>=resolve(expand('%'))<CR>.tar.gz -- Rajdeep.Mondal@amd.com < /dev/null && \rm -f <C-r>=resolve(expand('%'))<CR>.tar
@@ -5670,12 +5732,14 @@ endfunc
 func! CurrentFileDirP4(cmd)
   return a:cmd . " | enew | setlocal bt=nofile |  r !p4 print -q " . resolve(expand("%:p")) . ""
 endfunc
-function! My_Depth(cmd)
-  let output=system("/home/rmondal/bin/scripts/my_depth")
-  return a:cmd . " " . output . "/"
+function! My_Depth(cmd,...) abort
+  let dir = get(a:,1, "")
+  let output_depth=system("/home/rmondal/bin/vdepth")
+  let output = get(a:,2, output_depth)
+  return a:cmd . " " . output . "/" . dir
 endfunction
 function! My_DepthNoSpace(cmd)
-  let output=system("/home/rmondal/bin/scripts/my_depth")
+  let output=system("/home/rmondal/bin/vdepth")
   return a:cmd . "" . output . ""
 endfunction
 func! CurrentFileUnite(cmd)
@@ -5929,7 +5993,7 @@ nnoremap <leader><leader>f :FZF <c-r>=resolve(expand('%:p:h'))<cr>/
 nnoremap <silent> <leader><leader>w :Windows<CR>
 nnoremap <silent> <leader><leader>h :History:<CR>
 nnoremap <silent> <leader><leader>s :History/<CR>
-nnoremap <silent> <leader><leader>sn :Snippets<CR>
+" nnoremap <silent> <leader><leader>sn :Snippets<CR>
 nnoremap <silent> <leader><leader>m :Maps<CR>
 nnoremap <silent> <leader><leader>hh :Helptags<CR>
 nnoremap <silent> <leader><leader>ff :Filetypes<CR>
@@ -5952,6 +6016,10 @@ function! s:build_quickfix_list(lines)
   copen
   cc
 endfunction
+" change alt to esc
+for s:key in range(97,122)
+  execute 'tnoremap <A-' . nr2char(s:key) . '> <Esc>' . nr2char(s:key)
+endfor
 
 let g:fzf_action = {
   \ 'ctrl-q': function('s:build_quickfix_list'),
@@ -6124,10 +6192,10 @@ inoremap , ,<C-g>u
 inoremap . .<C-g>u
 inoremap ! !<C-g>u
 inoremap ? ?<C-g>u
-noremap <F5> :<C-u>MundoToggle<CR>:set background&<CR>
+" noremap <F5> :<C-u>MundoToggle<CR>:set background&<CR>
 noremap <F6> :<C-u>UndotreeToggle<CR>:set background&<CR>
 " let g:tagbar_usearrows = 1
-noremap <F7> :TlistToggle<CR>
+" noremap <F7> :TlistToggle<CR>
 " noremap <F7> :YRShow<CR>
 " settings for anzu
 " nnoremap n <Plug>(anzu-n-with-echo)
@@ -6391,6 +6459,7 @@ let g:Perl_TemplateOverwrittenMsg= 'no'
 " Setting the author var
 " If forking, please overwrite in your .vimrc.local file
 let g:snips_author = 'Rajdeep <[[Rajdeep.Mondal@amd.com]](mailto:Rajdeep.Mondal@amd.com)>'
+let g:snipMate = { 'snippet_version' : 1 }
 
 " this is only for me
 " nnoremap <left> <nop>
@@ -6544,7 +6613,7 @@ let g:nrrw_rgn_protect = 'n'
 " map <Leader>ff :call FoldFocus('vnew')<CR>
 
 " UltiSnips "
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
+" let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 " let g:ycm_cache_omnifunc = 1
 let g:UltiSnipsRemoveSelectModeMappings=0
 let g:UltiSnipsExpandTrigger="<C-Space>"
