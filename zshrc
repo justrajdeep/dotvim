@@ -1,15 +1,21 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# # Initialization code that may require console input (password prompts, [y/n]
+# # confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+
+# typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -20,7 +26,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # ZSH_THEME="xiong-chiamiov-plus"
 # ZSH_THEME="robbyrussell"
 # ZSH_THEME="agnoster"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_THEME="3den"
 # ZSH_THEME="adben"
 # ZSH_THEME="af-magic"
@@ -224,10 +230,11 @@ plugins=(
     gitfast
     zoxide
     # z
-    zbell
+    # zbell
     vim-interaction
     ripgrep
     rsync
+    # git
     # globalias
     # colorize
     common-aliases
@@ -240,13 +247,19 @@ plugins=(
     fzf-tab
     dirhistory
     jsontools
-    fzf
+    # fzf
     # fd
     emacs
     extract
     poetry
     command-time
+    autoupdate
+    auto-notify
     # zsh-vi-mode
+    fzf-zsh-plugin
+    zsh-you-should-use
+    # zsh-expand
+    # zsh-history-substring-search
 )
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
@@ -256,6 +269,10 @@ fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh/Completion/Unix/Co
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zchee-zsh-completions/src/zsh
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/as2/completion
 export EDITOR=gvim
+export FZF_PREVIEW_ADVANCED=true
+export FZF_PREVIEW_WINDOW=''
+export AUTO_NOTIFY_THRESHOLD=60
+# export AUTO_NOTIFY_BODY="It completed in %elapsed seconds with exit code %exit_code"
 HISTSIZE=10000000
 SAVEHIST=10000000
 [ -f $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
@@ -302,7 +319,7 @@ unsetopt BEEP
 
 _comp_options+=(globdots)       # Include hidden files.
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+zvm_after_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 # . ~/.local/bin/z.sh
 
 # Use lf to switch directories and bind it to ctrl-o
@@ -316,6 +333,11 @@ lfcd () {
     fi
 }
 bindkey -s '^o' 'lfcd\n'
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+# \cat -v
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -342,6 +364,11 @@ bindkey -s '^o' 'lfcd\n'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 [ -f ~/.config/zsh/zsh-aliases ] && source ~/.config/zsh/zsh-aliases
 
+# Uncomment the following line to change how often to auto-update (in days).
+export UPDATE_ZSH_DAYS=1
+export NOVAS_LIC_EXP_CTRL=0
+export GHIST_DEFAULT_OPTIONS="-fc upper -f time-,user+,branch,cl,cwd-,cmd -fe cmd:first_file*,cmd:genie_print_env*,cwd:*scratch.???regress*,cwd:*cpuregress_data*,cwd:/tmp*,cmd:ghist*,cmd:nvrun*"
+
 source /home/rmondal/.config/broot/launcher/bash/br
 source /etc/profile.d/vte.sh
 
@@ -349,7 +376,14 @@ source /etc/profile.d/vte.sh
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Add below lines into $HOME/.zshrc
+easyjump_home=/home/nv/utils/stepstone/latest/easyjump
+if [ -s $easyjump_home/bin/easyjump.zsh ]; then
+    source $easyjump_home/bin/easyjump.zsh $easyjump_home/bin
+fi
 
 autoload -Uz compinit
 compinit
+
+eval "$(starship init zsh)"
